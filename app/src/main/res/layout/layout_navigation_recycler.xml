@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <ImageView
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/NavigationRecycler_Image"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/NavigationRecycler_Image"
+        android:layout_centerVertical="true"
+        android:textColor="#000"
+        android:fontFamily="@font/shabnam"
+        android:text="درخواست مرخصی"
+        android:layout_marginRight="4dp"
+        android:textSize="15sp"
+        android:id="@+id/NavigationRecycler_Text"/>
+
+</RelativeLayout>

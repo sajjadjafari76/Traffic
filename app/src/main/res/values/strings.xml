@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Transport</string>
+
+    <!--   Login    -->
+    <string name="Login_Toolbar"> ورود </string>
+
+    <!--  Drivers.Login.getPhone    -->
+    <string name="DriversLogin_GetPhoneText"> شماره همراه خود را برای دریافت کد وارد کنید. </string>
+    <string name="DriversLogin_GetPhoneEditText"> شماره همراه </string>
+    <string name="DriversLogin_GetPhoneBtn"> ارسال </string>
+
+    <!--  Drivers.Login.getSms    -->
+    <string name="DriversLogin_GetSmsText"> کد پیامک شده را وارد کنید. </string>
+
+    <!-- MainActivity -->
+    <string name="MainActivity_img1">ثبت شی گمشده</string>
+    <string name="MainActivity_img2">جستجو</string>
+    <string name="MainActivity_img3">شکایت</string>
+
+    <!-- Critical -->
+    <string name="Critical_Title">ثبت انتقادات و پیشنهادات</string>
+    <string name="Critical_Text">نظرات و پیشنهادات خود را برای ما ارسال کنید</string>
+
+</resources>

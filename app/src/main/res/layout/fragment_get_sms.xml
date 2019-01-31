@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="4"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.1"
+        android:src="@drawable/logo"
+        android:contentDescription="@string/app_name"
+        android:layout_marginTop="-100dp"
+        android:layout_marginBottom="28dp"/>
+
+
+    <irstit.transport.Views.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/DriversLogin_GetSmsText"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:textSize="@dimen/DriversLogin_GetPhone"
+        android:layout_marginBottom="10dp"/>
+
+
+    <com.mukesh.OtpView
+        android:id="@+id/GetSms_Otp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:inputType="number"
+        android:fontFamily="@font/byekan"
+        android:itemBackground="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        app:itemCount="6"
+        android:text="12"
+        app:lineColor="@color/colorPrimary"
+        app:viewType="line" />
+
+
+
+    <Button
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="@string/DriversLogin_GetPhoneBtn"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/DriversLogin_Btn"
+        android:layout_marginTop="20dp"/>
+
+</LinearLayout>
