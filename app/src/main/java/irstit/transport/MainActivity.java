@@ -6,13 +6,15 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,39 +27,81 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import irstit.transport.Citizens.Criticals;
+import irstit.transport.Citizens.Criticals_Suggestion;
+import irstit.transport.Citizens.RegisterObject;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
+import irstit.transport.Drivers.DriversMainActivity;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.Views.CustomTextView;
+import irstit.transport.Views.Utilities;
+import irstit.transport.Views.Utils;
 import ss.com.bannerslider.ImageLoadingService;
 import ss.com.bannerslider.Slider;
 import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    private LinearLayout InfoNavigation;
+    private RelativeLayout LoginNavigation;
+    private TextView Navigation_Info_Name, MainActivity_Login_Text;
+    private CustomTextView Navigation_Info_Code, MainActivity_Date;
+    private DrawerLayout drawer;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (!DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+            InfoNavigation.setVisibility(View.VISIBLE);
+            LoginNavigation.setVisibility(View.GONE);
+
+            Navigation_Info_Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName().concat(" " + DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily()));
+            Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getBirthCertificate()));
+
+            MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_2));
+        }else {
+            MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_1));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ViewPager viewPager = findViewById(R.id.MainActivity_ViewPager);
-//        PagerContainer container = findViewById(R.id.MainActivity_Container);
         Slider slider = findViewById(R.id.MainActivity_Slider);
         RelativeLayout Login = findViewById(R.id.MainActivity_Login);
-        NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView);
         LinearLayout complaint = findViewById(R.id.MainActivity_Complaint);
+        LinearLayout registerObject = findViewById(R.id.MainActivity_RegisterObject);
+        ImageView iconDrawer = findViewById(R.id.MainActivity_NavigatorIcon);
+        MainActivity_Date = findViewById(R.id.MainActivity_Date);
+        drawer = findViewById(R.id.MainActivity_Drawer);
+        iconDrawer.setOnClickListener(this);
+        complaint.setOnClickListener(this);
+        Login.setOnClickListener(this);
+        registerObject.setOnClickListener(this);
+        NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView);
+
         Toolbar toolbar = findViewById(R.id.MainActivity_Toolbar);
         setSupportActionBar(toolbar);
 
         View view = navigationView.getHeaderView(0);
-        RelativeLayout LoginNavigation = view.findViewById(R.id.Navigation_Login);
-//        viewPager = container.getViewPager();
-//        viewPager.setOffscreenPageLimit(3);
-//        viewPager.setAdapter(new MyPagerAdapter());
+        LoginNavigation = view.findViewById(R.id.Navigation_Login);
+        InfoNavigation = view.findViewById(R.id.Navigation_Info);
+        Navigation_Info_Name = view.findViewById(R.id.Navigation_Info_Name);
+        MainActivity_Login_Text = findViewById(R.id.MainActivity_Login_Text);
+        Navigation_Info_Code = view.findViewById(R.id.Navigation_Info_Code);
+        LoginNavigation.setOnClickListener(this);
+
+
 
         Slider.init(new PicassoImageLoadingService(getApplicationContext()));
         slider.setAdapter(new SliderAdapter());
@@ -70,22 +114,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-//        new CoverFlow.Builder()
-//                .with(viewPager)
-//                .pagerMargin(0f)
-//                .scale(0.3f)
-//                .spaceSize(0f)
-//                .rotationY(0f)
-//                .build();
-
-
-//        container.setPageItemClickListener(new PageItemClickListener() {
-//            @Override
-//            public void onItemClick(View view, int i) {
-//
-//            }
-//        });
-
         RecyclerView recyclerView = findViewById(R.id.MainActivity_Recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new MyCustomAdapter(Data()));
@@ -95,29 +123,11 @@ public class MainActivity extends AppCompatActivity {
         navigation_Recycler.setAdapter(new MyNavigationAdapter(navigationData()));
 
 
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
-            }
-        });
+        Utilities utilities = new Utilities();
 
-        LoginNavigation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
-            }
-        });
 
-        complaint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), Criticals.class));
-            }
-        });
-
+        MainActivity_Date.setText(Utilities.getCurrentShamsidate());
     }
-
 
     private List<NewsModel> Data() {
         List<NewsModel> data = new ArrayList<>();
@@ -204,6 +214,32 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return data;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.MainActivity_Complaint:
+                startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
+                break;
+            case R.id.Navigation_Login:
+                startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+                break;
+            case R.id.MainActivity_Login:
+                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+                    startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+                }else {
+                    startActivity(new Intent(getApplicationContext(), DriversMainActivity.class));
+                }
+                break;
+            case R.id.MainActivity_RegisterObject:
+                startActivity(new Intent(getApplicationContext(), RegisterObject.class));
+                break;
+            case R.id.MainActivity_NavigatorIcon:
+                drawer.openDrawer(Gravity.RIGHT);
+                break;
+        }
     }
 
     private class SliderAdapter extends ss.com.bannerslider.adapters.SliderAdapter {
@@ -374,6 +410,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
 
 }

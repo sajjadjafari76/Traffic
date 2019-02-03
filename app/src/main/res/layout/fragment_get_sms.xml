@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="4"
-    android:gravity="center">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.1"
-        android:src="@drawable/logo"
-        android:contentDescription="@string/app_name"
-        android:layout_marginTop="-100dp"
-        android:layout_marginBottom="28dp"/>
+    android:gravity="center_horizontal">
 
 
     <irstit.transport.Views.CustomTextView
@@ -31,24 +23,37 @@
         android:id="@+id/GetSms_Otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/spacing_xmedium"
         android:inputType="number"
         android:fontFamily="@font/byekan"
-        android:itemBackground="@color/colorPrimary"
         android:textColor="@android:color/white"
-        app:itemCount="6"
-        android:text="12"
-        app:lineColor="@color/colorPrimary"
+        app:itemCount="4"
+        app:lineColor="@color/overlay_light_90"
         app:viewType="line" />
 
 
-
-    <Button
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:text="@string/DriversLogin_GetPhoneBtn"
-        android:layout_gravity="center"
-        android:backgroundTint="@color/DriversLogin_Btn"
-        android:layout_marginTop="20dp"/>
+    <com.marozzi.roundbutton.RoundButton
+        android:id="@+id/GetSms_Btn"
+        android:layout_width="200dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:text="ورود"
+        android:fontFamily="@font/shabnam"
+        app:rb_animation_alpha="false"
+        app:rb_animation_progress_color="@color/colorAccent"
+        app:rb_animation_progress_padding="8dp"
+        app:rb_animation_progress_width="2dp"
+        app:rb_animation_progress_style="circle"
+        app:rb_animation_corner_radius="20dp"
+        app:rb_animation_duration="500"
+        app:rb_background_color="@android:color/transparent"
+        app:rb_background_color_pressed="@color/colorPrimary"
+        app:rb_corner_color="@color/grey_5"
+        app:rb_corner_color_pressed="@color/colorPrimary"
+        app:rb_corner_radius="2dp"
+        app:rb_corner_width="1dp"
+        app:rb_text_color="@color/grey_5"
+        app:rb_text_color_pressed="@android:color/white" />
 
 </LinearLayout>

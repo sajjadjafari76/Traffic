@@ -16,9 +16,17 @@
     <string name="MainActivity_img1">ثبت شی گمشده</string>
     <string name="MainActivity_img2">جستجو</string>
     <string name="MainActivity_img3">شکایت</string>
+    <string name="MainActivity_Login_Text_1">ورود راننده</string>
+    <string name="MainActivity_Login_Text_2">پروفایل</string>
 
     <!-- Critical -->
     <string name="Critical_Title">ثبت انتقادات و پیشنهادات</string>
     <string name="Critical_Text">نظرات و پیشنهادات خود را برای ما ارسال کنید</string>
+
+
+    <!-- RegisterObject -->
+    <string name="RegisterObject_Title">ثبت اشیا</string>
+    <string name="RegisterObject_Btn">ثبت اطلاعات</string>
+    <string name="RegisterObject_Text">تصویر شی یافت شده را انتخاب کنید</string>
 
 </resources>

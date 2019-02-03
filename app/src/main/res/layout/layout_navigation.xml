@@ -53,7 +53,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="1dp"
                 android:layout_toLeftOf="@+id/Navigation_Enter"
-                android:src="@drawable/ic_chevron_left" />
+                app:srcCompat="@drawable/ic_chevron_left" />
 
         </RelativeLayout>
 
@@ -62,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/Navigation_Image"
+            android:id="@+id/Navigation_Info"
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="gone">
@@ -71,18 +72,20 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/iransansbold"
                 android:gravity="center"
-                android:text="مرتضی طاهرخانی"
+                tools:text="مرتضی طاهرخانی"
                 android:textColor="#FFF"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:id="@+id/Navigation_Info_Name"/>
 
             <irstit.transport.Views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
                 android:gravity="center"
-                android:text="کد خودرو : 30"
+                tools:text="کد خودرو : 30"
                 android:textColor="#FFF"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                android:id="@+id/Navigation_Info_Code"/>
 
         </LinearLayout>
 

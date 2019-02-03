@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Citizens.Criticals_Suggestion">
+    tools:context=".Citizens.RegisterObject">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/Complaint_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        app:contentInsetStart="0dp"
         android:background="?attr/colorPrimary"
-        app:contentInsetStartWithNavigation="0dp"
+        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
@@ -27,17 +26,17 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                app:srcCompat="@drawable/ic_left_arrow"
-                android:layout_marginLeft="8dp"/>
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
 
 
             <irstit.transport.Views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/Critical_Title"
-                android:textColor="@color/green_50"/>
-
+                android:text="@string/RegisterObject_Title"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
 
         </RelativeLayout>
 
@@ -46,10 +45,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3"
         android:layout_below="@id/Complaint_Toolbar"
-        android:background="@drawable/img_bk_complicate">
+        android:background="@drawable/img_bk_complicate"
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -59,19 +58,19 @@
 
             <ImageView
                 android:id="@+id/Critical_Img"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/spacing_xxxxxlarge"
                 android:layout_height="@dimen/spacing_xxxxxlarge"
-                android:src="@drawable/img_compliant"/>
-
-
+                android:padding="@dimen/spacing_middle"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_camera" />
 
             <irstit.transport.Views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Critical_Img"
-                android:layout_marginTop="@dimen/spacing_mxlarge"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:gravity="center"
-                android:text="@string/Critical_Text"
+                android:text="@string/RegisterObject_Text"
                 android:textColor="@color/grey_1000" />
 
         </RelativeLayout>
@@ -81,8 +80,8 @@
             android:layout_height="0dp"
             android:layout_weight="1.8"
             android:orientation="vertical"
-            android:paddingEnd="@dimen/appbar_padding_top"
-            android:paddingStart="@dimen/appbar_padding_top">
+            android:paddingStart="@dimen/appbar_padding_top"
+            android:paddingEnd="@dimen/appbar_padding_top">
 
 
             <LinearLayout
@@ -99,18 +98,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="نام و نام خانوادگی"
                     android:lines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
-                    android:fontFamily="@font/shabnam"
-                    android:hint="نام و نام خانوادگی"/>
-
-
+                    android:textColor="@color/grey_80" />
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -136,18 +132,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="عنوان"
                     android:lines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
-                    android:fontFamily="@font/shabnam"
-                    android:hint="عنوان"/>
-
+                    android:textColor="@color/grey_80" />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -174,18 +168,17 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:lines="1"
-                    android:inputType="number"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
                     android:fontFamily="@font/shabnam"
-                    android:hint="شماره همراه"/>
+                    android:hint="شماره همراه"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80" />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -212,19 +205,17 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:lines="3"
-                    android:inputType="textMultiLine"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
                     android:fontFamily="@font/shabnam"
-                    android:hint="متن شکایت"/>
-
+                    android:hint="متن شکایت"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80" />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -247,12 +238,12 @@
             <Button
                 android:layout_width="200dp"
                 android:layout_height="55dp"
-                android:text="ثبت اطلاعات"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
                 android:drawableRight="@drawable/ic_check"
                 android:fontFamily="@font/shabnam"
-                android:layout_gravity="center_horizontal"
-                android:theme="@style/Button.Accent"
-                android:layout_marginTop="12dp"/>
+                android:text="@string/RegisterObject_Btn"
+                android:theme="@style/Button.Accent" />
 
         </LinearLayout>
 

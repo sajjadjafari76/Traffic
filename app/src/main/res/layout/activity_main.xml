@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/MainActivity_Drawer">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
-                    android:src="@drawable/ic_menu" />
+                    app:srcCompat="@drawable/ic_menu" />
 
 
                 <ImageView
@@ -49,28 +50,30 @@
                 <RelativeLayout
                     android:id="@+id/MainActivity_Login"
                     android:layout_width="100dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="9dp"
-                    android:background="#1BF8F8F8">
+                    android:background="#1BF8F8F8"
+                    android:layout_alignParentLeft="true">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginRight="2dp"
                         android:fontFamily="@font/iransans"
                         android:gravity="center"
-                        android:text="ورود راننده"
+                        android:text="@string/MainActivity_Login_Text_2"
                         android:textColor="#FFF"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:id="@+id/MainActivity_Login_Text"/>
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:layout_width="30dp"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="3dp"
                         android:layout_marginTop="2dp"
-                        android:src="@drawable/ic_chevron_left" />
+                        app:srcCompat="@drawable/ic_chevron_left" />
 
                 </RelativeLayout>
 
@@ -156,7 +159,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:id="@+id/MainActivity_RegisterObject">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -233,7 +237,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dp"
-                    android:src="@drawable/ic_calendar" />
+                    app:srcCompat="@drawable/ic_calendar" />
 
 
                 <irstit.transport.Views.CustomTextView
@@ -242,8 +246,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8dp"
                     android:layout_toLeftOf="@+id/ActivityMain_icon"
-                    android:text="امروز سه شنبه 1396/09/10"
-                    android:textColor="#FFF" />
+                    tools:text="امروز سه شنبه 1396/09/10"
+                    android:textColor="#FFF"
+                    android:id="@+id/MainActivity_Date"/>
 
             </RelativeLayout>
 

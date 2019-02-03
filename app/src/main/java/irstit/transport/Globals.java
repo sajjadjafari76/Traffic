@@ -5,6 +5,6 @@ package irstit.transport;
  */
 
 public class Globals {
-    public static final String ApiURLAll = "http://137.takestancity.ir/access/android/";
+    public static final String APIURL = "http://traffictakestan.ir/api";
     public static final String IRANSANS = "Fonts/Shabnam.ttf";
 }

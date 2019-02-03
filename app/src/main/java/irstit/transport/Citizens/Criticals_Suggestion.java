@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import irstit.transport.R;
 
-public class Criticals extends AppCompatActivity {
+public class Criticals_Suggestion extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
