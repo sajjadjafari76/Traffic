@@ -14,7 +14,7 @@
 
     <!-- MainActivity -->
     <string name="MainActivity_img1">ثبت شی گمشده</string>
-    <string name="MainActivity_img2">جستجو</string>
+    <string name="MainActivity_Search">جستجوی اشیاء</string>
     <string name="MainActivity_img3">شکایت</string>
     <string name="MainActivity_Login_Text_1">ورود راننده</string>
     <string name="MainActivity_Login_Text_2">پروفایل</string>
@@ -25,7 +25,7 @@
 
 
     <!-- RegisterObject -->
-    <string name="RegisterObject_Title">ثبت اشیا</string>
+    <string name="RegisterObject_Title">ثبت شی گمشده</string>
     <string name="RegisterObject_Btn">ثبت اطلاعات</string>
     <string name="RegisterObject_Text">تصویر شی یافت شده را انتخاب کنید</string>
 

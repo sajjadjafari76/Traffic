@@ -34,6 +34,7 @@ import java.util.List;
 
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.RegisterObject;
+import irstit.transport.Citizens.SearchObject;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
@@ -59,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
-        if (!DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+        if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null && !DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
             InfoNavigation.setVisibility(View.VISIBLE);
             LoginNavigation.setVisibility(View.GONE);
 
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RelativeLayout Login = findViewById(R.id.MainActivity_Login);
         LinearLayout complaint = findViewById(R.id.MainActivity_Complaint);
         LinearLayout registerObject = findViewById(R.id.MainActivity_RegisterObject);
+        LinearLayout search = findViewById(R.id.MainActivity_Search);
         ImageView iconDrawer = findViewById(R.id.MainActivity_NavigatorIcon);
         MainActivity_Date = findViewById(R.id.MainActivity_Date);
         drawer = findViewById(R.id.MainActivity_Drawer);
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         complaint.setOnClickListener(this);
         Login.setOnClickListener(this);
         registerObject.setOnClickListener(this);
+        search.setOnClickListener(this);
         NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView);
 
         Toolbar toolbar = findViewById(R.id.MainActivity_Toolbar);
@@ -218,7 +221,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
         switch (view.getId()) {
             case R.id.MainActivity_Complaint:
                 startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
@@ -227,10 +229,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
                 break;
             case R.id.MainActivity_Login:
-                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
-                    startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null) {
+                    if ( DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+                        startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
+                    }else {
+                        startActivity(new Intent(getApplicationContext(), DriversMainActivity.class));
+                    }
                 }else {
-                    startActivity(new Intent(getApplicationContext(), DriversMainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
                 }
                 break;
             case R.id.MainActivity_RegisterObject:
@@ -238,6 +244,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.MainActivity_NavigatorIcon:
                 drawer.openDrawer(Gravity.RIGHT);
+                break;
+            case R.id.MainActivity_Search:
+                startActivity(new Intent(getApplicationContext(), SearchObject.class));
                 break;
         }
     }

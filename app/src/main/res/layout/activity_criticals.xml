@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +10,11 @@
         android:id="@+id/Complaint_Toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
-        app:contentInsetStart="0dp"
         android:background="?attr/colorPrimary"
-        app:contentInsetStartWithNavigation="0dp"
+        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
 
@@ -27,8 +26,9 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
                 app:srcCompat="@drawable/ic_left_arrow"
-                android:layout_marginLeft="8dp"/>
+                android:id="@+id/Critical_Back"/>
 
 
             <irstit.transport.Views.CustomTextView
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/Critical_Title"
-                android:textColor="@color/green_50"/>
+                android:textColor="@color/green_50" />
 
 
         </RelativeLayout>
@@ -46,10 +46,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="3"
         android:layout_below="@id/Complaint_Toolbar"
-        android:background="@drawable/img_bk_complicate">
+        android:background="@drawable/img_bk_complicate"
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -61,8 +61,7 @@
                 android:id="@+id/Critical_Img"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_xxxxxlarge"
-                android:src="@drawable/img_compliant"/>
-
+                android:src="@drawable/img_compliant" />
 
 
             <irstit.transport.Views.CustomTextView
@@ -81,8 +80,9 @@
             android:layout_height="0dp"
             android:layout_weight="1.8"
             android:orientation="vertical"
+            android:paddingStart="@dimen/appbar_padding_top"
             android:paddingEnd="@dimen/appbar_padding_top"
-            android:paddingStart="@dimen/appbar_padding_top">
+            android:gravity="center">
 
 
             <LinearLayout
@@ -96,21 +96,22 @@
 
 
                 <EditText
+                    android:id="@+id/Critical_Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="نام و نام خانوادگی"
                     android:lines="1"
+                    android:padding="@dimen/default_dash_indicator_width"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/grey_80"
-                    android:fontFamily="@font/shabnam"
-                    android:hint="نام و نام خانوادگی"/>
-
+                    android:background="@drawable/res_focused_edittext"/>
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -132,22 +133,24 @@
                 android:paddingRight="@dimen/spacing_large">
 
 
-                <EditText
+                <Spinner
+                    android:id="@+id/Critical_Title"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="46dp"
                     android:layout_weight="1"
-                    android:lines="1"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
-                    android:fontFamily="@font/shabnam"
-                    android:hint="عنوان"/>
-
+                    android:background="@drawable/back_spinner"
+                    android:focusableInTouchMode="true"
+                    android:layoutDirection="rtl"
+                    android:popupBackground="#62ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:spinnerMode="dialog"
+                    />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -171,21 +174,23 @@
 
 
                 <EditText
+                    android:id="@+id/Critical_Phone"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:lines="1"
-                    android:inputType="number"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
                     android:fontFamily="@font/shabnam"
-                    android:hint="شماره همراه"/>
+                    android:hint="شماره همراه"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:background="@drawable/res_focused_edittext"
+                    android:padding="@dimen/default_dash_indicator_width"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80" />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -208,23 +213,23 @@
 
 
                 <EditText
+                    android:id="@+id/Critical_Description"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:lines="3"
-                    android:inputType="textMultiLine"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/grey_80"
                     android:fontFamily="@font/shabnam"
-                    android:hint="متن شکایت"/>
-
+                    android:hint="متن شکایت"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:background="@drawable/res_focused_edittext"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80" />
 
 
                 <View
                     android:layout_width="@dimen/spacing_middle"
                     android:layout_height="wrap_content" />
-
 
 
                 <ImageButton
@@ -247,15 +252,33 @@
             <Button
                 android:layout_width="200dp"
                 android:layout_height="55dp"
-                android:text="ثبت اطلاعات"
                 android:drawableRight="@drawable/ic_check"
                 android:fontFamily="@font/shabnam"
-                android:layout_gravity="center_horizontal"
+                android:text="ثبت اطلاعات"
                 android:theme="@style/Button.Accent"
-                android:layout_marginTop="12dp"/>
+                android:id="@+id/Critical_Btn"/>
 
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/Critical_Loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCCCCCCC"
+        android:visibility="gone">
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerInParent="true"
+            app:mk_color="@color/colorPrimary"
+            app:mk_type="TwinFishesSpinner" />
+
+
+    </RelativeLayout>
 
 </RelativeLayout>

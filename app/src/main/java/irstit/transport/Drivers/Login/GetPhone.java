@@ -102,6 +102,9 @@ public class GetPhone extends Fragment implements View.OnClickListener {
                                 transaction.commit();
 
 
+                            }else if (object.getString("status").equals("false")){
+                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                                sendInfo.revertAnimation();
                             }
                         } catch (Exception e) {
 
@@ -133,4 +136,6 @@ public class GetPhone extends Fragment implements View.OnClickListener {
         AppController.getInstance().addToRequestQueue(getPhoneRequest);
 
     }
+
+
 }

@@ -11,7 +11,9 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.File;
 
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataBase.ParentDBManger;
+import irstit.transport.DataModel.DriverInfoModel;
 
 public class AppController extends Application {
 
@@ -31,11 +33,14 @@ public class AppController extends Application {
         if (!databaseExist()) {
             Log.e(TAG, "Database11 : database not create");
             new ParentDBManger(getApplicationContext());
-//            AccessToken token = new AccessToken();
-//            token.setStatus(0);
-//            token.setAccessToken("");
-////            token.setChildAccessToken("");
-//            DBManager.getInstance(this).setTokenData(token);
+            DriverInfoModel model = new DriverInfoModel();
+            model.setBirthCertificate("");
+            model.setFamily("");
+            model.setName("");
+            model.setParent("");
+            model.setTelephone("");
+            model.setNationalCode("");
+            DBManager.getInstance(getBaseContext()).setDriverInfo(model);
         } else {
 //            Log.e(TAG, "Database : database created");
         }

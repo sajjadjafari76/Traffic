@@ -135,7 +135,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:weightSum="2">
+                    android:weightSum="2"
+                    android:id="@+id/MainActivity_Search">
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -149,7 +150,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="0.6"
                         android:gravity="top|center_horizontal"
-                        android:text="@string/MainActivity_img2"
+                        android:text="@string/MainActivity_Search"
                         android:textColor="#000" />
 
                 </LinearLayout>
@@ -232,8 +233,8 @@
 
                 <ImageView
                     android:id="@+id/ActivityMain_icon"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/spacing_mxlarge"
+                    android:layout_height="@dimen/spacing_mxlarge"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="15dp"
