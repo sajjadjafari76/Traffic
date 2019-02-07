@@ -37,7 +37,7 @@ import irstit.transport.R;
 
 public class Criticals_Suggestion extends AppCompatActivity {
 
-    private spinnerAdapter adapter;
+    private spinnerAdapter adapter ;
     private List<SpinnerModel> category = new ArrayList<>();
     private String type = "";
     private RelativeLayout Critical_Loading;
