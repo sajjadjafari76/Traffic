@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -21,10 +22,14 @@ import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.github.florent37.expansionpanel.ExpansionHeader;
+import com.github.florent37.expansionpanel.ExpansionLayout;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +40,7 @@ import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import irstit.transport.AppController.AppController;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
+import irstit.transport.DataModel.SearchObjModel;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.MainActivity;
@@ -49,35 +55,36 @@ public class SearchObject extends AppCompatActivity {
     private EditText Start, End;
     private spinnerAdapter adapter;
     private Spinner Category;
+    private ExpansionHeader Header;
+    private ExpansionLayout Layout;
+    private String StartDate, EndDate;
+    private PersianCalendar StartDateCalender = new PersianCalendar(), EndDateCalender = new PersianCalendar();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_object);
+        ExpansionLayout layout;
 
+
+        ImageView Back = findViewById(R.id.RegisterObject_Back);
+        Button Btn = findViewById(R.id.RegisterObject_Btn);
+        Header = findViewById(R.id.SearchObject_Header);
+        Layout = findViewById(R.id.SearchObject_ExpansionLayout);
         Recycler = findViewById(R.id.SearchObject_Recycler);
         Category = findViewById(R.id.RegisterObject_Category);
         Start = findViewById(R.id.SearchObject_Start);
         End = findViewById(R.id.SearchObject_End);
         Start.setOnFocusChangeListener((view, hasFocus) -> {
             if (hasFocus) {
-                picker.show();
+                configureStartDate();
             }
         });
         End.setOnFocusChangeListener((view, hasFocus) -> {
             if (hasFocus) {
-                picker.show();
+                configureEndDate();
             }
         });
-
-        configureDate();
-
-        Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
-                    Recycler.setAdapter(new MyNavigationAdapter(Data()));
-//
-
-        criticalRequest();
-
 
 
         adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
@@ -94,13 +101,31 @@ public class SearchObject extends AppCompatActivity {
 //                if (position > (category.size() - 1)) {
 //
 //                }else {
-//                    type = String.valueOf(getCategory().get(position).getId());
+////                    type = String.valueOf(getCategory().get(position).getId());
 //                    Log.e("GetPhoneResponse", String.valueOf(getCategory().get(position).getId()) + " |");
 //                }
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        Back.setOnClickListener(view -> {
+            finish();
+        });
+
+        Btn.setOnClickListener(view -> {
+
+            if (Start.getText().toString().isEmpty()) {
+                Toast.makeText(getBaseContext(), "تاریخ آغاز نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
+            } else if (End.getText().toString().isEmpty()) {
+                Toast.makeText(getBaseContext(), "تاریخ پایان نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
+            } else if (EndDateCalender.before(StartDateCalender)) {
+                Toast.makeText(getBaseContext(), "بازه زمانی تعیین شده اشتباه است", Toast.LENGTH_SHORT).show();
+            } else {
+                criticalRequest(StartDate, "", EndDate);
 
             }
         });
@@ -192,9 +217,9 @@ public class SearchObject extends AppCompatActivity {
 
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {
 
-        List<NavModel> data;
+        List<SearchObjModel> data;
 
-        public MyNavigationAdapter(List<NavModel> data) {
+        public MyNavigationAdapter(List<SearchObjModel> data) {
             this.data = data;
         }
 
@@ -207,9 +232,8 @@ public class SearchObject extends AppCompatActivity {
         @Override
         public void onBindViewHolder(MyNavigationAdapter.MyCustomView holder, final int position) {
 
-//            holder.textView.setText(data.get(position).getName());
-//
-//            holder.imageView.setImageDrawable(data.get(position).getImage());
+            holder.Title.setText(data.get(position).getTitle());
+            holder.Date.setText(data.get(position).getDate());
 
         }
 
@@ -220,45 +244,53 @@ public class SearchObject extends AppCompatActivity {
 
         class MyCustomView extends RecyclerView.ViewHolder {
 
-            //            private CardView cardView;
-//            private TextView textView;
-//            private ImageView imageView;
+            private TextView Title, Date;
 
             public MyCustomView(View itemView) {
                 super(itemView);
-//                cardView = itemView.findViewById(R.id.RecyclerMainActivity_Root);
-//                textView = itemView.findViewById(R.id.NavigationRecycler_Text);
-//                imageView = itemView.findViewById(R.id.NavigationRecycler_Image);
+                Title = itemView.findViewById(R.id.Search_Title);
+                Date = itemView.findViewById(R.id.Search_Date);
 
             }
         }
     }
 
-    private void criticalRequest(/*String Name, String Type, String Phone, String Description*/) {
+    private void criticalRequest(String StartDate, String Type, String EndDate) {
         Log.e("GetPhoneResponse", "sgbjhsjZ" + " |");
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/serachobjpost",
                 response -> {
                     Log.e("GetPhoneResponse", response + " |");
 
-//                    try {
-//                        JSONObject object = new JSONObject(response);
+                    try {
+                        JSONObject object = new JSONObject(response);
 //                        Critical_Loading.setVisibility(View.GONE);
-//                        if (object.getString("status").equals("true")) {
+                        if (object.getString("status").equals("true")) {
 //                            enabledEditText();
 //                            clear();
-//                            Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
 
-//                    Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
-//                    Recycler.setAdapter(new MyNavigationAdapter());
-//
-//                        } else if (object.getString("status").equals("true")) {
+                            JSONArray array = object.getJSONArray("result");
+                            List<SearchObjModel> obj = new ArrayList<>();
+
+                            for (int i = 0 ; i < array.length() ; i++) {
+
+                                SearchObjModel searchObject = new SearchObjModel();
+                                searchObject.setTitle(array.getJSONObject(0).getString("rd_name"));
+                                searchObject.setDate(array.getJSONObject(0).getString("rd_timeobject"));
+                                obj.add(searchObject);
+                            }
+
+                            Layout.toggle(true);
+                            Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+                            Recycler.setAdapter(new MyNavigationAdapter(obj));
+
+                        } else if (object.getString("status").equals("true")) {
 //                            enabledEditText();
-//                            Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-//                        }
-//                    } catch (Exception e) {
-//                        Log.e("GetPhoneError", e.toString() + " |");
+                            Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        Log.e("GetPhoneError", e.toString() + " |");
 //                        enabledEditText();
-//                    }
+                    }
                 },
                 error -> {
                     Log.e("GetPhoneError", error.toString() + " |");
@@ -270,8 +302,8 @@ public class SearchObject extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Log.e("GetPhoneResponse", "dfgdgdfdgdgfdgd" + " |");
                 Map<String, String> map = new HashMap<>();
-                map.put("startdate", "1397/09/01");
-                map.put("enddate", "1397/11/17");
+                map.put("startdate", StartDate);
+                map.put("enddate", EndDate);
                 map.put("type", "6214");
                 return map;
             }
@@ -290,7 +322,7 @@ public class SearchObject extends AppCompatActivity {
 
     }
 
-    public void configureDate() {
+    public void configureStartDate() {
         PersianCalendar calendar = new PersianCalendar(System.currentTimeMillis());
         picker = new PersianDatePickerDialog(this)
                 .setPositiveButtonString("باشه")
@@ -305,8 +337,9 @@ public class SearchObject extends AppCompatActivity {
                 .setListener(new Listener() {
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {
-//                        mDate = persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay();
-//                        Date.setText(mDate);
+                        StartDate = persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay();
+                        Start.setText(StartDate);
+                        StartDateCalender.setPersianDate(persianCalendar.getPersianYear(), persianCalendar.getPersianMonth(), persianCalendar.getPersianDay());
                     }
 
                     @Override
@@ -314,7 +347,36 @@ public class SearchObject extends AppCompatActivity {
 
                     }
                 });
+        picker.show();
 
+    }
+
+    public void configureEndDate() {
+        PersianCalendar calendar = new PersianCalendar(System.currentTimeMillis());
+        picker = new PersianDatePickerDialog(this)
+                .setPositiveButtonString("باشه")
+                .setNegativeButton("بیخیال")
+//                .setTodayButton("امروز")
+                .setTodayButtonVisible(true)
+                .setInitDate(calendar)
+                .setMaxYear(PersianDatePickerDialog.THIS_YEAR)
+                .setMinYear(1300)
+                .setActionTextColor(Color.GRAY)
+                .setTypeFace(CFProvider.getIRANIANSANS(getBaseContext()))
+                .setListener(new Listener() {
+                    @Override
+                    public void onDateSelected(PersianCalendar persianCalendar) {
+                        EndDate = persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay();
+                        End.setText(EndDate);
+                        EndDateCalender.setPersianDate(persianCalendar.getPersianYear(), persianCalendar.getPersianMonth(), persianCalendar.getPersianDay());
+                    }
+
+                    @Override
+                    public void onDismissed() {
+
+                    }
+                });
+        picker.show();
 
     }
 
