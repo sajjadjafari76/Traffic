@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Citizens.SearchObject"></activity>
+        <activity android:name=".ConnectToUs"></activity>
+        <activity android:name=".AboutUs" />
+        <activity android:name=".Citizens.SearchObject" />
         <activity android:name=".Drivers.DriversMainActivity" />
         <activity android:name=".Citizens.RegisterObject" />
         <activity android:name=".Citizens.Criticals_Suggestion" />

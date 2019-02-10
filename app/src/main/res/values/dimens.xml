@@ -10,6 +10,7 @@
     <dimen name="spacing_medium">5sp</dimen>
     <dimen name="spacing_xmedium">7sp</dimen>
     <dimen name="spacing_middle">10sp</dimen>
+    <dimen name="spacing_xmiddle">12sp</dimen>
     <dimen name="spacing_large">15sp</dimen>
     <dimen name="spacing_smlarge">18sp</dimen>
     <dimen name="spacing_mlarge">20sp</dimen>

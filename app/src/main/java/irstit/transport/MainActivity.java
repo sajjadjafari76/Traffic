@@ -394,8 +394,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onBindViewHolder(MyNavigationAdapter.MyCustomView holder, final int position) {
 
             holder.textView.setText(data.get(position).getName());
-
             holder.imageView.setImageDrawable(data.get(position).getImage());
+
+            holder.Root.setOnClickListener(v -> {
+
+                switch (position) {
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        startActivity(new Intent(getBaseContext(), ConnectToUs.class));
+                        break;
+                    case 7:
+
+                        break;
+                }
+
+            });
 
         }
 
@@ -406,13 +430,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         class MyCustomView extends RecyclerView.ViewHolder {
 
-            //            private CardView cardView;
+            private RelativeLayout Root;
             private TextView textView;
             private ImageView imageView;
 
             public MyCustomView(View itemView) {
                 super(itemView);
-//                cardView = itemView.findViewById(R.id.RecyclerMainActivity_Root);
+                Root = itemView.findViewById(R.id.NavigationRecycler_Root);
                 textView = itemView.findViewById(R.id.NavigationRecycler_Text);
                 imageView = itemView.findViewById(R.id.NavigationRecycler_Image);
 

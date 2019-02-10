@@ -29,4 +29,7 @@
     <string name="RegisterObject_Btn">ثبت اطلاعات</string>
     <string name="RegisterObject_Text">تصویر شی یافت شده را انتخاب کنید</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

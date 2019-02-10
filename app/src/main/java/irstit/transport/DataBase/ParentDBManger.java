@@ -12,111 +12,134 @@ import irstit.transport.DataModel.DriverInfoModel;
 
 public class ParentDBManger extends SQLiteOpenHelper {
 
-  private static final String TAG = "ParentDBManger";
+    private static final String TAG = "ParentDBManger";
 
-  public enum TokenType {
-    AccessToken,
-    Status
-  }
-
-  public static final String DATABASE_NAME = "traffictakestan_db";
-  private static final int DATABASE_VERSION = 1;
-  private static final String USER_TABLE_NAME = "tbl_user";
-
-
-  private final String USER_COL_ID = "col_id";
-  private final String USER_COL_NAME = "col_name";
-  private final String USER_COL_FAMILY = "col_family";
-  private final String USER_COL_PARENT = "col_parent";
-  private final String USER_COL_NATIONAL_CODE = "col_national_code";
-  private final String USER_COL_TELEPHONE = "col_telephone";
-  private final String USER_COL_BIRTH_CERTIFICATE = "col_birth_certificate";
-  private final String USER_TABLE = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
-          USER_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-          USER_COL_NAME + " TEXT, " +
-          USER_COL_FAMILY + " TEXT, " +
-          USER_COL_PARENT + " TEXT, " +
-          USER_COL_NATIONAL_CODE + " TEXT, " +
-          USER_COL_TELEPHONE + " TEXT, " +
-          USER_COL_BIRTH_CERTIFICATE + " TEXT );";
-
-
-
-  public ParentDBManger (Context context) {
-    super(context, DATABASE_NAME, null, DATABASE_VERSION);
-  }
-
-  @Override
-  public void onCreate (SQLiteDatabase db) {
-    try {
-      db.execSQL(USER_TABLE);
-    } catch (Exception e) {
-      e.printStackTrace();
-      Log.e(TAG, e.toString());
+    public enum TokenType {
+        AccessToken,
+        Status
     }
-  }
 
-  @Override
-  public void onUpgrade (SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
-  }
+    public static final String DATABASE_NAME = "traffictakestan_db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String USER_TABLE_NAME = "tbl_user";
 
 
-  boolean setDriverInfo (DriverInfoModel drivers) {
+    private final String USER_COL_ID = "col_id";
+    private final String USER_COL_NAME = "col_name";
+    private final String USER_COL_FAMILY = "col_family";
+    private final String USER_COL_PARENT = "col_parent";
+    private final String USER_COL_NATIONAL_CODE = "col_national_code";
+    private final String USER_COL_TELEPHONE = "col_telephone";
+    private final String USER_COL_BIRTH_CERTIFICATE = "col_birth_certificate";
+    private final String USER_COL_VEHICLE_CODE = "col_vehicle_code";
+    private final String USER_COL_VEHICLE_PELAK = "col_vehicle_pelak";
+    private final String USER_COL_VEHICLE_MODEL = "col_vehicle_model";
+    private final String USER_COL_VEHICLE_TYPE = "col_vehicle_type";
+    private final String USER_COL_LINE_TYPE = "col_line_type";
+    private final String USER_COL_REGISTER_DATE = "col_registerdate";
+    private final String USER_TABLE = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
+            USER_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            USER_COL_NAME + " TEXT, " +
+            USER_COL_FAMILY + " TEXT, " +
+            USER_COL_PARENT + " TEXT, " +
+            USER_COL_NATIONAL_CODE + " TEXT, " +
+            USER_COL_TELEPHONE + " TEXT, " +
+            USER_COL_BIRTH_CERTIFICATE + " TEXT, " +
+            USER_COL_VEHICLE_CODE + " TEXT, " +
+            USER_COL_VEHICLE_PELAK + " TEXT, " +
+            USER_COL_VEHICLE_MODEL + " TEXT, " +
+            USER_COL_VEHICLE_TYPE + " TEXT, " +
+            USER_COL_LINE_TYPE + " TEXT, " +
+            USER_COL_REGISTER_DATE + " TEXT );";
 
-    try {
-      long status = -11;
-      SQLiteDatabase database = getWritableDatabase();
 
-      ContentValues cp = new ContentValues();
-      cp.put(USER_COL_NAME, drivers.getName());
-      cp.put(USER_COL_FAMILY, drivers.getFamily());
-      cp.put(USER_COL_PARENT, drivers.getParent());
-      cp.put(USER_COL_NATIONAL_CODE, drivers.getNationalCode());
-      cp.put(USER_COL_TELEPHONE, drivers.getTelephone());
-      cp.put(USER_COL_BIRTH_CERTIFICATE, drivers.getBirthCertificate());
+    public ParentDBManger(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
-      status = database.insert(USER_TABLE_NAME, null, cp);
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        try {
+            db.execSQL(USER_TABLE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(TAG, e.toString());
+        }
+    }
 
-      Log.e("childApps insert : ", status + " |");
-      if (status > 0) {
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+
+
+    boolean setDriverInfo(DriverInfoModel drivers) {
+
+        try {
+            long status = -11;
+            SQLiteDatabase database = getWritableDatabase();
+
+            ContentValues cp = new ContentValues();
+            cp.put(USER_COL_NAME, drivers.getName());
+            cp.put(USER_COL_FAMILY, drivers.getFamily());
+            cp.put(USER_COL_PARENT, drivers.getParent());
+            cp.put(USER_COL_NATIONAL_CODE, drivers.getNationalCode());
+            cp.put(USER_COL_TELEPHONE, drivers.getTelephone());
+            cp.put(USER_COL_BIRTH_CERTIFICATE, drivers.getBirthCertificate());
+            cp.put(USER_COL_VEHICLE_PELAK, drivers.getVehiclePelak());
+            cp.put(USER_COL_VEHICLE_MODEL, drivers.getVehicleModel());
+            cp.put(USER_COL_LINE_TYPE, drivers.getLineType());
+            cp.put(USER_COL_REGISTER_DATE, drivers.getRegisterDate());
+            cp.put(USER_COL_VEHICLE_TYPE, drivers.getVehicleType());
+            cp.put(USER_COL_VEHICLE_CODE, drivers.getVehicleCode());
+
+            status = database.insert(USER_TABLE_NAME, null, cp);
+
+            Log.e("childApps insert : ", status + " |");
+            if (status > 0) {
+                database.close();
+                return true;
+            } else {
+                database.close();
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.toString();
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+    DriverInfoModel getDriverInfo() {
+
+        DriverInfoModel driver = new DriverInfoModel();
+
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + USER_TABLE_NAME, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            while (!cursor.isAfterLast()) {
+                driver.setName(cursor.getString(1));
+                driver.setFamily(cursor.getString(2));
+                driver.setParent(cursor.getString(3));
+                driver.setNationalCode(cursor.getString(4));
+                driver.setTelephone(cursor.getString(5));
+                driver.setBirthCertificate(cursor.getString(6));
+                driver.setVehicleCode(cursor.getString(7));
+                driver.setVehiclePelak(cursor.getString(8));
+                driver.setVehicleModel(cursor.getString(9));
+                driver.setVehicleType(cursor.getString(10));
+                driver.setLineType(cursor.getString(11));
+                driver.setRegisterDate(cursor.getString(12));
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
         database.close();
-        return true;
-      } else {
-        database.close();
-        return false;
-      }
-
-    } catch (Exception e) {
-      e.toString();
-      Log.e(TAG, e.toString());
-      return false;
+        return driver;
     }
-  }
-
-  DriverInfoModel getDriverInfo () {
-
-    DriverInfoModel driver = new DriverInfoModel();
-
-    SQLiteDatabase database = getReadableDatabase();
-    Cursor cursor = database.rawQuery("SELECT * FROM " + USER_TABLE_NAME, null);
-
-    cursor.moveToFirst();
-    if (cursor.getCount() > 0) {
-      while (!cursor.isAfterLast()) {
-        driver.setName(cursor.getString(1));
-        driver.setFamily(cursor.getString(2));
-        driver.setParent(cursor.getString(3));
-        driver.setNationalCode(cursor.getString(4));
-        driver.setTelephone(cursor.getString(5));
-        driver.setBirthCertificate(cursor.getString(6));
-        cursor.moveToNext();
-      }
-    }
-    cursor.close();
-    database.close();
-    return driver;
-  }
 //
 //  String getMaxTimeChildApps (String packageName) {
 //
@@ -170,8 +193,6 @@ public class ParentDBManger extends SQLiteOpenHelper {
 //      return false;
 //    }
 //  }
-
-
 
 
 //

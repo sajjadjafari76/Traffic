@@ -19,4 +19,8 @@
         <item name="android:textColorPrimary">@color/grey_60</item>
     </style>
 
+    <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+    <item name="fontFamily">@font/shabnam</item>
+    </style>
+
 </resources>

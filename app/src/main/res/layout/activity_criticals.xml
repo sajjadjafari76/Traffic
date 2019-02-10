@@ -198,7 +198,7 @@
                     android:layout_height="@dimen/spacing_xlarge"
                     android:background="@android:color/transparent"
                     android:tint="@color/grey_40"
-                    app:srcCompat="@drawable/img_phone" />
+                    app:srcCompat="@drawable/img_phone_1" />
 
             </LinearLayout>
 

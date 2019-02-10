@@ -42,7 +42,7 @@ public class AppController extends Application {
             model.setNationalCode("");
             DBManager.getInstance(getBaseContext()).setDriverInfo(model);
         } else {
-//            Log.e(TAG, "Database : database created");
+            Log.e(TAG, "Database : database created");
         }
 
     }

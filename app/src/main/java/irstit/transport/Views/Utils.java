@@ -7,6 +7,7 @@ import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 import static irstit.transport.AppController.AppController.TAG;
 
@@ -121,12 +123,6 @@ public class Utils {
         }
         return status[0];
     }
-//
-//    public boolean dataBaseExist() {
-////        Log.e(TAG , "Database : " + mContext.getDatabasePath(ParentDBManger.DATABASE_NAME).getPath());
-//        File dbFile = new File(mContext.getDatabasePath(ParentDBManger.DATABASE_NAME).getPath());
-//        return dbFile.exists();
-//    }
 
     public void getlog(String veryLongString) {
         int maxLogSize = 1500;
@@ -137,7 +133,6 @@ public class Utils {
             Log.e("ShowAssChild1", veryLongString.substring(start, end));
         }
     }
-
 
     public double getDeviceSize(Activity activity) {
 
@@ -176,5 +171,23 @@ public class Utils {
 
     }
 
+    public String DecodeData(String data) {
+        byte[] decededString = Base64.decode(data, Base64.DEFAULT);
+        String stringconverted = new String(decededString, StandardCharsets.UTF_8);
+        return new String(Base64.decode
+                (stringconverted.substring(10, stringconverted.length() - 10 ), Base64.DEFAULT), StandardCharsets.UTF_8);
+    }
+
+    public String convertStatus(int status) {
+        switch (status) {
+            case 0:
+                return "در انتظار بررسی";
+            case 1:
+                return "تایید شده";
+            case 2:
+                return "تایید نشده";
+        }
+        return "";
+    }
 
 }

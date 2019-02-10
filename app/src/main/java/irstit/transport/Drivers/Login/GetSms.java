@@ -77,30 +77,47 @@ public class GetSms extends Fragment implements View.OnClickListener {
                     try {
                         JSONObject object = new JSONObject(response);
 
-                        if (object.getJSONObject("result").getString("status").equals("true")) {
+                        if (object.getJSONObject("result").getString("status").equals("false")) {
+                            btn.revertAnimation();
+                            Toast.makeText(getContext(), object.getJSONObject("result").getString("message"), Toast.LENGTH_SHORT).show();
+                        }else if (object.getJSONObject("result").getString("status").equals("true")) {
                             btn.revertAnimation();
 
                             DriverInfoModel info = new DriverInfoModel();
                             info.setName(object.getJSONObject("driverdata").getString("d_name"));
                             info.setFamily(object.getJSONObject("driverdata").getString("d_family"));
                             info.setParent(object.getJSONObject("driverdata").getString("d_parent"));
-                            info.setNationalCode(new String(Base64.decode(
-                                    object.getJSONObject("driverdata").getString("d_nmc"),Base64.DEFAULT), StandardCharsets.UTF_8));
+                            info.setNationalCode(Utils.getInstance(getContext()).DecodeData(
+                                    object.getJSONObject("driverdata").getString("d_nmc")));
                             info.setBirthCertificate(object.getJSONObject("driverdata").getString("d_passcode"));
-                            info.setTelephone(new String(Base64.decode(
-                                    object.getJSONObject("driverdata").getString("d_tel"),Base64.DEFAULT), StandardCharsets.UTF_8));
+                            info.setTelephone(Utils.getInstance(getContext()).DecodeData(
+                                    object.getJSONObject("driverdata").getString("d_tel")));
+
+                            info.setLineType(object.getJSONObject("vehicledata").getString("v_activitytype"));
+                            info.setVehicleType(object.getJSONObject("vehicledata").getString("v_vhicletype"));
+                            info.setVehicleCode(object.getJSONObject("vehicledata").getString("v_code"));
+
+                            info.setVehicleModel(object.getJSONObject("vehicledata").getString("v_model"));
+                            info.setRegisterDate(object.getJSONObject("vehicledata").getString("v_regtime"));
+//                            info.setVehiclePelak(Utils.getInstance(getContext()).DecodeData(
+//                                    object.getJSONObject("vehicledata").getString("v_plate")));
+
                             DBManager.getInstance(getContext()).setDriverInfo(info);
 
                             startActivity(new Intent(getActivity(), DriversMainActivity.class));
                             getActivity().finish();
+
                         }
                     } catch (Exception e) {
-
+                        btn.revertAnimation();
+                        Log.e("getSmsError", e.toString() + " | ");
+                        Toast.makeText(getContext(), "خطایی رخ داد لطفا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
                     }
                 }, error -> {
-
+            btn.revertAnimation();
             Log.e("getDriverInfoError", error.toString() + " |");
             btn.revertAnimation();
+            Toast.makeText(getContext(), "خطایی رخ داد لطفا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
         }) {
 
             @Override

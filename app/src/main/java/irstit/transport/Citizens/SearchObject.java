@@ -52,13 +52,14 @@ public class SearchObject extends AppCompatActivity {
 
     private RecyclerView Recycler;
     private PersianDatePickerDialog picker;
-    private EditText Start, End;
+    private TextView Start, End;
     private spinnerAdapter adapter;
     private Spinner Category;
     private ExpansionHeader Header;
     private ExpansionLayout Layout;
     private String StartDate, EndDate;
     private PersianCalendar StartDateCalender = new PersianCalendar(), EndDateCalender = new PersianCalendar();
+    private TextView Null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +76,12 @@ public class SearchObject extends AppCompatActivity {
         Category = findViewById(R.id.RegisterObject_Category);
         Start = findViewById(R.id.SearchObject_Start);
         End = findViewById(R.id.SearchObject_End);
-        Start.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus) {
+        Null = findViewById(R.id.SearchObject_Null);
+        Start.setOnClickListener((view) -> {
                 configureStartDate();
-            }
         });
-        End.setOnFocusChangeListener((view, hasFocus) -> {
-            if (hasFocus) {
+        End.setOnClickListener((view) -> {
                 configureEndDate();
-            }
         });
 
 
@@ -179,42 +177,6 @@ public class SearchObject extends AppCompatActivity {
         return data;
     }
 
-    private List<NavModel> Data() {
-        List<NavModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 6 ; i++) {
-
-            if (i == 0) {
-                NavModel model = new NavModel();
-//                model.setName("نظریه جدید در سازمان");
-//                model.setImage("http://traffictakestan.ir/images/photo_2019-01-27_05-26-38.jpg");
-                data.add(model);
-            } else if (i == 1) {
-                NavModel model = new NavModel();
-//                model.setName("نرخ های جدید سازمان");
-//                model.setImage("https://assets.materialup.com/uploads/20ded50d-cc85-4e72-9ce3-452671cf7a6d/preview.jpg");
-                data.add(model);
-            } else if (i == 2) {
-                NavModel model = new NavModel();
-//                model.setName("پیشنهاد های مردمی");
-//                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            } else if (i == 3) {
-                NavModel model = new NavModel();
-//                model.setName("پیشنهاد های مردمی");
-//                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            } else if (i == 4) {
-                NavModel model = new NavModel();
-//                model.setName("پیشنهاد های مردمی");
-//                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            }
-
-        }
-
-        return data;
-    }
-
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {
 
         List<SearchObjModel> data;
@@ -269,20 +231,32 @@ public class SearchObject extends AppCompatActivity {
 //                            clear();
 
                             JSONArray array = object.getJSONArray("result");
-                            List<SearchObjModel> obj = new ArrayList<>();
 
-                            for (int i = 0 ; i < array.length() ; i++) {
+                            if (array.length() == 0) {
 
-                                SearchObjModel searchObject = new SearchObjModel();
-                                searchObject.setTitle(array.getJSONObject(0).getString("rd_name"));
-                                searchObject.setDate(array.getJSONObject(0).getString("rd_timeobject"));
-                                obj.add(searchObject);
+                                Null.setVisibility(View.VISIBLE);
+                                Recycler.setVisibility(View.GONE);
+
+                            }else {
+
+                                Null.setVisibility(View.GONE);
+                                Recycler.setVisibility(View.VISIBLE);
+
+                                List<SearchObjModel> obj = new ArrayList<>();
+
+                                for (int i = 0 ; i < array.length() ; i++) {
+
+                                    SearchObjModel searchObject = new SearchObjModel();
+                                    searchObject.setTitle(array.getJSONObject(0).getString("rd_name"));
+                                    searchObject.setDate(array.getJSONObject(0).getString("rd_timeobject"));
+                                    obj.add(searchObject);
+                                }
+
+                                Layout.toggle(true);
+                                Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+                                Recycler.setAdapter(new MyNavigationAdapter(obj));
+
                             }
-
-                            Layout.toggle(true);
-                            Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
-                            Recycler.setAdapter(new MyNavigationAdapter(obj));
-
                         } else if (object.getString("status").equals("true")) {
 //                            enabledEditText();
                             Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
@@ -396,6 +370,5 @@ public class SearchObject extends AppCompatActivity {
 
         }
     }
-
 
 }

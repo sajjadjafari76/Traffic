@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Drivers.VacationSearch">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        android:id="@+id/RequestVacation_CardSearch">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_search"
+                android:padding="8dp"
+                android:id="@+id/RequestVacation_Search"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/RequestVacation_Search"
+                android:background="#FFF"
+                android:hint="جستجوی مرخصی"
+                android:fontFamily="@font/shabnam"
+                android:padding="@dimen/spacing_medium"
+                android:textSize="@dimen/spacing_large"
+                android:id="@+id/RequestVacation_TextSearch"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/RequestVacation_CardSearch"
+        android:id="@+id/RequestVacation_Status"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/app1"
+                android:visibility="visible"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/first_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="تایید نشده"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk"
+                    android:backgroundTint="#DA034E" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/app2"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/second_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="در انتظار بررسی"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk"
+                    android:backgroundTint="@color/deep_orange_400" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/app3"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/third_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="تایید شده"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk"
+                    android:backgroundTint="#21C89A" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/RequestVacation_Status"
+        android:id="@+id/RequestVacation_Recycler">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>
