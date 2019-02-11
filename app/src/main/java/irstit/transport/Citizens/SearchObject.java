@@ -2,6 +2,11 @@ package irstit.transport.Citizens;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,8 +18,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,22 +33,21 @@ import com.github.florent37.expansionpanel.ExpansionLayout;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import irstit.transport.AppController.AppController;
-import irstit.transport.DataModel.NavModel;
-import irstit.transport.DataModel.NewsModel;
 import irstit.transport.DataModel.SearchObjModel;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
-import irstit.transport.MainActivity;
 import irstit.transport.R;
 import irstit.transport.Views.CFProvider;
 
@@ -60,13 +64,12 @@ public class SearchObject extends AppCompatActivity {
     private String StartDate, EndDate;
     private PersianCalendar StartDateCalender = new PersianCalendar(), EndDateCalender = new PersianCalendar();
     private TextView Null;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_object);
-        ExpansionLayout layout;
-
 
         ImageView Back = findViewById(R.id.RegisterObject_Back);
         Button Btn = findViewById(R.id.RegisterObject_Btn);
@@ -78,10 +81,10 @@ public class SearchObject extends AppCompatActivity {
         End = findViewById(R.id.SearchObject_End);
         Null = findViewById(R.id.SearchObject_Null);
         Start.setOnClickListener((view) -> {
-                configureStartDate();
+            configureStartDate();
         });
         End.setOnClickListener((view) -> {
-                configureEndDate();
+            configureEndDate();
         });
 
 
@@ -96,12 +99,11 @@ public class SearchObject extends AppCompatActivity {
         Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//                if (position > (category.size() - 1)) {
-//
-//                }else {
-////                    type = String.valueOf(getCategory().get(position).getId());
-//                    Log.e("GetPhoneResponse", String.valueOf(getCategory().get(position).getId()) + " |");
-//                }
+                if (position > (getCategory().size() - 1)) {
+
+                } else {
+                    type = String.valueOf(getCategory().get(position).getId());
+                }
             }
 
             @Override
@@ -194,9 +196,23 @@ public class SearchObject extends AppCompatActivity {
         @Override
         public void onBindViewHolder(MyNavigationAdapter.MyCustomView holder, final int position) {
 
-            holder.Title.setText(data.get(position).getTitle());
-            holder.Date.setText(data.get(position).getDate());
+            try {
+                PersianCalendar date = new PersianCalendar(
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(data.get(position).getDate()).getTime());
 
+                holder.Title.setText("عنوان : ".concat(data.get(position).getTitle()));
+                holder.Date.setText("تاریخ یافت : ".concat(date.getPersianYear() + "/" + date.getPersianMonth() + "/" + date.getPersianDay()));
+
+                Drawable background = holder.Bk.getBackground();
+                if (background instanceof GradientDrawable) {
+                    Random rnd = new Random();
+                    int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                    GradientDrawable gradientDrawable = (GradientDrawable) background;
+                    gradientDrawable.setColor(color);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         @Override
@@ -207,12 +223,13 @@ public class SearchObject extends AppCompatActivity {
         class MyCustomView extends RecyclerView.ViewHolder {
 
             private TextView Title, Date;
+            private RelativeLayout Bk;
 
             public MyCustomView(View itemView) {
                 super(itemView);
                 Title = itemView.findViewById(R.id.Search_Title);
                 Date = itemView.findViewById(R.id.Search_Date);
-
+                Bk = itemView.findViewById(R.id.Search_Bk);
             }
         }
     }
@@ -237,7 +254,7 @@ public class SearchObject extends AppCompatActivity {
                                 Null.setVisibility(View.VISIBLE);
                                 Recycler.setVisibility(View.GONE);
 
-                            }else {
+                            } else {
 
                                 Null.setVisibility(View.GONE);
                                 Recycler.setVisibility(View.VISIBLE);
@@ -278,7 +295,7 @@ public class SearchObject extends AppCompatActivity {
                 Map<String, String> map = new HashMap<>();
                 map.put("startdate", StartDate);
                 map.put("enddate", EndDate);
-                map.put("type", "6214");
+                map.put("type", type);
                 return map;
             }
 

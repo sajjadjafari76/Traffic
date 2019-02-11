@@ -1,6 +1,7 @@
 package irstit.transport.AppController;
 
 import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -15,7 +16,7 @@ import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataBase.ParentDBManger;
 import irstit.transport.DataModel.DriverInfoModel;
 
-public class AppController extends Application {
+public class AppController extends MultiDexApplication {
 
     public static final String TAG = AppController.class
             .getSimpleName();

@@ -36,7 +36,8 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:padding="5dp"
-                app:srcCompat="@drawable/ic_list_white" />
+                app:srcCompat="@drawable/ic_list_white"
+                android:id="@+id/RequestVacation_Print"/>
 
         </android.support.v7.widget.CardView>
 

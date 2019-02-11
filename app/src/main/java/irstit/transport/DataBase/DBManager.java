@@ -31,5 +31,9 @@ public class DBManager {
         return pDb.getDriverInfo();
     }
 
+    public void deleteDrivers() {
+        pDb = new ParentDBManger(mContext);
+        pDb.deleteDrivers();
+    }
 
 }

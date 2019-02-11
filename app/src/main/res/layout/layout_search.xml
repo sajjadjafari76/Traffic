@@ -20,7 +20,8 @@
             <RelativeLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/ic_circle">
+                android:background="@drawable/ic_circle"
+                android:id="@+id/Search_Bk">
 
                 <ImageView
                     android:layout_width="match_parent"

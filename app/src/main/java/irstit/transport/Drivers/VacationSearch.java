@@ -18,6 +18,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -26,11 +27,14 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import irstit.transport.AppController.AppController;
 import irstit.transport.DataModel.ReqVacationModel;
 import irstit.transport.Globals;
@@ -77,7 +81,7 @@ public class VacationSearch extends Fragment {
         return view;
     }
 
-    private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView>  implements Filterable {
+    private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> implements Filterable {
 
         List<ReqVacationModel> data;
         List<ReqVacationModel> dataFiltered;
@@ -96,21 +100,40 @@ public class VacationSearch extends Fragment {
         @Override
         public void onBindViewHolder(MyNavigationAdapter.MyCustomView holder, final int position) {
 
-            holder.Code.setText( " کد رهگیری ".concat(dataFiltered.get(position).getCode()));
-            holder.FromDate.setText(" از ".concat(dataFiltered.get(position).getFromDate()));
-            holder.ToDate.setText(" تا ".concat(dataFiltered.get(position).getToDate()));
-            holder.Type.setText(dataFiltered.get(position).getVacationType());
-            holder.Desc.setText(" توضیحات : ".concat(dataFiltered.get(position).getDesc()));
+            try {
+                PersianCalendar fromCalendar = new PersianCalendar(
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dataFiltered.get(position).getFromDate()).getTime());
+                PersianCalendar toCalender = new PersianCalendar(
+                        new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dataFiltered.get(position).getToDate()).getTime());
 
-            if (dataFiltered.get(position).getStatus().equals("0")) {
-                holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.deep_orange_300));
-            }else if (dataFiltered.get(position).getStatus().equals("1")) {
-                holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.green_300));
-            }else if (dataFiltered.get(position).getStatus().equals("2")) {
-                holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.red_A200));
+                holder.Code.setText(" کد رهگیری ".concat(dataFiltered.get(position).getCode()));
+                holder.FromDate.setText(" از ".concat(fromCalendar.getPersianYear() + "/" + fromCalendar.getPersianMonth() + "/" + fromCalendar.getPersianDay()));
+                holder.ToDate.setText(" تا ".concat(toCalender.getPersianYear() + "/" + toCalender.getPersianMonth() + "/" + toCalender.getPersianDay()));
+                holder.Type.setText(dataFiltered.get(position).getVacationType());
+                holder.Desc.setText(" توضیحات : ".concat(dataFiltered.get(position).getDesc()));
+
+                if (dataFiltered.get(position).getStatus().equals("0")) {
+                    holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.deep_orange_300));
+                    holder.Print.setEnabled(false);
+                } else if (dataFiltered.get(position).getStatus().equals("1")) {
+                    holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.green_300));
+                    holder.Print.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_print_));
+                    holder.Print.setEnabled(true);
+                } else if (dataFiltered.get(position).getStatus().equals("2")) {
+                    holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_A200));
+                    holder.Print.setEnabled(false);
+                }
+
+                holder.Print.setOnClickListener(v -> {
+
+                    if (holder.Print.isEnabled()) {
+                        Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-
         }
 
         @Override
@@ -122,7 +145,7 @@ public class VacationSearch extends Fragment {
         public Filter getFilter() {
             return new Filter() {
                 @Override
-                protected FilterResults performFiltering (CharSequence constraint) {
+                protected FilterResults performFiltering(CharSequence constraint) {
 
                     String charString = constraint.toString();
                     if (charString.isEmpty()) {
@@ -148,7 +171,7 @@ public class VacationSearch extends Fragment {
                 }
 
                 @Override
-                protected void publishResults (CharSequence constraint, FilterResults results) {
+                protected void publishResults(CharSequence constraint, FilterResults results) {
 
                     dataFiltered = (List<ReqVacationModel>) results.values;
                     notifyDataSetChanged();
@@ -161,6 +184,7 @@ public class VacationSearch extends Fragment {
 
             private TextView Code, FromDate, ToDate, Type, Desc;
             private CardView Root;
+            private ImageView Print;
 
             public MyCustomView(View itemView) {
                 super(itemView);
@@ -170,11 +194,11 @@ public class VacationSearch extends Fragment {
                 Type = itemView.findViewById(R.id.RequestVacation_Type);
                 Desc = itemView.findViewById(R.id.RequestVacation_Desc);
                 Root = itemView.findViewById(R.id.RequestVacation_Root);
+                Print = itemView.findViewById(R.id.RequestVacation_Print);
 
             }
         }
     }
-
 
     private void criticalRequest() {
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/listleave",
@@ -189,7 +213,7 @@ public class VacationSearch extends Fragment {
 
                             if (array.length() == 0) {
 
-                            }else {
+                            } else {
                                 DriversMainActivity.mData.clear();
 
                                 for (int i = 0 ; i < array.length() ; i++) {
@@ -244,6 +268,5 @@ public class VacationSearch extends Fragment {
         AppController.getInstance().addToRequestQueue(getPhoneRequest);
 
     }
-
 
 }

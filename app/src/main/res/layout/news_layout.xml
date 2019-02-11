@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardElevation="1dp"
+    app:cardCornerRadius="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="#FFF">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:id="@+id/NewsLayout_Image"
+            android:layout_marginBottom="10dp"/>
+
+        <irstit.transport.Views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="عنوان"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:id="@+id/NewsLayout_Topic"/>
+
+        <at.blogc.android.views.ExpandableTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#888"
+            android:textSize="12sp"
+            android:layout_marginTop="5dp"
+            android:id="@+id/NewsLayout_Content"
+            android:maxLines="3"
+            android:fontFamily="@font/shabnam"
+            android:ellipsize="end"
+            app:animation_duration="750"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp">
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:padding="5dp"
+                android:layout_height="wrap_content"
+                android:text="12/11/1396"
+                android:textSize="12sp"
+                android:textColor="#000"
+                android:background="#f9f9f9"
+                android:id="@+id/NewsLayout_Date"/>
+
+            <TextView
+                android:layout_width="180dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:id="@+id/NewsLayout_Expand"
+                android:text="ادامه خبر"
+                android:gravity="center"
+                android:fontFamily="@font/shabnam"
+                android:textSize="11sp"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

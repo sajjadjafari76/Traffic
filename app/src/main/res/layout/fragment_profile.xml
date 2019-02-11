@@ -24,7 +24,8 @@
             android:gravity="center"
             android:textColor="#FFF"
             android:fontFamily="@font/shabnam"
-            android:textSize="@dimen/spacing_xmiddle"/>
+            android:textSize="@dimen/spacing_xmiddle"
+            android:id="@+id/Profile_Logout"/>
 
 
         <ImageView

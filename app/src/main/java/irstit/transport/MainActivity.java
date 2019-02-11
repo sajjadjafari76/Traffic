@@ -25,21 +25,32 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
+import irstit.transport.DataModel.ReqVacationModel;
 import irstit.transport.Drivers.DriversMainActivity;
 import irstit.transport.Drivers.Login.ActivityLogin;
+import irstit.transport.Drivers.VacationSearch;
 import irstit.transport.Views.CustomTextView;
 import irstit.transport.Views.Utilities;
 import irstit.transport.Views.Utils;
@@ -55,6 +66,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView Navigation_Info_Name, MainActivity_Login_Text;
     private CustomTextView Navigation_Info_Code, MainActivity_Date;
     private DrawerLayout drawer;
+    public static List<NewsModel> mNews = new ArrayList<>();
+    public List<NewsModel> mNewsNew = new ArrayList<>();
 
     @Override
     protected void onStart() {
@@ -68,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getBirthCertificate()));
 
             MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_2));
-        }else {
+        } else {
             MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_1));
         }
     }
@@ -84,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LinearLayout registerObject = findViewById(R.id.MainActivity_RegisterObject);
         LinearLayout search = findViewById(R.id.MainActivity_Search);
         ImageView iconDrawer = findViewById(R.id.MainActivity_NavigatorIcon);
+        TextView additionalNews = findViewById(R.id.MainActivity_Additional);
         MainActivity_Date = findViewById(R.id.MainActivity_Date);
         drawer = findViewById(R.id.MainActivity_Drawer);
         iconDrawer.setOnClickListener(this);
@@ -91,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Login.setOnClickListener(this);
         registerObject.setOnClickListener(this);
         search.setOnClickListener(this);
+        additionalNews.setOnClickListener(this);
         NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView);
 
         Toolbar toolbar = findViewById(R.id.MainActivity_Toolbar);
@@ -105,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         LoginNavigation.setOnClickListener(this);
 
 
-
         Slider.init(new PicassoImageLoadingService(getApplicationContext()));
         slider.setAdapter(new SliderAdapter());
 
@@ -116,56 +130,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
-
-        RecyclerView recyclerView = findViewById(R.id.MainActivity_Recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerView.setAdapter(new MyCustomAdapter(Data()));
-
         RecyclerView navigation_Recycler = findViewById(R.id.MainActivity_Navigation_RecyClerView);
         navigation_Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
         navigation_Recycler.setAdapter(new MyNavigationAdapter(navigationData()));
 
 
-        Utilities utilities = new Utilities();
+        getNews();
 
 
         MainActivity_Date.setText(Utilities.getCurrentShamsidate());
-    }
-
-    private List<NewsModel> Data() {
-        List<NewsModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 6 ; i++) {
-
-            if (i == 0) {
-                NewsModel model = new NewsModel();
-                model.setName("نظریه جدید در سازمان");
-                model.setImage("http://traffictakestan.ir/images/photo_2019-01-27_05-26-38.jpg");
-                data.add(model);
-            } else if (i == 1) {
-                NewsModel model = new NewsModel();
-                model.setName("نرخ های جدید سازمان");
-                model.setImage("https://assets.materialup.com/uploads/20ded50d-cc85-4e72-9ce3-452671cf7a6d/preview.jpg");
-                data.add(model);
-            } else if (i == 2) {
-                NewsModel model = new NewsModel();
-                model.setName("پیشنهاد های مردمی");
-                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            } else if (i == 3) {
-                NewsModel model = new NewsModel();
-                model.setName("پیشنهاد های مردمی");
-                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            } else if (i == 4) {
-                NewsModel model = new NewsModel();
-                model.setName("پیشنهاد های مردمی");
-                model.setImage("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                data.add(model);
-            }
-
-        }
-
-        return data;
     }
 
     private List<NavModel> navigationData() {
@@ -230,12 +203,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.MainActivity_Login:
                 if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null) {
-                    if ( DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+                    if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
                         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
-                    }else {
+                    } else {
                         startActivity(new Intent(getApplicationContext(), DriversMainActivity.class));
                     }
-                }else {
+                } else {
                     startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
                 }
                 break;
@@ -247,6 +220,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.MainActivity_Search:
                 startActivity(new Intent(getApplicationContext(), SearchObject.class));
+                break;
+            case R.id.MainActivity_Additional:
+                startActivity(new Intent(getApplicationContext(), News.class));
                 break;
         }
     }
@@ -346,10 +322,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onBindViewHolder(MyCustomAdapter.MyCustomView holder, final int position) {
 
-            holder.textView.setText(data.get(position).getName());
+            holder.textView.setText(data.get(position).getTopic());
 
             Picasso.with(getBaseContext())
-                    .load(data.get(position).getImage())
+                    .load(Globals.APIURLIMAGE + data.get(position).getImage())
                     .resize(200, 200)
                     .into(holder.imageView);
 
@@ -400,6 +376,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (position) {
                     case 0:
+                        Intent intent = new Intent(getBaseContext(), DriversMainActivity.class);
+                        intent.putExtra("RequestVacation", "true");
+                        startActivity(intent);
                         break;
                     case 1:
                         break;
@@ -444,4 +423,79 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void getNews() {
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.GET, Globals.APIURL + "/news",
+                response -> {
+                    Log.e("NewsResponse", response + " |");
+
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        if (object.getString("status").equals("true")) {
+
+                            JSONArray array = object.getJSONArray("news");
+
+                            if (array.length() == 0) {
+
+                            } else {
+                                mNews.clear();
+
+                                for (int i = 0 ; i < array.length() ; i++) {
+
+                                    JSONObject myObject = array.getJSONObject(i);
+
+                                    NewsModel model = new NewsModel();
+                                    model.setContent(myObject.getString("n_body"));
+                                    model.setDate(myObject.getString("n_date"));
+                                    model.setImage(myObject.getString("n_thumb"));
+                                    model.setTopic(myObject.getString("n_title"));
+
+                                    mNews.add(model);
+
+                                    if (i <= 2 ) {
+                                        mNewsNew.add(model);
+                                    }
+
+                                }
+
+                                RecyclerView recyclerView = findViewById(R.id.MainActivity_Recycler);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.HORIZONTAL, false));
+                                recyclerView.setAdapter(new MyCustomAdapter(mNewsNew));
+
+                            }
+                        } else if (object.getString("status").equals("false")) {
+
+                        }
+                    } catch (Exception e) {
+                        Log.e("ListLeavesError1", e.toString() + " |");
+
+                    }
+                },
+                error -> {
+                    Log.e("ListLeavesError2", error.toString() + " |");
+
+                }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> map = new HashMap<>();
+//                map.put("phone", "9190467144");
+                return super.getParams();
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> map = new HashMap<>();
+//                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                return super.getHeaders();
+            }
+        };
+
+        getPhoneRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(getPhoneRequest);
+
+    }
+
+
 }
+//https://github.com/Blogcat/Android-ExpandableTextView

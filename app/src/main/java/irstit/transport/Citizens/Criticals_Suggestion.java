@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
-import irstit.transport.DataModel.DriverInfoModel;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.R;

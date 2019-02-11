@@ -29,15 +29,21 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(this);
 
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
-        fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());
-        fragmentTransaction.commit();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
+//        fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());
+//        fragmentTransaction.commit();
+
+        if (getIntent().getExtras() != null && getIntent().getExtras().getString("RequestVacation").equals("true")) {
+            bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_ReqVacation);
+        }else {
+            bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_Profile);
+        }
     }
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         switch (menuItem.getItemId()) {
             case R.id.DriversMainMenu_Profile:
                 fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());

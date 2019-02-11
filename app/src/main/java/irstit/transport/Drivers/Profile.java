@@ -1,6 +1,8 @@
 package irstit.transport.Drivers;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,13 +20,18 @@ import irstit.transport.R;
 
 public class Profile extends Fragment {
 
+    private AlertDialog.Builder alertDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        alertDialog = new AlertDialog.Builder(getContext());
+
         RecyclerView recyclerInfo = view.findViewById(R.id.SearchObject_RecyclerInfo);
         RecyclerView recyclerVehicle = view.findViewById(R.id.SearchObject_RecyclerVehicle);
+        TextView logOut = view.findViewById(R.id.Profile_Logout);
 
         ProfileInfoAdapter infoAdapter = new ProfileInfoAdapter(DBManager.getInstance(getContext()).getDriverInfo());
         recyclerInfo.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
@@ -34,6 +41,18 @@ public class Profile extends Fragment {
         recyclerVehicle.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
         recyclerVehicle.setAdapter(vehicleAdapter);
 
+        logOut.setOnClickListener(v -> {
+
+            alertDialog.setCancelable(false);
+            alertDialog.setMessage("آیا مطمئن هستید؟");
+            alertDialog.setNegativeButton("خیر", (dialog, which) -> dialog.dismiss());
+            alertDialog.setPositiveButton("بله", (dialog, which) -> {
+                logOut();
+                getActivity().finish();
+            });
+            alertDialog.show();
+
+        });
 
         return view;
     }
@@ -164,6 +183,10 @@ public class Profile extends Fragment {
             }
         }
 
+    }
+
+    private void logOut() {
+        DBManager.getInstance(getContext()).deleteDrivers();
     }
 
 }

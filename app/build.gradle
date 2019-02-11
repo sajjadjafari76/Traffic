@@ -11,6 +11,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -23,7 +24,6 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
-
 
 }
 
@@ -62,4 +62,15 @@ dependencies {
     // expansion
     implementation 'com.github.florent37:expansionpanel:1.0.3'
 
+    // google map
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
+    // chart
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+    //multidex
+    implementation 'com.android.support:multidex:1.0.3'
+
+    // expandable textview
+    implementation 'at.blogc:expandabletextview:1.0.5'
 }

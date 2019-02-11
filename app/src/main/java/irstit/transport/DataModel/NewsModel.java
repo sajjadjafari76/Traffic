@@ -3,7 +3,9 @@ package irstit.transport.DataModel;
 public class NewsModel {
 
     private String Image;
-    private String Name;
+    private String Topic;
+    private String Content;
+    private String Date;
 
     public String getImage() {
         return Image;
@@ -13,11 +15,27 @@ public class NewsModel {
         Image = image;
     }
 
-    public String getName() {
-        return Name;
+    public String getTopic() {
+        return Topic;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setTopic(String topic) {
+        Topic = topic;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String content) {
+        Content = content;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 }

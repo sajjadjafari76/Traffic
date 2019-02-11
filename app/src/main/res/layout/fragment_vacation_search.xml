@@ -80,7 +80,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="#DA034E" />
+                    android:backgroundTint="@color/red_A200" />
 
 
             </LinearLayout>
@@ -106,7 +106,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="@color/deep_orange_400" />
+                    android:backgroundTint="@color/deep_orange_300" />
 
 
             </LinearLayout>
@@ -132,7 +132,7 @@
                     android:layout_width="12dp"
                     android:layout_height="12dp"
                     android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="#21C89A" />
+                    android:backgroundTint="@color/green_300" />
 
 
             </LinearLayout>

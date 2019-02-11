@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ConnectToUs"></activity>
+        <activity android:name=".News"></activity>
+        <activity android:name=".SplashScreen" />
+        <activity android:name=".ConnectToUs" />
         <activity android:name=".AboutUs" />
         <activity android:name=".Citizens.SearchObject" />
         <activity android:name=".Drivers.DriversMainActivity" />
@@ -29,6 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" />
     </application>
 
 </manifest>

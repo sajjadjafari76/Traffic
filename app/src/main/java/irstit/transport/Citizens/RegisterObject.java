@@ -39,14 +39,12 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
-import irstit.transport.AppController.AppController;
+import irstit.transport.DataModel.NewsModel;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
@@ -62,6 +60,8 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
     private ImageView Picture;
     private PersianDatePickerDialog picker;
     private String mDate = "";
+    private String type;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +101,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
                 uploadContent(Title.getText().toString(),
                         Description.getText().toString(),
                         mDate,
-                        "",
+                        type,
                         imgDecodableString);
 
                 disabledEditText();
@@ -121,12 +121,11 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
         Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-//                if (position > (category.size() - 1)) {
-//
-//                }else {
-//                    type = String.valueOf(getCategory().get(position).getId());
-//                    Log.e("GetPhoneResponse", String.valueOf(getCategory().get(position).getId()) + " |");
-//                }
+                if (position > (getCategory().size() - 1)) {
+
+                }else {
+                    type = String.valueOf(getCategory().get(position).getId());
+                }
             }
 
             @Override

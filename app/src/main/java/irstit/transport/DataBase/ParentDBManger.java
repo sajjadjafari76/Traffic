@@ -140,6 +140,11 @@ public class ParentDBManger extends SQLiteOpenHelper {
         database.close();
         return driver;
     }
+
+    void deleteDrivers() {
+        SQLiteDatabase database = getReadableDatabase();
+        database.execSQL("delete from " + USER_TABLE_NAME);
+    }
 //
 //  String getMaxTimeChildApps (String packageName) {
 //
