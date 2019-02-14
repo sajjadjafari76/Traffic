@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.Globals;
 import irstit.transport.R;
 import irstit.transport.Views.Utils;
@@ -34,6 +36,8 @@ public class GetPhone extends Fragment implements View.OnClickListener {
 
     private EditText phone;
     private RoundButton sendInfo;
+    private TextView text;
+    private String state = "null";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,22 +46,26 @@ public class GetPhone extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_get_phone, container, false);
 
         sendInfo = view.findViewById(R.id.bt);
+        text = view.findViewById(R.id.GetPhone_Text);
 
-        sendInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
-                    Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
-                } else if (phone.getText().toString().length() < 9 || phone.getText().toString().equals("")) {
-                    Toast.makeText(getContext(), "شماره تلفن صحیح نمی باشد", Toast.LENGTH_SHORT).show();
-                } else {
-                    GetPhoneRequest();
-                    sendInfo.startAnimation();
-                }
-
+        sendInfo.setOnClickListener(view1 -> {
+            if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
+                Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
+            } else if (phone.getText().toString().length() >10 || phone.getText().toString().length() < 10 || phone.getText().toString().equals("")) {
+                Toast.makeText(getContext(), "شماره تلفن صحیح نمی باشد", Toast.LENGTH_SHORT).show();
+            } else {
+                GetPhoneRequest();
+                sendInfo.startAnimation();
             }
+
         });
 
+
+        if (getArguments() != null && getArguments().getString("state").equals("ChangePass")) {
+            text.setText("شماره موبایل جدید خود را وارد کنید");
+        }else {
+
+        }
 
         phone = view.findViewById(R.id.GetPhone_Edittext);
 
@@ -76,8 +84,8 @@ public class GetPhone extends Fragment implements View.OnClickListener {
     }
 
     private void GetPhoneRequest() {
-
-        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/loginDV",
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST,
+                Globals.APIURL + ((getArguments() != null && getArguments().getString("state").equals("ChangePass")) ? "/changephone" : "/loginDV"),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -96,6 +104,11 @@ public class GetPhone extends Fragment implements View.OnClickListener {
                                 transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("phone", phone.getText().toString());
+                                if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+                                    bundle.putString("state", "ChangePass");
+                                }else {
+                                    bundle.putString("state", "null");
+                                }
                                 GetSms getSms = new GetSms();
                                 getSms.setArguments(bundle);
                                 transaction.replace(R.id.Toolbar_Frame, getSms);
@@ -125,8 +138,20 @@ public class GetPhone extends Fragment implements View.OnClickListener {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> map = new HashMap<>();
-                map.put("phone", phone.getText().toString());
+                if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+                    map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
+                    map.put("newphone", phone.getText().toString());
+                }else {
+                    map.put("phone", phone.getText().toString());
+                }
 
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
                 return map;
             }
         };

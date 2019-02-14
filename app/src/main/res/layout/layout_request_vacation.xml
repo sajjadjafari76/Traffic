@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="3dp"
-    android:id="@+id/RequestVacation_Root">
-
+    android:layout_height="118dp"
+    android:elevation="1dp"
+    android:layout_marginBottom="5dp"
+    android:id="@+id/RequestVacation_Root"
+    app:cardCornerRadius="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="115dp"
         android:orientation="vertical"
         android:background="#5E000000"
         android:backgroundTint="#5E000000">

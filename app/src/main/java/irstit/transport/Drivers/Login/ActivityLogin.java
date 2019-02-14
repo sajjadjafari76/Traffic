@@ -15,9 +15,24 @@ public class ActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Bundle bundle = new Bundle();
+
+
+        if (getIntent().getExtras() != null
+                && getIntent().getExtras().getString("state").equals("ChangePass")) {
+            bundle.putString("state","ChangePass");
+        }else {
+            bundle.putString("state","null");
+        }
+
         // Going to getPhone fragment to get phone number
+
         transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.Toolbar_Frame, new GetPhone());
+
+        GetPhone getPhone = new GetPhone();
+        getPhone.setArguments(bundle);
+
+        transaction.replace(R.id.Toolbar_Frame, getPhone);
         transaction.commit();
 
     }

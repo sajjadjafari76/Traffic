@@ -26,6 +26,11 @@ public class DBManager {
         return pDb.setDriverInfo(info);
     }
 
+    public boolean updateDriverInfo(String info, String newPhone) {
+        pDb = new ParentDBManger(mContext);
+        return pDb.updateDriverInfo(info, newPhone);
+    }
+
     public DriverInfoModel getDriverInfo() {
         pDb = new ParentDBManger(mContext);
         return pDb.getDriverInfo();

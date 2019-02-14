@@ -1,6 +1,5 @@
 package irstit.transport;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,42 +24,38 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.smarteist.autoimageslider.DefaultSliderView;
+import com.smarteist.autoimageslider.SliderLayout;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.Citizens.Complaint;
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
-import irstit.transport.DataModel.ReqVacationModel;
 import irstit.transport.Drivers.DriversMainActivity;
 import irstit.transport.Drivers.Login.ActivityLogin;
-import irstit.transport.Drivers.VacationSearch;
 import irstit.transport.Views.CustomTextView;
 import irstit.transport.Views.Utilities;
-import irstit.transport.Views.Utils;
-import ss.com.bannerslider.ImageLoadingService;
-import ss.com.bannerslider.Slider;
-import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     private LinearLayout InfoNavigation;
     private RelativeLayout LoginNavigation;
@@ -68,17 +64,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout drawer;
     public static List<NewsModel> mNews = new ArrayList<>();
     public List<NewsModel> mNewsNew = new ArrayList<>();
+    private List<String> Image = new ArrayList<>();
+    private SliderLayout sliderLayout;
 
     @Override
     protected void onStart() {
         super.onStart();
 
         if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null && !DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
+
+            Log.e("telephone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() + " | ");
             InfoNavigation.setVisibility(View.VISIBLE);
             LoginNavigation.setVisibility(View.GONE);
 
             Navigation_Info_Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName().concat(" " + DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily()));
-            Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getBirthCertificate()));
+            Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode()));
 
             MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_2));
         } else {
@@ -91,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Slider slider = findViewById(R.id.MainActivity_Slider);
+        sliderLayout = findViewById(R.id.MainActivity_Slider);
+//        sliderLayout.setIndicatorAnimation(IndicatorAnimations.FILL); //set indicator animation by using SliderLayout.Animations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+//        sliderLayout.setScrollTimeInSec(3); //set scroll delay in seconds :
+        sliderLayout.setAutoScrolling(false);
+
         RelativeLayout Login = findViewById(R.id.MainActivity_Login);
         LinearLayout complaint = findViewById(R.id.MainActivity_Complaint);
         LinearLayout registerObject = findViewById(R.id.MainActivity_RegisterObject);
@@ -119,9 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Navigation_Info_Code = view.findViewById(R.id.Navigation_Info_Code);
         LoginNavigation.setOnClickListener(this);
 
-
-        Slider.init(new PicassoImageLoadingService(getApplicationContext()));
-        slider.setAdapter(new SliderAdapter());
+        configSlider();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -130,12 +132,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryDark));
         }
 
+
         RecyclerView navigation_Recycler = findViewById(R.id.MainActivity_Navigation_RecyClerView);
         navigation_Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
         navigation_Recycler.setAdapter(new MyNavigationAdapter(navigationData()));
 
+//        getNews();
 
-        getNews();
+        configNews();
 
 
         MainActivity_Date.setText(Utilities.getCurrentShamsidate());
@@ -152,35 +156,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 data.add(model);
             } else if (i == 1) {
                 NavModel model = new NavModel();
-                model.setName("ثبت اشیا گمشده");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_lostobj));
-                data.add(model);
-            } else if (i == 2) {
-                NavModel model = new NavModel();
                 model.setName("جستجو اشیا گمشده");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
                 data.add(model);
-            } else if (i == 3) {
+            } else if (i == 2) {
                 NavModel model = new NavModel();
                 model.setName("ثبت شکایات");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
                 data.add(model);
-            } else if (i == 4) {
+            } else if (i == 3) {
                 NavModel model = new NavModel();
                 model.setName("نمایش نرخ نامه");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_price));
                 data.add(model);
-            } else if (i == 5) {
+            } else if (i == 4) {
                 NavModel model = new NavModel();
                 model.setName("پیشنهادات و انتقادات");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_critical));
                 data.add(model);
-            } else if (i == 6) {
+            } else if (i == 5) {
                 NavModel model = new NavModel();
                 model.setName("تماس با ما");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_contact));
                 data.add(model);
-            } else if (i == 7) {
+            } else if (i == 6) {
                 NavModel model = new NavModel();
                 model.setName("درباره ی ما");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
@@ -224,52 +223,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.MainActivity_Additional:
                 startActivity(new Intent(getApplicationContext(), News.class));
                 break;
-        }
-    }
-
-    private class SliderAdapter extends ss.com.bannerslider.adapters.SliderAdapter {
-
-        @Override
-        public int getItemCount() {
-            return 3;
-        }
-
-        @Override
-        public void onBindImageSlide(int position, ImageSlideViewHolder imageSlideViewHolder) {
-            switch (position) {
-                case 0:
-                    imageSlideViewHolder.bindImageSlide("http://traffictakestan.ir/images/photo_2019-01-27_05-26-38.jpg");
-                    break;
-                case 1:
-                    imageSlideViewHolder.bindImageSlide("https://assets.materialup.com/uploads/20ded50d-cc85-4e72-9ce3-452671cf7a6d/preview.jpg");
-                    break;
-                case 2:
-                    imageSlideViewHolder.bindImageSlide("https://assets.materialup.com/uploads/76d63bbc-54a1-450a-a462-d90056be881b/preview.png");
-                    break;
-            }
-        }
-    }
-
-    public class PicassoImageLoadingService implements ImageLoadingService {
-        public Context context;
-
-        public PicassoImageLoadingService(Context context) {
-            this.context = context;
-        }
-
-        @Override
-        public void loadImage(String url, ImageView imageView) {
-            Picasso.with(context).load(url).into(imageView);
-        }
-
-        @Override
-        public void loadImage(int resource, ImageView imageView) {
-            Picasso.with(context).load(resource).into(imageView);
-        }
-
-        @Override
-        public void loadImage(String url, int placeHolder, int errorDrawable, ImageView imageView) {
-            Picasso.with(context).load(url).placeholder(placeHolder).error(errorDrawable).into(imageView);
         }
     }
 
@@ -326,8 +279,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             Picasso.with(getBaseContext())
                     .load(Globals.APIURLIMAGE + data.get(position).getImage())
-                    .resize(200, 200)
+//                    .resize(200, 200)
+                    .fit()
                     .into(holder.imageView);
+
+            holder.cardView.setOnClickListener(v -> {
+
+                Intent intent = new Intent(getApplicationContext(), News.class);
+                intent.putExtra("position", String.valueOf(position));
+                startActivity(intent);
+            });
 
         }
 
@@ -379,21 +340,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Intent intent = new Intent(getBaseContext(), DriversMainActivity.class);
                         intent.putExtra("RequestVacation", "true");
                         startActivity(intent);
+                        closeDrawer();
                         break;
                     case 1:
                         break;
                     case 2:
+                        Intent intent1 = new Intent(getBaseContext(), Complaint.class);
+                        intent1.putExtra("data", getIntent().getExtras().getString("data"));
+                        startActivity(intent1);
+                        closeDrawer();
                         break;
                     case 3:
+                        startActivity(new Intent(getBaseContext(), LetterRate.class));
+                        closeDrawer();
                         break;
                     case 4:
+                        startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
+                        closeDrawer();
                         break;
                     case 5:
+                        startActivity(new Intent(getBaseContext(), ConnectToUs.class));
+                        closeDrawer();
                         break;
                     case 6:
-                        startActivity(new Intent(getBaseContext(), ConnectToUs.class));
-                        break;
-                    case 7:
 
                         break;
                 }
@@ -451,14 +420,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                     mNews.add(model);
 
-                                    if (i <= 2 ) {
+                                    if (i <= 2) {
                                         mNewsNew.add(model);
                                     }
 
                                 }
 
                                 RecyclerView recyclerView = findViewById(R.id.MainActivity_Recycler);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.HORIZONTAL, false));
+                                recyclerView.setLayoutManager(new GridLayoutManager(getBaseContext(), 3, LinearLayoutManager.VERTICAL, false));
                                 recyclerView.setAdapter(new MyCustomAdapter(mNewsNew));
 
                             }
@@ -496,6 +465,95 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    void configNews() {
+        try {
+
+            if (getIntent().getExtras() != null && !getIntent().getExtras().getString("data").isEmpty()) {
+                JSONObject object = new JSONObject(getIntent().getExtras().getString("data"));
+                if (object.getString("status").equals("true")) {
+
+                    JSONArray array = object.getJSONArray("news");
+
+                    if (array.length() == 0) {
+
+                    } else {
+                        mNews.clear();
+
+                        for (int i = 0 ; i < array.length() ; i++) {
+
+                            JSONObject myObject = array.getJSONObject(i);
+
+                            NewsModel model = new NewsModel();
+                            model.setContent(myObject.getString("n_body"));
+                            model.setDate(myObject.getString("n_date"));
+                            model.setImage(myObject.getString("n_thumb"));
+                            model.setTopic(myObject.getString("n_title"));
+
+                            mNews.add(model);
+
+                            if (i <= 2) {
+                                mNewsNew.add(model);
+                            }
+
+                        }
+
+                        RecyclerView recyclerView = findViewById(R.id.MainActivity_Recycler);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getBaseContext(), 3, LinearLayoutManager.VERTICAL, false));
+                        recyclerView.setAdapter(new MyCustomAdapter(mNewsNew));
+
+                    }
+                } else if (object.getString("status").equals("false")) {
+
+                }
+            }
+        } catch (Exception e) {
+            Log.e("ListLeavesError111", e.toString() + " |");
+
+        }
+    }
+
+    void configSlider() {
+        try {
+            if (getIntent().getExtras() != null && !getIntent().getExtras().getString("data").isEmpty()) {
+                JSONObject object = new JSONObject(getIntent().getExtras().getString("data"));
+                JSONArray array = object.getJSONArray("slider");
+
+
+                for (int i = 0 ; i < array.length() ; i++) {
+                    JSONObject myObject = array.getJSONObject(i);
+                    Image.add(myObject.getString("s_fileaddress"));
+                    DefaultSliderView sliderView = new DefaultSliderView(getBaseContext());
+
+                    sliderView.setImageUrl(myObject.getString("s_fileaddress"));
+
+                    sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+//                    sliderView.setDescription("setDescription " + (i + 1));
+                    final int finalI = i;
+                    sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
+                        @Override
+                        public void onSliderClick(SliderView sliderView) {
+                            Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    //at last add this view in your layout :
+                    sliderLayout.addSliderView(sliderView);
+
+
+                }
+
+
+            }
+
+        } catch (Exception e) {
+
+        }
+    }
+
+    void closeDrawer() {
+        if (drawer.isDrawerOpen(Gravity.RIGHT)) {
+            drawer.closeDrawers();
+        }
+    }
 
 }
-//https://github.com/Blogcat/Android-ExpandableTextView

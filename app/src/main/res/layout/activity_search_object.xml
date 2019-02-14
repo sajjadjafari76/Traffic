@@ -128,7 +128,7 @@
                             android:layout_weight="0.8"
                             android:fontFamily="@font/shabnam"
                             android:gravity="center"
-                            android:text="شروع تاریخ"
+                            android:hint="شروع تاریخ"
                             android:textSize="@dimen/spacing_large"/>
 
 
@@ -230,7 +230,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/SearchObject_Card"
-        android:text="اشیا مورد نظر یافت نشد"
+        android:text="اشیایی در بازه زمانی مشخص شده یافت نشد"
         android:gravity="center"
         android:textSize="@dimen/spacing_smlarge"
         android:textColor="#000"

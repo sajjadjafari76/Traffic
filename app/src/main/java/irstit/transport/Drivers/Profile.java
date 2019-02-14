@@ -3,8 +3,12 @@ package irstit.transport.Drivers;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +16,29 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.DriverInfoModel;
+import irstit.transport.Drivers.Login.ActivityLogin;
+import irstit.transport.Drivers.Login.GetPhone;
 import irstit.transport.R;
+import irstit.transport.Views.EditnameDialogFragment;
+import irstit.transport.Views.MyDialogManager;
 
 public class Profile extends Fragment {
 
     private AlertDialog.Builder alertDialog;
+    private AlertDialog dialog;
+    private AlertDialog.Builder Dialog;
+    private TextView Name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,10 +46,17 @@ public class Profile extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         alertDialog = new AlertDialog.Builder(getContext());
+        Dialog = new AlertDialog.Builder(getActivity());
+        Name = view.findViewById(R.id.Profile_Name);
+        Name.setText(DBManager.getInstance(getContext()).getDriverInfo().getName() + " " + DBManager.getInstance(getContext()).getDriverInfo().getFamily());
+        QrCode();
+
 
         RecyclerView recyclerInfo = view.findViewById(R.id.SearchObject_RecyclerInfo);
         RecyclerView recyclerVehicle = view.findViewById(R.id.SearchObject_RecyclerVehicle);
         TextView logOut = view.findViewById(R.id.Profile_Logout);
+        TextView changePass = view.findViewById(R.id.Profile_ChangePass);
+        ImageView picture = view.findViewById(R.id.Profile_Picture);
 
         ProfileInfoAdapter infoAdapter = new ProfileInfoAdapter(DBManager.getInstance(getContext()).getDriverInfo());
         recyclerInfo.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
@@ -54,6 +79,29 @@ public class Profile extends Fragment {
 
         });
 
+        changePass.setOnClickListener(v -> {
+
+//            dialog.show();
+
+//            showEditDialog();
+
+            Intent intent = new Intent(getContext(), ActivityLogin.class);
+            intent.putExtra("state", "ChangePass");
+
+            startActivity(intent);
+
+        });
+
+
+        if (DBManager.getInstance(getContext()).getDriverInfo().getPicture() != null) {
+
+            Picasso.with(getContext())
+                    .load("http://cpanel.traffictakestan.ir/" + DBManager.getInstance(getContext()).getDriverInfo().getPicture())
+                    .error(R.drawable.noimage)
+                    .into(picture);
+        } else {
+            picture.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.no_image));
+        }
         return view;
     }
 
@@ -154,7 +202,9 @@ public class Profile extends Fragment {
                         holder.Text.setText(" نوع خط : ".concat(data.getLineType()));
                         break;
                     case 5:
-                        holder.Text.setText(" تاریخ ثبت : ".concat(data.getRegisterDate()));
+                        PersianCalendar date = new PersianCalendar(
+                                new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(data.getRegisterDate()).getTime());
+                        holder.Text.setText(" تاریخ ثبت : ".concat(date.getPersianYear() + "/" + date.getPersianMonth() + "/" + date.getPersianDay()));
                         break;
 
                 }
@@ -188,6 +238,59 @@ public class Profile extends Fragment {
     private void logOut() {
         DBManager.getInstance(getContext()).deleteDrivers();
     }
+
+
+    private void QrCode() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogLayout = inflater.inflate(R.layout.layout_change_pass, null);
+        Dialog.setView(dialogLayout);
+        Dialog.setCancelable(false);
+        Dialog.setMessage("تغییر شماره موبایل");
+        Dialog.setPositiveButton("بعداً", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+//                AppController.getInstance().getRequestQueue().cancelAll("Dialog");
+//
+//                Log.e("dialog11", AppController.getInstance().getRequestQueue().getSequenceNumber() + "|");
+
+            }
+        });
+        Dialog.setNegativeButton("انجام دادم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+//                getApps(keyMain);
+//                Log.e("dialog11", AppController.getInstance().getRequestQueue().getSequenceNumber() + "|");
+            }
+        });
+        dialog = Dialog.create();
+//        textDialog = dialogLayout.findViewById(R.id.text);
+//
+//        FragmentTransaction transaction = getActivity()
+//                .getSupportFragmentManager().beginTransaction().addToBackStack(null);
+//        transaction.replace(R.id.ChangePass_Container, new GetPhone());
+//        transaction.commit();
+
+//        progressBarDoalog = dialogLayout.findViewById(R.id.progress);
+//    textcode = dialogLayout.findViewById(R.id.textcode);
+
+//    Dialog.show();
+
+//            AlertDialog dialog = builder.create();
+//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+
+    }
+
+//    private void showEditDialog() {
+//        FragmentManager fm = getActivity().getSupportFragmentManager();
+//        EditnameDialogFragment editNameDialogFragment = EditnameDialogFragment.newInstance("Some Title");
+//        editNameDialogFragment.show(fm, "fragment_edit_name");
+//    }
+
 
 }
 

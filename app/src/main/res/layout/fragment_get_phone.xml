@@ -14,7 +14,8 @@
         android:textColor="#FFF"
         android:gravity="center"
         android:textSize="@dimen/DriversLogin_GetPhone"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:id="@+id/GetPhone_Text"/>
 
     <irstit.transport.Views.CustomEdittext
         android:layout_width="match_parent"
@@ -25,6 +26,7 @@
         android:layout_marginRight="30dp"
         android:textSize="@dimen/DriversLogin_GetPhone"
         android:padding="6dp"
+        android:text="91"
         android:textColorHint="@color/grey_20"
         android:textColor="@color/grey_20"
         android:id="@+id/GetPhone_Edittext"

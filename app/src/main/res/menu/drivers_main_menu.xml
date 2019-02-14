@@ -5,17 +5,17 @@
 
     <item
         android:id="@+id/DriversMainMenu_Profile"
-        android:icon="@drawable/ic_envelope"
+        android:icon="@drawable/ic_avatar"
         android:title="پروفایل"/>
 
     <item
         android:id="@+id/DriversMainMenu_VacationSearch"
-        android:icon="@drawable/ic_envelope"
+        android:icon="@drawable/ic_loupe"
         android:title="جستجو مرخصی"/>
 
     <item
         android:id="@+id/DriversMainMenu_ReqVacation"
-        android:icon="@drawable/ic_envelope"
+        android:icon="@drawable/ic_notes"
         android:title="درخواست مرخصی"
         app:showAsAction="always"/>
 

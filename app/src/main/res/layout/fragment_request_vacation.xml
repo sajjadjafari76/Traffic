@@ -1,54 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:weightSum="3"
+
     tools:context=".Drivers.RequestVacation">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2">
 
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-
-            <com.anychart.AnyChartView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/RequestVacation_Chart">
-
-            </com.anychart.AnyChartView>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="horizontal">-->
 
 
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
+            <!--<com.anychart.AnyChartView-->
+                <!--android:id="@+id/RequestVacation_Chart"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
 
-        </LinearLayout>
+            <!--</com.anychart.AnyChartView>-->
 
-    </LinearLayout>
 
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1">-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1.7"
+        android:gravity="center"
         android:orientation="vertical"
         android:paddingStart="@dimen/appbar_padding_top"
-        android:paddingEnd="@dimen/appbar_padding_top"
-        android:gravity="center">
+        android:paddingEnd="@dimen/appbar_padding_top">
 
 
         <LinearLayout
@@ -60,19 +66,49 @@
             android:paddingLeft="@dimen/spacing_large"
             android:paddingRight="@dimen/spacing_large">
 
-            <Spinner
-                android:id="@+id/RegisterObject_Category1"
+
+            <LinearLayout
+                android:id="@+id/SearchObject_SEDate"
                 android:layout_width="0dp"
-                android:layout_height="46dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:background="@drawable/back_spinner"
-                android:focusableInTouchMode="true"
-                android:layoutDirection="rtl"
-                android:popupBackground="#62ffffff"
-                android:soundEffectsEnabled="true"
-                android:spinnerMode="dialog"
-                />
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/RequestVacation_EndDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.87"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:hint="پایان تاریخ"
+                    android:textSize="@dimen/spacing_large" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:text="الی"
+                    android:textColor="#000"
+                    android:textSize="@dimen/spacing_large" />
+
+                <TextView
+                    android:id="@+id/RequestVacation_StartDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:text="شروع تاریخ"
+                    android:textSize="@dimen/spacing_large" />
+
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="@dimen/spacing_middle"
@@ -98,18 +134,47 @@
             android:paddingRight="@dimen/spacing_large">
 
 
-            <EditText
+            <LinearLayout
+                android:id="@+id/SearchObject_SEDate1"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/shabnam"
-                android:hint="عنوان"
-                android:lines="1"
-                android:padding="@dimen/default_dash_indicator_width"
-                android:background="@drawable/res_focused_edittext"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80"
-                android:id="@+id/RegisterObject_Title"/>
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/RequestVacation_EndTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.87"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:hint="پایان ساعت"
+                    android:textSize="@dimen/spacing_large" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:text="الی"
+                    android:textColor="#000"
+                    android:textSize="@dimen/spacing_large" />
+
+                <TextView
+                    android:id="@+id/RequestVacation_StartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center"
+                    android:text="شروع ساعت"
+                    android:textSize="@dimen/spacing_large" />
+
+
+            </LinearLayout>
 
 
             <View
@@ -137,18 +202,17 @@
             android:paddingRight="@dimen/spacing_large">
 
             <Spinner
-                android:id="@+id/RegisterObject_Category"
+                android:id="@+id/RequestVacation_Category"
                 android:layout_width="0dp"
                 android:layout_height="46dp"
                 android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 android:background="@drawable/back_spinner"
                 android:focusableInTouchMode="true"
                 android:layoutDirection="rtl"
                 android:popupBackground="#62ffffff"
                 android:soundEffectsEnabled="true"
                 android:spinnerMode="dialog"
-                />
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
             <View
                 android:layout_width="@dimen/spacing_middle"
@@ -175,19 +239,19 @@
 
 
             <EditText
+                android:id="@+id/RequestVacation_Destination"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/res_focused_edittext"
                 android:ems="10"
                 android:fontFamily="@font/shabnam"
-                android:hint="توضیحات"
-                android:inputType="textMultiLine"
+                android:hint="مقصد"
+                android:inputType="text"
                 android:lines="3"
-                android:padding="@dimen/default_dash_indicator_width"
-                android:background="@drawable/res_focused_edittext"
+                android:padding="@dimen/spacing_small"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textColor="@color/grey_80"
-                android:id="@+id/RegisterObject_Description"/>
+                android:textColor="@color/grey_80" />
 
 
             <View
@@ -214,30 +278,50 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/sign_out1"
+            android:id="@+id/RequestVacation_Btn"
             android:layout_width="160dp"
             android:layout_height="?attr/actionBarSize"
             android:backgroundTint="@color/colorPrimary"
+            android:drawableRight="@drawable/ic_check"
             android:fontFamily="@font/shabnam"
             android:text="ثبت نهایی"
             android:textColor="#d9f1fd"
-            android:textSize="15sp"
-            android:drawableRight="@drawable/ic_check"/>
+            android:textSize="15sp" />
 
 
-        <Button
-            android:id="@+id/sign_out"
-            android:layout_width="170dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginRight="25dp"
-            android:backgroundTint="@color/orange_300"
-            android:fontFamily="@font/shabnam"
-            android:text="ثبت پیش نویس"
-            android:textColor="#d9f1fd"
-            android:textSize="13sp"
-            android:drawableRight="@drawable/ic_create_"/>
+        <!--<Button-->
+        <!--android:id="@+id/sign_out"-->
+        <!--android:layout_width="170dp"-->
+        <!--android:layout_height="?attr/actionBarSize"-->
+        <!--android:layout_marginRight="25dp"-->
+        <!--android:backgroundTint="@color/orange_300"-->
+        <!--android:fontFamily="@font/shabnam"-->
+        <!--android:text="ثبت پیش نویس"-->
+        <!--android:textColor="#d9f1fd"-->
+        <!--android:textSize="13sp"-->
+        <!--android:drawableRight="@drawable/ic_create_"/>-->
 
     </LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/RequestVacation_Loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#52CCCCCC"
+        android:visibility="gone">
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerInParent="true"
+            app:mk_color="@color/colorPrimary"
+            app:mk_type="TwinFishesSpinner" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

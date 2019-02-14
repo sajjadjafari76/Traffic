@@ -4,6 +4,7 @@ package irstit.transport.Drivers.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.mukesh.OtpView;
 
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
             } else {
                 getDriverInfo();
+                btn.startAnimation();
             }
         });
         btn.setOnClickListener((View v) -> {
@@ -54,6 +57,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
             } else {
                 getDriverInfo();
+                btn.startAnimation();
             }
         });
 
@@ -67,7 +71,8 @@ public class GetSms extends Fragment implements View.OnClickListener {
 
     private void getDriverInfo() {
 
-        StringRequest getDriverInfo = new StringRequest(Request.Method.POST, Globals.APIURL + "/validation",
+        StringRequest getDriverInfo = new StringRequest(Request.Method.POST,
+                Globals.APIURL + ((getArguments() != null && getArguments().getString("state").equals("ChangePass")) ? "/codenewphone" : "/validation"),
                 response -> {
 
                     Log.e("getDriverInfoResponse", response + " |");
@@ -75,10 +80,27 @@ public class GetSms extends Fragment implements View.OnClickListener {
                     try {
                         JSONObject object = new JSONObject(response);
 
+                        if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+
+                            if (object.getString("status").equals("true")) {
+
+                                Log.e("phone" , getArguments().getString("phone") + " | " + " loh");
+                                Log.e("phone" , getArguments().getString("phone") + " | " +
+                                        DBManager.getInstance(getContext()).updateDriverInfo(
+                                                DBManager.getInstance(getContext()).getDriverInfo().getTelephone(),getArguments().getString("phone")));
+                                startActivity(new Intent(getActivity(), DriversMainActivity.class));
+                                getActivity().finish();
+                            }else {
+                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                                btn.revertAnimation();
+                            }
+
+                            return;
+                        }
                         if (object.getJSONObject("result").getString("status").equals("false")) {
                             btn.revertAnimation();
                             Toast.makeText(getContext(), object.getJSONObject("result").getString("message"), Toast.LENGTH_SHORT).show();
-                        }else if (object.getJSONObject("result").getString("status").equals("true")) {
+                        } else if (object.getJSONObject("result").getString("status").equals("true")) {
                             btn.revertAnimation();
 
                             DriverInfoModel info = new DriverInfoModel();
@@ -93,13 +115,16 @@ public class GetSms extends Fragment implements View.OnClickListener {
 
                             info.setLineType(object.getJSONObject("vehicledata").getString("v_activitytype"));
                             info.setVehicleType(object.getJSONObject("vehicledata").getString("v_vhicletype"));
+
                             info.setVehicleCode(object.getJSONObject("vehicledata").getString("v_code"));
 
                             info.setVehicleModel(object.getJSONObject("vehicledata").getString("v_model"));
                             info.setRegisterDate(object.getJSONObject("vehicledata").getString("v_regtime"));
-//                            info.setVehiclePelak(Utils.getInstance(getContext()).DecodeData(
-//                                    object.getJSONObject("vehicledata").getString("v_plate")));
 
+                            info.setVehiclePelak(object.getJSONObject("vehicledata").getString("v_plate"));
+
+                            info.setPicture(object.getJSONObject("driverdata").getString("d_pic"));
+                            Log.e("vehicleType" , object.getJSONObject("driverdata").getString("d_pic") + " |");
                             DBManager.getInstance(getContext()).setDriverInfo(info);
 
                             startActivity(new Intent(getActivity(), DriversMainActivity.class));
@@ -121,8 +146,16 @@ public class GetSms extends Fragment implements View.OnClickListener {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("validateCode", otpView.getText().toString());
+
+                map.put("validationCode", otpView.getText().toString());
                 map.put("phone", getArguments().getString("phone"));
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
                 return map;
             }
         };

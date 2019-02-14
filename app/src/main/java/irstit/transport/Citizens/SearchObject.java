@@ -2,11 +2,8 @@ package irstit.transport.Citizens;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,7 +61,7 @@ public class SearchObject extends AppCompatActivity {
     private String StartDate, EndDate;
     private PersianCalendar StartDateCalender = new PersianCalendar(), EndDateCalender = new PersianCalendar();
     private TextView Null;
-    private String type;
+    private String type = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +114,8 @@ public class SearchObject extends AppCompatActivity {
         });
 
         Btn.setOnClickListener(view -> {
+
+            Log.e("loglog", Start.getText().toString() + " | " + End.getText().toString());
 
             if (Start.getText().toString().isEmpty()) {
                 Toast.makeText(getBaseContext(), "تاریخ آغاز نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();

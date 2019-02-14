@@ -15,8 +15,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".News"></activity>
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".Citizens.Complaint"></activity>
+        <activity android:name=".LetterRate" />
+        <activity android:name=".News" />
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- <action android:name="android.intent.action.VIEW" /> -->
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+                <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+                <!-- &lt;!&ndash; Accepts URIs that begin with "http://www.example.com/gizmos” &ndash;&gt; -->
+                <!-- <data android:scheme="http" -->
+                <!-- android:host="www.stit.ir" -->
+                <!-- android:pathPrefix="/gizmos" /> -->
+                <!-- &lt;!&ndash; note that the leading "/" is required for pathPrefix&ndash;&gt; -->
+                <!-- &lt;!&ndash; Accepts URIs that begin with "example://gizmos” &ndash;&gt; -->
+                <!-- <data android:scheme="example" -->
+                <!-- android:host="sajjad" /> -->
+
+            </intent-filter>
+        </activity>
         <activity android:name=".ConnectToUs" />
         <activity android:name=".AboutUs" />
         <activity android:name=".Citizens.SearchObject" />
@@ -24,13 +45,7 @@
         <activity android:name=".Citizens.RegisterObject" />
         <activity android:name=".Citizens.Criticals_Suggestion" />
         <activity android:name=".Drivers.Login.ActivityLogin" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -3,8 +3,10 @@ package irstit.transport.Drivers;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,15 +39,19 @@ import java.util.Map;
 
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
 import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.ReqVacationModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
+import irstit.transport.Views.CustomTextView;
 
 
 public class VacationSearch extends Fragment {
 
     private RecyclerView navigation_Recycler;
     private MyNavigationAdapter adapter;
+    private RelativeLayout Loading;
+    private CustomTextView empty;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,7 +60,9 @@ public class VacationSearch extends Fragment {
 
         EditText TextSearch = view.findViewById(R.id.RequestVacation_TextSearch);
         ImageView IconSearch = view.findViewById(R.id.RequestVacation_Search);
+        empty = view.findViewById(R.id.VacationSearch_Empty);
         navigation_Recycler = view.findViewById(R.id.RequestVacation_Recycler);
+        Loading = view.findViewById(R.id.VacationSearch_Loading);
 
 
         IconSearch.setOnClickListener(v -> {
@@ -77,6 +86,7 @@ public class VacationSearch extends Fragment {
             }
         });
 
+        Loading.setVisibility(View.VISIBLE);
         criticalRequest();
         return view;
     }
@@ -110,7 +120,8 @@ public class VacationSearch extends Fragment {
                 holder.FromDate.setText(" از ".concat(fromCalendar.getPersianYear() + "/" + fromCalendar.getPersianMonth() + "/" + fromCalendar.getPersianDay()));
                 holder.ToDate.setText(" تا ".concat(toCalender.getPersianYear() + "/" + toCalender.getPersianMonth() + "/" + toCalender.getPersianDay()));
                 holder.Type.setText(dataFiltered.get(position).getVacationType());
-                holder.Desc.setText(" توضیحات : ".concat(dataFiltered.get(position).getDesc()));
+                holder.Desc.setText(" توضیحات : "
+                        .concat((dataFiltered.get(position).getDesc() == null) ? "" : dataFiltered.get(position).getDesc() ));
 
                 if (dataFiltered.get(position).getStatus().equals("0")) {
                     holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.deep_orange_300));
@@ -127,7 +138,16 @@ public class VacationSearch extends Fragment {
                 holder.Print.setOnClickListener(v -> {
 
                     if (holder.Print.isEnabled()) {
-                        Toast.makeText(getContext(), "ok", Toast.LENGTH_SHORT).show();
+
+                        FragmentTransaction transaction =
+                                getActivity().getSupportFragmentManager().beginTransaction().addToBackStack(null);
+                        ReportDriverInfo info = new ReportDriverInfo();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", dataFiltered.get(position).getCode());
+                        info.setArguments(bundle);
+                        transaction.replace(R.id.DriversMainActivity_Container, info);
+                        transaction.commit();
+
                     }
 
                 });
@@ -212,7 +232,9 @@ public class VacationSearch extends Fragment {
                             JSONArray array = object.getJSONArray("leaves");
 
                             if (array.length() == 0) {
-
+                                Loading.setVisibility(View.GONE);
+                                navigation_Recycler.setVisibility(View.VISIBLE);
+                                empty.setVisibility(View.VISIBLE);
                             } else {
                                 DriversMainActivity.mData.clear();
 
@@ -230,28 +252,38 @@ public class VacationSearch extends Fragment {
                                     DriversMainActivity.mData.add(model);
                                 }
 
+                                Loading.setVisibility(View.GONE);
+                                navigation_Recycler.setVisibility(View.VISIBLE);
+                                empty.setVisibility(View.GONE);
+
                                 adapter = new MyNavigationAdapter(DriversMainActivity.mData);
-                                navigation_Recycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                                navigation_Recycler.setLayoutManager(new GridLayoutManager(getContext(), 1, LinearLayoutManager.VERTICAL, false));
                                 navigation_Recycler.setAdapter(adapter);
 
                             }
                         } else if (object.getString("status").equals("false")) {
-
+                            Loading.setVisibility(View.GONE);
+                            navigation_Recycler.setVisibility(View.VISIBLE);
+                            empty.setVisibility(View.GONE);
                         }
                     } catch (Exception e) {
                         Log.e("ListLeavesError1", e.toString() + " |");
-
+                        Loading.setVisibility(View.GONE);
+                        navigation_Recycler.setVisibility(View.VISIBLE);
+                        empty.setVisibility(View.GONE);
                     }
                 },
                 error -> {
                     Log.e("ListLeavesError2", error.toString() + " |");
-
+                    Loading.setVisibility(View.GONE);
+                    navigation_Recycler.setVisibility(View.VISIBLE);
+                    empty.setVisibility(View.GONE);
                 }) {
 
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> map = new HashMap<>();
-                map.put("phone", "9190467144");
+                map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
                 return map;
             }
 

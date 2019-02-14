@@ -6,12 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -19,6 +21,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.anychart.scales.Linear;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,70 +53,14 @@ public class News extends AppCompatActivity {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
-//        progressDialog = new ProgressDialog(News.this);
-//        progressDialog.setMessage("در حال بارگذاری ...");
-//        progressDialog.show();
-//
-//        final StringRequest request1 = new StringRequest(Request.Method.POST, Globals.APIURL + "feed", new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(String response) {
-//                Log.e("Loggggg", response + " |");
-//                try {
-//                    List<NewsModel> data = new ArrayList<>();
-//
-//                    JSONArray array = new JSONArray(response);
-//
-//                    if (array.length() == 0) {
-//                        empty.setVisibility(View.VISIBLE);
-//                        recyclerView.setVisibility(View.GONE);
-//                        return;
-//                    }
-//
-//                    for (int i = 0 ; i < array.length() ; i++) {
-//                        NewsModel model = new NewsModel();
-//                        model.setImage(array.getJSONArray(i).getString(0));
-//                        model.setTopic(array.getJSONArray(i).getString(1));
-//                        model.setContent(array.getJSONArray(i).getString(2));
-//                        model.setDate(array.getJSONArray(i).getString(3));
-//                        data.add(model);
-//                    }
-//                    SlideInUpAnimator animator = new SlideInUpAnimator(new OvershootInterpolator(1f));
-//                    animator.setInterpolator(new OvershootInterpolator());
-//                    recyclerView.setItemAnimator(animator);
-//                    recyclerView.getItemAnimator().setMoveDuration(1000);
-//                    recyclerView.getItemAnimator().setChangeDuration(1000);
-//                    MainAdapter adapter = new MainAdapter(getApplicationContext(), data);
-//                    AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
-//                    alphaAdapter.setDuration(1000);
-//                    recyclerView.setAdapter(adapter);
-//
-//                    progressDialog.dismiss();
-//                } catch (Exception e) {
-//                    progressDialog.dismiss();
-//                }
-//
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                empty.setText("خطایی رخ داد لطفا دوباره تلاش کنید!");
-//                empty.setVisibility(View.VISIBLE);
-//                recyclerView.setVisibility(View.GONE);
-//                Log.e("error1", error.toString() + " |");
-//                progressDialog.dismiss();
-//            }
-//        });
-//
-//        request1.setRetryPolicy(new DefaultRetryPolicy(10000,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-//
-//        AppController.getInstance().addToRequestQueue(request1);
-
-
         MainAdapter adapter = new MainAdapter(getApplicationContext(), MainActivity.mNews);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layout = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
+        if (getIntent().getStringExtra("position")!= null) {
+            layout.scrollToPositionWithOffset(Integer.parseInt(getIntent().getStringExtra("position")), 20);
+        }
+        recyclerView.setLayoutManager(layout);
         recyclerView.setAdapter(adapter);
+
 
         News_Backwards.setOnClickListener(v -> finish());
 
@@ -151,7 +98,8 @@ public class News extends AppCompatActivity {
                         new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(mDataSet.get(position).getDate()).getTime());
 
                 holder.Topic.setText(mDataSet.get(position).getTopic());
-                holder.Content.setText(mDataSet.get(position).getContent());
+                String content = String.valueOf(Html.fromHtml(mDataSet.get(position).getContent()));
+                        holder.Content.setText(content);
                 holder.Date.setText(fromCalendar.getPersianYear() + "/" + fromCalendar.getPersianMonth() + "/" + fromCalendar.getPersianDay());
 
                 holder.Content.setAnimationDuration(1550L);

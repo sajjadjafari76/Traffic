@@ -44,7 +44,6 @@ import java.util.List;
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
-import irstit.transport.DataModel.NewsModel;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
@@ -212,7 +211,6 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.e("okokioklk", "dat11 : " + " |");
         if (requestCode == CAMERA && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
 

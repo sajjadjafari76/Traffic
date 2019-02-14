@@ -86,6 +86,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
 
         for (int i = 0 ; i < getCategory().size() ; i++) {
             adapter.add(getCategory().get(i).getName());
+
         }
         adapter.add("یک موضوع را انتخاب کنید!");
         Title.setAdapter(adapter);
@@ -93,11 +94,11 @@ public class Criticals_Suggestion extends AppCompatActivity {
         Title.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position > (category.size() - 1)) {
+                if (position > (getCategory().size() - 1)) {
 
                 }else {
                     type = String.valueOf(getCategory().get(position).getId());
-                    Log.e("GetPhoneResponse", String.valueOf(getCategory().get(position).getId()) + " |");
+                    Log.e("GetPhoneResponse123", String.valueOf(getCategory().get(position).getId()) + " |");
                 }
             }
 
@@ -117,13 +118,13 @@ public class Criticals_Suggestion extends AppCompatActivity {
 
                 case 0:
                     SpinnerModel model = new SpinnerModel();
-                    model.setId(1);
+                    model.setId(1597);
                     model.setName("پیشنهاد");
                     data.add(model);
                     break;
                 case 1:
                     SpinnerModel model2 = new SpinnerModel();
-                    model2.setId(0);
+                    model2.setId(9519);
                     model2.setName("انتقاد");
                     data.add(model2);
                     break;

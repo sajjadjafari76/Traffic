@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".LetterRate">
+
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow"
+                android:id="@+id/LetterRate_Back"/>
+
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="نرخ نامه"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <Spinner
+        android:id="@+id/LetterRate_Category"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_margin="12dp"
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        android:background="@drawable/back_spinner"
+        android:focusableInTouchMode="true"
+        android:layoutDirection="rtl"
+        android:popupBackground="#62ffffff"
+        android:soundEffectsEnabled="true"
+        android:spinnerMode="dialog"
+        />
+
+    <irstit.transport.Views.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LetterRate_Category"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:text="نوع دسته بندی : "
+        android:textColor="#000"
+        android:id="@+id/LetterRate_Text"/>
+
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LetterRate_Text"
+        android:layout_margin="12dp"
+        android:id="@+id/LetterRate_Image"/>
+
+
+
+</RelativeLayout>

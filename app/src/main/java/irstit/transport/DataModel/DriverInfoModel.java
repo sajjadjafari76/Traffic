@@ -14,6 +14,7 @@ public class DriverInfoModel {
     private String VehicleType;
     private String LineType;
     private String RegisterDate;
+    private String Picture;
 
     public String getName() {
         return Name;
@@ -109,5 +110,13 @@ public class DriverInfoModel {
 
     public void setVehicleType(String vehicleType) {
         VehicleType = vehicleType;
+    }
+
+    public String getPicture() {
+        return Picture;
+    }
+
+    public void setPicture(String picture) {
+        Picture = picture;
     }
 }

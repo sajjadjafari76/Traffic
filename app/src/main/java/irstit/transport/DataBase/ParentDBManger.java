@@ -37,6 +37,7 @@ public class ParentDBManger extends SQLiteOpenHelper {
     private final String USER_COL_VEHICLE_TYPE = "col_vehicle_type";
     private final String USER_COL_LINE_TYPE = "col_line_type";
     private final String USER_COL_REGISTER_DATE = "col_registerdate";
+    private final String USER_COL_PICTURE = "col_picture";
     private final String USER_TABLE = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
             USER_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_COL_NAME + " TEXT, " +
@@ -50,7 +51,8 @@ public class ParentDBManger extends SQLiteOpenHelper {
             USER_COL_VEHICLE_MODEL + " TEXT, " +
             USER_COL_VEHICLE_TYPE + " TEXT, " +
             USER_COL_LINE_TYPE + " TEXT, " +
-            USER_COL_REGISTER_DATE + " TEXT );";
+            USER_COL_REGISTER_DATE + " TEXT, " +
+            USER_COL_PICTURE + " TEXT );";
 
 
     public ParentDBManger(Context context) {
@@ -92,10 +94,38 @@ public class ParentDBManger extends SQLiteOpenHelper {
             cp.put(USER_COL_REGISTER_DATE, drivers.getRegisterDate());
             cp.put(USER_COL_VEHICLE_TYPE, drivers.getVehicleType());
             cp.put(USER_COL_VEHICLE_CODE, drivers.getVehicleCode());
+            cp.put(USER_COL_PICTURE, drivers.getPicture());
 
             status = database.insert(USER_TABLE_NAME, null, cp);
 
             Log.e("childApps insert : ", status + " |");
+            if (status > 0) {
+                database.close();
+                return true;
+            } else {
+                database.close();
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.toString();
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+    boolean updateDriverInfo(String phone, String newPhone) {
+
+        try {
+            long status = -11;
+            SQLiteDatabase database = getWritableDatabase();
+
+            ContentValues cp = new ContentValues();
+            cp.put(USER_COL_TELEPHONE, newPhone);
+
+            status = database.update(USER_TABLE_NAME, cp, USER_COL_TELEPHONE+"="+phone, null);
+
+            Log.e("childApps updated : ", status + " |");
             if (status > 0) {
                 database.close();
                 return true;
@@ -133,6 +163,7 @@ public class ParentDBManger extends SQLiteOpenHelper {
                 driver.setVehicleType(cursor.getString(10));
                 driver.setLineType(cursor.getString(11));
                 driver.setRegisterDate(cursor.getString(12));
+                driver.setPicture(cursor.getString(13));
                 cursor.moveToNext();
             }
         }
