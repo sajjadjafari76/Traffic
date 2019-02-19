@@ -15,6 +15,9 @@ public class DriverInfoModel {
     private String LineType;
     private String RegisterDate;
     private String Picture;
+    private String Owner;
+    private String OwnerId;
+    private String IsTaxi;
 
     public String getName() {
         return Name;
@@ -118,5 +121,29 @@ public class DriverInfoModel {
 
     public void setPicture(String picture) {
         Picture = picture;
+    }
+
+    public String getOwner() {
+        return Owner;
+    }
+
+    public void setOwner(String owner) {
+        Owner = owner;
+    }
+
+    public String getIsTaxi() {
+        return IsTaxi;
+    }
+
+    public void setIsTaxi(String isTaxi) {
+        IsTaxi = isTaxi;
+    }
+
+    public String getOwnerId() {
+        return OwnerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        OwnerId = ownerId;
     }
 }

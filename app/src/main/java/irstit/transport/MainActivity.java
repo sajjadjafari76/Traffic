@@ -36,6 +36,7 @@ import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ import java.util.Map;
 
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Complaint;
+import irstit.transport.Citizens.ComplaintTrack;
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
@@ -51,6 +53,7 @@ import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.DataModel.NewsModel;
 import irstit.transport.Drivers.DriversMainActivity;
+import irstit.transport.Drivers.FoundedObjectActivity;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.Views.CustomTextView;
 import irstit.transport.Views.Utilities;
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private LinearLayout InfoNavigation;
     private RelativeLayout LoginNavigation;
-    private TextView Navigation_Info_Name, MainActivity_Login_Text;
+    private TextView Navigation_Info_Name, MainActivity_Login_Text, MainActivity_Txt1, MainActivity_Txt3;
     private CustomTextView Navigation_Info_Code, MainActivity_Date;
     private DrawerLayout drawer;
     public static List<NewsModel> mNews = new ArrayList<>();
@@ -78,11 +81,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             LoginNavigation.setVisibility(View.GONE);
 
             Navigation_Info_Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName().concat(" " + DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily()));
-            Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode()));
+            if (DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode() != null) {
+                Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode()));
+            } else {
+                Navigation_Info_Code.setVisibility(View.INVISIBLE);
+            }
 
             MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_2));
+
+            if (DBManager.getInstance(getBaseContext()).getDriverInfo().getOwnerId() != null) {
+                if (!DBManager.getInstance(getBaseContext()).getDriverInfo().getIsTaxi().equals("0")) {
+                    MainActivity_Txt1.setText("ثبت مرخصی");
+                }
+                MainActivity_Txt3.setText("ثبت اشیا یافت شده");
+            }
         } else {
             MainActivity_Login_Text.setText(getResources().getString(R.string.MainActivity_Login_Text_1));
+
+            MainActivity_Txt1.setText("نمایش نرخ نامه");
+            MainActivity_Txt3.setText("شکایات");
         }
     }
 
@@ -104,6 +121,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TextView additionalNews = findViewById(R.id.MainActivity_Additional);
         MainActivity_Date = findViewById(R.id.MainActivity_Date);
         drawer = findViewById(R.id.MainActivity_Drawer);
+        MainActivity_Txt1 = findViewById(R.id.MainActivity_Txt1);
+        MainActivity_Txt3 = findViewById(R.id.MainActivity_Txt3);
         iconDrawer.setOnClickListener(this);
         complaint.setOnClickListener(this);
         Login.setOnClickListener(this);
@@ -147,27 +166,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private List<NavModel> navigationData() {
         List<NavModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 8 ; i++) {
+        for (int i = 0 ; i <= 7 ; i++) {
 
             if (i == 0) {
-                NavModel model = new NavModel();
-                model.setName("درخواست مرخصی");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_vacation));
-                data.add(model);
-            } else if (i == 1) {
                 NavModel model = new NavModel();
                 model.setName("جستجو اشیا گمشده");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
                 data.add(model);
+            } else if (i == 1) {
+                NavModel model = new NavModel();
+                model.setName("ثبت شی گمشده");
+                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
+                data.add(model);
             } else if (i == 2) {
                 NavModel model = new NavModel();
-                model.setName("ثبت شکایات");
+                model.setName("شکایات");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
                 data.add(model);
             } else if (i == 3) {
                 NavModel model = new NavModel();
-                model.setName("نمایش نرخ نامه");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_price));
+                model.setName("پیگیری شکایت");
+                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
                 data.add(model);
             } else if (i == 4) {
                 NavModel model = new NavModel();
@@ -195,7 +214,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.MainActivity_Complaint:
-                startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
+                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getOwnerId() == null) {
+                    Intent intent = new Intent(getBaseContext(), Complaint.class);
+                    intent.putExtra("data", getIntent().getExtras().getString("data"));
+                    startActivity(intent);
+                } else {
+                    startActivity(new Intent(getBaseContext(), FoundedObjectActivity.class));
+                }
                 break;
             case R.id.Navigation_Login:
                 startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
@@ -205,14 +230,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
                         startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
                     } else {
-                        startActivity(new Intent(getApplicationContext(), DriversMainActivity.class));
+
+                        try {
+                            Intent intent = new Intent(getApplicationContext(), DriversMainActivity.class);
+                            if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
+
+                                JSONObject object = new JSONObject(getIntent().getExtras().getString("data"));
+                                intent.putExtra("dataVacation", object.getJSONObject("fulltime").toString());
+
+                            }
+                            startActivity(intent);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
                     }
                 } else {
                     startActivity(new Intent(getApplicationContext(), ActivityLogin.class));
                 }
                 break;
             case R.id.MainActivity_RegisterObject:
-                startActivity(new Intent(getApplicationContext(), RegisterObject.class));
+                if (DBManager.getInstance(getBaseContext()).getDriverInfo() == null) {
+                    startActivity(new Intent(getApplicationContext(), LetterRate.class));
+                    Log.e("data1", "123");
+                } else {
+                    if (DBManager.getInstance(getBaseContext()).getDriverInfo().getOwnerId() != null) {
+                        if (!DBManager.getInstance(getBaseContext()).getDriverInfo().getIsTaxi().equals("0")) {
+                            Intent intent1 = new Intent(getBaseContext(), DriversMainActivity.class);
+                            intent1.putExtra("RequestVacation", "true");
+                            startActivity(intent1);
+                            Log.e("data1", "321");
+                        }
+                    } else {
+                        startActivity(new Intent(getApplicationContext(), LetterRate.class));
+                        Log.e("data1", "112233");
+                    }
+                }
                 break;
             case R.id.MainActivity_NavigatorIcon:
                 drawer.openDrawer(Gravity.RIGHT);
@@ -337,21 +391,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(getBaseContext(), DriversMainActivity.class);
-                        intent.putExtra("RequestVacation", "true");
+                        Intent intent = new Intent(getBaseContext(), SearchObject.class);
+//                        intent.putExtra("RequestVacation", "true");
                         startActivity(intent);
                         closeDrawer();
                         break;
                     case 1:
-                        break;
-                    case 2:
-                        Intent intent1 = new Intent(getBaseContext(), Complaint.class);
-                        intent1.putExtra("data", getIntent().getExtras().getString("data"));
+                        Intent intent1 = new Intent(getBaseContext(), RegisterObject.class);
+//                        intent1.putExtra("data", getIntent().getExtras().getString("data"));
                         startActivity(intent1);
                         closeDrawer();
                         break;
+                    case 2:
+                        Intent intent12 = new Intent(getBaseContext(), Complaint.class);
+                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
+                            intent12.putExtra("data", getIntent().getExtras().getString("data"));
+                        }
+                        startActivity(intent12);
+                        closeDrawer();
+                        break;
                     case 3:
-                        startActivity(new Intent(getBaseContext(), LetterRate.class));
+                        startActivity(new Intent(getBaseContext(), ComplaintTrack.class));
                         closeDrawer();
                         break;
                     case 4:
@@ -363,7 +423,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         closeDrawer();
                         break;
                     case 6:
-
                         break;
                 }
 
@@ -532,7 +591,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     sliderView.setOnSliderClickListener(new SliderView.OnSliderClickListener() {
                         @Override
                         public void onSliderClick(SliderView sliderView) {
-                            Toast.makeText(MainActivity.this, "This is slider " + (finalI + 1), Toast.LENGTH_SHORT).show();
+
                         }
                     });
 
@@ -543,10 +602,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
 
+            } else {
+
+                DefaultSliderView sliderView = new DefaultSliderView(getBaseContext());
+                sliderView.setImageDrawable(R.drawable.slider_bk);
+                sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                sliderLayout.addSliderView(sliderView);
+
             }
 
         } catch (Exception e) {
+            DefaultSliderView sliderView = new DefaultSliderView(getBaseContext());
+            sliderView.setImageDrawable(R.drawable.slider_bk);
+            sliderView.setImageScaleType(ImageView.ScaleType.CENTER_CROP);
 
+            sliderLayout.addSliderView(sliderView);
         }
     }
 
@@ -557,3 +628,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
+

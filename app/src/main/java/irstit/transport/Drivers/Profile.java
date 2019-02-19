@@ -19,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.florent37.expansionpanel.ExpansionHeader;
+import com.github.florent37.expansionpanel.ExpansionLayout;
+import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -38,7 +41,9 @@ public class Profile extends Fragment {
     private AlertDialog.Builder alertDialog;
     private AlertDialog dialog;
     private AlertDialog.Builder Dialog;
-    private TextView Name;
+    private TextView Name, NullInfoDriver;
+    private ExpansionLayout Vehicle, Human;
+    private ExpansionHeader VehicleInfo, HumanInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,8 +53,40 @@ public class Profile extends Fragment {
         alertDialog = new AlertDialog.Builder(getContext());
         Dialog = new AlertDialog.Builder(getActivity());
         Name = view.findViewById(R.id.Profile_Name);
+        NullInfoDriver = view.findViewById(R.id.Profile_NullInfoDriver);
+        Vehicle = view.findViewById(R.id.Profile_Vehicle);
+        Human = view.findViewById(R.id.Profile_Human);
+        VehicleInfo = view.findViewById(R.id.Profile_VehicleInfo);
+        HumanInfo = view.findViewById(R.id.Profile_HumanInfo);
         Name.setText(DBManager.getInstance(getContext()).getDriverInfo().getName() + " " + DBManager.getInstance(getContext()).getDriverInfo().getFamily());
         QrCode();
+
+
+        ExpansionLayoutCollection expansionLayoutCollection = new ExpansionLayoutCollection();
+        expansionLayoutCollection.add(Vehicle);
+        expansionLayoutCollection.add(Human);
+
+        expansionLayoutCollection.openOnlyOne(true);
+
+//
+//        Vehicle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Info.isExpanded()) {
+//                    Info.toggle(true);
+//                }
+//            }
+//        });
+//
+//        Human.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (Human.isExpanded()) {
+//                    Human.toggle(true);
+//                }
+//            }
+//        });
+
 
 
         RecyclerView recyclerInfo = view.findViewById(R.id.SearchObject_RecyclerInfo);
@@ -62,9 +99,16 @@ public class Profile extends Fragment {
         recyclerInfo.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
         recyclerInfo.setAdapter(infoAdapter);
 
-        ProfileVehicleAdapter vehicleAdapter = new ProfileVehicleAdapter(DBManager.getInstance(getContext()).getDriverInfo());
-        recyclerVehicle.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
-        recyclerVehicle.setAdapter(vehicleAdapter);
+        if (DBManager.getInstance(getContext()).getDriverInfo().getVehicleCode() != null) {
+            NullInfoDriver.setVisibility(View.GONE);
+            recyclerVehicle.setVisibility(View.VISIBLE);
+            ProfileVehicleAdapter vehicleAdapter = new ProfileVehicleAdapter(DBManager.getInstance(getContext()).getDriverInfo());
+            recyclerVehicle.setLayoutManager(new GridLayoutManager(getContext(), 2, LinearLayoutManager.VERTICAL, false));
+            recyclerVehicle.setAdapter(vehicleAdapter);
+        }else {
+            NullInfoDriver.setVisibility(View.VISIBLE);
+            recyclerVehicle.setVisibility(View.GONE);
+        }
 
         logOut.setOnClickListener(v -> {
 
@@ -137,6 +181,9 @@ public class Profile extends Fragment {
                     case 3:
                         holder.Text.setText(" ش.شناسنامه : ".concat(data.getBirthCertificate()));
                         break;
+                    case 4:
+                        holder.Text.setText(" نوع مالکیت : ".concat(data.getOwner()));
+                        break;
 
                 }
             } catch (Exception e) {
@@ -147,7 +194,7 @@ public class Profile extends Fragment {
 
         @Override
         public int getItemCount() {
-            return 4;
+            return 5;
         }
 
 
@@ -290,6 +337,7 @@ public class Profile extends Fragment {
 //        EditnameDialogFragment editNameDialogFragment = EditnameDialogFragment.newInstance("Some Title");
 //        editNameDialogFragment.show(fm, "fragment_edit_name");
 //    }
+
 
 
 }

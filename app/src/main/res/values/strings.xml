@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Transport</string>
+    <string name="app_name">TrafficTakestan</string>
 
     <!--   Login    -->
     <string name="Login_Toolbar"> ورود </string>
@@ -13,9 +13,9 @@
     <string name="DriversLogin_GetSmsText"> کد پیامک شده را وارد کنید. </string>
 
     <!-- MainActivity -->
-    <string name="MainActivity_img1">ثبت شی گمشده</string>
+    <string name="MainActivity_img1">نمایش نرخ نامه</string>
     <string name="MainActivity_Search">جستجوی اشیاء</string>
-    <string name="MainActivity_img3">نظرات و پیشنهادات</string>
+    <string name="MainActivity_img3">شکایات</string>
     <string name="MainActivity_Login_Text_1">ورود راننده</string>
     <string name="MainActivity_Login_Text_2">پروفایل</string>
 

@@ -85,4 +85,6 @@ dependencies {
 
     // set time
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
+
+    implementation 'com.github.feeeei:CircleSeekbar:v1.1.2'
 }

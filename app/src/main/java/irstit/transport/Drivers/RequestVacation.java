@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.feeeei.circleseekbar.CircleSeekBar;
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
@@ -64,13 +66,15 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 
     private PersianDatePickerDialog picker;
     private String StartDate, EndDate;
-    private TextView startDate, endDate, startTime, endTime;
+    private TextView startDate, endDate, startTime, endTime, Remaining, Used, Entire, TextPersent, Status;
     private PersianCalendar StartDateCalender = new PersianCalendar(), EndDateCalender = new PersianCalendar();
     private int status = 0;
     private spinnerAdapter adapter;
     private String type;
     private RelativeLayout Loading;
     private EditText destination;
+    private CircleSeekBar SeekBar;
+    private LinearLayout Form, Btn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +90,47 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         startTime = view.findViewById(R.id.RequestVacation_StartTime);
         endTime = view.findViewById(R.id.RequestVacation_EndTime);
         Loading = view.findViewById(R.id.RequestVacation_Loading);
+        TextPersent = view.findViewById(R.id.RequestVacation_TextPersent);
+        SeekBar = view.findViewById(R.id.RequestVacation_SeekBar);
+        Status = view.findViewById(R.id.RequestVacation_Status);
+        Btn = view.findViewById(R.id.RequestVacation_Btn1);
+        Form = view.findViewById(R.id.RequestVacation_Form);
+
+        Remaining = view.findViewById(R.id.RequestVacation_Remaining);
+        Used = view.findViewById(R.id.RequestVacation_Used);
+        Entire = view.findViewById(R.id.RequestVacation_Entire);
+
+        Log.e("lojhgfdsa", getArguments().getString("dataVacation") + " |");
+
+        if (getArguments().getString("dataVacation") != null &&
+                !getArguments().getString("dataVacation").isEmpty()) {
+
+            try {
+                JSONObject object = new JSONObject(getArguments().getString("dataVacation"));
+
+                Log.e("canleave" , object.getString("canleave") + " | ");
+                if (object.getString("canleave").equals("false")) {
+                    Status.setVisibility(View.VISIBLE);
+                    Btn.setVisibility(View.GONE);
+                    Form.setVisibility(View.GONE);
+                }
+
+                Remaining.setText(object.getString("havetime"));
+                Used.setText(object.getString("timeuse"));
+                Entire.setText(object.getString("alltime"));
+
+                SeekBar.setCurProcess(Integer.parseInt(object.getString("timeuse")));
+                SeekBar.setMaxProcess(Integer.parseInt(object.getString("alltime")));
+
+                int persent = (Integer.parseInt(object.getString("timeuse")) * 100) /
+                        Integer.parseInt(object.getString("alltime"));
+
+                TextPersent.setText(persent + "%");
+
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         startDate.setOnClickListener(v -> {
             configureStartDate();
@@ -295,8 +340,9 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                                 Clear();
                                 Toast.makeText(RequestVacation.this.getContext(), "درخواست مرخصی شما با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
 //
+                            } else if (object.getString("status").equals("false") && object.has("statusLeave")) {
                             } else if (object.getString("status").equals("false")) {
-                                Toast.makeText(RequestVacation.this.getContext(), "درخواست مرخصی با مشکل مواجه شد", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RequestVacation.this.getContext(), "وضعیت اخرین مرخصی ارسالی هنوز مشخص نشده است لطفا تا بررسی مدیر صبر کنید", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             Log.e("ListLeavesError1", e.toString() + " |");

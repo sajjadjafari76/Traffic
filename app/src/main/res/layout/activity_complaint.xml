@@ -195,7 +195,7 @@
                         android:layout_marginRight="18dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/back_message_137"
-                        android:hint="*ایمیل"
+                        android:hint="ایمیل"
                         android:inputType="textWebEmailAddress"
                         android:maxEms="10"
                         android:padding="8dp"
@@ -239,6 +239,7 @@
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/back_message_137"
                         android:hint="*همراه"
+                        android:text="09"
                         android:inputType="number"
                         android:padding="8dp"
                         android:textSize="16sp" />
@@ -295,8 +296,8 @@
                         android:layout_marginRight="18dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/back_message_137"
-                        android:hint="پلاک خودرو"
-                        android:inputType="number"
+                        android:hint="پلاک خودرو (44t4579)"
+                        android:inputType="text"
                         android:padding="8dp"
                         android:textSize="16sp" />
 
@@ -337,7 +338,7 @@
                         android:weightSum="2">
 
                         <LinearLayout
-                            android:id="@+id/Page_137_Video_Btn"
+                            android:id="@+id/Complaint_Video"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -346,7 +347,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:src="@drawable/logo" />
+                                android:src="@drawable/photo_camera" />
 
                             <irstit.transport.Views.CustomTextView
                                 android:layout_width="match_parent"
@@ -361,7 +362,7 @@
                         </LinearLayout>
 
                         <LinearLayout
-                            android:id="@+id/Page_137_Image_Btn"
+                            android:id="@+id/Complaint_Image"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -372,7 +373,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:src="@drawable/logo" />
+                                android:src="@drawable/clapperboard" />
 
                             <irstit.transport.Views.CustomTextView
                                 android:layout_width="match_parent"
@@ -390,7 +391,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/Page_137_Result"
+                        android:id="@+id/Complaint_Result"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_below="@+id/Page_137_View"
@@ -414,6 +415,7 @@
                 android:backgroundTint="@color/green_400"
                 android:fontFamily="@font/shabnam"
                 android:text="ثبت"
+                android:drawableRight="@drawable/ic_check"
                 android:textColor="#d9f1fd"
                 android:textSize="20dp"/>
 

@@ -1,6 +1,18 @@
 package irstit.transport.Citizens;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,20 +21,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.anychart.core.stock.indicators.EMA;
+import com.koushikdutta.async.http.AsyncHttpClient;
+import com.koushikdutta.async.http.AsyncHttpPost;
+import com.koushikdutta.async.http.AsyncHttpResponse;
+import com.koushikdutta.async.http.body.MultipartFormDataBody;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,8 +60,13 @@ public class Complaint extends AppCompatActivity {
     private Spinner Category;
     private spinnerAdapter adapter;
     private Button Btn;
-    private String type = "";
+    private String type = "", selectedVideoPath;
     private RelativeLayout Loading;
+    private int GALLERY = 1, CAMERA = 2, GALLERYVIDEO = 3;
+    private String imgDecodableString = "";
+    private LinearLayout Image, Video;
+    private TextView Result;
+    private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +84,42 @@ public class Complaint extends AppCompatActivity {
         CarPelake = findViewById(R.id.Complaint_carPelak);
         Btn = findViewById(R.id.Complaint_Btn);
         Loading = findViewById(R.id.Complaint_Loading);
+        Image = findViewById(R.id.Complaint_Image);
+        Video = findViewById(R.id.Complaint_Video);
+        Text = findViewById(R.id.Complaint_Text);
+        Result = findViewById(R.id.Complaint_Result);
+
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                // Should we show an explanation?
+                if (shouldShowRequestPermissionRationale(
+                        Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    // Explain to the user why we need to read the contacts
+                }
+
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+            }
+        }
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    != PackageManager.PERMISSION_GRANTED) {
+//
+//                // Should we show an explanation?
+//                if (shouldShowRequestPermissionRationale(
+//                        Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+//                    // Explain to the user why we need to read the contacts
+//                }
+//
+//                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                        MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+//
+//            }
+//        }
 
 
         for (int i = 0 ; i < getCategory().size() ; i++) {
@@ -88,20 +149,44 @@ public class Complaint extends AppCompatActivity {
 
             if (type.isEmpty() || Text.getText().toString().isEmpty()) {
                 Toast.makeText(this, "فیلد های شرح پیام نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
-            } else if(Name.getText().toString().isEmpty() || Family.getText().toString().isEmpty() || Email.getText().toString().isEmpty()) {
+            } else if (Name.getText().toString().isEmpty() || Family.getText().toString().isEmpty()) {
                 Toast.makeText(this, "فیلد های اطلاعات نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
 
-            }else {
+            } else {
 
                 complaintRequest(Name.getText().toString(), Family.getText().toString(),
                         Email.getText().toString(), Text.getText().toString(), type,
-                        CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString());
+                        CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), imgDecodableString);
 
                 Loading.setVisibility(View.VISIBLE);
                 Disabled();
             }
         });
 
+        Image.setOnClickListener(v -> {
+            showPictureDialog();
+        });
+
+        Video.setOnClickListener(v -> {
+            SelectVideo();
+        });
+
+
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        if (requestCode == MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE) {
+            if (grantResults.length != 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                Toast.makeText(this, "مجوز صادر شد", Toast.LENGTH_SHORT).show();
+                // TODO: 10/21/2017 13:58
+            } else {
+//                Toast.makeText(this, "مجوز صادر نشد", Toast.LENGTH_SHORT).show();
+                // TODO: 10/21/2017 13:58
+            }
+        }
 
     }
 
@@ -152,18 +237,172 @@ public class Complaint extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == CAMERA && resultCode == RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+
+            Uri tempUri = getImageUri(getBaseContext(), photo);
+
+            File finalFile = new File(getRealPathFromURI(tempUri));
+            imgDecodableString = finalFile.getPath();
+
+//            Picasso.with(getBaseContext())
+//                    .load(finalFile)
+//                    .into(Picture);
+
+//            Page_137_Result.setText(finalFile.getName());
+
+            Log.e("image12", finalFile.getPath() + " | " + (finalFile.getName()) + " |" + finalFile.getParent());
+            Result.setText(finalFile.getName() + "");
+
+        } else if (requestCode == GALLERY && resultCode == RESULT_OK) {
+
+            try {
+                Uri selectedImage = data.getData();
+
+                Log.e("okokiok", "data : " + " |");
+
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                // Get the cursor
+                Cursor cursor = getContentResolver().query(selectedImage,
+                        filePathColumn, null, null, null);
+
+                // Move to first row
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+
+
+                File file = new File(imgDecodableString);
+                Result.setText(file.getName() + "");
+//            Page_137_Result.setText(file.getName());
+//                Log.e("image12", file.getPath() + " | " + (file.getName()) + " |" + file.getParent());
+//                Picasso.with(getBaseContext())
+//                        .load(file)
+//                        .into(Picture);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else if (resultCode == RESULT_OK) {
+            if (requestCode == GALLERYVIDEO) {
+                Log.d("what", "gale");
+                if (data != null) {
+                    Uri contentURI = data.getData();
+
+                    selectedVideoPath = getPath(contentURI);
+
+                    imgDecodableString = "";
+
+                    Result.setText(new File(selectedVideoPath).getName());
+                    Log.d("path", selectedVideoPath);
+
+                }
+            }
+        }
+
+    }
 
     private void complaintRequest(String Fname, String LName, String Email, String Message,
-                                  String Type, String VehicleCode, String VehiclePelack, String Mobile) {
-        StringRequest complaintRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/Complaint",
-                response -> {
-                    Log.e("ListLeavesResponse", response + " |");
+                                  String Type, String VehicleCode, String VehiclePelack, String Mobile, String File) {
+//        StringRequest complaintRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/Complaint",
+//                response -> {
+//                    Log.e("ListLeavesResponse", response + " |");
+//
+//                    try {
+//                        JSONObject object = new JSONObject(response);
+//                        if (object.getString("status").equals("true")) {
+//
+//                            Toast.makeText(this, object.getString("message"), Toast.LENGTH_SHORT).show();
+//                            Loading.setVisibility(View.GONE);
+//                            Enabled();
+//                            Clear();
+//
+//                        } else if (object.getString("status").equals("false")) {
+//                            Loading.setVisibility(View.VISIBLE);
+//                            Enabled();
+//                        }
+//                    } catch (Exception e) {
+//                        Log.e("ListLeavesError1", e.toString() + " |");
+//                        Loading.setVisibility(View.GONE);
+//                        Enabled();
+//                    }
+//                },
+//                error -> {
+//                    Log.e("ListLeavesError2", error.toString() + " |");
+//                    Loading.setVisibility(View.GONE);
+//                    Enabled();
+//                }) {
+//
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> map = new HashMap<>();
+//                map.put("fname", Fname);
+//                map.put("lname", LName);
+//                map.put("email", Email);
+//                map.put("mobile", Mobile);
+//                map.put("message", Message);
+//                map.put("typecomplaint", Type);
+//                map.put("vehiclecode", VehicleCode);
+//                map.put("vehiclepluck", VehiclePelack);
+//                return map;
+//            }
+//
+//            @Override
+//            public Map<String, String> getHeaders() {
+//                Map<String, String> map = new HashMap<>();
+//                map.put("token", "df837016d0fc7670f221197cd92439b5");
+//                return map;
+//            }
+//        };
+//
+//        complaintRequest.setRetryPolicy(new DefaultRetryPolicy(
+//                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+//        AppController.getInstance().addToRequestQueue(complaintRequest);
 
+
+
+
+        AsyncHttpPost post = new AsyncHttpPost(Globals.APIURL + "/Complaint");
+        post.setHeader("token", "df837016d0fc7670f221197cd92439b5");
+        post.setTimeout(25000);
+
+        MultipartFormDataBody body = new MultipartFormDataBody();
+
+        body.addStringPart("fname", Fname);
+        body.addStringPart("lname", LName);
+        body.addStringPart("email", Email);
+        body.addStringPart("mobile", Mobile);
+        body.addStringPart("message", Message);
+        body.addStringPart("typecomplaint", Type);
+        body.addStringPart("vehiclecode", VehicleCode);
+        body.addStringPart("vehiclepluck", VehiclePelack);
+        if (!File.isEmpty()) {
+            Log.e("filesfiles", File + " |");
+            body.addFilePart("files", new File(File));
+        }
+        post.setBody(body);
+
+
+        AsyncHttpClient.getDefaultInstance().executeString(post, new AsyncHttpClient.StringCallback() {
+            @Override
+            public void onCompleted(final Exception e, AsyncHttpResponse source, String result) {
+
+                Log.e("UploadResponse", result + " |");
+
+                runOnUiThread(() -> {
                     try {
-                        JSONObject object = new JSONObject(response);
+
+                        JSONObject object = new JSONObject(result);
                         if (object.getString("status").equals("true")) {
 
-                            Toast.makeText(this, object.getString("message"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                             Loading.setVisibility(View.GONE);
                             Enabled();
                             Clear();
@@ -172,43 +411,18 @@ public class Complaint extends AppCompatActivity {
                             Loading.setVisibility(View.VISIBLE);
                             Enabled();
                         }
-                    } catch (Exception e) {
-                        Log.e("ListLeavesError1", e.toString() + " |");
+
+                    } catch (Exception error) {
+                        Log.e("GetPhoneError", error.toString() + " |");
                         Loading.setVisibility(View.GONE);
                         Enabled();
                     }
-                },
-                error -> {
-                    Log.e("ListLeavesError2", error.toString() + " |");
-                    Loading.setVisibility(View.GONE);
-                    Enabled();
-                }) {
+                });
 
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> map = new HashMap<>();
-                map.put("fname", Fname);
-                map.put("lname", LName);
-                map.put("email", Email);
-                map.put("mobile", Mobile);
-                map.put("message", Message);
-                map.put("typecomplaint", Type);
-                map.put("vehiclecode", VehicleCode);
-                map.put("vehiclepluck", VehiclePelack);
-                return map;
+
             }
+        });
 
-            @Override
-            public Map<String, String> getHeaders() {
-                Map<String, String> map = new HashMap<>();
-                map.put("token", "df837016d0fc7670f221197cd92439b5");
-                return map;
-            }
-        };
-
-        complaintRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(complaintRequest);
 
     }
 
@@ -220,6 +434,7 @@ public class Complaint extends AppCompatActivity {
         CarPelake.setText("");
         CarCode.setText("");
         Text.setText("");
+        imgDecodableString = "";
     }
 
     void Enabled() {
@@ -240,6 +455,89 @@ public class Complaint extends AppCompatActivity {
         CarPelake.setEnabled(false);
         CarCode.setEnabled(false);
         Text.setEnabled(false);
+    }
+
+
+    public String getPath(Uri uri) {
+        String[] projection = {MediaStore.Video.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            // HERE YOU WILL GET A NULLPOINTER IF CURSOR IS NULL
+            // THIS CAN BE, IF YOU USED OI FILE MANAGER FOR PICKING THE MEDIA
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } else
+            return null;
+    }
+
+    // for captured image from camera
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    // for captured image from camera
+    public String getRealPathFromURI(Uri uri) {
+        String path = "";
+        if (getContentResolver() != null) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                path = cursor.getString(idx);
+                cursor.close();
+            }
+        }
+        return path;
+    }
+
+
+    public void SelectVideo() {
+
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI);
+        galleryIntent.setType("video/*");
+        startActivityForResult(galleryIntent, GALLERYVIDEO);
+
+    }
+
+    private void showPictureDialog() {
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+//        pictureDialog.setTitle("انتخاب عکس");
+        String[] pictureDialogItems = {
+                "انتخاب از گالری",
+                "دوربین"};
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
     }
 
 

@@ -53,6 +53,7 @@ public class News extends AppCompatActivity {
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
+
         MainAdapter adapter = new MainAdapter(getApplicationContext(), MainActivity.mNews);
         LinearLayoutManager layout = new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false);
         if (getIntent().getStringExtra("position")!= null) {
@@ -90,8 +91,7 @@ public class News extends AppCompatActivity {
                 Picasso.with(mContext)
                         .load(Globals.APIURLIMAGE + mDataSet.get(position).getImage())
                         .error(R.drawable.no_image)
-                        .resize(400, 400)
-                        .onlyScaleDown()
+                        .fit()
                         .into(holder.Image);
 
                 PersianCalendar fromCalendar = new PersianCalendar(
@@ -117,6 +117,7 @@ public class News extends AppCompatActivity {
                 });
             } catch (Exception e) {
                 e.printStackTrace();
+                Log.e("errorNews1", e.toString());
             }
         }
 

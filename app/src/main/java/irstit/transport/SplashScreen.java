@@ -16,14 +16,16 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NewsModel;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private final int SPLASH_DISPLAY_LENGTH = 2000;
+    private final int SPLASH_DISPLAY_LENGTH = 1500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,10 @@ public class SplashScreen extends AppCompatActivity {
 
 
     private void getNews() {
-        StringRequest getPhoneRequest = new StringRequest(Request.Method.GET, Globals.APIURL + "/news",
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/news",
                 response -> {
                     Log.e("NewsResponse", response + " |");
-
+                    getlog(response);
                     try {
                         JSONObject object = new JSONObject(response);
                         if (object.getString("status").equals("true")) {
@@ -86,9 +88,10 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("phone", "9190467144");
-                return super.getParams();
+                Map<String, String> map = new HashMap<>();
+                map.put("phone", (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null) ?
+                        DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() : "");
+                return map;
             }
 
             @Override
@@ -105,5 +108,14 @@ public class SplashScreen extends AppCompatActivity {
 
     }
 
+    public void getlog(String veryLongString) {
+        int maxLogSize = 1500;
+        for(int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+            int start = i * maxLogSize;
+            int end = (i+1) * maxLogSize;
+            end = end > veryLongString.length() ? veryLongString.length() : end;
+            Log.e("ShowAssChild1", veryLongString.substring(start, end));
+        }
+    }
 
 }

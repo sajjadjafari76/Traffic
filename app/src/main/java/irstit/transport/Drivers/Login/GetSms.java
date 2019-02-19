@@ -112,19 +112,26 @@ public class GetSms extends Fragment implements View.OnClickListener {
                             info.setBirthCertificate(object.getJSONObject("driverdata").getString("d_passcode"));
                             info.setTelephone(Utils.getInstance(getContext()).DecodeData(
                                     object.getJSONObject("driverdata").getString("d_tel")));
-
-                            info.setLineType(object.getJSONObject("vehicledata").getString("v_activitytype"));
-                            info.setVehicleType(object.getJSONObject("vehicledata").getString("v_vhicletype"));
-
-                            info.setVehicleCode(object.getJSONObject("vehicledata").getString("v_code"));
-
-                            info.setVehicleModel(object.getJSONObject("vehicledata").getString("v_model"));
-                            info.setRegisterDate(object.getJSONObject("vehicledata").getString("v_regtime"));
-
-                            info.setVehiclePelak(object.getJSONObject("vehicledata").getString("v_plate"));
-
                             info.setPicture(object.getJSONObject("driverdata").getString("d_pic"));
-                            Log.e("vehicleType" , object.getJSONObject("driverdata").getString("d_pic") + " |");
+
+                            Log.e("vehicle", object.getJSONObject("vehicledata").toString()+"|");
+
+                            if (object.getJSONObject("vehicledata").length() != 0 ) {
+                                info.setLineType(object.getJSONObject("vehicledata").getString("v_activitytype"));
+                                info.setVehicleType(object.getJSONObject("vehicledata").getString("v_vhicletype"));
+
+                                info.setVehicleCode(object.getJSONObject("vehicledata").getString("v_code"));
+
+                                info.setVehicleModel(object.getJSONObject("vehicledata").getString("v_model"));
+                                info.setRegisterDate(object.getJSONObject("vehicledata").getString("v_regtime"));
+
+                                info.setVehiclePelak(object.getJSONObject("vehicledata").getString("v_plate"));
+
+                                info.setOwner(object.getJSONObject("vehicledata").getString("driver_type"));
+                                info.setIsTaxi(object.getJSONObject("vehicledata").getString("is_taxi"));
+                                info.setOwnerId(object.getJSONObject("vehicledata").getString("is_owner"));
+                            }
+
                             DBManager.getInstance(getContext()).setDriverInfo(info);
 
                             startActivity(new Intent(getActivity(), DriversMainActivity.class));
@@ -134,7 +141,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
                     } catch (Exception e) {
                         btn.revertAnimation();
                         Log.e("getSmsError", e.toString() + " | ");
-                        Toast.makeText(getContext(), "خطایی رخ داد لطفا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "خطایی رخ داد لطفا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
                     }
                 }, error -> {
             btn.revertAnimation();

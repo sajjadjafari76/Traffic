@@ -121,7 +121,7 @@ public class VacationSearch extends Fragment {
                 holder.ToDate.setText(" تا ".concat(toCalender.getPersianYear() + "/" + toCalender.getPersianMonth() + "/" + toCalender.getPersianDay()));
                 holder.Type.setText(dataFiltered.get(position).getVacationType());
                 holder.Desc.setText(" توضیحات : "
-                        .concat((dataFiltered.get(position).getDesc() == null) ? "" : dataFiltered.get(position).getDesc() ));
+                        .concat((dataFiltered.get(position).getDesc() == null) ? " " : dataFiltered.get(position).getDesc() ));
 
                 if (dataFiltered.get(position).getStatus().equals("0")) {
                     holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.deep_orange_300));
@@ -133,6 +133,8 @@ public class VacationSearch extends Fragment {
                 } else if (dataFiltered.get(position).getStatus().equals("2")) {
                     holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_A200));
                     holder.Print.setEnabled(false);
+                    holder.Desc.setText(" پاسخ مدیریت : "
+                            .concat((dataFiltered.get(position).getDesc() == null) ? "" : dataFiltered.get(position).getReason() ));
                 }
 
                 holder.Print.setOnClickListener(v -> {
@@ -248,6 +250,7 @@ public class VacationSearch extends Fragment {
                                     model.setVacationType(myObject.getString("l_type"));
                                     model.setDesc(myObject.getString("l_text"));
                                     model.setStatus(myObject.getString("l_status"));
+                                    model.setReason(myObject.getString("l_reson"));
 
                                     DriversMainActivity.mData.add(model);
                                 }

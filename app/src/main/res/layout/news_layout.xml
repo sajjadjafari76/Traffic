@@ -38,6 +38,7 @@
             android:maxLines="3"
             android:fontFamily="@font/shabnam"
             android:ellipsize="end"
+            android:justificationMode="inter_word"
             app:animation_duration="750"/>
 
         <RelativeLayout

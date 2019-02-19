@@ -8,6 +8,7 @@ public class ReqVacationModel {
     private String VacationType;
     private String Desc;
     private String Status;
+    private String Reason;
 
     public String getFromDate() {
         return FromDate;
@@ -55,5 +56,13 @@ public class ReqVacationModel {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getReason() {
+        return Reason;
+    }
+
+    public void setReason(String reason) {
+        Reason = reason;
     }
 }

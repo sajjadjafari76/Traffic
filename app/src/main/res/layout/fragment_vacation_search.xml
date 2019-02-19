@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Drivers.VacationSearch">
+    tools:context=".Drivers.VacationSearch"
+    android:backgroundTint="#FFF"
+    android:background="#FFF">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -41,6 +43,7 @@
                 android:id="@+id/RequestVacation_TextSearch"/>
 
         </RelativeLayout>
+
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -80,8 +83,7 @@
                 <View
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="@color/red_A200" />
+                    android:background="@drawable/ic_circle_bk_22"/>
 
 
             </LinearLayout>
@@ -106,8 +108,7 @@
                 <View
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="@color/deep_orange_300" />
+                    android:background="@drawable/ic_circle_bk_11"/>
 
 
             </LinearLayout>
@@ -132,8 +133,7 @@
                 <View
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:background="@drawable/ic_circle_bk"
-                    android:backgroundTint="@color/green_300" />
+                    android:background="@drawable/ic_circle_bk"/>
 
 
             </LinearLayout>

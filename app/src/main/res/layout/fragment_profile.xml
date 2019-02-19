@@ -100,11 +100,11 @@
                     android:orientation="vertical">
 
                     <com.github.florent37.expansionpanel.ExpansionHeader
-                        android:id="@+id/SearchObject_Header"
+                        android:id="@+id/Profile_HumanInfo"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         app:expansion_headerIndicator="@+id/SearchObject_Indicator"
-                        app:expansion_layout="@+id/SearchObject_ExpansionLayout"
+                        app:expansion_layout="@+id/Profile_Human"
                         app:expansion_toggleOnClick="true">
 
 
@@ -135,7 +135,7 @@
                     </com.github.florent37.expansionpanel.ExpansionHeader>
 
                     <com.github.florent37.expansionpanel.ExpansionLayout
-                        android:id="@+id/SearchObject_ExpansionLayout"
+                        android:id="@+id/Profile_Human"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:expansion_expanded="true">
@@ -144,7 +144,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/SearchObject_RecyclerInfo"
-                            android:paddingTop="3dp"/>
+                            android:paddingTop="3dp"
+                            android:layoutDirection="rtl"/>
 
                     </com.github.florent37.expansionpanel.ExpansionLayout>
 
@@ -169,11 +170,11 @@
 
 
                     <com.github.florent37.expansionpanel.ExpansionHeader
-                        android:id="@+id/SearchObject_Header1"
+                        android:id="@+id/Profile_VehicleInfo"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         app:expansion_headerIndicator="@+id/SearchObject_Indicator1"
-                        app:expansion_layout="@+id/SearchObject_ExpansionLayout1"
+                        app:expansion_layout="@+id/Profile_Vehicle"
                         app:expansion_toggleOnClick="true">
 
 
@@ -206,16 +207,38 @@
 
 
                     <com.github.florent37.expansionpanel.ExpansionLayout
-                        android:id="@+id/SearchObject_ExpansionLayout1"
+                        android:id="@+id/Profile_Vehicle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:expansion_expanded="false">
 
-                        <android.support.v7.widget.RecyclerView
+                        <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/SearchObject_RecyclerVehicle"
-                            android:paddingTop="3dp"/>
+                            android:layout_height="wrap_content">
+
+
+                            <android.support.v7.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/SearchObject_RecyclerVehicle"
+                                android:paddingTop="3dp"
+                                android:visibility="gone"
+                                android:layoutDirection="rtl"/>
+
+
+                            <TextView
+                                android:id="@+id/Profile_NullInfoDriver"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:visibility="gone"
+                                android:text="اطلاعاتی یافت نشد"
+                                android:gravity="center"
+                                android:fontFamily="@font/shabnam"
+                                android:textColor="#000"/>
+
+
+                        </RelativeLayout>
+
 
 
 

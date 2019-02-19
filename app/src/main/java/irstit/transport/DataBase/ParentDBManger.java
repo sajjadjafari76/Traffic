@@ -38,6 +38,9 @@ public class ParentDBManger extends SQLiteOpenHelper {
     private final String USER_COL_LINE_TYPE = "col_line_type";
     private final String USER_COL_REGISTER_DATE = "col_registerdate";
     private final String USER_COL_PICTURE = "col_picture";
+    private final String USER_COL_Owner = "col_owner";
+    private final String USER_COL_IS_TAXI = "col_is_taxi";
+    private final String USER_COL_OWNER_ID = "col_owner_id";
     private final String USER_TABLE = "CREATE TABLE IF NOT EXISTS " + USER_TABLE_NAME + "(" +
             USER_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             USER_COL_NAME + " TEXT, " +
@@ -52,7 +55,10 @@ public class ParentDBManger extends SQLiteOpenHelper {
             USER_COL_VEHICLE_TYPE + " TEXT, " +
             USER_COL_LINE_TYPE + " TEXT, " +
             USER_COL_REGISTER_DATE + " TEXT, " +
-            USER_COL_PICTURE + " TEXT );";
+            USER_COL_PICTURE + " TEXT, " +
+            USER_COL_Owner + " TEXT, " +
+            USER_COL_IS_TAXI + " TEXT, " +
+            USER_COL_OWNER_ID + " TEXT );";
 
 
     public ParentDBManger(Context context) {
@@ -95,6 +101,9 @@ public class ParentDBManger extends SQLiteOpenHelper {
             cp.put(USER_COL_VEHICLE_TYPE, drivers.getVehicleType());
             cp.put(USER_COL_VEHICLE_CODE, drivers.getVehicleCode());
             cp.put(USER_COL_PICTURE, drivers.getPicture());
+            cp.put(USER_COL_Owner, drivers.getOwner());
+            cp.put(USER_COL_IS_TAXI, drivers.getIsTaxi());
+            cp.put(USER_COL_OWNER_ID, drivers.getOwnerId());
 
             status = database.insert(USER_TABLE_NAME, null, cp);
 
@@ -164,6 +173,9 @@ public class ParentDBManger extends SQLiteOpenHelper {
                 driver.setLineType(cursor.getString(11));
                 driver.setRegisterDate(cursor.getString(12));
                 driver.setPicture(cursor.getString(13));
+                driver.setOwner(cursor.getString(14));
+                driver.setIsTaxi(cursor.getString(15));
+                driver.setOwnerId(cursor.getString(16));
                 cursor.moveToNext();
             }
         }

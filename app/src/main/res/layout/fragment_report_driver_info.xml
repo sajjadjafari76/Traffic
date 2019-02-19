@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Drivers.ReportDriverInfo">
+    tools:context=".Drivers.ReportDriverInfo"
+    android:backgroundTint="#FFF"
+    android:background="#FFF">
 
     <com.github.chrisbanes.photoview.PhotoView
         android:layout_width="match_parent"

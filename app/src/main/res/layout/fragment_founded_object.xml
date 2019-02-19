@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Citizens.RegisterObject">
+    tools:context=".Citizens.FoundedObject">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/Complaint_Toolbar"
@@ -28,14 +28,14 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 app:srcCompat="@drawable/ic_left_arrow"
-                android:id="@+id/RegisterObject_Back"/>
+                android:id="@+id/FoundedObject_Back"/>
 
 
             <irstit.transport.Views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="@string/RegisterObject_Title"
+                android:text="ثبت شی یافت شده"
                 android:textColor="@color/green_50"
                 android:textSize="@dimen/ToolbarSize" />
 
@@ -58,7 +58,7 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/RegisterObject_Picture"
+                android:id="@+id/FoundedObject_Picture"
                 android:layout_width="@dimen/spacing_xxxxxlarge"
                 android:layout_height="@dimen/spacing_xxxxxlarge"
                 android:padding="@dimen/spacing_middle"
@@ -68,10 +68,10 @@
             <irstit.transport.Views.CustomTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/RegisterObject_Picture"
+                android:layout_below="@id/FoundedObject_Picture"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:gravity="center"
-                android:text="@string/RegisterObject_Text"
+                android:text="تصویر شی یافت شده را انتخاب کنید"
                 android:textColor="@color/grey_1000" />
 
         </RelativeLayout>
@@ -96,7 +96,7 @@
                 android:paddingRight="@dimen/spacing_large">
 
                 <Spinner
-                    android:id="@+id/RegisterObject_Category"
+                    android:id="@+id/FoundedObject_Category"
                     android:layout_width="0dp"
                     android:layout_height="46dp"
                     android:layout_weight="1"
@@ -144,7 +144,7 @@
                     android:background="@drawable/res_focused_edittext"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/grey_80"
-                    android:id="@+id/RegisterObject_Title"/>
+                    android:id="@+id/FoundedObject_Title"/>
 
 
                 <View
@@ -173,12 +173,12 @@
 
 
                 <EditText
-                    android:id="@+id/RegisterObject_Date"
+                    android:id="@+id/FoundedObject_Date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/shabnam"
-                    android:hint="تاریخ مفقودی"
+                    android:hint="تاریخ یافت"
                     android:inputType="date"
                     android:lines="1"
                     android:padding="@dimen/spacing_small"
@@ -198,7 +198,7 @@
                     android:background="@android:color/transparent"
                     android:tint="@color/grey_40"
                     app:srcCompat="@drawable/ic_calendar"
-                    android:id="@+id/RegisterObject_DateIcon"/>
+                    android:id="@+id/FoundedObject_DateIcon"/>
 
             </LinearLayout>
 
@@ -225,7 +225,7 @@
                     android:background="@drawable/res_focused_edittext"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     android:textColor="@color/grey_80"
-                    android:id="@+id/RegisterObject_Description"/>
+                    android:id="@+id/FoundedObject_Description"/>
 
 
                 <View
@@ -258,7 +258,7 @@
                 android:fontFamily="@font/shabnam"
                 android:text="@string/RegisterObject_Btn"
                 android:theme="@style/Button.Accent"
-                android:id="@+id/RegisterObject_Btn"/>
+                android:id="@+id/FoundedObject_Btn"/>
 
         </LinearLayout>
 
@@ -269,7 +269,7 @@
         android:layout_height="match_parent"
         android:background="#CCCCCCCC"
         android:visibility="gone"
-        android:id="@+id/RegisterObject_Loading">
+        android:id="@+id/FoundedObject_Loading">
 
 
         <com.tuyenmonkey.mkloader.MKLoader

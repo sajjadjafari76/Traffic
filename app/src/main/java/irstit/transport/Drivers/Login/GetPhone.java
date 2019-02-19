@@ -51,7 +51,7 @@ public class GetPhone extends Fragment implements View.OnClickListener {
         sendInfo.setOnClickListener(view1 -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
-            } else if (phone.getText().toString().length() >10 || phone.getText().toString().length() < 10 || phone.getText().toString().equals("")) {
+            } else if (phone.getText().toString().length() >11 || phone.getText().toString().length() < 11 || phone.getText().toString().equals("")) {
                 Toast.makeText(getContext(), "شماره تلفن صحیح نمی باشد", Toast.LENGTH_SHORT).show();
             } else {
                 GetPhoneRequest();
