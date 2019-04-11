@@ -110,6 +110,30 @@ public class Criticals_Suggestion extends AppCompatActivity {
 
     }
 
+//    private List<SpinnerModel> getCategory() {
+//        List<SpinnerModel> data = new ArrayList<>();
+//
+//        for (int i = 0 ; i < 6 ; i++) {
+//            switch (i) {
+//
+//                case 0:
+//                    SpinnerModel model = new SpinnerModel();
+//                    model.setId(1597);
+//                    model.setName("پیشنهاد");
+//                    data.add(model);
+//                    break;
+//                case 1:
+//                    SpinnerModel model2 = new SpinnerModel();
+//                    model2.setId(9519);
+//                    model2.setName("انتقاد");
+//                    data.add(model2);
+//                    break;
+//            }
+//        }
+//        return data;
+//    }
+
+
     private List<SpinnerModel> getCategory() {
         List<SpinnerModel> data = new ArrayList<>();
 
@@ -119,14 +143,38 @@ public class Criticals_Suggestion extends AppCompatActivity {
                 case 0:
                     SpinnerModel model = new SpinnerModel();
                     model.setId(1597);
-                    model.setName("پیشنهاد");
+                    model.setName("سازمان حمل و نقل");
                     data.add(model);
                     break;
                 case 1:
                     SpinnerModel model2 = new SpinnerModel();
                     model2.setId(9519);
-                    model2.setName("انتقاد");
+                    model2.setName("CNG");
                     data.add(model2);
+                    break;
+                case 2:
+                    SpinnerModel model3 = new SpinnerModel();
+                    model3.setId(9520);
+                    model3.setName("معاینه فنی");
+                    data.add(model3);
+                    break;
+                case 3:
+                    SpinnerModel model4 = new SpinnerModel();
+                    model4.setId(9521);
+                    model4.setName("ترمینال");
+                    data.add(model4);
+                    break;
+                case 4:
+                    SpinnerModel model5 = new SpinnerModel();
+                    model5.setId(9522);
+                    model5.setName("روزبازار");
+                    data.add(model5);
+                    break;
+                case 5:
+                    SpinnerModel model6 = new SpinnerModel();
+                    model6.setId(9523);
+                    model6.setName("خودروهای دیزلی");
+                    data.add(model6);
                     break;
             }
         }

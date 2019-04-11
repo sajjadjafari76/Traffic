@@ -16,7 +16,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 import static irstit.transport.AppController.AppController.TAG;
 
@@ -174,8 +176,42 @@ public class Utils {
     public String DecodeData(String data) {
         byte[] decededString = Base64.decode(data, Base64.DEFAULT);
         String stringconverted = new String(decededString, StandardCharsets.UTF_8);
-        return new String(Base64.decode
+        Log.e("dnmc", stringconverted + " |");
+        String newData =  new String(Base64.decode
+                (stringconverted.substring(20, stringconverted.length() - 20 ), Base64.DEFAULT), StandardCharsets.UTF_8);
+        Log.e("dnmc1", newData + " |");
+        Log.e("dnmc2", new String(Base64.decode(newData, Base64.DEFAULT), StandardCharsets.UTF_8) + " |");
+        return new String(Base64.decode(newData, Base64.DEFAULT), StandardCharsets.UTF_8);
+    }
+
+    public String DecodeData1(String data) {
+        byte[] decededString = Base64.decode(data, Base64.DEFAULT);
+        String stringconverted = new String(decededString, StandardCharsets.UTF_8);
+        Log.e("dnmc", stringconverted + " |");
+        String newData =  new String(Base64.decode
                 (stringconverted.substring(10, stringconverted.length() - 10 ), Base64.DEFAULT), StandardCharsets.UTF_8);
+        Log.e("dnmc1", newData + " |");
+//        Log.e("dnmc2", new String(Base64.decode(newData, Base64.DEFAULT), StandardCharsets.UTF_8) + " |");
+        return newData;
+    }
+
+    public String EncodeData(String data) {
+        byte[] decededString = Base64.encode(data.getBytes(), Base64.DEFAULT);
+
+        byte[] array = new byte[20]; // length is bounded by 7
+        new Random().nextBytes(array);
+        String generatedString = new String(array, Charset.forName("UTF-8"));
+
+        byte[] array1 = new byte[20]; // length is bounded by 7
+        new Random().nextBytes(array1);
+        String generatedString1 = new String(array, StandardCharsets.UTF_8);
+
+
+        String stringconverted = new String(decededString, StandardCharsets.UTF_8);
+
+        stringconverted = generatedString + stringconverted + generatedString1;
+
+        return new String(Base64.encode(stringconverted.getBytes(), Base64.DEFAULT), StandardCharsets.UTF_8);
     }
 
     public String convertStatus(int status) {

@@ -53,6 +53,8 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
                 if (getIntent().getExtras() != null) {
                     if (getIntent().getExtras().getString("RequestVacation") != null && getIntent().getExtras().getString("RequestVacation").equals("true")) {
                         bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_ReqVacation);
+                    }else if (getIntent().getExtras().getString("VacationSearch") != null && getIntent().getExtras().getString("VacationSearch").equals("true")){
+                        bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_VacationSearch);
                     }else {
                         bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_Profile);
                     }

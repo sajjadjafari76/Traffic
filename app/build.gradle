@@ -87,4 +87,9 @@ dependencies {
     implementation 'com.mohamadamin:persianmaterialdatetimepicker:1.2.1'
 
     implementation 'com.github.feeeei:CircleSeekbar:v1.1.2'
+
+//    implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.10'
+//    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:3.0.3'
 }

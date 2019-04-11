@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
+import irstit.transport.DataModel.CitizenModel;
 import irstit.transport.DataModel.DriverInfoModel;
 
 public class ParentDBManger extends SQLiteOpenHelper {
@@ -22,6 +23,7 @@ public class ParentDBManger extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "traffictakestan_db";
     private static final int DATABASE_VERSION = 1;
     private static final String USER_TABLE_NAME = "tbl_user";
+    private static final String CITIZEN_TABLE_NAME = "tbl_citizen";
 
 
     private final String USER_COL_ID = "col_id";
@@ -60,6 +62,18 @@ public class ParentDBManger extends SQLiteOpenHelper {
             USER_COL_IS_TAXI + " TEXT, " +
             USER_COL_OWNER_ID + " TEXT );";
 
+    private final String CITIZEN_COL_ID = "col_id";
+    private final String CITIZEN_COL_NAME = "col_name";
+    private final String CITIZEN_COL_USERID = "col_user_id";
+    private final String CITIZEN_COL_Email = "col_email";
+    private final String CITIZEN_COL_PHONE = "col_phone";
+    private final String CITIZEN_TABLE = "CREATE TABLE IF NOT EXISTS " + CITIZEN_TABLE_NAME + "(" +
+            CITIZEN_COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            CITIZEN_COL_NAME + " TEXT, " +
+            CITIZEN_COL_USERID + " TEXT, " +
+            CITIZEN_COL_Email + " TEXT, " +
+            CITIZEN_COL_PHONE + " TEXT );";
+
 
     public ParentDBManger(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -69,6 +83,7 @@ public class ParentDBManger extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         try {
             db.execSQL(USER_TABLE);
+            db.execSQL(CITIZEN_TABLE);
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(TAG, e.toString());
@@ -132,7 +147,7 @@ public class ParentDBManger extends SQLiteOpenHelper {
             ContentValues cp = new ContentValues();
             cp.put(USER_COL_TELEPHONE, newPhone);
 
-            status = database.update(USER_TABLE_NAME, cp, USER_COL_TELEPHONE+"="+phone, null);
+            status = database.update(USER_TABLE_NAME, cp, USER_COL_TELEPHONE + "=" + phone, null);
 
             Log.e("childApps updated : ", status + " |");
             if (status > 0) {
@@ -188,6 +203,67 @@ public class ParentDBManger extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         database.execSQL("delete from " + USER_TABLE_NAME);
     }
+
+
+    boolean setCitizenInfo(CitizenModel citizen) {
+
+        try {
+            long status = -11;
+            SQLiteDatabase database = getWritableDatabase();
+
+            ContentValues cp = new ContentValues();
+            cp.put(CITIZEN_COL_USERID, citizen.getUserId());
+            cp.put(CITIZEN_COL_PHONE, citizen.getUserPhone());
+            cp.put(CITIZEN_COL_NAME, citizen.getUserName());
+            cp.put(CITIZEN_COL_Email, citizen.getUserEmail());
+
+            status = database.insert(CITIZEN_TABLE_NAME, null, cp);
+
+            Log.e("childApps insert : ", status + " |");
+            if (status > 0) {
+                database.close();
+                return true;
+            } else {
+                database.close();
+                return false;
+            }
+
+        } catch (Exception e) {
+            e.toString();
+            Log.e(TAG, e.toString());
+            return false;
+        }
+    }
+
+
+    CitizenModel getCitizenInfo() {
+
+        CitizenModel citizen = new CitizenModel();
+
+        SQLiteDatabase database = getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM " + CITIZEN_TABLE_NAME, null);
+
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0) {
+            while (!cursor.isAfterLast()) {
+                citizen.setUserName(cursor.getString(1));
+                citizen.setUserId(cursor.getString(2));
+                citizen.setUserEmail(cursor.getString(3));
+                citizen.setUserPhone(cursor.getString(4));
+
+                cursor.moveToNext();
+            }
+        }
+        cursor.close();
+        database.close();
+        return citizen;
+    }
+
+    void deleteCitizen() {
+        SQLiteDatabase database = getReadableDatabase();
+        database.execSQL("delete from " + CITIZEN_TABLE_NAME);
+    }
+
 //
 //  String getMaxTimeChildApps (String packageName) {
 //

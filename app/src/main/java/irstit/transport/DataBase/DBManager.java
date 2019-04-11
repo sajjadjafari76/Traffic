@@ -2,6 +2,8 @@ package irstit.transport.DataBase;
 
 import android.content.Context;
 
+import irstit.transport.Citizens.Account.CitizenLogin;
+import irstit.transport.DataModel.CitizenModel;
 import irstit.transport.DataModel.DriverInfoModel;
 
 public class DBManager {
@@ -40,5 +42,21 @@ public class DBManager {
         pDb = new ParentDBManger(mContext);
         pDb.deleteDrivers();
     }
+    public void deleteCitizen() {
+        pDb = new ParentDBManger(mContext);
+        pDb.deleteCitizen();
+    }
+
+
+    public boolean setCitizenInfo(CitizenModel info) {
+        pDb = new ParentDBManger(mContext);
+        return pDb.setCitizenInfo(info);
+    }
+
+    public CitizenModel getCitizenInfo() {
+        pDb = new ParentDBManger(mContext);
+        return pDb.getCitizenInfo();
+    }
+
 
 }

@@ -30,6 +30,7 @@ import irstit.transport.DataModel.DriverInfoModel;
 import irstit.transport.Drivers.DriversMainActivity;
 import irstit.transport.Globals;
 import irstit.transport.R;
+import irstit.transport.ViewPager.MainPager;
 import irstit.transport.Views.Utils;
 
 public class GetSms extends Fragment implements View.OnClickListener {
@@ -84,13 +85,13 @@ public class GetSms extends Fragment implements View.OnClickListener {
 
                             if (object.getString("status").equals("true")) {
 
-                                Log.e("phone" , getArguments().getString("phone") + " | " + " loh");
-                                Log.e("phone" , getArguments().getString("phone") + " | " +
+                                Log.e("phone", getArguments().getString("phone") + " | " + " loh");
+                                Log.e("phone", getArguments().getString("phone") + " | " +
                                         DBManager.getInstance(getContext()).updateDriverInfo(
-                                                DBManager.getInstance(getContext()).getDriverInfo().getTelephone(),getArguments().getString("phone")));
+                                                DBManager.getInstance(getContext()).getDriverInfo().getTelephone(), getArguments().getString("phone")));
                                 startActivity(new Intent(getActivity(), DriversMainActivity.class));
                                 getActivity().finish();
-                            }else {
+                            } else {
                                 Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                                 btn.revertAnimation();
                             }
@@ -107,16 +108,16 @@ public class GetSms extends Fragment implements View.OnClickListener {
                             info.setName(object.getJSONObject("driverdata").getString("d_name"));
                             info.setFamily(object.getJSONObject("driverdata").getString("d_family"));
                             info.setParent(object.getJSONObject("driverdata").getString("d_parent"));
-                            info.setNationalCode(Utils.getInstance(getContext()).DecodeData(
+                            info.setNationalCode(Utils.getInstance(getContext()).DecodeData1(
                                     object.getJSONObject("driverdata").getString("d_nmc")));
                             info.setBirthCertificate(object.getJSONObject("driverdata").getString("d_passcode"));
-                            info.setTelephone(Utils.getInstance(getContext()).DecodeData(
+                            info.setTelephone(Utils.getInstance(getContext()).DecodeData1(
                                     object.getJSONObject("driverdata").getString("d_tel")));
                             info.setPicture(object.getJSONObject("driverdata").getString("d_pic"));
 
-                            Log.e("vehicle", object.getJSONObject("vehicledata").toString()+"|");
+                            Log.e("vehicle", object.getJSONObject("vehicledata").toString() + "|");
 
-                            if (object.getJSONObject("vehicledata").length() != 0 ) {
+                            if (object.getJSONObject("vehicledata").length() != 0) {
                                 info.setLineType(object.getJSONObject("vehicledata").getString("v_activitytype"));
                                 info.setVehicleType(object.getJSONObject("vehicledata").getString("v_vhicletype"));
 
@@ -134,7 +135,8 @@ public class GetSms extends Fragment implements View.OnClickListener {
 
                             DBManager.getInstance(getContext()).setDriverInfo(info);
 
-                            startActivity(new Intent(getActivity(), DriversMainActivity.class));
+//                            startActivity(new Intent(getActivity(), DriversMainActivity.class));
+                            startActivity(new Intent(getActivity(), MainPager.class));
                             getActivity().finish();
 
                         }

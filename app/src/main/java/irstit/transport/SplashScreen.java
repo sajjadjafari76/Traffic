@@ -55,14 +55,14 @@ public class SplashScreen extends AppCompatActivity {
                         JSONObject object = new JSONObject(response);
                         if (object.getString("status").equals("true")) {
 
-                            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
                             mainIntent.putExtra("data", response);
                             mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(mainIntent);
                             finish();
 
                         } else if (object.getString("status").equals("false")) {
-                            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                            Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
                             mainIntent.putExtra("data", response);
                             mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(mainIntent);
@@ -70,7 +70,7 @@ public class SplashScreen extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         Log.e("ListLeavesError1", e.toString() + " |");
-                        Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
                         mainIntent.putExtra("data", response);
                         mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(mainIntent);
@@ -79,7 +79,7 @@ public class SplashScreen extends AppCompatActivity {
                 },
                 error -> {
                     Log.e("ListLeavesError2", error.toString() + " |");
-                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
 
                     mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(mainIntent);

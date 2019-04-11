@@ -33,15 +33,16 @@ public class AppController extends MultiDexApplication {
 
         if (!databaseExist()) {
             Log.e(TAG, "Database11 : database not create");
-            new ParentDBManger(getApplicationContext());
-            DriverInfoModel model = new DriverInfoModel();
-            model.setBirthCertificate("");
-            model.setFamily("");
-            model.setName("");
-            model.setParent("");
-            model.setTelephone("");
-            model.setNationalCode("");
-            DBManager.getInstance(getBaseContext()).setDriverInfo(model);
+//            new ParentDBManger(getApplicationContext());
+//            DriverInfoModel model = new DriverInfoModel();
+//            model.setBirthCertificate("");
+//            model.setFamily("");
+//            model.setName("");
+//            model.setParent("");
+//            model.setTelephone("");
+//            model.setNationalCode("");
+//            DBManager.getInstance(getBaseContext()).setDriverInfo(model);
+            openOrCreateDatabase(ParentDBManger.DATABASE_NAME,MODE_PRIVATE, null);
         } else {
             Log.e(TAG, "Database : database created");
         }
