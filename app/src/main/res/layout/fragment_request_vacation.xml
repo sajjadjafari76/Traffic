@@ -71,7 +71,6 @@
                     android:layout_height="25dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginRight="4dp"
-                    android:drawableRight="@drawable/ic_fiber_manual"
                     android:drawablePadding="5dp"
                     android:fontFamily="@font/shabnam"
                     android:text="استفاده شده"

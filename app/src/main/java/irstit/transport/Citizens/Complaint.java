@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -29,6 +30,7 @@ import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.anychart.core.stock.indicators.EMA;
 import com.koushikdutta.async.http.AsyncHttpClient;
@@ -53,6 +55,8 @@ import irstit.transport.DataModel.LetterRateModel;
 import irstit.transport.Globals;
 import irstit.transport.LetterRate;
 import irstit.transport.R;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Complaint extends AppCompatActivity {
 
@@ -105,6 +109,8 @@ public class Complaint extends AppCompatActivity {
 
             }
         }
+
+
 //        if (Build.VERSION.SDK_INT >= 23) {
 //            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 //                    != PackageManager.PERMISSION_GRANTED) {
@@ -194,12 +200,14 @@ public class Complaint extends AppCompatActivity {
     List<LetterRateModel> getCategory() {
         List<LetterRateModel> data = new ArrayList<>();
         try {
-            if (getIntent().getExtras().getString("data") != null && !getIntent().getExtras().getString("data").isEmpty()) {
-                JSONObject object = new JSONObject(getIntent().getExtras().getString("data"));
+//            if (getIntent().getExtras().getString("data") != null && !getIntent().getExtras().getString("data").isEmpty()) {
+//                JSONObject object = new JSONObject(getIntent().getExtras().getString("data"));
 
-                if (object.getString("status").equals("true")) {
+//                if (object.getString("status").equals("true")) {
 
-                    JSONArray array = new JSONArray(object.getString("complainttype"));
+                      JSONObject jsonObject = new JSONObject();
+                      jsonObject = getComplaintArray();
+                     JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
 
 
                     for (int i = 0 ; i < array.length() ; i++) {
@@ -208,10 +216,10 @@ public class Complaint extends AppCompatActivity {
                         model.setText(array.getJSONObject(i).getString("ct_name"));
                         data.add(model);
                     }
-                }
-            } else {
 
-            }
+//            } else {
+
+//            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -540,5 +548,25 @@ public class Complaint extends AppCompatActivity {
         startActivityForResult(intent, CAMERA);
     }
 
+
+    private JSONObject getComplaintArray(){
+
+        SharedPreferences  sh = getSharedPreferences("complaint",MODE_PRIVATE);
+        String Jso =sh.getString("complaintArray","-1");
+
+
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(Jso);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        //  Log.e("from_Complaint",jsonObject);
+
+        return  jsonObject;
+
+    }
 
 }

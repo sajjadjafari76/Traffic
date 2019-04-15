@@ -2,6 +2,7 @@ package irstit.transport.Drivers;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.anychart.AnyChart;
 import com.anychart.AnyChartView;
@@ -35,12 +37,14 @@ import com.anychart.chart.common.listener.ListenersInterface;
 import com.anychart.charts.Pie;
 import com.anychart.enums.Align;
 import com.anychart.enums.LegendLayout;
+import com.koushikdutta.async.http.body.JSONObjectBody;
 import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
 import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.PrivateKey;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -61,6 +65,8 @@ import irstit.transport.MainActivity;
 import irstit.transport.R;
 import irstit.transport.Views.CFProvider;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class RequestVacation extends Fragment implements TimePickerDialog.OnTimeSetListener {
 
 
@@ -75,7 +81,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
     private EditText destination;
     private CircleSeekBar SeekBar;
     private LinearLayout Form, Btn;
-
+    Context context;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -102,35 +108,52 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 
         Log.e("lojhgfdsa", getArguments().getString("dataVacation") + " |");
 
-        if (getArguments().getString("dataVacation") != null &&
-                !getArguments().getString("dataVacation").isEmpty()) {
+      //  if (getArguments().getString("dataVacation") != null &&
+       //         !getArguments().getString("dataVacation").isEmpty()) {
 
             try {
-                JSONObject object = new JSONObject(getArguments().getString("dataVacation"));
 
-                Log.e("canleave" , object.getString("canleave") + " | ");
-                if (object.getString("canleave").equals("false")) {
+
+                SharedPreferences  sh = this.getActivity().getSharedPreferences("complaint",MODE_PRIVATE);
+                String Jso =sh.getString("complaintArray","-1");
+
+
+                    JSONObject object = new JSONObject(Jso);
+                    JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
+
+
+                Log.e("fulltimefromhere",allOffTimes.toString());
+
+                //getArguments().getString("dataVacation")
+
+//                Log.e("canleave" , object.getString("canleave") + " | ");
+                if (allOffTimes.getString("canleave").equals("false")) {
                     Status.setVisibility(View.VISIBLE);
                     Btn.setVisibility(View.GONE);
                     Form.setVisibility(View.GONE);
                 }
 
-                Remaining.setText(object.getString("havetime"));
-                Used.setText(object.getString("timeuse"));
-                Entire.setText(object.getString("alltime"));
 
-                SeekBar.setCurProcess(Integer.parseInt(object.getString("timeuse")));
-                SeekBar.setMaxProcess(Integer.parseInt(object.getString("alltime")));
+                  Used.setText(allOffTimes.getString("timeuse"));
+                  Remaining.setText(allOffTimes.getString("havetime"));
+                  Entire.setText(allOffTimes.getString("alltime"));
 
-                int persent = (Integer.parseInt(object.getString("timeuse")) * 100) /
-                        Integer.parseInt(object.getString("alltime"));
+                  SeekBar.setCurProcess(Integer.parseInt(allOffTimes.getString("timeuse")));
+                  SeekBar.setMaxProcess(Integer.parseInt(allOffTimes.getString("alltime")));
 
-                TextPersent.setText(persent + "%");
+                  int persent = (Integer.parseInt(allOffTimes.getString("timeuse")) * 100) /
+                          Integer.parseInt(allOffTimes.getString("alltime"));
+
+                  TextPersent.setText(persent + "%");
+
+
 
             }catch (Exception e) {
                 e.printStackTrace();
+                Log.e("fulltimefromhere","error from RequestVaction.java");
+
             }
-        }
+   //     }
 
         startDate.setOnClickListener(v -> {
             configureStartDate();
