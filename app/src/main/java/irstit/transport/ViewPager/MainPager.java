@@ -1,7 +1,9 @@
 package irstit.transport.ViewPager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -12,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,10 +26,13 @@ import android.widget.TextView;
 
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
+import irstit.transport.AboutUs;
 import irstit.transport.Citizens.Complaint;
 import irstit.transport.Citizens.ComplaintTrack;
 import irstit.transport.Citizens.Criticals_Suggestion;
@@ -93,8 +99,32 @@ public class MainPager extends AppCompatActivity {
         DotsIndicator dotsIndicator =  findViewById(R.id.MainPage_Indicator);
         dotsIndicator.setViewPager(mPager);
 
+        changeDefaultuser_Name();
 //        IndefinitePagerIndicator Indicator = findViewById(R.id.MainPage_Indicator);
 //        Indicator.attachToViewPager(mPager);
+    }
+
+    private void changeDefaultuser_Name() {
+
+        try {
+
+            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+            String objectForDriverName = sh.getString("complaintArray", "-1");
+            JSONObject jsonObject = new JSONObject(objectForDriverName);
+            JSONObject name = new JSONObject(jsonObject.getString("userdata"));
+            Log.e("nameFromMainActivity", name.toString());
+
+            if(name.getString("d_tel")!=null) {
+                NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
+                View headerView = navigationView.getHeaderView(0);
+                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+                navUsername.setText(name.getString("d_name"));
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -178,6 +208,7 @@ public class MainPager extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case 6:
+                        startActivity(new Intent(getBaseContext(),AboutUs.class));
                         break;
                 }
 

@@ -1,15 +1,19 @@
 package irstit.transport.Drivers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +22,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,17 +48,21 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
     private DrawerLayout drawer;
     private AlertDialog alertDialog;
+    private  TextView driverName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main_two);
 
+
         LinearLayout regVacation = findViewById(R.id.DriverMainTwo_RegVacation);
         LinearLayout regObj = findViewById(R.id.DriverMainTwo_RegObj);
         LinearLayout vacationHistory = findViewById(R.id.DriverMainTwo_VacationHistory);
         LinearLayout followUp = findViewById(R.id.DriverMainTwo_VacationFollowUp);
         TextView Name = findViewById(R.id.DriverMainTwo_Name);
+
 
         Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName());
 
@@ -97,6 +107,10 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
         });
 
+        // change  default profile's name  to user's log-in name
+          changeDefaultuser_Name();
+
+
 
         drawer = findViewById(R.id.DriverMainTwo_Drawer);
         ImageView iconDrawer = findViewById(R.id.DriverMainTwo_NavigatorIcon);
@@ -109,9 +123,31 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
 
 
+
     }
 
+    private void changeDefaultuser_Name() {
 
+        try {
+
+            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+            String objectForDriverName = sh.getString("complaintArray", "-1");
+            JSONObject jsonObject = new JSONObject(objectForDriverName);
+            JSONObject name = new JSONObject(jsonObject.getString("userdata"));
+            Log.e("nameFromhere", name.toString());
+
+            if(name.getString("d_tel")!=null) {
+                NavigationView navigationView = findViewById(R.id.DriverMainTwo_NavigationView);
+                View headerView = navigationView.getHeaderView(0);
+                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+                navUsername.setText(name.getString("d_name"));
+
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {

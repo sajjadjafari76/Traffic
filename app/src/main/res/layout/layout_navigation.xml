@@ -48,11 +48,12 @@
                 android:textSize="14sp" />
 
             <ImageView
+                android:id="@+id/nav_t"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="1dp"
-                android:layout_toLeftOf="@+id/Navigation_Enter"
+                android:layout_toLeftOf="@id/Navigation_Enter"
                 app:srcCompat="@drawable/ic_chevron_left" />
 
         </RelativeLayout>

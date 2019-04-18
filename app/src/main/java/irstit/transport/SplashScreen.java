@@ -67,7 +67,6 @@ public class SplashScreen extends AppCompatActivity {
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/news",
                 response -> {
                     Log.e("NewsResponse", response + " |");
-                    Toast.makeText(getApplicationContext(),"this is text",Toast.LENGTH_LONG).show();
                     getlog(response);
                     try {
                         JSONObject object = new JSONObject(response);

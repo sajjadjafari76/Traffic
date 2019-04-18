@@ -65,4 +65,5 @@ public class Page_2 extends Fragment {
         return view;
     }
 
+
 }

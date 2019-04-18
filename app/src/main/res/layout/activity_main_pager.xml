@@ -49,7 +49,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginRight="18dp"
-                    android:layout_toLeftOf="@+id/MainPager_NavigatorIcon"
+                    android:layout_toLeftOf="@id/MainPager_NavigatorIcon"
                     android:src="@drawable/logo" />
 
 
@@ -165,7 +165,7 @@
 
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/MAinActivity_NavigationView"
+        android:id="@+id/MAinActivity_NavigationView_3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"

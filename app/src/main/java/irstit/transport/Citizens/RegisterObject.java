@@ -80,13 +80,16 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
         Picture.setOnClickListener(this);
         Back.setOnClickListener(this);
-        Date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus) {
-                    picker.show();
-                }
-            }
+//        Date.setOnFocusChangeListener((view, hasFocus) -> {
+//            if (hasFocus) {
+//                picker.show();
+//            }
+//        });
+
+        Date.setOnClickListener(view -> {
+
+            picker.show();
+
         });
 
         RegisterObject_Btn.setOnClickListener(view -> {

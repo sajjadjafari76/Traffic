@@ -55,7 +55,7 @@
         android:id="@+id/ViewInfo_ViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ViewInfo_Tab"
+        android:layout_below="@id/ViewInfo_Tab"
         android:background="@android:color/white" />
 
 </RelativeLayout>

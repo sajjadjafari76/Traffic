@@ -1,6 +1,7 @@
 package irstit.transport;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private LinearLayout InfoNavigation;
     private RelativeLayout LoginNavigation;
-    private TextView Navigation_Info_Name, MainActivity_Login_Text, MainActivity_Txt1, MainActivity_Txt3;
+    private TextView Navigation_Info_Name, MainActivity_Login_Text, MainActivity_Txt1, MainActivity_Txt3, Navigation_Enter_name;
     private CustomTextView Navigation_Info_Code, MainActivity_Date;
     private DrawerLayout drawer;
     public static List<NewsModel> mNews = new ArrayList<>();
@@ -74,13 +75,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
 
+
+       /*     SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+            String objectForDriverName = sh.getString("complaintArray", "-1");
+            JSONObject jsonObject = new JSONObject(objectForDriverName);
+            JSONObject name = new JSONObject(jsonObject.getString("userdata"));
+            Navigation_Enter_name.setText(name.getString("d_name"));
+            Log.e("nameFromhere", name.toString());
+
+    //this code is  in if   //
+           */
+
         if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() != null && !DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone().equals("")) {
 
             Log.e("telephone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() + " | ");
             InfoNavigation.setVisibility(View.VISIBLE);
             LoginNavigation.setVisibility(View.GONE);
 
-            Navigation_Info_Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName().concat(" " + DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily()));
+            Navigation_Info_Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName().concat(" " + DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily())
+            );
+
+
             if (DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode() != null) {
                 Navigation_Info_Code.setText("  کد خودرو : ".concat(DBManager.getInstance(getBaseContext()).getDriverInfo().getVehicleCode()));
             } else {
@@ -101,6 +116,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             MainActivity_Txt1.setText("نمایش نرخ نامه");
             MainActivity_Txt3.setText("شکایات");
         }
+
     }
 
     @Override
@@ -140,10 +156,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Navigation_Info_Name = view.findViewById(R.id.Navigation_Info_Name);
         MainActivity_Login_Text = findViewById(R.id.MainActivity_Login_Text);
         Navigation_Info_Code = view.findViewById(R.id.Navigation_Info_Code);
+        Navigation_Enter_name = view.findViewById(R.id.Navigation_Enter);
         LoginNavigation.setOnClickListener(this);
 
         configSlider();
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -161,12 +177,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         configNews();
 
 
+
         MainActivity_Date.setText(Utilities.getCurrentShamsidate());
     }
 
     private List<NavModel> navigationData() {
         List<NavModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 7 ; i++) {
+        for (int i = 0; i <= 7; i++) {
 
             if (i == 0) {
                 NavModel model = new NavModel();
@@ -209,6 +226,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         return data;
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -467,7 +486,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             } else {
                                 mNews.clear();
 
-                                for (int i = 0 ; i < array.length() ; i++) {
+                                for (int i = 0; i < array.length(); i++) {
 
                                     JSONObject myObject = array.getJSONObject(i);
 
@@ -538,7 +557,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } else {
                         mNews.clear();
 
-                        for (int i = 0 ; i < array.length() ; i++) {
+                        for (int i = 0; i < array.length(); i++) {
 
                             JSONObject myObject = array.getJSONObject(i);
 
@@ -578,7 +597,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 JSONArray array = object.getJSONArray("slider");
 
 
-                for (int i = 0 ; i < array.length() ; i++) {
+                for (int i = 0; i < array.length(); i++) {
                     JSONObject myObject = array.getJSONObject(i);
                     Image.add(myObject.getString("s_fileaddress"));
                     DefaultSliderView sliderView = new DefaultSliderView(getBaseContext());
