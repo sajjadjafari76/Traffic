@@ -6,6 +6,10 @@
 
     <!--  Drivers.Login.getPhone    -->
     <string name="DriversLogin_GetPhoneText"> شماره همراه خود را برای دریافت کد وارد کنید. </string>
+    <string name="forgotten_GetPhoneText"> شماره همراه خود را برای بازیابی رمز عبور  وارد کنید.! </string>
+    <string name="EnterCitizenInfo"> رمز جدید خود را وارد کنید. </string>
+    <string name="EnterCitizenInfNewPassword">* رمز جدید  </string>
+    <string name="ReEnterCitizenInfNewPassword"> * تکرا رمز جدید </string>
     <string name="DriversLogin_GetPhoneEditText"> شماره همراه </string>
     <string name="DriversLogin_GetPhoneBtn"> ارسال </string>
 

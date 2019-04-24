@@ -1,4 +1,4 @@
-package irstit.transport.Citizens;
+package irstit.transport.Citizens.complaint;
 
 import android.Manifest;
 import android.content.Context;
@@ -55,6 +55,8 @@ import irstit.transport.DataModel.LetterRateModel;
 import irstit.transport.Globals;
 import irstit.transport.LetterRate;
 import irstit.transport.R;
+import irstit.transport.ViewPager.MainPager;
+import irstit.transport.VoiceRecoeder;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -66,9 +68,9 @@ public class Complaint extends AppCompatActivity {
     private Button Btn;
     private String type = "", selectedVideoPath;
     private RelativeLayout Loading;
-    private int GALLERY = 1, CAMERA = 2, GALLERYVIDEO = 3;
+    private int GALLERY = 1, CAMERA = 2, GALLERYVIDEO = 3, VOICE = 4;
     private String imgDecodableString = "";
-    private LinearLayout Image, Video;
+    private LinearLayout Image, Video, Voice;
     private TextView Result;
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
 
@@ -90,6 +92,7 @@ public class Complaint extends AppCompatActivity {
         Loading = findViewById(R.id.Complaint_Loading);
         Image = findViewById(R.id.Complaint_Image);
         Video = findViewById(R.id.Complaint_Video);
+        Voice = findViewById(R.id.Complaint_Voice);
         Text = findViewById(R.id.Complaint_Text);
         Result = findViewById(R.id.Complaint_Result);
 
@@ -128,7 +131,7 @@ public class Complaint extends AppCompatActivity {
 //        }
 
 
-        for (int i = 0 ; i < getCategory().size() ; i++) {
+        for (int i = 0; i < getCategory().size(); i++) {
             adapter.add(getCategory().get(i).getText());
         }
         adapter.add("موضوع خود را انتخاب کنید");
@@ -151,7 +154,10 @@ public class Complaint extends AppCompatActivity {
         });
 
 
+       //  VoiceRecoeder gettingVoiceInstance ;
         Btn.setOnClickListener(v -> {
+
+            Log.e("step1", VoiceRecoeder.AudioSavePathInDevice  + " |");
 
             if (type.isEmpty() || Text.getText().toString().isEmpty()) {
                 Toast.makeText(this, "فیلد های شرح پیام نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
@@ -160,14 +166,52 @@ public class Complaint extends AppCompatActivity {
 
             } else {
 
-                complaintRequest(Name.getText().toString(), Family.getText().toString(),
-                        Email.getText().toString(), Text.getText().toString(), type,
-                        CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), imgDecodableString);
+                if (imgDecodableString != null && !imgDecodableString.equals("")) {
 
-                Loading.setVisibility(View.VISIBLE);
-                Disabled();
+                    Log.e("step2", imgDecodableString  + " |");
+
+                    complaintRequest(Name.getText().toString(), Family.getText().toString(),
+                            Email.getText().toString(), Text.getText().toString(), type,
+                            CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), imgDecodableString);
+
+                    Loading.setVisibility(View.VISIBLE);
+                    Disabled();
+
+                } else if (selectedVideoPath!=null && !selectedVideoPath.equals("")) {
+                    Log.e("step3", selectedVideoPath  + " |");
+
+                    complaintRequest(Name.getText().toString(), Family.getText().toString(),
+                            Email.getText().toString(), Text.getText().toString(), type,
+                            CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), imgDecodableString);
+
+                    Loading.setVisibility(View.VISIBLE);
+                    Disabled();
+
+                     Log.e("Audio_recoder_file ",checkShared()+"");
+                } else if (VoiceRecoeder.AudioSavePathInDevice != null && !VoiceRecoeder.AudioSavePathInDevice.equals("")) {
+
+                    Log.e("step4", VoiceRecoeder.AudioSavePathInDevice  + " |");
+
+                    Result.setText("فایل صدا");
+
+                //    String fil =VoiceRecoeder.AudioSavePathInDevice;
+
+                    complaintRequest(Name.getText().toString(), Family.getText().toString(),
+                            Email.getText().toString(), Text.getText().toString(), type,
+                            CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), VoiceRecoeder.AudioSavePathInDevice);
+
+                    Loading.setVisibility(View.VISIBLE);
+                    Disabled();
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "فایل ضمیمه نمی تواند خالی باشد! ", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
+
+
 
         Image.setOnClickListener(v -> {
             showPictureDialog();
@@ -175,6 +219,14 @@ public class Complaint extends AppCompatActivity {
 
         Video.setOnClickListener(v -> {
             SelectVideo();
+        });
+
+        Voice.setOnClickListener(view -> {
+
+            Log.e("jfufu", "jgigil");
+            //startActivity(new Intent(getApplicationContext(), Record_Voice.class));
+            SelectVoice();
+
         });
 
 
@@ -205,17 +257,17 @@ public class Complaint extends AppCompatActivity {
 
 //                if (object.getString("status").equals("true")) {
 
-                      JSONObject jsonObject = new JSONObject();
-                      jsonObject = getComplaintArray();
-                     JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
+            JSONObject jsonObject = new JSONObject();
+            jsonObject = getComplaintArray();
+            JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
 
 
-                    for (int i = 0 ; i < array.length() ; i++) {
-                        LetterRateModel model = new LetterRateModel();
-                        model.setImage(array.getJSONObject(i).getString("ct_code"));
-                        model.setText(array.getJSONObject(i).getString("ct_name"));
-                        data.add(model);
-                    }
+            for (int i = 0; i < array.length(); i++) {
+                LetterRateModel model = new LetterRateModel();
+                model.setImage(array.getJSONObject(i).getString("ct_code"));
+                model.setText(array.getJSONObject(i).getString("ct_name"));
+                data.add(model);
+            }
 
 //            } else {
 
@@ -314,7 +366,6 @@ public class Complaint extends AppCompatActivity {
                 }
             }
         }
-
     }
 
     private void complaintRequest(String Fname, String LName, String Email, String Message,
@@ -375,8 +426,6 @@ public class Complaint extends AppCompatActivity {
 //        AppController.getInstance().addToRequestQueue(complaintRequest);
 
 
-
-
         AsyncHttpPost post = new AsyncHttpPost(Globals.APIURL + "/Complaint");
         post.setHeader("token", "df837016d0fc7670f221197cd92439b5");
         post.setTimeout(25000);
@@ -391,6 +440,8 @@ public class Complaint extends AppCompatActivity {
         body.addStringPart("typecomplaint", Type);
         body.addStringPart("vehiclecode", VehicleCode);
         body.addStringPart("vehiclepluck", VehiclePelack);
+
+        Log.e("sgdsd44", VoiceRecoeder.AudioSavePathInDevice  + " |" + File);
         if (!File.isEmpty()) {
             Log.e("filesfiles", File + " |");
             body.addFilePart("files", new File(File));
@@ -513,6 +564,17 @@ public class Complaint extends AppCompatActivity {
 
     }
 
+    public void SelectVoice() {
+
+        Intent recordVoice = new Intent(getApplicationContext(),VoiceRecoeder.class);
+        startActivity(recordVoice);
+
+
+
+        // startActivityForResult(recordVoice,VOICE);
+
+    }
+
     private void showPictureDialog() {
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
 //        pictureDialog.setTitle("انتخاب عکس");
@@ -549,10 +611,10 @@ public class Complaint extends AppCompatActivity {
     }
 
 
-    private JSONObject getComplaintArray(){
+    private JSONObject getComplaintArray() {
 
-        SharedPreferences  sh = getSharedPreferences("complaint",MODE_PRIVATE);
-        String Jso =sh.getString("complaintArray","-1");
+        SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+        String Jso = sh.getString("complaintArray", "-1");
 
 
         JSONObject jsonObject = null;
@@ -565,8 +627,20 @@ public class Complaint extends AppCompatActivity {
 
         //  Log.e("from_Complaint",jsonObject);
 
-        return  jsonObject;
+        return jsonObject;
 
     }
 
+    private String checkShared() {
+
+        SharedPreferences h = getSharedPreferences("voice", MODE_PRIVATE);
+        String getVoice = h.getString("voice_", "-1");
+        Log.e("Audio_file",getVoice);
+       //String address =  getIntent().getExtras().getString("Audio_source_address");
+
+        return getVoice;
+
+    }
+
+    ;
 }

@@ -36,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="@string/RegisterObject_Title"
+                android:id="@+id/titleOfFounded"
                 android:textColor="@color/green_50"
                 android:textSize="@dimen/ToolbarSize" />
 
@@ -72,6 +73,7 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:gravity="center"
                 android:text="@string/RegisterObject_Text"
+                android:id="@+id/pictureOfFounded"
                 android:textColor="@color/grey_1000" />
 
         </RelativeLayout>

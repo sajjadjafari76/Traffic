@@ -10,7 +10,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,17 +27,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import irstit.transport.Citizens.Account.CitizensAccountActivity;
-import irstit.transport.Citizens.CitizenMainActivity;
-import irstit.transport.Citizens.Complaint;
-import irstit.transport.Citizens.ComplaintTrack;
-import irstit.transport.Citizens.Criticals_Suggestion;
+import irstit.transport.AboutUs;
+import irstit.transport.Citizens.complaint.Complaint;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
 import irstit.transport.ConnectToUs;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
-import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.MainPage;
 import irstit.transport.R;
 import irstit.transport.Views.CFProvider;
@@ -49,7 +44,10 @@ public class DriverMainActivityTwo extends AppCompatActivity {
     private DrawerLayout drawer;
     private AlertDialog alertDialog;
     private  TextView driverName;
-
+    private  RelativeLayout rel;
+    NavigationView navigationView;
+    TextView navUsername;
+    public  static  String sharingName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +60,20 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         LinearLayout vacationHistory = findViewById(R.id.DriverMainTwo_VacationHistory);
         LinearLayout followUp = findViewById(R.id.DriverMainTwo_VacationFollowUp);
         TextView Name = findViewById(R.id.DriverMainTwo_Name);
+        rel = findViewById(R.id.MainActivity_Login_Driver_profile_name);
+
+        if(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()!=null){
+
+            rel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(getBaseContext(),DriversMainActivity.class);
+                    intent.putExtra("Driver_profile","true");
+                    startActivity(intent);
+                }
+            });
+        }
 
 
         Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName());
@@ -121,10 +133,29 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         navigation_Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
         navigation_Recycler.setAdapter(new MyNavigationAdapter(navigationData()));
 
+        // this textView is getting it's value from inner Person's name
+        //        TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+
+        NavigationView navigationView = findViewById(R.id.DriverMainTwo_NavigationView);
+        View headerView = navigationView.getHeaderView(0);
+        RelativeLayout relativeLayout = headerView.findViewById(R.id.Navigation_Login);
+
+        if(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()!=null){
+
+            relativeLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getBaseContext(),DriversMainActivity.class);
+                    intent.putExtra("Driver_profile","true");
+                    startActivity(intent);
+                }
+            });
+        }
 
 
 
     }
+
 
     private void changeDefaultuser_Name() {
 
@@ -136,11 +167,11 @@ public class DriverMainActivityTwo extends AppCompatActivity {
             JSONObject name = new JSONObject(jsonObject.getString("userdata"));
             Log.e("nameFromhere", name.toString());
 
+
             if(name.getString("d_tel")!=null) {
-                NavigationView navigationView = findViewById(R.id.DriverMainTwo_NavigationView);
-                View headerView = navigationView.getHeaderView(0);
-                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+
                 navUsername.setText(name.getString("d_name"));
+                sharingName = name.getString("d_name");
 
             }
 
@@ -148,8 +179,20 @@ public class DriverMainActivityTwo extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void deleteSavedDefaultUsername(){
+        try {
+
+            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sh.edit();
+            editor.clear();
+            editor.commit();
 
 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {
 
         List<NavModel> data;
@@ -193,21 +236,16 @@ public class DriverMainActivityTwo extends AppCompatActivity {
                         startActivity(intent12);
                         closeDrawer();
                         break;
+
                     case 3:
-                        startActivity(new Intent(getBaseContext(), ComplaintTrack.class));
-                        closeDrawer();
-                        break;
-                    case 4:
-                        startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
-                        closeDrawer();
-                        break;
-                    case 5:
                         startActivity(new Intent(getBaseContext(), ConnectToUs.class));
                         closeDrawer();
                         break;
-                    case 6:
+                    case 4:
+                        startActivity(new Intent(getBaseContext(),AboutUs.class));
                         break;
-                    case 7:
+                    case 5:
+                        deleteSavedDefaultUsername();
                         ShowDialog();
                         break;
                 }
@@ -240,44 +278,34 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
     private List<NavModel> navigationData() {
         List<NavModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 8 ; i++) {
+        for (int i = 0 ; i <= 5 ; i++) {
 
             if (i == 0) {
                 NavModel model = new NavModel();
-                model.setName("جستجو اشیا گمشده");
+                model.setName("جستجو اشیا یافت شده");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
                 data.add(model);
             } else if (i == 1) {
                 NavModel model = new NavModel();
-                model.setName("ثبت شی گمشده");
+                model.setName("ثبت شی یافت شده");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
                 data.add(model);
             } else if (i == 2) {
                 NavModel model = new NavModel();
-                model.setName("شکایات");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
-                data.add(model);
-            } else if (i == 3) {
-                NavModel model = new NavModel();
-                model.setName("پیگیری شکایت");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
-                data.add(model);
-            } else if (i == 4) {
-                NavModel model = new NavModel();
                 model.setName("پیشنهادات و انتقادات");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_critical));
                 data.add(model);
-            } else if (i == 5) {
+            } else if (i == 3) {
                 NavModel model = new NavModel();
                 model.setName("تماس با ما");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_contact));
                 data.add(model);
-            } else if (i == 6) {
+            } else if (i == 4) {
                 NavModel model = new NavModel();
                 model.setName("درباره ی ما");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
                 data.add(model);
-            } else if (i == 7) {
+            } else if (i == 5) {
                 NavModel model = new NavModel();
                 model.setName("خروج");
                 model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));

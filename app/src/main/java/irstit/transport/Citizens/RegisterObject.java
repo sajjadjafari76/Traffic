@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.koushikdutta.async.http.AsyncHttpClient;
@@ -44,6 +45,7 @@ import java.util.List;
 import ir.hamsaa.persiandatepicker.Listener;
 import ir.hamsaa.persiandatepicker.PersianDatePickerDialog;
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
@@ -60,6 +62,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
     private PersianDatePickerDialog picker;
     private String mDate = "";
     private String type;
+    private TextView titleOfFoundedObject,pictureOfFoundedObject;
 
 
     @Override
@@ -75,9 +78,15 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
         Picture = findViewById(R.id.RegisterObject_Picture);
         ImageView Back = findViewById(R.id.RegisterObject_Back);
         Spinner Category = findViewById(R.id.RegisterObject_Category);
-
         configureDate();
+        titleOfFoundedObject = findViewById(R.id.titleOfFounded);
+        pictureOfFoundedObject = findViewById(R.id.pictureOfFounded);
 
+        if(DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() !=null){
+
+            titleOfFoundedObject.setText("ثبت شی یافت شده");
+            pictureOfFoundedObject.setText("تصویر شی یافت شده را انتخاب کنید");
+        }
         Picture.setOnClickListener(this);
         Back.setOnClickListener(this);
 //        Date.setOnFocusChangeListener((view, hasFocus) -> {

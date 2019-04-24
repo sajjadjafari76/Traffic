@@ -11,33 +11,21 @@
     <irstit.transport.Views.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="اطلاعات خود را وارد کنید"
+        android:text="@string/EnterCitizenInfo"
         android:textColor="#FFF"
         android:gravity="center"
         android:textSize="@dimen/DriversLogin_GetPhone"
         android:layout_marginBottom="10dp"
-        android:id="@+id/CitizenGetPhone_Text"/>
+        android:id="@+id/CitizenGetPhoneSmsForgotten_Text"/>
+
+
 
     <irstit.transport.Views.CustomEdittext
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" نام و نام خانوادگی *"
-        android:inputType="text"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textSize="16sp"
-        android:padding="6dp"
-        android:textColorHint="@color/grey_20"
-        android:textColor="@color/grey_20"
-        android:id="@+id/CitizenGetInfo_Name"
-        android:background="@drawable/dr_getphone_edittext"
-        android:drawableRight="@drawable/ic_getphone_smartphone"/>
-
-    <irstit.transport.Views.CustomEdittext
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="ایمیل"
-        android:inputType="text"
+        android:hint="@string/EnterCitizenInfNewPassword"
+        android:inputType="textPassword"
+        android:gravity="right"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
@@ -45,7 +33,7 @@
         android:padding="6dp"
         android:textColorHint="@color/grey_20"
         android:textColor="@color/grey_20"
-        android:id="@+id/CitizenGetInfo_Email"
+        android:id="@+id/CitizenGetSms_enterPasswordForgotten"
         android:background="@drawable/dr_getphone_edittext"
         android:drawableRight="@drawable/ic_getphone_smartphone"/>
 
@@ -53,7 +41,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="* رمز عبور"
+        android:hint="@string/ReEnterCitizenInfNewPassword"
         android:inputType="textPassword"
         android:textDirection="rtl"
         android:gravity="right"
@@ -64,12 +52,12 @@
         android:padding="6dp"
         android:textColorHint="@color/grey_20"
         android:textColor="@color/grey_20"
-        android:id="@+id/CitizenGetInfo_Pass"
+        android:id="@+id/CitizenGetSms_RenterPasswordForgotten"
         android:background="@drawable/dr_getphone_edittext"
         android:drawableRight="@drawable/ic_getphone_smartphone"/>
 
     <com.marozzi.roundbutton.RoundButton
-        android:id="@+id/CitizenGetInfo_Btn"
+        android:id="@+id/CitizenGetSms_BtnForgotten"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:gravity="center"

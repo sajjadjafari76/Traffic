@@ -1,8 +1,8 @@
-package irstit.transport.Citizens.Account;
+package irstit.transport.Citizens.Account.forgettenpasswrod;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -28,29 +28,27 @@ import irstit.transport.ViewPager.MainPager;
 import irstit.transport.Views.CustomEdittext;
 import irstit.transport.Views.Utils;
 
-public class CitizenLogin extends AppCompatActivity {
+public class CitizenForgottenPassword extends AppCompatActivity {
 
     private RoundButton Btn;
     public  static int identifyingOfPerson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_citizen_login);
+        setContentView(R.layout.activity_citizen_forgottenpassword);
 
-        CustomEdittext UserName = findViewById(R.id.CitizenLogin_UserName);
-        CustomEdittext Pass = findViewById(R.id.CitizenLogin_Password);
-        Btn = findViewById(R.id.CitizenLogin_Btn);
+
+        CustomEdittext Pass = findViewById(R.id.CitizenForgotten_password);
+        Btn = findViewById(R.id.CitizenForgotten_password_btn);
 
         Btn.setOnClickListener(v -> {
 
             if (!Utils.getInstance(getBaseContext()).hasInternetAccess() && !Utils.getInstance(getBaseContext()).isOnline()) {
                 Toast.makeText(getBaseContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
-            } else if (UserName.getText().toString().length() == 0) {
-                Toast.makeText(getBaseContext(), "شماره همراه را وارد کنید!", Toast.LENGTH_SHORT).show();
-            } else if (Pass.getText().toString().length() <11 &&  Pass.getText().toString().length()>11 ) {
-                Toast.makeText(getBaseContext(), "شماره تلفن را  درست وارد کنید !.", Toast.LENGTH_SHORT).show();
+            } else if (Pass.getText().toString().length() < 5) {
+                Toast.makeText(getBaseContext(), "رمز عبور نمیتواند کمتر از 5 کاراکتر باشد.", Toast.LENGTH_SHORT).show();
             }else {
-                citizenLogin(UserName.getText().toString(), Pass.getText().toString());
+              //  citizenLogin(Pass.getText().toString());
             }
         });
 

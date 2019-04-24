@@ -1,17 +1,11 @@
 package irstit.transport;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -21,14 +15,11 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
-import irstit.transport.Citizens.Complaint;
-import irstit.transport.DataBase.DBManager;
-import irstit.transport.DataModel.NewsModel;
+import irstit.transport.Citizens.complaint.Complaint;
 
 //implements Parcelable
 public class SplashScreen extends AppCompatActivity {

@@ -219,7 +219,7 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="@font/shabnam"
-                    android:hint="متن شکایت"
+                    android:hint="متن پیام"
                     android:inputType="textMultiLine"
                     android:lines="3"
                     android:background="@drawable/res_focused_edittext"

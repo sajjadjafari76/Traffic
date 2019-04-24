@@ -2,6 +2,7 @@ package irstit.transport.ViewPager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,20 +35,30 @@ import java.util.List;
 import java.util.Vector;
 
 import irstit.transport.AboutUs;
-import irstit.transport.Citizens.Complaint;
-import irstit.transport.Citizens.ComplaintTrack;
+import irstit.transport.Citizens.Account.CitizenLogin;
+import irstit.transport.Citizens.CitizenMainActivity;
+import irstit.transport.Citizens.complaint.Complaint;
+import irstit.transport.Citizens.complaint.ComplaintTrack;
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
 import irstit.transport.ConnectToUs;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
+import irstit.transport.Drivers.DriverMainActivityTwo;
+import irstit.transport.Drivers.DriversMainActivity;
 import irstit.transport.MainPage;
 import irstit.transport.R;
+import irstit.transport.Views.CFProvider;
+import irstit.transport.Views.CustomButton;
 
 public class MainPager extends AppCompatActivity {
 
     private FragmentAdapter mAdapter;
     private ViewPager mPager;
+
+
+    private AlertDialog alertDialog;
 
     private DrawerLayout drawer;
 
@@ -58,15 +70,15 @@ public class MainPager extends AppCompatActivity {
         LinearLayout Site = findViewById(R.id.MainPager_Site);
         LinearLayout Dial = findViewById(R.id.MainPager_Dial);
 
-        Dial.setOnClickListener(v->{
+        Dial.setOnClickListener(v -> {
 
             Intent dial1 = new Intent();
             dial1.setAction("android.intent.action.DIAL");
-            dial1.setData(Uri.parse("tel:"+"02835237500"));
+            dial1.setData(Uri.parse("tel:" + "02835237500"));
             startActivity(dial1);
 
         });
-        Site.setOnClickListener(v->{
+        Site.setOnClickListener(v -> {
 
             Uri uri = Uri.parse("http://www.traffictakestan.ir"); // missing 'http://' will cause crashed
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -81,10 +93,11 @@ public class MainPager extends AppCompatActivity {
         fragments.add(Fragment.instantiate(this, Page_3.class.getName()));
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
 
-
+        changeDefaultuser_Name();
         drawer = findViewById(R.id.MainPager_Drawer);
         ImageView iconDrawer = findViewById(R.id.MainPager_NavigatorIcon);
-        iconDrawer.setOnClickListener(v-> drawer.openDrawer(Gravity.RIGHT));
+        iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.RIGHT)
+        );
 
 
         RecyclerView navigation_Recycler = findViewById(R.id.MainPager_Navigation_RecyClerView);
@@ -96,12 +109,42 @@ public class MainPager extends AppCompatActivity {
         mPager.setAdapter(mAdapter);
 
 
-        DotsIndicator dotsIndicator =  findViewById(R.id.MainPage_Indicator);
+        DotsIndicator dotsIndicator = findViewById(R.id.MainPage_Indicator);
         dotsIndicator.setViewPager(mPager);
 
-        changeDefaultuser_Name();
 //        IndefinitePagerIndicator Indicator = findViewById(R.id.MainPage_Indicator);
 //        Indicator.attachToViewPager(mPager);
+
+        NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
+        View headerView = navigationView.getHeaderView(0);
+        if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() != null) {
+            RelativeLayout relative = headerView.findViewById(R.id.Navigation_Login);
+
+            relative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getBaseContext(), DriversMainActivity.class);
+                    intent.putExtra("Driver_profile", "true");
+                    startActivity(intent);
+
+
+                }
+            });
+        }
+    }
+
+    private void deleteSavedDefaultUsername() {
+        try {
+
+            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sh.edit();
+            editor.clear();
+            editor.commit();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void changeDefaultuser_Name() {
@@ -114,15 +157,28 @@ public class MainPager extends AppCompatActivity {
             JSONObject name = new JSONObject(jsonObject.getString("userdata"));
             Log.e("nameFromMainActivity", name.toString());
 
-            if(name.getString("d_tel")!=null) {
-                NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
-                View headerView = navigationView.getHeaderView(0);
-                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
-                navUsername.setText(name.getString("d_name"));
+            NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
+            View headerView = navigationView.getHeaderView(0);
 
+
+            if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() !=null) {
+
+                DriverMainActivityTwo nameGetter = new DriverMainActivityTwo();
+
+                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+                navUsername.setText(nameGetter.sharingName);
+
+
+
+                }else if(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()!=null){
+
+                CitizenMainActivity getCitizenName =new CitizenMainActivity();
+                TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+                navUsername.setText(getCitizenName.sharinCitizenName);
             }
 
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -150,8 +206,6 @@ public class MainPager extends AppCompatActivity {
     }
 
 
-
-
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {
 
         List<NavModel> data;
@@ -174,45 +228,98 @@ public class MainPager extends AppCompatActivity {
 
             holder.Root.setOnClickListener(v -> {
 
-                switch (position) {
-                    case 0:
-                        Intent intent = new Intent(getBaseContext(), SearchObject.class);
+                if (DBManager.getInstance(getApplicationContext()).getCitizenInfo().getUserName() != null) {
+                    switch (position) {
+                        case 0:
+                            Intent intent = new Intent(getBaseContext(), SearchObject.class);
 //                        intent.putExtra("RequestVacation", "true");
-                        startActivity(intent);
-                        closeDrawer();
-                        break;
-                    case 1:
-                        Intent intent1 = new Intent(getBaseContext(), RegisterObject.class);
+                            startActivity(intent);
+                            closeDrawer();
+                            break;
+                        case 1:
+                            Intent intent1 = new Intent(getBaseContext(), RegisterObject.class);
 //                        intent1.putExtra("data", getIntent().getExtras().getString("data"));
-                        startActivity(intent1);
-                        closeDrawer();
-                        break;
-                    case 2:
-                        Intent intent12 = new Intent(getBaseContext(), Complaint.class);
-                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
-                            intent12.putExtra("data", getIntent().getExtras().getString("data"));
-                        }
-                        startActivity(intent12);
-                        closeDrawer();
-                        break;
-                    case 3:
-                        startActivity(new Intent(getBaseContext(), ComplaintTrack.class));
-                        closeDrawer();
-                        break;
-                    case 4:
-                        startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
-                        closeDrawer();
-                        break;
-                    case 5:
-                        startActivity(new Intent(getBaseContext(), ConnectToUs.class));
-                        closeDrawer();
-                        break;
-                    case 6:
-                        startActivity(new Intent(getBaseContext(),AboutUs.class));
-                        break;
-                }
+                            startActivity(intent1);
+                            closeDrawer();
+                            break;
+                        case 2:
+                            Intent intent12 = new Intent(getBaseContext(), Complaint.class);
+                            if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
+                                intent12.putExtra("data", getIntent().getExtras().getString("data"));
+                            }
+                            startActivity(intent12);
+                            closeDrawer();
+                            break;
+                        case 3:
+                            startActivity(new Intent(getBaseContext(), ComplaintTrack.class));
+                            closeDrawer();
+                            break;
+                        case 4:
+                            startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
+                            closeDrawer();
+                            break;
+                        case 5:
+                            startActivity(new Intent(getBaseContext(), ConnectToUs.class));
+                            closeDrawer();
+                            break;
+                        case 6:
+                            startActivity(new Intent(getBaseContext(), AboutUs.class));
+                            break;
 
+                        case 7:
+                            deleteSavedDefaultUsername();
+                            ShowDialog();
+                            break;
+
+
+                    }
+                } else if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() != null) {
+                    switch (position) {
+                        case 0:
+                            Intent intent = new Intent(getBaseContext(), SearchObject.class);
+//                        intent.putExtra("RequestVacation", "true");
+                            startActivity(intent);
+                            closeDrawer();
+                            break;
+                        case 1:
+                            Intent intent1 = new Intent(getBaseContext(), RegisterObject.class);
+//                        intent1.putExtra("data", getIntent().getExtras().getString("data"));
+                            startActivity(intent1);
+                            closeDrawer();
+                            break;
+//                        case 2:
+//                            Intent intent12 = new Intent(getBaseContext(), Complaint.class);
+//                            if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
+//                                intent12.putExtra("data", getIntent().getExtras().getString("data"));
+//                            }
+//                            startActivity(intent12);
+//                            closeDrawer();
+//                            break;
+//                        case 3:
+//                            startActivity(new Intent(getBaseContext(), ComplaintTrack.class));
+//                            closeDrawer();
+//                            break;
+                        case 2:
+                            startActivity(new Intent(getBaseContext(), Criticals_Suggestion.class));
+                            closeDrawer();
+                            break;
+                        case 3:
+                            startActivity(new Intent(getBaseContext(), ConnectToUs.class));
+                            closeDrawer();
+                            break;
+                        case 4:
+                            startActivity(new Intent(getBaseContext(), AboutUs.class));
+                            break;
+
+                        case 5:
+                            deleteSavedDefaultUsername();
+                            ShowDialog();
+                            break;
+
+                    }
+                }
             });
+
 
         }
 
@@ -240,45 +347,100 @@ public class MainPager extends AppCompatActivity {
 
     private List<NavModel> navigationData() {
         List<NavModel> data = new ArrayList<>();
-        for (int i = 0 ; i <= 7 ; i++) {
 
-            if (i == 0) {
-                NavModel model = new NavModel();
-                model.setName("جستجو اشیا گمشده");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
-                data.add(model);
-            } else if (i == 1) {
-                NavModel model = new NavModel();
-                model.setName("ثبت شی گمشده");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
-                data.add(model);
-            } else if (i == 2) {
-                NavModel model = new NavModel();
-                model.setName("شکایات");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
-                data.add(model);
-            } else if (i == 3) {
-                NavModel model = new NavModel();
-                model.setName("پیگیری شکایت");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
-                data.add(model);
-            } else if (i == 4) {
-                NavModel model = new NavModel();
-                model.setName("پیشنهادات و انتقادات");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_critical));
-                data.add(model);
-            } else if (i == 5) {
-                NavModel model = new NavModel();
-                model.setName("تماس با ما");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_contact));
-                data.add(model);
-            } else if (i == 6) {
-                NavModel model = new NavModel();
-                model.setName("درباره ی ما");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
-                data.add(model);
+        CitizenLogin citizenLogin = new CitizenLogin();
+
+        //  DBManager.getInstance(getBaseContext()).getDriverInfo();
+
+        // this if condition is for citizen section
+        if (DBManager.getInstance(getApplicationContext()).getCitizenInfo().getUserName() != null) {
+            for (int i = 0; i <= 7; i++) {
+
+                if (i == 0) {
+                    NavModel model = new NavModel();
+                    model.setName("جستجو اشیا گمشده");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
+                    data.add(model);
+                } else if (i == 1) {
+                    NavModel model = new NavModel();
+                    model.setName("ثبت شی  گمشده");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
+                    data.add(model);
+                } else if (i == 2) {
+                    NavModel model = new NavModel();
+                    model.setName("شکایات");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
+                    data.add(model);
+                } else if (i == 3) {
+                    NavModel model = new NavModel();
+                    model.setName("پیگیری شکایت");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
+                    data.add(model);
+                } else if (i == 4) {
+                    NavModel model = new NavModel();
+                    model.setName("پیشنهادات و انتقادات");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_critical));
+                    data.add(model);
+                } else if (i == 5) {
+                    NavModel model = new NavModel();
+                    model.setName("تماس با ما");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_contact));
+                    data.add(model);
+                } else if (i == 6) {
+                    NavModel model = new NavModel();
+                    model.setName("درباره ی ما");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    data.add(model);
+                } else if (i == 7) {
+
+                    NavModel model = new NavModel();
+                    model.setName("خروج");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    data.add(model);
+                }
+
+
             }
+        } else if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() != null) {
 
+            // this else is for driver section
+
+
+            for (int i = 0; i <= 8; i++) {
+
+                if (i == 0) {
+                    NavModel model = new NavModel();
+                    model.setName("جستجو اشیا یافت شده");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_search));
+                    data.add(model);
+                } else if (i == 1) {
+                    NavModel model = new NavModel();
+                    model.setName("ثبت شی یافت شده");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_complaint));
+                    data.add(model);
+                } else if (i == 2) {
+                    NavModel model = new NavModel();
+                    model.setName("پیشنهادات و انتقادات");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_critical));
+                    data.add(model);
+                } else if (i == 3) {
+                    NavModel model = new NavModel();
+                    model.setName("تماس با ما");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_contact));
+                    data.add(model);
+                } else if (i == 4) {
+                    NavModel model = new NavModel();
+                    model.setName("درباره ی ما");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    data.add(model);
+                } else if (i == 8) {
+                    NavModel model = new NavModel();
+                    model.setName("خروج");
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    data.add(model);
+                }
+
+            }
         }
 
         return data;
@@ -290,4 +452,51 @@ public class MainPager extends AppCompatActivity {
         }
     }
 
+
+    private void ShowDialog() {
+
+        try {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainPager.this);
+            dialog.setView(R.layout.exit_permission);
+
+            alertDialog = dialog.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            LayoutInflater inflater = getLayoutInflater();
+            alertDialog.setContentView(inflater.inflate(R.layout.exit_permission, null));
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+
+            CustomButton Yes = (CustomButton) alertDialog.findViewById(R.id.CustomPermission_Yes);
+            CustomButton Cancel = (CustomButton) alertDialog.findViewById(R.id.CustomPermission_Cancel);
+            if (Yes != null && Cancel != null) {
+                Yes.setTypeface(CFProvider.getIRANIANSANS(getBaseContext()));
+                Cancel.setTypeface(CFProvider.getIRANIANSANS(getBaseContext()));
+
+                Cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+                Yes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        DBManager.getInstance(getApplicationContext()).deleteDrivers();
+                        DBManager.getInstance(getApplicationContext()).deleteCitizen();
+
+                        alertDialog.dismiss();
+                        Intent intent = new Intent(getBaseContext(), MainPage.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

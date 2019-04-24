@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.Citizens.Account.CitizenLogin;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.DriverInfoModel;
 import irstit.transport.Drivers.DriversMainActivity;
@@ -90,6 +91,11 @@ public class GetSms extends Fragment implements View.OnClickListener {
                                         DBManager.getInstance(getContext()).updateDriverInfo(
                                                 DBManager.getInstance(getContext()).getDriverInfo().getTelephone(), getArguments().getString("phone")));
                                 startActivity(new Intent(getActivity(), DriversMainActivity.class));
+
+                                // this variable is used for identifying person's role
+                                CitizenLogin golobalVaribale = new CitizenLogin();
+                                golobalVaribale.identifyingOfPerson =1;
+
                                 getActivity().finish();
                             } else {
                                 Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();

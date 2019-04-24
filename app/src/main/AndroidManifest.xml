@@ -3,12 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="irstit.transport">
 
-    <!--&lt;!&ndash;The following section is for Qr code&ndash;&gt;-->
-    <!--<uses-permission android:name="android.permission.CAMERA"/>-->
-    <!--<uses-feature android:name="android.hardware.camera"/>-->
-    <!--<uses-feature android:name="android.hardware.camera.autofocus"/>-->
-    <!--<code class="xml plain"/><uses-feature/>-->
+    <!-- &lt;!&ndash;The following section is for Qr code&ndash;&gt; -->
+    <!-- <uses-permission android:name="android.permission.CAMERA"/> -->
+    <!-- <uses-feature android:name="android.hardware.camera"/> -->
+    <!-- <uses-feature android:name="android.hardware.camera.autofocus"/> -->
+    <!-- <code class="xml plain"/><uses-feature/> -->
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -22,24 +29,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Citizens.CitizenMainActivity"></activity>
+        <activity android:name=".Citizens.CitizenMainActivity" />
         <activity android:name=".Citizens.Account.CitizenLogin" />
+        <activity android:name=".SplashScreen" />
+        <activity android:name=".Citizens.Account.forgettenpasswrod.CitizenForgottenPassword" />
+        <activity android:name=".Citizens.complaint.Record_Voice" />
         <activity android:name=".Drivers.DriverMainActivityTwo" />
         <activity android:name=".ViewPager.ViewInfo.ViewInfo" />
         <activity android:name=".Citizens.Account.CitizensAccountActivity" />
         <activity android:name=".ViewPager.MainPager" />
-        <activity android:name=".MainPage">
-
-        </activity>
-        <activity android:name=".Citizens.ComplaintTrack" />
+        <activity android:name=".MainPage"></activity>
+        <activity android:name=".Citizens.complaint.ComplaintTrack" />
         <activity android:name=".Drivers.FoundedObjectActivity" />
         <activity
-            android:name=".Citizens.Complaint"
+            android:name=".Citizens.complaint.Complaint"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".LetterRate" />
         <activity android:name=".News" />
-        <activity android:name=".SplashScreen">
-
+        <activity android:name=".Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -80,6 +87,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" />
+
+        <activity android:name=".VoiceRecoeder"></activity>
     </application>
 
 </manifest>

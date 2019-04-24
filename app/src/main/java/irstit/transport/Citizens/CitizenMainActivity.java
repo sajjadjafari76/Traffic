@@ -1,8 +1,10 @@
 package irstit.transport.Citizens;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -19,17 +21,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import irstit.transport.AboutUs;
+import irstit.transport.Citizens.complaint.Complaint;
+import irstit.transport.Citizens.complaint.ComplaintTrack;
 import irstit.transport.ConnectToUs;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
-import irstit.transport.Drivers.DriverMainActivityTwo;
 import irstit.transport.LetterRate;
 import irstit.transport.MainPage;
 import irstit.transport.R;
-import irstit.transport.ViewPager.MainPager;
 import irstit.transport.Views.CFProvider;
 import irstit.transport.Views.CustomButton;
 
@@ -37,6 +42,8 @@ public class CitizenMainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
     private AlertDialog alertDialog;
+
+    public  static  String sharinCitizenName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +102,7 @@ public class CitizenMainActivity extends AppCompatActivity {
 
         });
 
+        changeDefaultUsername();
     }
 
 
@@ -154,6 +162,7 @@ public class CitizenMainActivity extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case 6:
+                        startActivity(new Intent(getBaseContext(),AboutUs.class));
                         break;
                     case 7:
                         ShowDialog();
@@ -186,6 +195,29 @@ public class CitizenMainActivity extends AppCompatActivity {
     }
 
 
+     private  void  changeDefaultUsername(){
+
+
+         try {
+             SharedPreferences sharedPreferences = getSharedPreferences("complaint",MODE_PRIVATE);
+             String getStringObject = sharedPreferences.getString("complaintArray","-1");
+             JSONObject jsonObject = new JSONObject(getStringObject);
+             JSONObject name = new JSONObject(jsonObject.getString("userdata"));
+
+             if(name.getString("d_tel")!= null){
+                 NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_citizen);
+                 View view = navigationView.getHeaderView(0);
+                 TextView textView = view.findViewById(R.id.Navigation_Enter);
+                 textView.setText(name.getString("d_name"));
+                 sharinCitizenName = name.getString("d_name");
+             }
+         }
+         catch (Exception e){
+              e.printStackTrace();
+         }
+
+
+     }
     private List<NavModel> navigationData() {
         List<NavModel> data = new ArrayList<>();
         for (int i = 0; i <= 8; i++) {

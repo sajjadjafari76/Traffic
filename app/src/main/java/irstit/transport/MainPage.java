@@ -2,35 +2,13 @@ package irstit.transport;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-
-import com.anychart.core.annotations.Line;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import irstit.transport.Citizens.Account.CitizensAccountActivity;
-import irstit.transport.Citizens.Complaint;
-import irstit.transport.Citizens.ComplaintTrack;
-import irstit.transport.Citizens.Criticals_Suggestion;
-import irstit.transport.Citizens.RegisterObject;
-import irstit.transport.Citizens.SearchObject;
 import irstit.transport.DataBase.DBManager;
-import irstit.transport.DataModel.NavModel;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.ViewPager.MainPager;
 

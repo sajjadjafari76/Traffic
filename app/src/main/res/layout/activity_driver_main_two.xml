@@ -54,7 +54,7 @@
 
 
                 <RelativeLayout
-                    android:id="@+id/MainActivity_Login"
+                    android:id="@+id/MainActivity_Login_Driver_profile_name"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="9dp"
