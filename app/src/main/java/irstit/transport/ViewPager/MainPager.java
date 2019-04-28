@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.CountDownTimer;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +26,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.marozzi.roundbutton.RoundButton;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import org.json.JSONObject;
@@ -57,10 +60,13 @@ public class MainPager extends AppCompatActivity {
     private FragmentAdapter mAdapter;
     private ViewPager mPager;
 
-
     private AlertDialog alertDialog;
 
     private DrawerLayout drawer;
+
+    public static String incomingName;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +118,12 @@ public class MainPager extends AppCompatActivity {
         DotsIndicator dotsIndicator = findViewById(R.id.MainPage_Indicator);
         dotsIndicator.setViewPager(mPager);
 
+
 //        IndefinitePagerIndicator Indicator = findViewById(R.id.MainPage_Indicator);
 //        Indicator.attachToViewPager(mPager);
+
+
+
 
         NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
         View headerView = navigationView.getHeaderView(0);
@@ -147,15 +157,17 @@ public class MainPager extends AppCompatActivity {
         }
     }
 
+
+
     private void changeDefaultuser_Name() {
 
         try {
 
-            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
-            String objectForDriverName = sh.getString("complaintArray", "-1");
-            JSONObject jsonObject = new JSONObject(objectForDriverName);
-            JSONObject name = new JSONObject(jsonObject.getString("userdata"));
-            Log.e("nameFromMainActivity", name.toString());
+//            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+//            String objectForDriverName = sh.getString("complaintArray", "-1");
+//            JSONObject jsonObject = new JSONObject(objectForDriverName);
+//            JSONObject name = new JSONObject(jsonObject.getString("userdata"));
+//            Log.e("nameFromMainActivity", name.toString());
 
             NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
             View headerView = navigationView.getHeaderView(0);
@@ -163,18 +175,20 @@ public class MainPager extends AppCompatActivity {
 
             if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() !=null) {
 
-                DriverMainActivityTwo nameGetter = new DriverMainActivityTwo();
+                incomingName = DBManager.getInstance(getBaseContext()).getDriverInfo().getName();
+//                incomingName = name.getString("d_name");
 
                 TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
-                navUsername.setText(nameGetter.sharingName);
+                navUsername.setText(incomingName);
 
 
 
                 }else if(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()!=null){
 
-                CitizenMainActivity getCitizenName =new CitizenMainActivity();
+                incomingName = DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName();
+//                incomingName = name.getString("d_name");
                 TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
-                navUsername.setText(getCitizenName.sharinCitizenName);
+                navUsername.setText(incomingName);
             }
 
 
@@ -182,6 +196,8 @@ public class MainPager extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
 
     public class FragmentAdapter extends FragmentPagerAdapter {
@@ -453,6 +469,7 @@ public class MainPager extends AppCompatActivity {
     }
 
 
+
     private void ShowDialog() {
 
         try {
@@ -499,4 +516,8 @@ public class MainPager extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
+
 }

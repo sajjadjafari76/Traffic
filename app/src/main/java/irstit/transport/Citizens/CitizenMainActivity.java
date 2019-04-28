@@ -35,6 +35,7 @@ import irstit.transport.DataModel.NavModel;
 import irstit.transport.LetterRate;
 import irstit.transport.MainPage;
 import irstit.transport.R;
+import irstit.transport.ViewPager.MainPager;
 import irstit.transport.Views.CFProvider;
 import irstit.transport.Views.CustomButton;
 
@@ -208,8 +209,8 @@ public class CitizenMainActivity extends AppCompatActivity {
                  NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_citizen);
                  View view = navigationView.getHeaderView(0);
                  TextView textView = view.findViewById(R.id.Navigation_Enter);
-                 textView.setText(name.getString("d_name"));
-                 sharinCitizenName = name.getString("d_name");
+                 textView.setText(MainPager.incomingName);
+
              }
          }
          catch (Exception e){

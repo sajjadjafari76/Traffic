@@ -2,12 +2,14 @@ package irstit.transport.Citizens.Account.forgettenpasswrod;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.CitizenGetInfo;
@@ -44,7 +48,16 @@ public class CitizenGetSmsForgotten extends Fragment {
 
     private OtpView otpView;
     private RoundButton btn;
+    TextView timerText;
+    //Thread runOnUiThread ;
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,6 +67,8 @@ public class CitizenGetSmsForgotten extends Fragment {
 
         otpView = view.findViewById(R.id.CitizenGetSms_Otp);
         btn = view.findViewById(R.id.CitizenGetSms_Btn);
+        timerText = view.findViewById(R.id.timer);
+        conter();
         otpView.setOtpCompletionListener((String s) -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
@@ -112,9 +127,82 @@ public class CitizenGetSmsForgotten extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+//    private  void timerFunction (){
+//
+//        Thread t = new Thread() {
+//
+//            @Override
+//            public void run() {
+//                try {
+//                    while (!isInterrupted()) {
+//                        Thread.sleep(1000);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//
+//                           /*     Calendar c = Calendar.getInstance();
+//
+//                                int hours = c.get(Calendar.HOUR_OF_DAY);
+//                                int minutes = c.get(Calendar.MINUTE);
+//                                int seconds = c.get(Calendar.SECOND);
+//
+//                                String curTime = String.format("%02d  %02d  %02d", hours, minutes, seconds);
+//                          */
+//                                int countertime=0;
+//                               // String stringcounter = countertime+"";
+//                                countertime++;
+//
+//                                timerText.setText(countertime+""); //change clock to your textview
+//                            }
+//                        });
+//                    }
+//                } catch (InterruptedException e) {
+//                }
+//            }
+//        };
+//
+//        t.start();
+//
+//    }
+
+//
+//    private void runOnUiThread(Runnable runnable) {
+//         timerFunction();
+//    }
+
+
+    public  void conter() {
+
+        new CountDownTimer(60000, 1000) {
+
+            @Override
+            public void onTick(long l) {
+                Log.e("clickOnAnimation0","clickOnAnimationDOne0");
+
+
+                int second  = (int)l/1000;
+                timerText.setText(" زمان باقیمانده   "+second);
+                Log.e("clickOnAnimation1","clickOnAnimationDOne1");
+              //  btn.startAnimation();
+            }
+
+            @Override
+            public void onFinish() {
+                ///
+                Toast.makeText(getActivity(),"لطفا دوباره امتحان کنید",Toast.LENGTH_LONG).show();
+                timerText.setText("0");
+                timerText.setText("");
+              //  btn.stopAnimation();
+               // btn.revertAnimation();
+
+            }
+        }.start();
     }
 
 
@@ -122,7 +210,6 @@ public class CitizenGetSmsForgotten extends Fragment {
         Log.e("step0","works");
         Log.e("phoneFromGetSmsClass2",  getArguments().getString("phone"));
         Log.e("verfied_send_Code",otpView.getText().toString());
-
         StringRequest getDriverInfo = new StringRequest(Request.Method.POST,
                 Globals.APIURL + "/forgetcitizensms",
                 response -> {
@@ -157,9 +244,11 @@ public class CitizenGetSmsForgotten extends Fragment {
 
                         }
                     } catch (Exception e) {
-                        btn.revertAnimation();
+                         btn.revertAnimation();
                         Log.e("getSmsError", e.toString() + " | ");
                         Toast.makeText(getActivity(), "خطایی رخ داد لطفا دوباره تلاش کنید", Toast.LENGTH_SHORT).show();
+                        //btn.stopAnimation();
+
                     }
                 }, error -> {
             btn.revertAnimation();

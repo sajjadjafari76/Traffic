@@ -36,6 +36,7 @@ import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.MainPage;
 import irstit.transport.R;
+import irstit.transport.ViewPager.MainPager;
 import irstit.transport.Views.CFProvider;
 import irstit.transport.Views.CustomButton;
 
@@ -170,8 +171,8 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
             if(name.getString("d_tel")!=null) {
 
-                navUsername.setText(name.getString("d_name"));
-                sharingName = name.getString("d_name");
+                navUsername.setText(MainPager.incomingName);
+//                sharingName = DBManager.getInstance(getBaseContext()).getDriverInfo().getName();
 
             }
 

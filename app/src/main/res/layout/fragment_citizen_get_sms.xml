@@ -56,4 +56,25 @@
         app:rb_text_color="@color/grey_5"
         app:rb_text_color_pressed="@android:color/white" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/timer"
+                android:textColor="@color/mdtp_white"
+                android:textSize="17sp"
+                android:fontFamily="@font/byekan"
+
+
+                />
+        </LinearLayout>
+
+
 </LinearLayout>

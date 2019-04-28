@@ -1,6 +1,7 @@
 package irstit.transport.Citizens.Account;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -109,7 +110,9 @@ public class CitizenGetPhone extends Fragment {
 
 
                             } else if (object.getString("status").equals("false")) {
-                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), object.getString("message")+" لطفا وارد حساب خود شوید ", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getActivity(),CitizenLogin.class));
+
                                 sendInfo.revertAnimation();
                             }
                         } catch (Exception e) {
@@ -121,6 +124,7 @@ public class CitizenGetPhone extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
                 Log.e("regCitizenError", error.toString() + " |");
+
                 sendInfo.revertAnimation();
             }
 

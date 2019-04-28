@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.CitizenModel;
 import irstit.transport.Globals;
@@ -31,6 +34,7 @@ import irstit.transport.Views.Utils;
 public class CitizenLogin extends AppCompatActivity {
 
     private RoundButton Btn;
+    private LinearLayout forget;
     public  static int identifyingOfPerson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,16 @@ public class CitizenLogin extends AppCompatActivity {
 
         CustomEdittext UserName = findViewById(R.id.CitizenLogin_UserName);
         CustomEdittext Pass = findViewById(R.id.CitizenLogin_Password);
+        forget = findViewById(R.id.forgetyourpassword);
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getBaseContext(),CitizensAccountActivityForgotton.class));
+            }
+        });
+
         Btn = findViewById(R.id.CitizenLogin_Btn);
 
         Btn.setOnClickListener(v -> {

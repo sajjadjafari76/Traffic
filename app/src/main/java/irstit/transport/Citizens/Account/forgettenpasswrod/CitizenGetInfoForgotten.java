@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
+import irstit.transport.DataModel.CitizenModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
 import irstit.transport.ViewPager.MainPager;
@@ -53,15 +55,22 @@ public class CitizenGetInfoForgotten extends Fragment {
         String newPass = Pass.getText().toString();
         sendInfo = view.findViewById(R.id.CitizenGetSms_BtnForgotten);
 
+
         sendInfo.setOnClickListener(v -> {
+
+            String firstPass = Pass.getText().toString(), secondPass = renterpass.getText().toString();
 
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
-            }  else if (Pass.getText().toString().length() < 5 && !renterpass.getText().toString().equals(Pass.getText().toString())) {
-                Toast.makeText(getContext(), "رمز عبور نمیتواند کمتر از 5 کاراکتر باشد و تکرار رمز باید یکسان باشد!", Toast.LENGTH_SHORT).show();
+            } else if (Pass.getText().toString().length() < 5 && renterpass.getText().toString().length() < 5) {
+                Toast.makeText(getContext(), "رمز عبور نمیتواند کمتر از 5 کاراکتر باشد !", Toast.LENGTH_LONG).show();
+            } else if (!firstPass.equals(secondPass)) {
+
+                Toast.makeText(getContext(), " رمز یکسان نیست!", Toast.LENGTH_LONG).show();
+
             } else {
                 sendInfoRequest(Pass.getText().toString());
-                sendInfo.startAnimation();
+                //sendInfo.startAnimation();
             }
 
         });
@@ -82,30 +91,77 @@ public class CitizenGetInfoForgotten extends Fragment {
                         try {
                             JSONObject object = new JSONObject(response);
 
-                            if (object.getString("status").equals("true")) {
+                            Log.e("ChangingPassword12", "FirstStatusIsOk" + " |");
 
-                                sendInfo.revertAnimation();
+                            if (object.has("status")) {
+                                if (object.getString("status").equals("true")) {
 
-                                /* below we must  update DataBase Password Field by an approperate
-                                     way
-                                CitizenModel model = new CitizenModel();
-                                model.setUserPhone(getArguments().getString("phone"));
-                                model.setUserName(Name);
-                                model.setUserEmail(renterpass);
-                                model.setUserId(object.getJSONObject("result").getString("c_id"));
-                                DBManager.getInstance(getContext()).setCitizenInfo(model);
-
-                              */
-
-                                Log.e("changingpass","successful");
-                                startActivity(new Intent(getContext(), MainPager.class));
-                                getActivity().finish();
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk0" + " |");
+                                   // sendInfo.revertAnimation();
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk1" + " |");
 
 
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk2" + " |");
+
+                                    if(DBManager.getInstance(getContext()).getCitizenInfo().getUserName()!=null)
+                                         DBManager.getInstance(getContext()).deleteCitizen();
+
+                                    CitizenModel model = new CitizenModel();
+
+                                    model.setUserPhone(getArguments().get("phone").toString());
+                                    model.setUserName(object.getJSONObject("result").getString("c_name"));
+                                    model.setUserId(object.getJSONObject("result").getString("c_id"));
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk3" + " |");
+                                    if (object.getJSONObject("result").getString("c_email") == null)
+                                            model.setUserEmail("خالی است");
+
+
+                                    else {
+                                        model.setUserEmail(object.getJSONObject("result").getString("c_email"));
+
+                                    }
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk4" + " |");
+
+                                    DBManager.getInstance(getContext()).setCitizenInfo(model);
+                                    Log.e("ChangingPassword12", "FirstStatusIsOk5" + " |");
+
+
+                                    startActivity(new Intent(getContext(), MainPager.class));
+                                    getActivity().finish();
+
+                                }
                             } else if (object.getString("status").equals("false")) {
+
+                                Log.e("errorhabib","from_vallay");
                                 Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
-                                sendInfo.revertAnimation();
+                                //sendInfo.revertAnimation();
+
                             }
+
+
+//                            if (object.getString("isok").equals("1")) {
+//
+//                                sendInfo.revertAnimation();
+
+//                              //   below we must  update DataBase Password Field by an approperate
+//                                //     way
+////
+//
+//
+//
+
+//                                String getName = object.getJSONObject("result").getString("name");
+//                                Toast.makeText(getActivity(),getName,Toast.LENGTH_LONG).show();
+//                                Log.e("Citizen_Inof", object.toString());
+//                                Log.e("changingpass", "successful");
+//                                startActivity(new Intent(getContext(), MainPager.class));
+//                                getActivity().finish();
+//
+//
+//                            } else if (object.getString("status").equals("false")){
+//                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+//                                sendInfo.revertAnimation();
+//                            }
                         } catch (Exception e) {
 
                         }
@@ -126,15 +182,14 @@ public class CitizenGetInfoForgotten extends Fragment {
 
                 Map<String, String> map = new HashMap<>();
 
-                Log.e("phone",getArguments().getString("phone"));
-                Log.e("lognewPass",newpassword);
-                Log.e("logphone",getArguments().getString("phone"));
+                Log.e("phone", getArguments().getString("phone"));
+                Log.e("lognewPass", newpassword);
+                Log.e("logphone", getArguments().getString("phone"));
 
 
                 // pay attenion here to the code
                 map.put("phone", getArguments().getString("phone"));
                 map.put("newpass", newpassword);
-
 
 
                 return map;

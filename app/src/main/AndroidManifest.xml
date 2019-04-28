@@ -31,7 +31,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Citizens.CitizenMainActivity" />
         <activity android:name=".Citizens.Account.CitizenLogin" />
-        <activity android:name=".SplashScreen" />
+        <activity android:name=".Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton" />
         <activity android:name=".Citizens.Account.forgettenpasswrod.CitizenForgottenPassword" />
         <activity android:name=".Citizens.complaint.Record_Voice" />
         <activity android:name=".Drivers.DriverMainActivityTwo" />
@@ -46,7 +46,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".LetterRate" />
         <activity android:name=".News" />
-        <activity android:name=".Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton">
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
