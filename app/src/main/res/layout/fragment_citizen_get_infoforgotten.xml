@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/img_bk_login"
+    android:background="@color/backgroundColor"
     android:gravity="center_horizontal">
 
 
@@ -32,7 +32,7 @@
         android:textSize="@dimen/DriversLogin_GetPhone"
         android:padding="6dp"
         android:textColorHint="@color/grey_20"
-        android:textColor="@color/grey_20"
+        android:textColor="@color/overlay_black"
         android:id="@+id/CitizenGetSms_enterPasswordForgotten"
         android:background="@drawable/dr_getphone_edittext"
         android:drawableRight="@drawable/ic_getphone_smartphone"/>
@@ -51,7 +51,7 @@
         android:textSize="@dimen/DriversLogin_GetPhone"
         android:padding="6dp"
         android:textColorHint="@color/grey_20"
-        android:textColor="@color/grey_20"
+        android:textColor="@color/overlay_black"
         android:id="@+id/CitizenGetSms_RenterPasswordForgotten"
         android:background="@drawable/dr_getphone_edittext"
         android:drawableRight="@drawable/ic_getphone_smartphone"/>

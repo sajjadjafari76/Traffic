@@ -37,4 +37,19 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <!-- Phone_pay pay_by_reciepeind_code-->
+
+    <string name="pay_by">پرداخت با کد پذیرنده</string>
+    <string name="pay_profile">پروفایل</string>
+    <string name="pay">پرداخت</string>
+    <string name="increasing_balance">افزایش اعتبار</string>
+    <string name="all_our_prices">تمامی قیمت های ما به تومان می باشد</string>
+
+    <string name="pay_by_barcode">پرداخت از طریق اسکن  بارکد</string>
+    <string name="pay_by_barco">پرداخت از طیق اسکن بار کد</string>
+    <string name="security">امنیت</string>
+    <string name="generate_password">ایجاد رمز</string>
+    <string name="so_on">موارد بیشتر</string>
+    <string name="suggestion">ارسال نظرات</string>
 </resources>

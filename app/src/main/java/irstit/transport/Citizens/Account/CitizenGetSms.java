@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,6 +52,8 @@ public class CitizenGetSms extends Fragment {
 
     private OtpView otpView;
     private RoundButton btn;
+    private TextView timerText;
+   // private ImageView synchornize;
 
 
     @Override
@@ -56,9 +61,19 @@ public class CitizenGetSms extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_citizen_get_sms, container, false);
 
-
+        timerText = view.findViewById(R.id.CitizenGetSmsTimer);
         otpView = view.findViewById(R.id.CitizenGetSms_Otp);
         btn = view.findViewById(R.id.CitizenGetSms_Btn);
+      /*
+        synchornize =  view.findViewById(R.id.resendNumber);
+        synchornize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCitizenInfo();
+            }
+        });
+        */
+        counter();
         otpView.setOtpCompletionListener((String s) -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
@@ -152,6 +167,9 @@ public class CitizenGetSms extends Fragment {
                             transaction.replace(R.id.CitizenActivity_Frame, getSms);
                             transaction.commit();
 
+                          //  transaction.remove(getActivity().getSupportFragmentManager().getFragments().get(0));
+
+
 
                         }
                     } catch (Exception e) {
@@ -186,6 +204,40 @@ public class CitizenGetSms extends Fragment {
                 10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(getDriverInfo);
 
+    }
+
+
+    public  void counter() {
+
+        new CountDownTimer(60000, 1000) {
+
+            @Override
+            public void onTick(long l) {
+                Log.e("clickOnAnimation0","clickOnAnimationDOne0");
+
+
+                int second  = (int)l/1000;
+                timerText.setText(" زمان باقیمانده   "+second);
+                Log.e("clickOnAnimation1","clickOnAnimationDOne1");
+                //  btn.startAnimation();
+            }
+
+            @Override
+            public void onFinish() {
+                if (getActivity() != null) {
+                    Toast.makeText(getActivity(), "لطفا دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                }
+//                else if(getActivity().getSupportFragmentManager().executePendingTransactions()){
+//
+//                    }
+                timerText.setText("0");
+                timerText.setText("");
+
+                //  btn.stopAnimation();
+                // btn.revertAnimation();
+
+            }
+        }.start();
     }
 
 }

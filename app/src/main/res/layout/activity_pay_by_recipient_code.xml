@@ -1,10 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pay_by_recipient_code">
+    tools:context=".PhonePay.pay_by_recipient_code"
+    android:layout_weight="3"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#746DBA"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment1"
+        android:visibility="gone"
+        />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+
+            <ImageView
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:src="@drawable/iconpay"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/pay_check"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="@color/mdtp_white"
+                android:fontFamily="@font/shabnam"
+                android:text="@string/pay_by"/>
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+
+
+        <com.mukesh.OtpView
+            android:id="@+id/pay_by_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xmedium"
+            android:inputType="number"
+            android:fontFamily="@font/shabnam"
+            android:textColor="@android:color/white"
+            app:itemCount="4"
+            app:lineWidth="4dp"
+            app:lineColor="@color/overlay_light_90"
+            app:viewType="line" />
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:id="@+id/pay"
+        android:orientation="vertical">
+
+
+
+   <android.support.v7.widget.CardView
+       android:layout_width="188dp"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="45dp"
+       app:cardCornerRadius="20dp"
+
+       android:layout_gravity="center">
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/pay"
+           android:textSize="25sp"
+           android:padding="3dp"
+           android:layout_gravity="center"
+           android:fontFamily="@font/shabnam"
+           android:textColor="@color/mdtp_transparent_black"
+
+           />
+
+   </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

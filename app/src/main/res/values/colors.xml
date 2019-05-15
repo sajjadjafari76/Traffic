@@ -3,12 +3,14 @@
     <color name="colorPrimary">#227898</color>
     <color name="colorPrimaryDark">#004c6a</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="backgroundColor">#57A4c7</color>
 
     //MainActivity
     <color name="MainActivity_footer">#35BDF0</color>
 
     <!--  Drivers.Login    -->
     <color name="DriversLogin_Btn">#43add4</color>
+    <color name="background_for_phone_pay">#746dba</color>
 
 
 
@@ -35,9 +37,7 @@
 
 
 
-
-
-
+    <color name="overlay_black">#000000</color>
     <color name="overlay_dark_80">#CC000000</color>
     <color name="overlay_dark_90">#E6000000</color>
 

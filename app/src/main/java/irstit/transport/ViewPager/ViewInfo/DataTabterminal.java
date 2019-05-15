@@ -18,15 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import irstit.transport.R;
-import irstit.transport.Views.CustomTextView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DataTab extends Fragment {
+public class DataTabterminal extends Fragment {
 
 
-    public DataTab() {
+    public DataTabterminal() {
         // Required empty public constructor
     }
 
@@ -53,38 +52,36 @@ public class DataTab extends Fragment {
 
         for (int i = 0; i < 11 ; i++) {
             if (i==0) {
-                String text = "بخشنامه 1";
+                String text = "تپه تاریخی خله کوه";
                 data.add(text);
             }else if (i==1) {
-                String text =  "بخشنامه 2";
+                String text =  "بقعه پیر";
                 data.add(text);
             }else if (i==2) {
-                String text = "بخشنامه 3";
+                String text = "ساختمان بانک ملی";
                 data.add(text);
             }else if (i==3) {
-                String text = "بخشنامه 4";
+                String text = "قلعه دختر ( قزقلعه )";
                 data.add(text);
             }else if (i==4) {
-                String text = "بخشنامه 5";
+                String text = "میل خرم آبادی";
                 data.add(text);
             } else if (i==5) {
-                String text = "بخشنامه 6";
+                String text = "بخش مرکزی";
                 data.add(text);
 //            }else if (i==6) {
 //                String text = new String();
-////                text = "بنای عمارت میراث فرهنگی";
-////                data.add(text);
-//            }else if (i==6) {
-//                String text = "بخش خرمدشت";
+//                text = "بنای عمارت میراث فرهنگی";
 //                data.add(text);
-//            }else if (i==7) {
-//                String text ="بخش ضیاءآباد";
-//                data.add(text);
-//            }else if (i==8) {
-//                String text =  "بخش اسفرورین";
-//                data.add(text);
-//            }
-
+            }else if (i==6) {
+                String text = "بخش خرمدشت";
+                data.add(text);
+            }else if (i==7) {
+                String text ="بخش ضیاءآباد";
+                data.add(text);
+            }else if (i==8) {
+                String text =  "بخش اسفرورین";
+                data.add(text);
             }
         }
         return data;

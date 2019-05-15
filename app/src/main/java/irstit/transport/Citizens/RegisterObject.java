@@ -16,6 +16,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
@@ -74,6 +75,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
         Title = findViewById(R.id.RegisterObject_Title);
         Description = findViewById(R.id.RegisterObject_Description);
         Date = findViewById(R.id.RegisterObject_Date);
+
         Button RegisterObject_Btn = findViewById(R.id.RegisterObject_Btn);
         Picture = findViewById(R.id.RegisterObject_Picture);
         ImageView Back = findViewById(R.id.RegisterObject_Back);
@@ -81,6 +83,9 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
         configureDate();
         titleOfFoundedObject = findViewById(R.id.titleOfFounded);
         pictureOfFoundedObject = findViewById(R.id.pictureOfFounded);
+
+        disableSoftInputFromAppearing(Date);
+
 
         if(DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() !=null){
 
@@ -145,6 +150,16 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+    }
+
+    public static void disableSoftInputFromAppearing(EditText editText) {
+        if (Build.VERSION.SDK_INT >= 11) {
+            editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+            editText.setTextIsSelectable(true);
+        } else {
+            editText.setRawInputType(InputType.TYPE_NULL);
+            editText.setFocusable(true);
+        }
     }
 
     private List<SpinnerModel> getCategory() {

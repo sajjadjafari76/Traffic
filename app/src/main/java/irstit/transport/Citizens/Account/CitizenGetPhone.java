@@ -49,6 +49,7 @@ public class CitizenGetPhone extends Fragment {
         sendInfo = view.findViewById(R.id.CitizenGetPhone_Btn);
         text = view.findViewById(R.id.CitizenGetPhone_Text);
 
+
         sendInfo.setOnClickListener(view1 -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
@@ -71,6 +72,8 @@ public class CitizenGetPhone extends Fragment {
 //        }
 
         phone = view.findViewById(R.id.CitizenGetPhone_Edittext);
+        phone.append("09");
+        phone.setSelection(2);
 
 
         return view;

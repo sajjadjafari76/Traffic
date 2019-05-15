@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="4"
-    android:background="@drawable/img_bk_login"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
+
     >
 
     <RelativeLayout

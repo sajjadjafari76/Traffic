@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -35,6 +38,8 @@ public class LetterRate extends AppCompatActivity {
     private spinnerAdapter adapter;
     private ImageView Image;
     private CustomTextView Text;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,16 +51,20 @@ public class LetterRate extends AppCompatActivity {
         Text = findViewById(R.id.LetterRate_Text);
         ImageView back = findViewById(R.id.LetterRate_Back);
         adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
+        progressBar = findViewById(R.id.pragressbar);
 
 
         back.setOnClickListener(v -> {
             finish();
+
         });
+
 
         letterRateRequest();
 
-
     }
+
+
 
 
     public class spinnerAdapter extends ArrayAdapter<String> {
@@ -83,8 +92,11 @@ public class LetterRate extends AppCompatActivity {
                     Log.e("ListLeavesResponse", response + " |");
 
                     try {
+
+
                         JSONObject object = new JSONObject(response);
                         if (object.getString("status").equals("true")) {
+
 
                             JSONArray array = object.getJSONArray("prices");
 
@@ -95,11 +107,29 @@ public class LetterRate extends AppCompatActivity {
                                 data.add(model);
                             }
 
+                            progressBar.setVisibility(View.VISIBLE);
+
                             Text.setText("نوع دسته بندی : " + data.get(0).getText());
                             Picasso.with(getBaseContext())
                                     .load(data.get(0).getImage())
-                                    .into(Image);
+                                    .into(Image, new Callback() {
+                                        @Override
+                                        public void onSuccess() {
+                                            progressBar.setVisibility(View.GONE);
+                                        }
 
+                                        @Override
+                                        public void onError() {
+
+                                            progressBar.setVisibility(View.GONE);
+                                            Toast.makeText(getApplicationContext(),"خطا در ارتباط با سرور",Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+
+
+
+
+                            progressBar.setVisibility(View.GONE);
 
                             for (int i = 0 ; i < data.size() ; i++) {
                                 adapter.add(data.get(i).getText());
@@ -110,13 +140,29 @@ public class LetterRate extends AppCompatActivity {
                             Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+
+                                    progressBar.setVisibility(View.VISIBLE);
+
                                     if (position > (data.size() - 1)) {
 
                                     }else {
                                         type = String.valueOf(data.get(position).getImage());
                                         Picasso.with(getBaseContext())
                                                 .load(type)
-                                                .into(Image);
+                                                .into(Image, new Callback() {
+                                                    @Override
+                                                    public void onSuccess() {
+                                                        progressBar.setVisibility(View.GONE);
+                                                    }
+
+                                                    @Override
+                                                    public void onError() {
+                                                        progressBar.setVisibility(View.GONE);
+                                                        Toast.makeText(getApplicationContext(),"خطا در ارتباط با سرور",Toast.LENGTH_LONG).show();
+
+                                                    }
+                                                });
+
                                         Text.setText("نوع دسته بندی : " + data.get(position).getText());
                                     }
                                 }

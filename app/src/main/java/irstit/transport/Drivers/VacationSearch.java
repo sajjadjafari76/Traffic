@@ -15,10 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,7 @@ import irstit.transport.DataModel.ReqVacationModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
 import irstit.transport.Views.CustomTextView;
+import irstit.transport.Views.Utils;
 
 
 public class VacationSearch extends Fragment {
@@ -52,6 +55,8 @@ public class VacationSearch extends Fragment {
     private MyNavigationAdapter adapter;
     private RelativeLayout Loading;
     private CustomTextView empty;
+    private LinearLayout notConnectToInternet;
+    private Button reTry;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,20 +69,46 @@ public class VacationSearch extends Fragment {
         navigation_Recycler = view.findViewById(R.id.RequestVacation_Recycler);
         Loading = view.findViewById(R.id.VacationSearch_Loading);
 
+        notConnectToInternet = view.findViewById(R.id.Delivery_Connectivity);
+        notConnectToInternet=view.findViewById(R.id.Delivery_Connectivity);
+        reTry =view.findViewById(R.id.Delivery_Btn);
+        reTry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Loading.setVisibility(View.VISIBLE);
+                criticalRequest();
+            }
+        });
+        checkIfInternet();
+
 
         IconSearch.setOnClickListener(v -> {
 
         });
+//        if(Te)
 
         TextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                adapter.getFilter().filter(TextSearch.getText().toString());
+
+                if(DriversMainActivity.mData.isEmpty()){
+                    TextSearch.setFocusable(false);
+                    TextSearch.getText().clear();
+                    Toast.makeText(getActivity(),"لیست خالی است !",Toast.LENGTH_LONG).show();
+//                                        TextSearch.setText("");
+
+
+                }
+                 else {
+                    adapter.getFilter().filter(TextSearch.getText().toString());
+                }
+
             }
 
             @Override
@@ -88,6 +119,8 @@ public class VacationSearch extends Fragment {
 
         Loading.setVisibility(View.VISIBLE);
         criticalRequest();
+
+
         return view;
     }
 
@@ -121,7 +154,7 @@ public class VacationSearch extends Fragment {
                 holder.ToDate.setText(" تا ".concat(toCalender.getPersianYear() + "/" + toCalender.getPersianMonth() + "/" + toCalender.getPersianDay()));
                 holder.Type.setText(dataFiltered.get(position).getVacationType());
                 holder.Desc.setText(" توضیحات : "
-                        .concat((dataFiltered.get(position).getDesc() == null) ? " " : dataFiltered.get(position).getDesc() ));
+                        .concat((dataFiltered.get(position).getDesc() == null) ? " " : dataFiltered.get(position).getDesc()));
 
                 if (dataFiltered.get(position).getStatus().equals("0")) {
                     holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.deep_orange_300));
@@ -134,7 +167,7 @@ public class VacationSearch extends Fragment {
                     holder.Code.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.red_A200));
                     holder.Print.setEnabled(false);
                     holder.Desc.setText(" پاسخ مدیریت : "
-                            .concat((dataFiltered.get(position).getDesc() == null) ? "" : dataFiltered.get(position).getReason() ));
+                            .concat((dataFiltered.get(position).getDesc() == null) ? "" : dataFiltered.get(position).getReason()));
                 }
 
                 holder.Print.setOnClickListener(v -> {
@@ -169,6 +202,7 @@ public class VacationSearch extends Fragment {
                 @Override
                 protected FilterResults performFiltering(CharSequence constraint) {
 
+                    Log.e("datafilterHabib00", data.toString());
                     String charString = constraint.toString();
                     if (charString.isEmpty()) {
                         dataFiltered = data;
@@ -196,6 +230,7 @@ public class VacationSearch extends Fragment {
                 protected void publishResults(CharSequence constraint, FilterResults results) {
 
                     dataFiltered = (List<ReqVacationModel>) results.values;
+                    Log.e("datafilterHabib", dataFiltered.toString());
                     notifyDataSetChanged();
 
                 }
@@ -222,6 +257,7 @@ public class VacationSearch extends Fragment {
         }
     }
 
+
     private void criticalRequest() {
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/listleave",
                 response -> {
@@ -240,7 +276,7 @@ public class VacationSearch extends Fragment {
                             } else {
                                 DriversMainActivity.mData.clear();
 
-                                for (int i = 0 ; i < array.length() ; i++) {
+                                for (int i = 0; i < array.length(); i++) {
 
                                     JSONObject myObject = array.getJSONObject(i);
                                     ReqVacationModel model = new ReqVacationModel();
@@ -301,6 +337,21 @@ public class VacationSearch extends Fragment {
         getPhoneRequest.setRetryPolicy(new DefaultRetryPolicy(
                 10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         AppController.getInstance().addToRequestQueue(getPhoneRequest);
+
+    }
+
+
+    // addes methods by HabibUllah
+
+    private void checkIfInternet() {
+
+        if (Utils.getInstance(getActivity()).isOnline())
+            notConnectToInternet.setVisibility(View.GONE);
+        else {
+            notConnectToInternet.setVisibility(View.VISIBLE);
+
+        }
+
 
     }
 

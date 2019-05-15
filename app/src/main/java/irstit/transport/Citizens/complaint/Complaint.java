@@ -1,43 +1,47 @@
 package irstit.transport.Citizens.complaint;
 
+
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.anychart.core.stock.indicators.EMA;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpPost;
 import com.koushikdutta.async.http.AsyncHttpResponse;
 import com.koushikdutta.async.http.body.MultipartFormDataBody;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,19 +50,17 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 
-import irstit.transport.AppController.AppController;
 import irstit.transport.DataModel.LetterRateModel;
+import irstit.transport.DataModel.ThreeCompliant;
 import irstit.transport.Globals;
-import irstit.transport.LetterRate;
 import irstit.transport.R;
-import irstit.transport.ViewPager.MainPager;
 import irstit.transport.VoiceRecoeder;
 
-import static android.content.Context.MODE_PRIVATE;
+import org.json.*;
+
 
 public class Complaint extends AppCompatActivity {
 
@@ -66,13 +68,98 @@ public class Complaint extends AppCompatActivity {
     private Spinner Category;
     private spinnerAdapter adapter;
     private Button Btn;
-    private String type = "", selectedVideoPath;
+    private String type = "", selectedVideoPath ="";
     private RelativeLayout Loading;
     private int GALLERY = 1, CAMERA = 2, GALLERYVIDEO = 3, VOICE = 4;
+    public static int NOTPICTURESANDVIDEO = -1;
     private String imgDecodableString = "";
     private LinearLayout Image, Video, Voice;
     private TextView Result;
+    public RecyclerView threeRecyclerView;
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
+
+    //private List<ThreeCompliant> three = new ArrayList<ThreeCompliant>();
+    private List<ThreeCompliant> modelofThreeCompliantList = new ArrayList<ThreeCompliant>();
+
+
+    ThreeRecyclerView complaintAdapter = new ThreeRecyclerView(modelofThreeCompliantList);
+
+    String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        NOTPICTURESANDVIDEO = -1;
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.e("onstartHabib", "works");
+
+
+        SharedPreferences getsh = getSharedPreferences("source", MODE_PRIVATE);
+        String address_of_file = getsh.getString("filename", "-2");
+
+        if (NOTPICTURESANDVIDEO == 3 && !address_of_file.equals("-2")) {
+
+
+            Log.e("onstartHabib0", "works");
+            Log.e("printContentsofList", modelofThreeCompliantList.toString());
+            for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+
+                Log.e("onstartHabib1", "works");
+                Log.e("ListContentsStatus", modelofThreeCompliantList.get(i).getStatus().toString());
+                Log.e("ListContentsFilename", modelofThreeCompliantList.get(i).getFileName().toString());
+
+
+                if (modelofThreeCompliantList.get(i).getStatus().equals("Audio")) {
+//
+                    modelofThreeCompliantList.remove(i);
+                }
+            }
+            ThreeCompliant audio = new ThreeCompliant();
+            audio.setStatus("Audio");
+            audio.setFileName(address_of_file);
+            modelofThreeCompliantList.add(audio);
+            Log.e("addressoffile", address_of_file + "");
+            complaintAdapter.notifyDataSetChanged();
+
+        }
+//
+//                for (int j = 0; j < modelofThreeCompliantList.size(); j++) {
+//
+//                    Log.e("afterfists0","afterfists_works");
+//                    Log.e("afterfists1",modelofThreeCompliantList.get(j).getStatus().toString());
+//                    Log.e("afterfists2",modelofThreeCompliantList.get(j).getFileName().toString());
+//
+//
+//
+//        }
+//
+
+
+        //   }
+//        for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+//
+//            if (modelofThreeCompliantList.get(i).getStatus().equals("Sound")) {
+//
+//                modelofThreeCompliantList.get(i).setFileName(imgDecodableString);
+//
+//            } else {
+//
+//                ThreeCompliant camera = new ThreeCompliant();
+//                camera.setStatus("Sound");
+//                camera.setFileName(imgDecodableString);
+//
+//            }
+//
+//        }
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +181,12 @@ public class Complaint extends AppCompatActivity {
         Video = findViewById(R.id.Complaint_Video);
         Voice = findViewById(R.id.Complaint_Voice);
         Text = findViewById(R.id.Complaint_Text);
-        Result = findViewById(R.id.Complaint_Result);
+
+
+//        modelofThreeCompliantList.add(new ThreeCompliant());
+//        modelofThreeCompliantList.add(new ThreeCompliant());
+//        modelofThreeCompliantList.add(new ThreeCompliant());
+        fillthree();
 
 
         if (Build.VERSION.SDK_INT >= 23) {
@@ -130,17 +222,33 @@ public class Complaint extends AppCompatActivity {
 //            }
 //        }
 
+        if (!getCategory().isEmpty()) {
 
-        for (int i = 0; i < getCategory().size(); i++) {
-            adapter.add(getCategory().get(i).getText());
+            for (int i = 0; i < getCategory().size(); i++) {
+                adapter.add(getCategory().get(i).getText());
+            }
+        } else {
+
+            LetterRateModel model = new LetterRateModel();
+            model.setImage("عدم دریافت اطلاعات از سرور ");
+            model.setText(" عدم دریافت اطلاعات از سرور لطفا به اینترنت متصل شوید");
+            adapter.add(model.getText());
         }
+
+
         adapter.add("موضوع خود را انتخاب کنید");
         Category.setAdapter(adapter);
         Category.setSelection(adapter.getCount());
         Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position > (getCategory().size() - 1)) {
+
+
+                } else if (getCategory().isEmpty()) {
+
+                    Toast.makeText(getApplicationContext(), "عدم دریافت اطلاعات از سرور", Toast.LENGTH_LONG).show();
 
                 } else {
                     type = String.valueOf(getCategory().get(position).getImage());
@@ -154,10 +262,29 @@ public class Complaint extends AppCompatActivity {
         });
 
 
-       //  VoiceRecoeder gettingVoiceInstance ;
+        //  VoiceRecoeder gettingVoiceInstance ;
         Btn.setOnClickListener(v -> {
 
-            Log.e("step1", VoiceRecoeder.AudioSavePathInDevice  + " |");
+            if (type.isEmpty() || Text.getText().toString().isEmpty()) {
+                Toast.makeText(this, "فیلد های شرح پیام نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
+            } else if (Name.getText().toString().isEmpty() || Family.getText().toString().isEmpty()) {
+                Toast.makeText(this, "فیلد های اطلاعات نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
+
+            } else if ((imgDecodableString != null && !imgDecodableString.equals("") || selectedVideoPath != null && !selectedVideoPath.equals("")) || VoiceRecoeder.AudioSavePathInDevice != null && !VoiceRecoeder.AudioSavePathInDevice.equals("")) {
+
+                complaintRequest(Name.getText().toString(), Family.getText().toString(),
+                        Email.getText().toString(), Text.getText().toString(), type,
+                        CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), modelofThreeCompliantList);
+
+                Loading.setVisibility(View.VISIBLE);
+                Disabled();
+
+            } else {
+
+                Toast.makeText(getApplicationContext(), "فایل ضمیمه نمی تواند خالی باشد! ", Toast.LENGTH_LONG).show();
+            }
+
+          /*  Log.e("step1", VoiceRecoeder.AudioSavePathInDevice + " |");
 
             if (type.isEmpty() || Text.getText().toString().isEmpty()) {
                 Toast.makeText(this, "فیلد های شرح پیام نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
@@ -168,7 +295,7 @@ public class Complaint extends AppCompatActivity {
 
                 if (imgDecodableString != null && !imgDecodableString.equals("")) {
 
-                    Log.e("step2", imgDecodableString  + " |");
+                    Log.e("step2", imgDecodableString + " |");
 
                     complaintRequest(Name.getText().toString(), Family.getText().toString(),
                             Email.getText().toString(), Text.getText().toString(), type,
@@ -177,8 +304,8 @@ public class Complaint extends AppCompatActivity {
                     Loading.setVisibility(View.VISIBLE);
                     Disabled();
 
-                } else if (selectedVideoPath!=null && !selectedVideoPath.equals("")) {
-                    Log.e("step3", selectedVideoPath  + " |");
+                } else if (selectedVideoPath != null && !selectedVideoPath.equals("")) {
+                    Log.e("step3", selectedVideoPath + " |");
 
                     complaintRequest(Name.getText().toString(), Family.getText().toString(),
                             Email.getText().toString(), Text.getText().toString(), type,
@@ -187,14 +314,14 @@ public class Complaint extends AppCompatActivity {
                     Loading.setVisibility(View.VISIBLE);
                     Disabled();
 
-                     Log.e("Audio_recoder_file ",checkShared()+"");
+                    Log.e("Audio_recoder_file ", checkShared() + "");
                 } else if (VoiceRecoeder.AudioSavePathInDevice != null && !VoiceRecoeder.AudioSavePathInDevice.equals("")) {
 
-                    Log.e("step4", VoiceRecoeder.AudioSavePathInDevice  + " |");
+                    Log.e("step4", VoiceRecoeder.AudioSavePathInDevice + " |");
 
-                    Result.setText("فایل صدا");
 
-                //    String fil =VoiceRecoeder.AudioSavePathInDevice;
+
+                    //    String fil =VoiceRecoeder.AudioSavePathInDevice;
 
                     complaintRequest(Name.getText().toString(), Family.getText().toString(),
                             Email.getText().toString(), Text.getText().toString(), type,
@@ -209,8 +336,8 @@ public class Complaint extends AppCompatActivity {
                 }
 
             }
+            */
         });
-
 
 
         Image.setOnClickListener(v -> {
@@ -261,20 +388,32 @@ public class Complaint extends AppCompatActivity {
             jsonObject = getComplaintArray();
             JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
 
+            if (array.length() != 0) {
+                for (int i = 0; i < array.length(); i++) {
+                    LetterRateModel model = new LetterRateModel();
+                    model.setImage(array.getJSONObject(i).getString("ct_code"));
+                    model.setText(array.getJSONObject(i).getString("ct_name"));
+                    data.add(model);
+                }
 
-            for (int i = 0; i < array.length(); i++) {
+            } else {
+
+
                 LetterRateModel model = new LetterRateModel();
-                model.setImage(array.getJSONObject(i).getString("ct_code"));
-                model.setText(array.getJSONObject(i).getString("ct_name"));
+                model.setImage("عدم دریافت اطلاعات از سرور");
+                model.setText(" عدم دریافت اطلاعات از سرور");
                 data.add(model);
             }
+
 
 //            } else {
 
 //            }
         } catch (Exception e) {
+//            Toast.makeText(getApplicationContext(),"عدم دریافت اطلاعات از سرور",Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
+
 
         return data;
 
@@ -308,6 +447,84 @@ public class Complaint extends AppCompatActivity {
 
             File finalFile = new File(getRealPathFromURI(tempUri));
             imgDecodableString = finalFile.getPath();
+            NOTPICTURESANDVIDEO = 0;
+//            if (modelofThreeCompliantList.size() == 0) {
+//                ThreeCompliant camera = new ThreeCompliant();
+//                camera.setStatus("camera");
+//                camera.setFileName(imgDecodableString);
+//                modelofThreeCompliantList.add(camera);
+//                complaintAdapter.notifyDataSetChanged();
+//            }
+//
+//            for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+//
+//                if (modelofThreeCompliantList.get(i).getStatus().equals("camera")) {
+//
+//                    modelofThreeCompliantList.get(i).setFileName(imgDecodableString);
+//                    complaintAdapter.notifyDataSetChanged();
+//
+//                } else {
+//
+//                    ThreeCompliant camera = new ThreeCompliant();
+//                    camera.setStatus("camera");
+//                    camera.setFileName(imgDecodableString);
+//                    modelofThreeCompliantList.add(camera);
+//                    complaintAdapter.notifyDataSetChanged();
+//
+//                }
+//
+//            }
+
+
+            for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+
+                if (modelofThreeCompliantList.get(i).getStatus().equals("camera")) {
+                    modelofThreeCompliantList.remove(i);
+
+                }
+            }
+
+            ThreeCompliant camera = new ThreeCompliant();
+            camera.setStatus("camera");
+            camera.setFileName(imgDecodableString);
+            modelofThreeCompliantList.add(camera);
+            complaintAdapter.notifyDataSetChanged();
+
+//
+//            for (ThreeCompliant ob1 : modelofThreeCompliantList) {
+//
+//                if ("camera".equals(ob1.getStatus())) {
+//
+//                    int index = modelofThreeCompliantList.indexOf(ob1);
+//                    modelofThreeCompliantList.set(index, camera);
+//                    fillthree();
+//
+//
+////                         modelofThreeCompliantList.remove(picturesGallery);
+////                         modelofThreeCompliantList.add(picturesGallery);
+//                } else {
+//
+//                    camera.setFileName(imgDecodableString);
+//                    modelofThreeCompliantList.add(camera);
+//                    fillthree();
+//                }
+//            }
+
+//
+//           if(modelofThreeCompliantList.equals(camera)){
+//
+//                modelofThreeCompliantList.remove(camera);
+//                modelofThreeCompliantList.add(camera);
+//                fillthree();
+//
+//            }
+//            else{
+//
+//                camera.setFileName(imgDecodableString);
+//                modelofThreeCompliantList.add(camera);
+//                fillthree();
+//            }
+
 
 //            Picasso.with(getBaseContext())
 //                    .load(finalFile)
@@ -316,7 +533,7 @@ public class Complaint extends AppCompatActivity {
 //            Page_137_Result.setText(finalFile.getName());
 
             Log.e("image12", finalFile.getPath() + " | " + (finalFile.getName()) + " |" + finalFile.getParent());
-            Result.setText(finalFile.getName() + "");
+
 
         } else if (requestCode == GALLERY && resultCode == RESULT_OK) {
 
@@ -336,11 +553,81 @@ public class Complaint extends AppCompatActivity {
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
+                NOTPICTURESANDVIDEO = 1;
+
+//                if (modelofThreeCompliantList.size() == 0) {
+//                    ThreeCompliant camera = new ThreeCompliant();
+//                    camera.setStatus("Gallery");
+//                    camera.setFileName(imgDecodableString);
+//                    modelofThreeCompliantList.add(camera);
+//                    complaintAdapter.notifyDataSetChanged();
+//                    Log.e("state", "null");
+//                }
+//
+//                for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+//
+//                    if (modelofThreeCompliantList.get(i).getStatus().equals("Gallery")) {
+//                        Log.e("state", "exist");
+//                        modelofThreeCompliantList.get(i).setFileName(imgDecodableString);
+//                        complaintAdapter.notifyDataSetChanged();
+//
+//                    } else {
+//                        Log.e("state", "Not Exist");
+//
+//                        ThreeCompliant camera = new ThreeCompliant();
+//                        camera.setStatus("Gallery");
+//                        camera.setFileName(imgDecodableString);
+//                        modelofThreeCompliantList.add(camera);
+//                        complaintAdapter.notifyDataSetChanged();
+//
+//                    }
+//
+//                }
+
+                for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+
+                    if (modelofThreeCompliantList.get(i).getStatus().equals("camera")) {
+                        modelofThreeCompliantList.remove(i);
+
+                    }
+                }
+
+                ThreeCompliant camera = new ThreeCompliant();
+                camera.setStatus("camera");
+                camera.setFileName(imgDecodableString);
+                modelofThreeCompliantList.add(camera);
+                complaintAdapter.notifyDataSetChanged();
+                //save to model for recyclerView
+//                ThreeCompliant picturesGallery = new ThreeCompliant();
+//                picturesGallery.setStatus("video");
+//                picturesGallery.setFileName(imgDecodableString);
+//                Log.e("videoGallery_0", picturesGallery.getStatus());
+//
+//                for (ThreeCompliant ob1 : modelofThreeCompliantList) {
+//
+//                    if ("video".equals(ob1.getStatus())) {
+//
+//                        Log.e("videoGallery_1", picturesGallery.getStatus());
+//                        int index = modelofThreeCompliantList.indexOf(ob1);
+//                        modelofThreeCompliantList.set(index, picturesGallery);
+//                        fillthree();
+//                        Log.e("from_video", ob1.getStatus());
+////                         modelofThreeCompliantList.remove(picturesGallery);
+////                         modelofThreeCompliantList.add(picturesGallery);
+//                    } else {
+//                        Log.e("videoGallery_2", picturesGallery.getStatus());
+//                        picturesGallery.setFileName(imgDecodableString);
+//                        modelofThreeCompliantList.add(picturesGallery);
+//                        fillthree();
+//                    }
+//                }
+
+
                 cursor.close();
 
 
                 File file = new File(imgDecodableString);
-                Result.setText(file.getName() + "");
+
 //            Page_137_Result.setText(file.getName());
 //                Log.e("image12", file.getPath() + " | " + (file.getName()) + " |" + file.getParent());
 //                Picasso.with(getBaseContext())
@@ -358,9 +645,94 @@ public class Complaint extends AppCompatActivity {
 
                     selectedVideoPath = getPath(contentURI);
 
+//                    ThreeCompliant camera = new ThreeCompliant();
+//                    videoGallery.setStatus("camera");
+//                    videoGallery.setFileName(selectedVideoPath);
+                    NOTPICTURESANDVIDEO = 2;
+
+//                    if (modelofThreeCompliantList.size() == 0) {
+//                        ThreeCompliant camera = new ThreeCompliant();
+//                        camera.setStatus("Video");
+//                        camera.setFileName(selectedVideoPath);
+//                        modelofThreeCompliantList.add(camera);
+//                        complaintAdapter.notifyDataSetChanged();
+//                    }
+//
+//                    for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+//
+//                        if (modelofThreeCompliantList.get(i).getStatus().equals("Video")) {
+//
+//                            modelofThreeCompliantList.get(i).setFileName(selectedVideoPath);
+//                            complaintAdapter.notifyDataSetChanged();
+//
+//                        } else {
+//
+//                            ThreeCompliant camera = new ThreeCompliant();
+//                            camera.setStatus("Video");
+//                            camera.setFileName(selectedVideoPath);
+//                            modelofThreeCompliantList.add(camera);
+//                            complaintAdapter.notifyDataSetChanged();
+//
+//                        }
+//
+//                    }
+
+                    for (int i = 0; i < modelofThreeCompliantList.size(); i++) {
+
+                        if (modelofThreeCompliantList.get(i).getStatus().equals("Video")) {
+                            modelofThreeCompliantList.remove(i);
+
+                        }
+                    }
+
+                    ThreeCompliant camera = new ThreeCompliant();
+                    camera.setStatus("Video");
+                    camera.setFileName(selectedVideoPath);
+                    modelofThreeCompliantList.add(camera);
+                    complaintAdapter.notifyDataSetChanged();
+
+//                    Log.e("videoGallery_0", videoGallery.getStatus());
+//                    for (ThreeCompliant ob1 : modelofThreeCompliantList) {
+//
+//                        Log.e("videoGallery_1", videoGallery.getStatus());
+//                        if ("videoGallery".equals(ob1.getStatus())) {
+//
+//                            int index = modelofThreeCompliantList.indexOf(ob1);
+//                            modelofThreeCompliantList.set(index, videoGallery);
+//                            fillthree();
+//
+//                            Log.e("videoGallery_2", videoGallery.getStatus());
+////                         modelofThreeCompliantList.remove(picturesGallery);
+////                         modelofThreeCompliantList.add(picturesGallery);
+//                        } else {
+//
+//                            Log.e("videoGallery_3", videoGallery.getStatus());
+//                            videoGallery.setFileName(imgDecodableString);
+//                            modelofThreeCompliantList.add(videoGallery);
+//                            fillthree();
+//                        }
+//                    }
+
+
+//                    if(modelofThreeCompliantList.equals(videoGallery)){
+//
+//
+//                        modelofThreeCompliantList.remove(videoGallery);
+//                        modelofThreeCompliantList.add(videoGallery);
+//                        fillthree();
+//
+//                    }
+//                    else{
+//
+//                        videoGallery.setFileName(selectedVideoPath);
+//                        modelofThreeCompliantList.add(videoGallery);
+//                        fillthree();
+//                    }
+
+
                     imgDecodableString = "";
 
-                    Result.setText(new File(selectedVideoPath).getName());
+
                     Log.d("path", selectedVideoPath);
 
                 }
@@ -369,7 +741,7 @@ public class Complaint extends AppCompatActivity {
     }
 
     private void complaintRequest(String Fname, String LName, String Email, String Message,
-                                  String Type, String VehicleCode, String VehiclePelack, String Mobile, String File) {
+                                  String Type, String VehicleCode, String VehiclePelack, String Mobile, List<ThreeCompliant> listOfCompliants) {
 //        StringRequest complaintRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/Complaint",
 //                response -> {
 //                    Log.e("ListLeavesResponse", response + " |");
@@ -426,6 +798,8 @@ public class Complaint extends AppCompatActivity {
 //        AppController.getInstance().addToRequestQueue(complaintRequest);
 
 
+        // this section is comment by Habib Allah
+
         AsyncHttpPost post = new AsyncHttpPost(Globals.APIURL + "/Complaint");
         post.setHeader("token", "df837016d0fc7670f221197cd92439b5");
         post.setTimeout(25000);
@@ -441,10 +815,17 @@ public class Complaint extends AppCompatActivity {
         body.addStringPart("vehiclecode", VehicleCode);
         body.addStringPart("vehiclepluck", VehiclePelack);
 
-        Log.e("sgdsd44", VoiceRecoeder.AudioSavePathInDevice  + " |" + File);
-        if (!File.isEmpty()) {
-            Log.e("filesfiles", File + " |");
-            body.addFilePart("files", new File(File));
+        Log.e("sgdsd44", VoiceRecoeder.AudioSavePathInDevice + " |" + listOfCompliants);
+        if (!listOfCompliants.isEmpty()) {
+            Log.e("filesfiles", listOfCompliants + " |");
+            for (int i = 0; i < listOfCompliants.size(); i++) {
+
+                String itemOfList = listOfCompliants.get(i).getFileName();
+                body.addFilePart("files[]", new File(itemOfList));
+                Log.e("first" + i, itemOfList);
+
+
+            }
         }
         post.setBody(body);
 
@@ -461,10 +842,14 @@ public class Complaint extends AppCompatActivity {
                         JSONObject object = new JSONObject(result);
                         if (object.getString("status").equals("true")) {
 
-                            Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+                            // The below Toast shows some characters when uploading finishes successfully
+                            //     Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                             Loading.setVisibility(View.GONE);
                             Enabled();
                             Clear();
+                            Toast.makeText(getApplicationContext(), "آپلود با موفقعیت انجام شد.", Toast.LENGTH_LONG).show();
+                            modelofThreeCompliantList.clear();
+                            complaintAdapter.notifyDataSetChanged();
 
                         } else if (object.getString("status").equals("false")) {
                             Loading.setVisibility(View.VISIBLE);
@@ -494,6 +879,10 @@ public class Complaint extends AppCompatActivity {
         CarCode.setText("");
         Text.setText("");
         imgDecodableString = "";
+        selectedVideoPath = "";
+        VoiceRecoeder.AudioSavePathInDevice = "";
+
+
     }
 
     void Enabled() {
@@ -566,10 +955,9 @@ public class Complaint extends AppCompatActivity {
 
     public void SelectVoice() {
 
-        Intent recordVoice = new Intent(getApplicationContext(),VoiceRecoeder.class);
+        Intent recordVoice = new Intent(getApplicationContext(), VoiceRecoeder.class);
         startActivity(recordVoice);
-
-
+        NOTPICTURESANDVIDEO = 3;
 
         // startActivityForResult(recordVoice,VOICE);
 
@@ -635,12 +1023,142 @@ public class Complaint extends AppCompatActivity {
 
         SharedPreferences h = getSharedPreferences("voice", MODE_PRIVATE);
         String getVoice = h.getString("voice_", "-1");
-        Log.e("Audio_file",getVoice);
-       //String address =  getIntent().getExtras().getString("Audio_source_address");
+        Log.e("Audio_file", getVoice);
+        //String address =  getIntent().getExtras().getString("Audio_source_address");
 
         return getVoice;
 
     }
 
     ;
+
+
+    class ThreeRecyclerView extends RecyclerView.Adapter<ThreeRecyclerView.CustomizedView> {
+
+        List<ThreeCompliant> lisOfUploadFiles;
+
+        public ThreeRecyclerView(List<ThreeCompliant> lisOf) {
+            this.lisOfUploadFiles = lisOf;
+        }
+
+        @NonNull
+        @Override
+        public ThreeRecyclerView.CustomizedView onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            return new ThreeRecyclerView.CustomizedView(LayoutInflater.from(getApplicationContext()).inflate(R.layout.for_three_recycler,
+                    null
+            ));
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull CustomizedView customizedView, int i) {
+
+            customizedView.filename.setText(lisOfUploadFiles.get(i).getFileName());
+            customizedView.deleteFromList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    modelofThreeCompliantList.remove(i);
+                    complaintAdapter.notifyDataSetChanged();
+
+                }
+            });
+
+        }
+
+
+        @Override
+        public int getItemCount() {
+            return lisOfUploadFiles.size();
+        }
+
+
+        public class CustomizedView extends RecyclerView.ViewHolder {
+
+            TextView filename;
+            ImageView deleteFromList;
+
+
+            public CustomizedView(@NonNull View itemView) {
+                super(itemView);
+                filename = itemView.findViewById(R.id.textView_for_three_recycle);
+                deleteFromList = itemView.findViewById(R.id.delete_for_three_recycle);
+
+            }
+        }
+    }
+
+    private void fillthree() {
+
+
+//        ThreeCompliant obj = new ThreeCompliant();
+//        obj.setFileName("pic0");
+//        three.add(obj);
+//
+//        obj.setFileName("pic1");
+//        three.add(obj);
+//
+//        obj.setFileName("pic3");
+//        three.add(obj);
+//
+//        obj.setFileName("pic4");
+//        three.add(obj);
+//
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//
+//        obj.setFileName("pic15");
+//        three.add(obj);
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//        obj.setFileName("pic5");
+//        three.add(obj);
+//        obj.setFileName("pic5");
+//        three.add(obj);
+
+
+        threeRecyclerView = findViewById(R.id.threeRecycler);
+        threeRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayout.VERTICAL, false));
+        threeRecyclerView.setAdapter(complaintAdapter);
+
+     /*   LinearSnapHelper snapHelper  = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(threeRecyclerView);
+
+
+
+        //This is used to center first and last item on screen
+        threeRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                int position = parent.getChildViewHolder(view).getAdapterPosition();
+
+                if (position == 0 || position == state.getItemCount() - 2) {
+
+                    int elementWidth = (int)getResources().getDimension(R.dimen.widthof);
+                    int elementMargin = (int)getResources().getDimension(R.dimen.marginof);
+
+                    int padding = Resources.getSystem().getDisplayMetrics().widthPixels / 2 - elementWidth - elementMargin/2;
+
+                    if (position == 0) {
+                        outRect.left = padding;
+                    }
+                }
+            }
+        });
+        */
+
+//        if (!three.isEmpty())
+//            Log.e("are_You_really_null", "null");
+
+
+    }
+
+
 }

@@ -205,7 +205,7 @@ public class CitizenMainActivity extends AppCompatActivity {
              JSONObject jsonObject = new JSONObject(getStringObject);
              JSONObject name = new JSONObject(jsonObject.getString("userdata"));
 
-             if(name.getString("d_tel")!= null){
+             if(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()!= null){
                  NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_citizen);
                  View view = navigationView.getHeaderView(0);
                  TextView textView = view.findViewById(R.id.Navigation_Enter);

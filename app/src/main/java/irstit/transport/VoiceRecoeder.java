@@ -1,5 +1,7 @@
 package irstit.transport;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -27,6 +29,8 @@ import android.support.v4.app.ActivityCompat;
 import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 
+import irstit.transport.Citizens.complaint.Complaint;
+
 public class VoiceRecoeder extends AppCompatActivity {
 
     Button buttonStart, buttonStop, buttonPlayLastRecordAudio,
@@ -37,6 +41,12 @@ public class VoiceRecoeder extends AppCompatActivity {
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     public static final int RequestPermissionCode = 1;
     MediaPlayer mediaPlayer ;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Complaint.NOTPICTURESANDVIDEO =-1;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +71,18 @@ public class VoiceRecoeder extends AppCompatActivity {
             public void onClick(View view) {
 
                 if(AudioSavePathInDevice == null){
-                     Toast.makeText(getBaseContext(),"شما باید صدا اول صدا ظبط کنید",Toast.LENGTH_LONG).show();
+                     Toast.makeText(getBaseContext(),"شما باید  اول صدا ضبط کنید",Toast.LENGTH_LONG).show();
                 }else {
 
+                    Log.e("sourceforsource",AudioSavePathInDevice);
+                    SharedPreferences sh = getSharedPreferences("source",MODE_PRIVATE);
+                    SharedPreferences.Editor editor;
+                    editor = sh.edit();
+                    editor.putString("filename",AudioSavePathInDevice);
+                    editor.commit();
+
                     Toast.makeText(getBaseContext(),"صدا با موفقعیت ذخیره شده",Toast.LENGTH_LONG).show();
+//                    startActivity(new Intent(getBaseContext(),Complaint.class));
                     finish();
                 }
             }
@@ -97,7 +115,7 @@ public class VoiceRecoeder extends AppCompatActivity {
                     buttonStart.setEnabled(false);
                     buttonStop.setEnabled(true);
 
-                    Toast.makeText(VoiceRecoeder.this, "شروع ظبط",
+                    Toast.makeText(VoiceRecoeder.this, "شروع ضبط",
                             Toast.LENGTH_LONG).show();
                 } else {
                     requestPermission();
@@ -115,7 +133,7 @@ public class VoiceRecoeder extends AppCompatActivity {
                 buttonStart.setEnabled(true);
                 buttonStopPlayingRecording.setEnabled(false);
 
-                Toast.makeText(VoiceRecoeder.this, "ظبط کامل شد",
+                Toast.makeText(VoiceRecoeder.this, "ضبط کامل شد",
                         Toast.LENGTH_LONG).show();
             }
         });
@@ -135,6 +153,8 @@ public class VoiceRecoeder extends AppCompatActivity {
                     mediaPlayer.prepare();
                 } catch (IOException e) {
                     e.printStackTrace();
+                    Log.e("sourceforsource_Error",AudioSavePathInDevice);
+
                 }
 
                 mediaPlayer.start();

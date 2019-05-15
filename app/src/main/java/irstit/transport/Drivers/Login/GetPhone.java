@@ -68,6 +68,8 @@ public class GetPhone extends Fragment implements View.OnClickListener {
         }
 
         phone = view.findViewById(R.id.GetPhone_Edittext);
+        phone.append("09");
+        phone.setSelection(2);
 
         return view;
     }

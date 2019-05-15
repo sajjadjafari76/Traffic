@@ -30,6 +30,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Citizens.CitizenMainActivity" />
+        <activity android:name=".ViewPager.ViewInfo.ViewInfoTerminal" />
         <activity android:name=".Citizens.Account.CitizenLogin" />
         <activity android:name=".Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton" />
         <activity android:name=".Citizens.Account.forgettenpasswrod.CitizenForgottenPassword" />
@@ -38,15 +39,22 @@
         <activity android:name=".ViewPager.ViewInfo.ViewInfo" />
         <activity android:name=".Citizens.Account.CitizensAccountActivity" />
         <activity android:name=".ViewPager.MainPager" />
-        <activity android:name=".MainPage"></activity>
-        <activity android:name=".Citizens.complaint.ComplaintTrack" />
+        <activity android:name=".MainPage" />
+        <activity android:name=".ForDisel" />
+        <activity android:name=".Citizens.complaint.ComplaintTrack"
+
+            />
         <activity android:name=".Drivers.FoundedObjectActivity" />
         <activity
-            android:name=".Citizens.complaint.Complaint"
+            android:name=".PhonePay.PhonePayMainActicity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".LetterRate" />
         <activity android:name=".News" />
-        <activity android:name=".SplashScreen">
+        <activity android:name=".SplashScreen"
+
+
+                  android:configChanges="keyboardHidden|orientation|screenSize"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -88,7 +96,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" />
 
-        <activity android:name=".VoiceRecoeder"></activity>
+        <activity android:name=".VoiceRecoeder" />
+        <activity android:name=".Citizens.complaint.Complaint" />
+        <activity android:name=".PhonePay.pay_by_recipient_code"></activity>
     </application>
 
 </manifest>

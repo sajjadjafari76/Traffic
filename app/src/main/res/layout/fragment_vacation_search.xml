@@ -6,6 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Drivers.VacationSearch"
     android:backgroundTint="#FFF"
+    android:id="@+id/fragment_vacation"
     android:background="#FFF">
 
     <android.support.v7.widget.CardView
@@ -186,6 +187,41 @@
         android:textColor="#000"
         android:id="@+id/VacationSearch_Empty"
         android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/Delivery_Connectivity"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            app:srcCompat="@drawable/wifi_off"
+            android:layout_marginBottom="12dp"/>
+
+        <irstit.transport.Views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="شما به اینترنت متصل نمی باشید!"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#000"/>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="18dp"
+            android:text="تلاش مجدد"
+            android:textSize="12sp"
+                android:id="@+id/Delivery_Btn"
+            android:textColor="#000"
+            android:background="@drawable/bg_network"/>
+
+    </LinearLayout>
+
 
 
 </RelativeLayout>

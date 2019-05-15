@@ -37,7 +37,7 @@ import irstit.transport.Views.Utils;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CitizenGetInfo extends Fragment {
+public class CitizenGetInfo extends Fragment  {
 
 
     public CitizenGetInfo() {
@@ -73,6 +73,8 @@ public class CitizenGetInfo extends Fragment {
 
         return view;
     }
+
+
 
 
     private void sendInfoRequest(String Name, String Email, String Pass) {
@@ -150,5 +152,7 @@ public class CitizenGetInfo extends Fragment {
         AppController.getInstance().addToRequestQueue(getPhoneRequest);
 
     }
+
+
 
 }

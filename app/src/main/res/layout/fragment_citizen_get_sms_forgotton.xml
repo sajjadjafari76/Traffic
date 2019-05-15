@@ -20,20 +20,20 @@
 
 
     <com.mukesh.OtpView
-        android:id="@+id/CitizenGetSms_Otp"
+        android:id="@+id/CitizenGetSmsForgotton_Otp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xmedium"
         android:inputType="number"
         android:fontFamily="@font/byekan"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         app:itemCount="4"
         app:lineColor="@color/overlay_light_90"
         app:viewType="line" />
 
 
     <com.marozzi.roundbutton.RoundButton
-        android:id="@+id/CitizenGetSms_Btn"
+        android:id="@+id/CitizenGetSmsForgotton_Btn"
         android:layout_width="200dp"
         android:layout_height="43dp"
         android:gravity="center"
@@ -67,13 +67,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/timer"
+                android:id="@+id/timerForgotton"
                 android:textColor="@color/mdtp_white"
                 android:textSize="17sp"
                 android:fontFamily="@font/byekan"
-
-
                 />
+
         </LinearLayout>
 
 

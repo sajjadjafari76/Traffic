@@ -22,7 +22,12 @@
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
     <item name="fontFamily">@font/shabnam</item>
     </style>
+ 
+    <!--phone_pay-->
+    <style name="your_currently_balance">
 
+        <item name="android:radius">10dp</item>
 
+    </style>
 
 </resources>

@@ -1,12 +1,13 @@
-package irstit.transport;
+package irstit.transport.PhonePay;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import irstit.transport.R;
 
 public class pay_by_recipient_code extends AppCompatActivity {
 

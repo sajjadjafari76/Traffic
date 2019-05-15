@@ -69,6 +69,8 @@ public class CitizenGetPhoneForgotten extends Fragment {
 //        }
 
         phone = view.findViewById(R.id.CitizenGetPhoneForgotten_Edittext);
+        phone.append("09");
+        phone.setSelection(2);
 
 
         return view;

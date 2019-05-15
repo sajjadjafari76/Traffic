@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PhonePay.PhonePayMainActicity">
+    android:id="@+id/phonePaymainActivity"
+    tools:context=".PhonePay.PhonePayMainActicity"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/FrameLayoutForPhonePayMainActivity"
+        />
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        style="@style/Widget.BottomNavigationView"
+        app:menu="@menu/phone_pay_button_navigation"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

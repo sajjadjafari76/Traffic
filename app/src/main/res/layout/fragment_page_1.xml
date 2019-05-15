@@ -22,15 +22,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:id="@+id/Page3_Project">
+            android:id="@+id/Page1_LineCar">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
-                android:src="@drawable/projects" />
+                android:src="@drawable/line_car" />
 
             <android.support.v7.widget.CardView
-                android:layout_width="160dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="#3F51B5"
@@ -42,11 +42,10 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/shabnam"
                     android:gravity="center"
-                    android:text="پروژه های در دست اقدام"
+                    android:text="خودروهای خطی"
                     android:textAlignment="center"
-                    android:padding="5dp"
                     android:textColor="#ffff"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </android.support.v7.widget.CardView>
 
@@ -59,15 +58,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:id="@+id/Page3_Critical">
+            android:id="@+id/Page1_RoozBazar">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
-                android:src="@drawable/suggest" />
+                android:src="@drawable/roozbazar" />
 
             <android.support.v7.widget.CardView
-                android:layout_width="145dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="#3F51B5"
@@ -79,13 +78,12 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/shabnam"
                     android:gravity="center"
-                    android:text="پیشنهادات و انتقادات"
+                    android:text="روز بازار"
                     android:textAlignment="center"
                     android:textColor="#ffff"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </android.support.v7.widget.CardView>
-
 
         </LinearLayout>
 
@@ -102,8 +100,7 @@
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:gravity="top"
-        android:orientation="horizontal"
-        android:weightSum="2">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -111,15 +108,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:id="@+id/coperatewithYourProfession">
+            android:id="@+id/Page1_Diesel">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
-                android:src="@drawable/suggest" />
+                android:src="@drawable/disel" />
 
             <android.support.v7.widget.CardView
-                android:layout_width="145dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="#3F51B5"
@@ -131,30 +128,32 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/shabnam"
                     android:gravity="center"
-                    android:text="کمک فنی و تخصصی"
+                    android:text="خودروهای دیزلی"
                     android:textAlignment="center"
                     android:textColor="#ffff"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </android.support.v7.widget.CardView>
 
 
         </LinearLayout>
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="vertical"
-            android:id="@+id/validation">
+            android:id="@+id/Page1_Terminal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
-                android:src="@drawable/suggest" />
+                android:src="@drawable/terminal" />
 
             <android.support.v7.widget.CardView
-                android:layout_width="145dp"
+                android:layout_width="130dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="#3F51B5"
@@ -162,15 +161,14 @@
                 app:cardCornerRadius="15dp">
 
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/shabnam"
                     android:gravity="center"
-                    android:text="ارزیابی های شهرداری"
+                    android:text="ترمینال"
                     android:textAlignment="center"
                     android:textColor="#ffff"
-                    android:textSize="13sp" />
+                    android:textSize="16sp" />
 
             </android.support.v7.widget.CardView>
 

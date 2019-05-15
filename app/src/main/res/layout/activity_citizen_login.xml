@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="4"
-    android:background="@drawable/img_bk_login"
+    android:background="@color/backgroundColor"
     android:orientation="vertical"
     tools:context=".Drivers.Login.ActivityLogin">
 
@@ -53,8 +53,9 @@
            android:layout_marginRight="30dp"
            android:textSize="@dimen/DriversLogin_GetPhone"
            android:padding="6dp"
+           android:textDirection="rtl"
            android:textColorHint="@color/grey_20"
-           android:textColor="@color/grey_20"
+           android:textColor="@color/overlay_black"
            android:id="@+id/CitizenLogin_UserName"
            android:background="@drawable/dr_getphone_edittext"
            android:drawableLeft="@drawable/ic_getphone_smartphone"/>
@@ -69,8 +70,9 @@
            android:layout_marginRight="30dp"
            android:textSize="@dimen/DriversLogin_GetPhone"
            android:padding="6dp"
+           android:textDirection="rtl"
            android:textColorHint="@color/grey_20"
-           android:textColor="@color/grey_20"
+           android:textColor="@color/overlay_black"
            android:id="@+id/CitizenLogin_Password"
            android:background="@drawable/dr_getphone_edittext"
            android:drawableLeft="@drawable/ic_getphone_smartphone"/>
@@ -81,7 +83,7 @@
            android:layout_height="43dp"
            android:gravity="center"
            android:layout_marginTop="@dimen/spacing_xlarge"
-           android:text="ارسال"
+           android:text="@string/Login_Toolbar"
            android:fontFamily="@font/shabnam"
            app:rb_animation_alpha="false"
            app:rb_animation_progress_color="@color/colorAccent"

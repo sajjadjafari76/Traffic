@@ -44,8 +44,9 @@
                 android:fontFamily="@font/iransans"
                 android:gravity="center"
                 android:text="ورود راننده"
+                android:padding="10dp"
                 android:textColor="#FFF"
-                android:textSize="14sp" />
+                android:textSize="10sp" />
 
             <ImageView
                 android:id="@+id/nav_t"

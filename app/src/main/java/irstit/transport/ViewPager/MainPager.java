@@ -95,7 +95,7 @@ public class MainPager extends AppCompatActivity {
 
         List<Fragment> fragments = new Vector<Fragment>();
         fragments.add(Fragment.instantiate(this, Page_2.class.getName()));
-        //fragments.add(Fragment.instantiate(this, Page_1.class.getName()));
+        fragments.add(Fragment.instantiate(this, Page_1.class.getName()));
         fragments.add(Fragment.instantiate(this, Page_3.class.getName()));
         mAdapter = new FragmentAdapter(getSupportFragmentManager(), fragments);
 
@@ -142,6 +142,14 @@ public class MainPager extends AppCompatActivity {
             });
         }
     }
+
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//
+//        FragmentManager n = getSupportFragmentManager().findFragmentById()
+//    }
 
     private void deleteSavedDefaultUsername() {
         try {

@@ -62,13 +62,13 @@ public class CitizenGetSmsForgotten extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_citizen_get_sms, container, false);
+        View view = inflater.inflate(R.layout.fragment_citizen_get_sms_forgotton, container, false);
 
 
-        otpView = view.findViewById(R.id.CitizenGetSms_Otp);
-        btn = view.findViewById(R.id.CitizenGetSms_Btn);
-        timerText = view.findViewById(R.id.timer);
-        conter();
+        otpView = view.findViewById(R.id.CitizenGetSmsForgotton_Otp);
+        btn = view.findViewById(R.id.CitizenGetSmsForgotton_Btn);
+        timerText = view.findViewById(R.id.timerForgotton);
+        counter();
         otpView.setOtpCompletionListener((String s) -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
                 Toast.makeText(getContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
@@ -177,7 +177,7 @@ public class CitizenGetSmsForgotten extends Fragment {
 //    }
 
 
-    public  void conter() {
+    public  void counter() {
 
         new CountDownTimer(60000, 1000) {
 
@@ -195,7 +195,10 @@ public class CitizenGetSmsForgotten extends Fragment {
             @Override
             public void onFinish() {
                 ///
-                Toast.makeText(getActivity(),"لطفا دوباره امتحان کنید",Toast.LENGTH_LONG).show();
+                if(getActivity()!=null) {
+                    Toast.makeText(getActivity(), "لطفا دوباره امتحان کنید", Toast.LENGTH_LONG).show();
+                 }
+
                 timerText.setText("0");
                 timerText.setText("");
               //  btn.stopAnimation();
