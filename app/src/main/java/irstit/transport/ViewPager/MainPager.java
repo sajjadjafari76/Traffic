@@ -64,6 +64,8 @@ public class MainPager extends AppCompatActivity {
 
     private DrawerLayout drawer;
 
+    private NavigationView na;
+
     public static String incomingName;
 
 
@@ -101,8 +103,9 @@ public class MainPager extends AppCompatActivity {
 
         changeDefaultuser_Name();
         drawer = findViewById(R.id.MainPager_Drawer);
+       // na = findViewById(R.id.MAinActivity_NavigationView_3);
         ImageView iconDrawer = findViewById(R.id.MainPager_NavigatorIcon);
-        iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.RIGHT)
+        iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.END)
         );
 
 

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="جهت دانلود برنامه باربرگ بر روی دکمه زیر کلیک کنید."
         android:gravity="center"
-        android:layout_above="@+id/ForDisel_Btnd"
+        android:layout_above="@+id/uniqueBtn"
         android:fontFamily="@font/shabnam"
         android:textColor="#FF0000"
         android:textSize="18sp"
@@ -23,16 +23,18 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="دانلود برنامه باربرگ"
-        android:id="@+id/ForDisel_Btnd"
+        android:id="@+id/uniqueBtn"
         android:layout_margin="20dp"
         android:foregroundTint="@color/green_400"
         android:background="@color/green_400"
         android:fontFamily="@font/shabnam"
         android:textColor="#FFFFFF"/>
-    <WebView
-        android:id="@+id/mydown"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
+    <!--<WebView-->
+        <!--android:id="@+id/mydown"-->
+        <!--android:visibility="gone"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
 
 

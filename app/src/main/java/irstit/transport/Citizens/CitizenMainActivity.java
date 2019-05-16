@@ -76,7 +76,7 @@ public class CitizenMainActivity extends AppCompatActivity {
 
         drawer = findViewById(R.id.CitizenMain_Drawer);
         ImageView iconDrawer = findViewById(R.id.CitizenMain_NavigatorIcon);
-        iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.RIGHT));
+        iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.END));
 
 
         RecyclerView navigation_Recycler = findViewById(R.id.CitizenMain_RecyClerView);

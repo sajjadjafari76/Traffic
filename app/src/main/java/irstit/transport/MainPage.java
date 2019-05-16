@@ -75,8 +75,7 @@ public class MainPage extends AppCompatActivity {
 
                         if(internet == true){
                             startActivity(new Intent(getBaseContext(), ActivityLogin.class));
-
-                        }
+                     }
 
                         else {
                             Dialog  dialog = new Dialog(MainPage.this);

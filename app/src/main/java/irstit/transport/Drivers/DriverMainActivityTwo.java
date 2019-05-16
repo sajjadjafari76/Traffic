@@ -127,7 +127,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
 
         drawer = findViewById(R.id.DriverMainTwo_Drawer);
         ImageView iconDrawer = findViewById(R.id.DriverMainTwo_NavigatorIcon);
-        iconDrawer.setOnClickListener(v-> drawer.openDrawer(Gravity.RIGHT));
+        iconDrawer.setOnClickListener(v-> drawer.openDrawer(Gravity.END));
 
 
         RecyclerView navigation_Recycler = findViewById(R.id.DriverMainTwo_RecyClerView);

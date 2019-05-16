@@ -75,5 +75,12 @@
 
         </LinearLayout>
 
+    <ImageView
+        android:id="@+id/ForgottonresendNumber"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:visibility="gone"
+        android:src="@drawable/synchronize" />
+
 
 </LinearLayout>

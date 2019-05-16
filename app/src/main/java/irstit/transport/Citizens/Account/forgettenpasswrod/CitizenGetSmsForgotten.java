@@ -9,12 +9,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.marozzi.roundbutton.RoundButton;
 import com.mukesh.OtpView;
@@ -50,7 +53,7 @@ public class CitizenGetSmsForgotten extends Fragment {
     private RoundButton btn;
     TextView timerText;
     //Thread runOnUiThread ;
-
+    ImageView synchornize;
 
     @Override
     public void onStart() {
@@ -68,6 +71,19 @@ public class CitizenGetSmsForgotten extends Fragment {
         otpView = view.findViewById(R.id.CitizenGetSmsForgotton_Otp);
         btn = view.findViewById(R.id.CitizenGetSmsForgotton_Btn);
         timerText = view.findViewById(R.id.timerForgotton);
+
+   /*
+        synchornize = view.findViewById(R.id.ForgottonresendNumber);
+
+        synchornize.setOnClickListener(view1 -> {
+
+            synchornize.setVisibility(View.GONE);
+            counter();
+            GetPhoneRequest();
+
+        });
+        */
+
         counter();
         otpView.setOtpCompletionListener((String s) -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
@@ -185,7 +201,6 @@ public class CitizenGetSmsForgotten extends Fragment {
             public void onTick(long l) {
                 Log.e("clickOnAnimation0","clickOnAnimationDOne0");
 
-
                 int second  = (int)l/1000;
                 timerText.setText(" زمان باقیمانده   "+second);
                 Log.e("clickOnAnimation1","clickOnAnimationDOne1");
@@ -198,6 +213,7 @@ public class CitizenGetSmsForgotten extends Fragment {
                 if(getActivity()!=null) {
                     Toast.makeText(getActivity(), "لطفا دوباره امتحان کنید", Toast.LENGTH_LONG).show();
                  }
+
 
                 timerText.setText("0");
                 timerText.setText("");
@@ -283,5 +299,79 @@ public class CitizenGetSmsForgotten extends Fragment {
         AppController.getInstance().addToRequestQueue(getDriverInfo);
 
     }
+
+    private void GetPhoneRequest() {
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST,
+                Globals.APIURL + "/forgetcitizen",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.e("forgetCitizenResponse", response + " |");
+
+                        try {
+                            JSONObject object = new JSONObject(response);
+
+                            if (object.getString("status").equals("true")) {
+
+
+                                // after getting phone number we must going to GetSms Class
+                                FragmentTransaction transaction = getActivity()
+                                        .getSupportFragmentManager().beginTransaction().addToBackStack("GetSms");
+                                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+                                Bundle bundle = new Bundle();
+//                                bundle.putString("phone", phone.getText().toString());
+//                                if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+//                                    bundle.putString("state", "ChangePass");
+//                                } else {
+                                bundle.putString("phone", getArguments().getString("phone"));
+//                                }
+                                Log.e("phoneFRomGetPhoneClass1",getArguments().getString("phone"));
+                                CitizenGetSmsForgotten getSms = new CitizenGetSmsForgotten();
+                                getSms.setArguments(bundle);
+                                transaction.replace(R.id.CitizenActivity_Frame, getSms);
+                                transaction.commit();
+
+
+                            } else if (object.getString("status").equals("false")) {
+                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.e("regCitizenError", error.toString() + " |");
+
+            }
+
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<>();
+                map.put("phone", getArguments().getString("phone"));
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                return map;
+            }
+        };
+
+        getPhoneRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(getPhoneRequest);
+
+    }
+
 
 }
