@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:weightSum="4"
-    android:gravity="center_horizontal">
+    android:weightSum="4">
 
 
     <irstit.transport.Views.CustomTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
         android:text="@string/DriversLogin_GetSmsText"
         android:textColor="#FFF"
-        android:gravity="center"
-        android:textSize="@dimen/DriversLogin_GetPhone"
-        android:layout_marginBottom="10dp"/>
+        android:textSize="@dimen/DriversLogin_GetPhone" />
 
 
     <com.mukesh.OtpView
@@ -24,8 +24,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_xmedium"
-        android:inputType="number"
         android:fontFamily="@font/byekan"
+        android:inputType="number"
         android:textColor="@android:color/black"
         app:itemCount="4"
         app:lineColor="@color/overlay_light_90"
@@ -36,17 +36,17 @@
         android:id="@+id/GetSms_Btn"
         android:layout_width="200dp"
         android:layout_height="43dp"
-        android:gravity="center"
         android:layout_marginTop="@dimen/spacing_large"
-        android:text="ورود"
         android:fontFamily="@font/shabnam"
+        android:gravity="center"
+        android:text="ورود"
         app:rb_animation_alpha="false"
-        app:rb_animation_progress_color="@color/colorAccent"
-        app:rb_animation_progress_padding="8dp"
-        app:rb_animation_progress_width="2dp"
-        app:rb_animation_progress_style="circle"
         app:rb_animation_corner_radius="20dp"
         app:rb_animation_duration="500"
+        app:rb_animation_progress_color="@color/colorAccent"
+        app:rb_animation_progress_padding="8dp"
+        app:rb_animation_progress_style="circle"
+        app:rb_animation_progress_width="2dp"
         app:rb_background_color="@android:color/transparent"
         app:rb_background_color_pressed="@color/colorPrimary"
         app:rb_corner_color="@color/grey_5"
@@ -63,18 +63,26 @@
         android:orientation="horizontal">
 
 
-         <!--android:id="@+id/timer"-->
+        <!--android:id="@+id/timer"-->
 
         <TextView
+            android:id="@+id/GetSmsTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/GetSmsTimer"
+            android:fontFamily="@font/byekan"
             android:textColor="@color/mdtp_white"
             android:textSize="17sp"
-            android:fontFamily="@font/byekan"
 
 
             />
+
+        <ImageView
+            android:id="@+id/GetSmsresendNumber"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/synchronize"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </LinearLayout>

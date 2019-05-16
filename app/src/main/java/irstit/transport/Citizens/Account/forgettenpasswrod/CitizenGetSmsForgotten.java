@@ -72,7 +72,7 @@ public class CitizenGetSmsForgotten extends Fragment {
         btn = view.findViewById(R.id.CitizenGetSmsForgotton_Btn);
         timerText = view.findViewById(R.id.timerForgotton);
 
-   /*
+  // /*
         synchornize = view.findViewById(R.id.ForgottonresendNumber);
 
         synchornize.setOnClickListener(view1 -> {
@@ -82,7 +82,8 @@ public class CitizenGetSmsForgotten extends Fragment {
             GetPhoneRequest();
 
         });
-        */
+
+      //  */
 
         counter();
         otpView.setOtpCompletionListener((String s) -> {
@@ -217,6 +218,7 @@ public class CitizenGetSmsForgotten extends Fragment {
 
                 timerText.setText("0");
                 timerText.setText("");
+                synchornize.setVisibility(View.VISIBLE);
               //  btn.stopAnimation();
                // btn.revertAnimation();
 
@@ -244,7 +246,7 @@ public class CitizenGetSmsForgotten extends Fragment {
 
                             Log.e("step2","works");
                             FragmentTransaction transaction = getActivity()
-                                    .getSupportFragmentManager().beginTransaction().addToBackStack("GetSms");
+                                    .getSupportFragmentManager().beginTransaction();  //.addToBackStack("GetSms")
                             transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
                             Bundle bundle = new Bundle();
 //                                bundle.putString("phone", phone.getText().toString());
@@ -317,7 +319,7 @@ public class CitizenGetSmsForgotten extends Fragment {
 
                                 // after getting phone number we must going to GetSms Class
                                 FragmentTransaction transaction = getActivity()
-                                        .getSupportFragmentManager().beginTransaction().addToBackStack("GetSms");
+                                        .getSupportFragmentManager().beginTransaction();  //.addToBackStack("GetSms") gose to previews
                                 transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("phone", phone.getText().toString());

@@ -97,7 +97,7 @@ public class CitizenGetPhone extends Fragment {
 
                                 // after getting phone number we must going to GetSms Class
                                 FragmentTransaction transaction = getActivity()
-                                        .getSupportFragmentManager().beginTransaction().addToBackStack("GetSms");
+                                        .getSupportFragmentManager().beginTransaction();  //.addToBackStack("GetSms")
                                 transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
                                 Bundle bundle = new Bundle();
 //                                bundle.putString("phone", phone.getText().toString());

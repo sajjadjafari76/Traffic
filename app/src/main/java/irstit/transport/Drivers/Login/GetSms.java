@@ -5,17 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.marozzi.roundbutton.RoundButton;
 import com.mukesh.OtpView;
@@ -41,6 +45,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
     private OtpView otpView;
     private RoundButton btn;
     private TextView timerText;
+    private ImageView synchornize;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +55,18 @@ public class GetSms extends Fragment implements View.OnClickListener {
         timerText = view.findViewById(R.id.GetSmsTimer);
         otpView = view.findViewById(R.id.GetSms_Otp);
         btn = view.findViewById(R.id.GetSms_Btn);
+        synchornize = view.findViewById(R.id.GetSmsresendNumber);
+        synchornize.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                synchornize.setVisibility(View.GONE);
+                GetPhoneRequest();
+                counter();
+            }
+        });
+
+
+
         counter();
         otpView.setOtpCompletionListener((String s) -> {
             if (!Utils.getInstance(getContext()).hasInternetAccess() && !Utils.getInstance(getContext()).isOnline()) {
@@ -210,6 +227,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
                 }
                 timerText.setText("0");
                 timerText.setText("");
+                synchornize.setVisibility(View.VISIBLE);
                 //  btn.stopAnimation();
                 // btn.revertAnimation();
 
@@ -217,4 +235,82 @@ public class GetSms extends Fragment implements View.OnClickListener {
         }.start();
     }
 
+    private void GetPhoneRequest() {
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST,
+                Globals.APIURL + ((getArguments() != null && getArguments().getString("state").equals("ChangePass")) ? "/changephone" : "/loginDV"),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.e("GetPhoneResponse", response + " |");
+
+                        try {
+                            JSONObject object = new JSONObject(response);
+
+                            if (object.getString("status").equals("true")) {
+
+
+                                // after getting phone number we must going to GetSms Class
+                                FragmentTransaction transaction = getActivity()
+                                        .getSupportFragmentManager().beginTransaction();
+                                transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("phone", getArguments().getString("phone"));
+                                if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+                                    bundle.putString("state", "ChangePass");
+                                }else {
+                                    bundle.putString("state", "null");
+                                }
+                                GetSms getSms = new GetSms();
+                                getSms.setArguments(bundle);
+                                transaction.replace(R.id.Toolbar_Frame, getSms);
+                                transaction.commit();
+
+
+                            }else if (object.getString("status").equals("false")){
+                                Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.e("GetPhoneError", error.toString() + " |");
+
+            }
+
+
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<>();
+                if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
+                    map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
+                    map.put("newphone", getArguments().getString("phone"));
+                }else {
+                    map.put("phone", getArguments().getString("phone"));
+                }
+
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                return map;
+            }
+        };
+
+        getPhoneRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(getPhoneRequest);
+
+    }
 }

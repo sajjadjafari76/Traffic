@@ -102,7 +102,7 @@ public class GetPhone extends Fragment implements View.OnClickListener {
 
                                 // after getting phone number we must going to GetSms Class
                                 FragmentTransaction transaction = getActivity()
-                                        .getSupportFragmentManager().beginTransaction().addToBackStack("GetSms");
+                                        .getSupportFragmentManager().beginTransaction();
                                 transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left);
                                 Bundle bundle = new Bundle();
                                 bundle.putString("phone", phone.getText().toString());
