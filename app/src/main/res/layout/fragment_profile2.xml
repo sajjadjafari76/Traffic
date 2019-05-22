@@ -5,60 +5,65 @@
     android:layout_height="match_parent"
     android:background="@drawable/profile2"
     android:orientation="vertical"
-    android:weightSum="5"
+    android:weightSum="6"
     tools:context=".PhonePay.ProfileFragment">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/t1"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize">
-
-
-            <ImageView
-                android:id="@+id/editButton"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/pen"
-
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/shabnam"
-                android:text="@string/pay_profile"
-                android:textColor="@color/mdtp_white"
-                android:textSize="18sp" />
-
-            <ImageView
-                android:id="@+id/righarrow"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginRight="12dp"
-                android:src="@drawable/rightarrow" />
-
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/L0"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.7"
+        android:layout_weight="2"
+
         >
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/t1"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="15dp"
+            android:layout_height="?android:attr/actionBarSize">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize">
+
+
+                <ImageView
+                    android:id="@+id/editButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="15dp"
+                    android:src="@drawable/pen"
+
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/shabnam"
+                    android:text="@string/pay_profile"
+                    android:textColor="@color/mdtp_white"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/righarrow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="12dp"
+                    android:src="@drawable/rightarrow" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
 
         <TextView
+            android:layout_below="@+id/t1"
             android:id="@+id/firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,6 +76,7 @@
 
         <TextView
             android:id="@+id/email"
+            android:layout_below="@+id/t1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -83,6 +89,7 @@
 
         <irstit.transport.PhonePay.CircularImageView
             android:id="@+id/circleImage"
+            android:layout_below="@+id/t1"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="40dp"
@@ -93,15 +100,13 @@
         <TextView
             android:id="@+id/accountInfo"
             android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/shabnam"
             android:text="  مشخصات حساب"
-            android:textColor="@color/mdtp_light_gray"
+            android:textColor="@color/phone_pay_profile_color"
             android:textSize="18sp"
             android:layout_alignParentBottom="true"
-
+            android:layout_centerHorizontal="true"
             />
 
 
@@ -112,17 +117,18 @@
         android:id="@+id/L1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
+        android:layout_weight="1.44"
         android:background="@drawable/profile_background_style"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:gravity="center"
+       >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
             android:orientation="horizontal">
 
             <TextView
@@ -135,8 +141,8 @@
                 android:fontFamily="@font/shabnam"
                 android:text="ایجاد شناسه کاربری"
                 android:textColor="@color/overlay_black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                 />
 
             <ImageView
                 android:id="@+id/phone_profile_left_arrow"
@@ -149,9 +155,9 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dp"
+
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -164,8 +170,8 @@
                 android:fontFamily="@font/shabnam"
                 android:text="شماره من"
                 android:textColor="@color/overlay_black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                 />
 
             <ImageView
                 android:id="@+id/phone_profile_phone_left_arrow"
@@ -178,9 +184,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -193,8 +197,8 @@
                 android:fontFamily="@font/shabnam"
                 android:text="بارکد من"
                 android:textColor="@color/overlay_black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                />
 
             <ImageView
                 android:id="@+id/phone_profile_mybrcode_left_arrow"
@@ -207,21 +211,21 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
+   <!--this cotainer must be fixed-->
+    <RelativeLayout
         android:id="@+id/L2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/profile_background_style"
-        android:orientation="vertical">
+       >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:id="@+id/sec"
+            >
 
             <TextView
                 android:id="@+id/phone_profile_security"
@@ -232,7 +236,7 @@
                 android:layout_marginTop="5dp"
                 android:fontFamily="@font/shabnam"
                 android:text="@string/security"
-                android:textColor="@color/mdtp_transparent_black"
+                android:textColor="@color/phone_pay_profile_color"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -240,12 +244,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/gener"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_centerInParent="true"
+           >
 
             <TextView
                 android:id="@+id/phone_profile_generate_pass"
@@ -256,8 +260,8 @@
                 android:fontFamily="@font/shabnam"
                 android:text="@string/generate_password"
                 android:textColor="@color/overlay_black"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                 />
 
             <ImageView
                 android:id="@+id/phone_profile_genetate_pass_left_arrow"
@@ -269,42 +273,40 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/etc"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="1"
-            android:gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            >
 
             <TextView
                 android:id="@+id/phone_profile_so_on"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
                 android:fontFamily="@font/shabnam"
                 android:text="@string/so_on"
                 android:textSize="14sp"
+                android:textColor="@color/phone_pay_profile_color"
+                android:layout_marginBottom="5dp"
                 android:textStyle="bold" />
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/L3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7"
+        android:gravity="center"
+        android:layout_weight="0.8"
         android:background="@drawable/profile_background_style"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="5dp"
-            android:layout_weight="0.2"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
@@ -317,7 +319,7 @@
                 android:text="@string/suggestion"
                 android:textColor="@color/overlay_black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                 />
 
             <ImageView
                 android:id="@+id/phone_profile_ending_suggestion_left_arrow"

@@ -11,6 +11,8 @@
     <!--  Drivers.Login    -->
     <color name="DriversLogin_Btn">#43add4</color>
     <color name="background_for_phone_pay">#746dba</color>
+    <color name="background_transction">#ebebeb</color>
+    <color name="background_transction_top">#b7b7b7</color>
 
 
 
@@ -346,4 +348,9 @@
     <color name="grey_800">#424242</color>
     <color name="grey_900">#212121</color>
     <color name="grey_1000">#1a1a1a</color>
+
+    <!--added by Habibullah-->
+
+    <color name="phone_pay_button_nav_icons">#ea016a</color>
+    <color name="phone_pay_profile_color">#979797</color>
 </resources>

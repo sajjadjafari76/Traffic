@@ -24,6 +24,7 @@
                 android:id="@+id/Search_Bk">
 
                 <ImageView
+                    android:id="@+id/searchimage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="10dp"

@@ -8,12 +8,13 @@
 
         <item
             android:id="@+id/phone_profile"
-            android:icon="@drawable/square"
+            android:icon="@drawable/phonepayprofile"
             android:title="" />
 
         <item
+
             android:id="@+id/comment"
-            android:icon="@drawable/paywallet"
+            android:icon="@drawable/phonepaydoublemessage"
             android:title=""
             />
 

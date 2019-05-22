@@ -9,6 +9,7 @@
     <!-- <uses-feature android:name="android.hardware.camera.autofocus"/> -->
     <!-- <code class="xml plain"/><uses-feature/> -->
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -25,14 +26,21 @@
     <!--android:supportsRtl=""-->
 
     <application
+
+
         android:name=".AppController.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_logo"
         android:label="@string/app_name"
 
         android:supportsRtl="false"
-        tools:replace="android:supportsRtl"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:supportsRtl">
+
+        <meta-data
+            android:name="co.ronash.pushe.token"
+            android:value="PUSHE_255899902820" />
+
         <activity android:name=".Citizens.CitizenMainActivity" />
         <activity android:name=".ViewPager.ViewInfo.ViewInfoTerminal" />
         <activity android:name=".Citizens.Account.CitizenLogin" />
@@ -54,11 +62,11 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".LetterRate" />
         <activity android:name=".News" />
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
 
 
-                  android:configChanges="keyboardHidden|orientation|screenSize"
-            >
+            android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -95,6 +103,7 @@
         <activity android:name=".Citizens.Criticals_Suggestion" />
         <activity android:name=".Drivers.Login.ActivityLogin" />
         <activity android:name=".MainActivity" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

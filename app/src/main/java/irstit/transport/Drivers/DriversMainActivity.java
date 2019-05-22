@@ -79,7 +79,6 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
         bottomNavigationMenuView = findViewById(R.id.DriversMainActivity_BottomNavigation);
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(this);
 
-
     }
 
 

@@ -30,7 +30,7 @@ import irstit.transport.Citizens.Account.CitizensAccountActivity;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.ViewPager.MainPager;
-import irstit.transport.Views.Utils;
+import co.ronash.pushe.Pushe;
 
 public class MainPage extends AppCompatActivity {
 
@@ -56,6 +56,8 @@ public class MainPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
+
+        Pushe.initialize(this,true);
 
         LinearLayout driver = findViewById(R.id.MainPage_Driver);
         LinearLayout citizen = findViewById(R.id.MainPage_Citizen);

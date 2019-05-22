@@ -6,19 +6,27 @@
     android:layout_height="match_parent"
     android:id="@+id/phonePaymainActivity"
     tools:context=".PhonePay.PhonePayMainActicity"
+
     >
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/FrameLayoutForPhonePayMainActivity"
-        />
+        android:layout_height="match_parent"
+        android:id="@+id/FrameLayoutForPhonePayMainActivity" />
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/ponebottonnav"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
         style="@style/Widget.BottomNavigationView"
         app:menu="@menu/phone_pay_button_navigation"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:itemIconSize="45dp"
+        android:paddingBottom="13dp"
+        android:paddingTop="8dp"
+        app:itemIconTint="@color/phone_pay_button_nav_icons"
+        android:background="@drawable/design_of_phonepay_down_nav"
+
+        />
 
 </RelativeLayout>

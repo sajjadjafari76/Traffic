@@ -44,6 +44,7 @@
     <string name="pay_profile">پروفایل</string>
     <string name="pay">پرداخت</string>
     <string name="increasing_balance">افزایش اعتبار</string>
+    <string name="increasing_bal">افزایش اعتبار</string>
     <string name="all_our_prices">تمامی قیمت های ما به تومان می باشد</string>
 
     <string name="pay_by_barcode">پرداخت از طریق اسکن  بارکد</string>
@@ -52,4 +53,13 @@
     <string name="generate_password">ایجاد رمز</string>
     <string name="so_on">موارد بیشتر</string>
     <string name="suggestion">ارسال نظرات</string>
+    <string name="wallet">کیف پول</string>
+    <string name="toman_balance">اعتبار : تومان</string>
+    <string name="amount_price">50,000</string>
+    <string name="list_of_price">لیست تراکنش ها</string>
+
+    <!--<string name="search_item"><![CDATA[جستجوی اشیا <br/> یافت شده]]></string>-->
+
+    <string name="sample_string">"   اشیاء  یافت شده "</string>
+
 </resources>
