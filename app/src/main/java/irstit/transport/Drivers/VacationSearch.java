@@ -71,7 +71,7 @@ public class VacationSearch extends Fragment {
 
         notConnectToInternet = view.findViewById(R.id.Delivery_Connectivity);
         notConnectToInternet=view.findViewById(R.id.Delivery_Connectivity);
-        reTry =view.findViewById(R.id.Delivery_Btn);
+        reTry = view.findViewById(R.id.Delivery_Btn);
         reTry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

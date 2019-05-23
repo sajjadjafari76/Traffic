@@ -26,20 +26,16 @@
     <!--android:supportsRtl=""-->
 
     <application
-
-
         android:name=".AppController.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_logo"
         android:label="@string/app_name"
-
         android:supportsRtl="false"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
 
-        <meta-data
-            android:name="co.ronash.pushe.token"
-            android:value="PUSHE_255899902820" />
+        <meta-data android:name="co.ronash.pushe.token" android:value="PUSHE_474039343941"/>
 
         <activity android:name=".Citizens.CitizenMainActivity" />
         <activity android:name=".ViewPager.ViewInfo.ViewInfoTerminal" />
@@ -64,8 +60,6 @@
         <activity android:name=".News" />
         <activity
             android:name=".SplashScreen"
-
-
             android:configChanges="keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -104,14 +98,15 @@
         <activity android:name=".Drivers.Login.ActivityLogin" />
         <activity android:name=".MainActivity" />
 
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" />
+        <!--<meta-data-->
+            <!--android:name="com.google.android.geo.API_KEY"-->
+            <!--android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" />-->
 
         <activity android:name=".VoiceRecoeder" />
         <activity android:name=".Citizens.complaint.Complaint" />
         <activity android:name=".PhonePay.pay_by_recipient_code"></activity>
+
+
     </application>
 
 

@@ -12,6 +12,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.io.File;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataBase.ParentDBManger;
 import irstit.transport.DataModel.DriverInfoModel;
@@ -30,6 +31,7 @@ public class AppController extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        Pushe.initialize(this,true);
 
         if (!databaseExist()) {
             Log.e(TAG, "Database11 : database not create");

@@ -175,7 +175,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         configNews();
 
 
-
         MainActivity_Date.setText(Utilities.getCurrentShamsidate());
     }
 

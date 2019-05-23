@@ -25,12 +25,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.CitizensAccountActivity;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.ViewPager.MainPager;
-import co.ronash.pushe.Pushe;
 
 public class MainPage extends AppCompatActivity {
 
@@ -63,9 +63,6 @@ public class MainPage extends AppCompatActivity {
         LinearLayout citizen = findViewById(R.id.MainPage_Citizen);
         LinearLayout site = findViewById(R.id.MainPage_Site);
         LinearLayout dial = findViewById(R.id.MainPage_Dial1);
-
-
-
 
 
         driver.setOnClickListener(
