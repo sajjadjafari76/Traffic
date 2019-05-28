@@ -14,6 +14,7 @@ import irstit.transport.Citizens.CitizenMainActivity;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.Drivers.DriverMainActivityTwo;
 import irstit.transport.MainActivity;
+import irstit.transport.PhonePay.PhonePayMainActicity;
 import irstit.transport.R;
 import irstit.transport.ViewPager.ViewInfo.ViewInfo;
 
@@ -46,7 +47,9 @@ public class Page_2 extends Fragment {
         });
 
         wallet.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "این قسمت در دست ساخت می باشد", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getContext(), "این قسمت در دست ساخت می باشد", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getContext(),PhonePayMainActicity.class));
+
         });
 
         Taxi.setOnClickListener(v -> {

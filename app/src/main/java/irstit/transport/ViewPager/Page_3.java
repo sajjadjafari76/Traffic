@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.R;
 import irstit.transport.ViewPager.ViewInfo.ViewInfo;
+import irstit.transport.annoucment.announcement;
 
 
 public class Page_3 extends Fragment {
@@ -29,9 +30,16 @@ public class Page_3 extends Fragment {
 
         LinearLayout critical = view.findViewById(R.id.Page3_Critical);
         LinearLayout project = view.findViewById(R.id.Page3_Project);
+        LinearLayout anouncement = view.findViewById(R.id.announcement_spe);
 
         critical.setOnClickListener(v-> { startActivity(new Intent(getContext(), Criticals_Suggestion.class)); });
         project.setOnClickListener(v-> { startActivity(new Intent(getContext(), ViewInfo.class)); });
+
+        anouncement.setOnClickListener(V-> {
+
+            startActivity(new Intent(getContext(),announcement.class));
+
+        });
 
         return view;
 

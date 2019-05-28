@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.CitizenGetInfo;
 import irstit.transport.Globals;
@@ -285,6 +286,7 @@ public class CitizenGetSmsForgotten extends Fragment {
                 Log.e("step4",getArguments().getString("phone"));
                 map.put("phone", getArguments().getString("phone"));
                 map.put("verifycode", otpView.getText().toString());
+                map.put("push_id",Pushe.getPusheId(getActivity()));
                 return map;
             }
 

@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.forgettenpasswrod.CitizensAccountActivityForgotton;
 import irstit.transport.DataBase.DBManager;
@@ -130,6 +131,7 @@ public class CitizenLogin extends AppCompatActivity {
 
                 map.put("phone", Phone);
                 map.put("pass", Pass);
+                map.put("push_id",Pushe.getPusheId(getApplicationContext()));
 
 
                 return map;

@@ -30,6 +30,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.CitizenLogin;
 import irstit.transport.DataBase.DBManager;
@@ -117,7 +118,6 @@ public class GetSms extends Fragment implements View.OnClickListener {
                                 // this variable is used for identifying person's role
                                 CitizenLogin golobalVaribale = new CitizenLogin();
                                 golobalVaribale.identifyingOfPerson =1;
-
                                 getActivity().finish();
                             } else {
                                 Toast.makeText(getContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
@@ -186,6 +186,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
 
                 map.put("validationCode", otpView.getText().toString());
                 map.put("phone", getArguments().getString("phone"));
+                map.put("push_id", Pushe.getPusheId(getActivity()));
                 return map;
             }
 
@@ -293,8 +294,10 @@ public class GetSms extends Fragment implements View.OnClickListener {
                 if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
                     map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
                     map.put("newphone", getArguments().getString("phone"));
+//                    map.put("push_id",Pushe.getPusheId(getContext()));
                 }else {
                     map.put("phone", getArguments().getString("phone"));
+//                    map.put("push_id",Pushe.getPusheId(getActivity()));
                 }
 
                 return map;

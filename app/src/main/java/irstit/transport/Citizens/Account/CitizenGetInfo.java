@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.CitizenModel;
@@ -134,6 +135,7 @@ public class CitizenGetInfo extends Fragment  {
                 map.put("pass", Pass);
                 map.put("email", Email);
                 map.put("name", Name);
+                map.put("push_id", Pushe.getPusheId(getActivity()));
 
 
                 return map;

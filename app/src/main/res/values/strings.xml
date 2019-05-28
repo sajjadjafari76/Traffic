@@ -61,5 +61,11 @@
     <!--<string name="search_item"><![CDATA[جستجوی اشیا <br/> یافت شده]]></string>-->
 
     <string name="sample_string">"   اشیاء  یافت شده "</string>
+    <string name="announcement_main_text"> متن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستی
+                </string>
+
+    <string name="newTakestan">تاکستان جدید</string>
+    <string name="announcement_date">2019-05-07</string>
+    <string name="announcement_link">www.takestan.ir/download/me</string>
 
 </resources>

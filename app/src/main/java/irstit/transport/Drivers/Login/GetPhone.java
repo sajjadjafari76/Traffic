@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import co.ronash.pushe.Pushe;
 import irstit.transport.AppController.AppController;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.Globals;
@@ -143,8 +144,11 @@ public class GetPhone extends Fragment implements View.OnClickListener {
                 if ((getArguments() != null && getArguments().getString("state").equals("ChangePass"))) {
                     map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
                     map.put("newphone", phone.getText().toString());
+
                 }else {
                     map.put("phone", phone.getText().toString());
+
+
                 }
 
                 return map;

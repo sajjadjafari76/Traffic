@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -57,7 +58,11 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_page);
 
-        Pushe.initialize(this,true);
+        String push_id;
+        Pushe.initialize(this, true);
+
+
+
 
         LinearLayout driver = findViewById(R.id.MainPage_Driver);
         LinearLayout citizen = findViewById(R.id.MainPage_Citizen);
@@ -67,89 +72,86 @@ public class MainPage extends AppCompatActivity {
 
         driver.setOnClickListener(
 
-                v->{
-                      //Utils.getInstance(getApplicationContext()).isConnectingToInternet() == true
+                v -> {
+                    //Utils.getInstance(getApplicationContext()).isConnectingToInternet() == true
 
                     new CheckingInternetConnectionAccesss(internet -> {
 
-                        if(internet == true){
+                        if (internet == true) {
                             startActivity(new Intent(getBaseContext(), ActivityLogin.class));
-                     }
-
-                        else {
-                            Dialog  dialog = new Dialog(MainPage.this);
+                        } else {
+                            Dialog dialog = new Dialog(MainPage.this);
                             dialog.setContentView(R.layout.dialog_for_no_internet);
                             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 //                            dialog.setTitle("اینترنت در دسترس نیست!");
                             dialog.setCancelable(true);
-                            Button button = (Button)dialog.findViewById(R.id.Delivery_Btn_NotInternet);
-                                  button.setOnClickListener(new View.OnClickListener() {
-                                      @Override
-                                      public void onClick(View view) {
-                                          dialog.dismiss();
-                                      }
-                                  });
-                               dialog.show();
-                           // Toast.makeText(getApplicationContext(),"عدم ارتباط با اینترنت",Toast.LENGTH_LONG).show();
+                            Button button = (Button) dialog.findViewById(R.id.Delivery_Btn_NotInternet);
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            dialog.show();
+                            // Toast.makeText(getApplicationContext(),"عدم ارتباط با اینترنت",Toast.LENGTH_LONG).show();
                         }
                         /* do something with boolean response */
                     });
 
 
                 });
-        citizen.setOnClickListener(v->{
-           // if(Utils.getInstance(getApplicationContext()).isConnectingToInternet() == true)
-            new CheckingInternetConnectionAccesss(internet -> {
+        citizen.setOnClickListener(v -> {
+                    // if(Utils.getInstance(getApplicationContext()).isConnectingToInternet() == true)
+                    new CheckingInternetConnectionAccesss(internet -> {
 
-                 if(internet == true){
+                        if (internet == true) {
 
-                     startActivity(new Intent(getBaseContext(), CitizensAccountActivity.class));
+                            startActivity(new Intent(getBaseContext(), CitizensAccountActivity.class));
 
-                 }   else {
+                        } else {
 
-                     Dialog  dialog = new Dialog(MainPage.this);
-                     dialog.setContentView(R.layout.dialog_for_no_internet);
-                     dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            Dialog dialog = new Dialog(MainPage.this);
+                            dialog.setContentView(R.layout.dialog_for_no_internet);
+                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 //                     dialog.setTitle("اینترنت در دسترس نیست!");
 
-                     dialog.setCancelable(true);
-                     Button button = (Button)dialog.findViewById(R.id.Delivery_Btn_NotInternet);
+                            dialog.setCancelable(true);
+                            Button button = (Button) dialog.findViewById(R.id.Delivery_Btn_NotInternet);
 //                     Toast.makeText(getApplicationContext(),"عدم ارتباط با اینترنت",Toast.LENGTH_LONG).show();
 
 
-                     button.setOnClickListener(new View.OnClickListener() {
-                         @Override
-                         public void onClick(View view) {
-                             dialog.dismiss();
-                         }
-                     });
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
 
 
-                     dialog.show();
-                 }
-            });
+                            dialog.show();
+                        }
+                    });
 
-        }
+                }
 
-            );
-        dial.setOnClickListener(v->{
+        );
+        dial.setOnClickListener(v -> {
 
             Intent dial1 = new Intent();
             dial1.setAction("android.intent.action.DIAL");
-            dial1.setData(Uri.parse("tel:"+"02835237500"));
+            dial1.setData(Uri.parse("tel:" + "02835237500"));
             startActivity(dial1);
 
         });
-        site.setOnClickListener(v->{
+        site.setOnClickListener(v -> {
 
             Uri uri = Uri.parse("http://www.traffictakestan.ir"); // missing 'http://' will cause crashed
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
 
         });
-
 
 
     }
@@ -186,17 +188,17 @@ public class MainPage extends AppCompatActivity {
 
                         } else if (object.getString("status").equals("false")) {
 
-                            Toast.makeText(getApplicationContext(),"خطا در دریافت اطلاعات از سرور",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "خطا در دریافت اطلاعات از سرور", Toast.LENGTH_LONG).show();
 
                         }
                     } catch (Exception e) {
-                       e.printStackTrace();
+                        e.printStackTrace();
                     }
                 },
                 error -> {
 
                     Log.e("ListLeavesError2", error.toString() + " |");
-                    Toast.makeText(getApplicationContext(),"خطا در اتصال به سرور",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "خطا در اتصال به سرور", Toast.LENGTH_LONG).show();
 
 
                 }) {
@@ -228,14 +230,99 @@ public class MainPage extends AppCompatActivity {
 
     public void getlog(String veryLongString) {
         int maxLogSize = 1500;
-        for(int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+        for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
             int start = i * maxLogSize;
-            int end = (i+1) * maxLogSize;
+            int end = (i + 1) * maxLogSize;
             end = end > veryLongString.length() ? veryLongString.length() : end;
             Log.e("ShowAssChild1", veryLongString.substring(start, end));
         }
 
-        Log.e("work","yessssssssss");
+        Log.e("work", "yessssssssss");
+    }
+
+
+    //general_notifications request
+
+    private void generalRequest() {
+
+        StringRequest general_request = new StringRequest(Request.Method.POST, Globals.APIURL + "/testpush", response -> {
+
+            getlog(response);
+
+            try {
+                JSONObject response_object = new JSONObject(response);
+
+//                JSONObject object = new JSONObject(response);
+                Log.e("json_contnet",response_object.toString());
+
+                if (response_object.getString("status").equals("true")) {
+
+                    Log.v("general_response_true", "yesssssssssss_salehi");
+                    Toast.makeText(this, "yesssssssssss_salehi", Toast.LENGTH_LONG).show();
+//                    Log.e("userData", response_object.getString("userdata"));
+//                    JSONArray jsonArray = response_object.getJSONArray("complainttype");
+
+//                    SharedPreferences shared = getSharedPreferences("complaint", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = shared.edit();
+//                    editor.putString("complaintArray", object.toString());
+//                    editor.commit();
+
+//
+//                    Log.e("Complaint", jsonArray.toString());
+//                    Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
+//                    mainIntent.putExtra("data", response);
+//                    mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(mainIntent);
+//                    finish();
+
+                } else if (response_object.getString("status").equals("false")) {
+
+                    Toast.makeText(getApplicationContext(), "خطا در دریافت اطلاعات از سرور", Toast.LENGTH_LONG).show();
+
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }, error -> {
+
+            Log.e("general_server_error", error.toString() + " |");
+            Toast.makeText(getApplicationContext(), "خطا در اتصال به سرور", Toast.LENGTH_LONG).show();
+
+
+
+        }) {
+
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<>();
+                map.put("action", "general");
+
+
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                Map<String, String> map = new HashMap<>();
+
+                map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+
+
+                return map;
+
+            }
+        };
+
+        general_request.setRetryPolicy(new DefaultRetryPolicy(
+                10000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(general_request);
+
     }
 
 }
