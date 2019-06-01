@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Drivers.DriversMainActivity">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/DriversMainActivity_BottomNavigation"
+        android:id="@+id/DriversMainActivity_Container"/>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/DriversMainActivity_BottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EEE"
+        app:menu="@menu/drivers_main_menu"
+        android:theme="@style/Widget.BottomNavigationView"
+        android:layout_alignParentBottom="true" />
+
+
+
+</RelativeLayout>

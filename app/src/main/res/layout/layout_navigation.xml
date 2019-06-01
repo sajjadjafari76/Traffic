@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:elevation="1dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:cardCornerRadius="0dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal"
+        android:padding="10dp">
+
+
+        <ImageView
+            android:id="@+id/Navigation_Image"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/logo" />
+
+
+        <RelativeLayout
+            android:id="@+id/Navigation_Login"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/Navigation_Image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:background="#1BF8F8F8"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/Navigation_Enter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/iransans"
+                android:gravity="center"
+                android:text="ورود راننده"
+                android:padding="10dp"
+                android:textColor="#FFF"
+                android:textSize="10sp" />
+
+            <ImageView
+                android:id="@+id/nav_t"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="1dp"
+                android:layout_toLeftOf="@id/Navigation_Enter"
+                app:srcCompat="@drawable/ic_chevron_left" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/Navigation_Image"
+            android:id="@+id/Navigation_Info"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/iransansbold"
+                android:gravity="center"
+                tools:text="مرتضی طاهرخانی"
+                android:textColor="#FFF"
+                android:textSize="15sp"
+                android:id="@+id/Navigation_Info_Name"/>
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:gravity="center"
+                tools:text="کد خودرو : 30"
+                android:textColor="#FFF"
+                android:textSize="10sp"
+                android:id="@+id/Navigation_Info_Code"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>

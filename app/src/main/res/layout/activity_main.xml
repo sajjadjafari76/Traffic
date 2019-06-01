@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    tools:context=".MainActivity"
+    android:id="@+id/MainActivity_Drawer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/MainActivity_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="4dp"
+            app:contentInsetStart="0dp"
+            android:background="?attr/colorPrimary"
+            app:contentInsetStartWithNavigation="0dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/MainActivity_NavigatorIcon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    app:srcCompat="@drawable/ic_menu" />
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/MainActivity_NavigatorIcon"
+                    android:src="@drawable/logo" />
+
+
+                <RelativeLayout
+                    android:id="@+id/MainActivity_Login"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="9dp"
+                    android:background="#1BF8F8F8"
+                    android:layout_alignParentLeft="true">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="2dp"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="center"
+                        android:text="@string/MainActivity_Login_Text_2"
+                        android:textColor="#FFF"
+                        android:textSize="14sp"
+                        android:id="@+id/MainActivity_Login_Text"/>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_alignParentLeft="true"
+                        app:srcCompat="@drawable/ic_chevron_left" />
+
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/MainActivity_Toolbar"
+            android:orientation="vertical"
+            android:weightSum="5">
+
+            <com.smarteist.autoimageslider.SliderLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:id="@+id/MainActivity_Slider"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/img_bk"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:id="@+id/MainActivity_Complaint">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.4"
+                        android:padding="7dp"
+                        android:src="@drawable/img3" />
+
+                    <irstit.transport.Views.CustomTextView
+                        android:id="@+id/MainActivity_Txt3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/shabnam"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/MainActivity_img3"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:id="@+id/MainActivity_Search">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.4"
+                        android:padding="7dp"
+                        android:src="@drawable/img2" />
+
+                    <irstit.transport.Views.CustomTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/shabnam"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/MainActivity_Search"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="2"
+                    android:id="@+id/MainActivity_RegisterObject">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1.4"
+                        android:padding="7dp"
+                        android:src="@drawable/img1" />
+
+                    <irstit.transport.Views.CustomTextView
+                        android:id="@+id/MainActivity_Txt1"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.6"
+                        android:fontFamily="@font/shabnam"
+                        android:gravity="top|center_horizontal"
+                        android:text="@string/MainActivity_img1"
+                        android:textColor="#000" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.7"
+                android:orientation="vertical"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <irstit.transport.Views.CustomTextView
+                    android:id="@+id/MainActivity_Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:text="تازه ترین اخبار"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/colorPrimary" />
+
+
+                <TextView
+                    android:id="@+id/MainActivity_Additional"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:text="بیشتر"
+                    android:fontFamily="@font/shabnam"
+                    android:layout_alignParentLeft="true"
+                    android:textColor="@color/colorPrimary"
+                    android:drawablePadding="-5dp"
+                    android:drawableLeft="@drawable/ic_chevron_left_blue"
+                    android:background="@drawable/ic_bk_additional"
+                    android:paddingRight="8dp"/>
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/MainActivity_Recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/MainActivity_Text"
+                    android:layout_marginBottom="8dp"
+                    android:paddingTop="5dp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.3"
+                android:background="@color/MainActivity_footer">
+
+                <ImageView
+                    android:id="@+id/ActivityMain_icon"
+                    android:layout_width="@dimen/spacing_mxlarge"
+                    android:layout_height="@dimen/spacing_mxlarge"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    app:srcCompat="@drawable/ic_calendar" />
+
+
+                <irstit.transport.Views.CustomTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_toLeftOf="@+id/ActivityMain_icon"
+                    tools:text="امروز سه شنبه 1396/09/10"
+                    android:textColor="#FFF"
+                    android:id="@+id/MainActivity_Date"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="false"
+        app:headerLayout="@layout/layout_navigation"
+        android:id="@+id/MAinActivity_NavigationView">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="165dp">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/MainActivity_Navigation_RecyClerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/img_footer_navigation"
+                android:layout_alignParentBottom="true"/>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

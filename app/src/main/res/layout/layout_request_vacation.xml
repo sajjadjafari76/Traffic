@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="118dp"
+    android:elevation="1dp"
+    android:layout_marginBottom="5dp"
+    android:id="@+id/RequestVacation_Root"
+    app:cardCornerRadius="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
+        android:orientation="vertical"
+        android:background="#5E000000"
+        android:backgroundTint="#5E000000">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:elevation="1dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#21C89A"
+                android:fontFamily="@font/shabnam"
+                android:gravity="center_vertical"
+                android:paddingRight="@dimen/spacing_middle"
+                android:text="کد رهگیری : 125-5468-78"
+                android:textColor="@color/overlay_light_90"
+                android:id="@+id/RequestVacation_Code"
+                android:layout_gravity="right"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_list_white"
+                android:id="@+id/RequestVacation_Print"/>
+
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransansbold"
+                android:gravity="center"
+                android:text="از  1396/6/25 "
+                android:id="@+id/RequestVacation_ToDate"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="استحقاقی"
+                android:fontFamily="@font/shabnam"
+                android:background="@drawable/ic_request_vacation_back"
+                android:id="@+id/RequestVacation_Type"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransansbold"
+                android:gravity="center"
+                android:text="از  1395/6/25 "
+                android:id="@+id/RequestVacation_FromDate"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#21C89A"
+            android:layout_marginRight="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_middle"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:fontFamily="@font/shabnam"
+            android:textSize="@dimen/spacing_xmiddle"
+            android:layout_marginRight="@dimen/spacing_middle"
+            android:text="توضیحات : سفر به مشهد مقدس"
+            android:gravity="center_vertical"
+            android:id="@+id/RequestVacation_Desc"/>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

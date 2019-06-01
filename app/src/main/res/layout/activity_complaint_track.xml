@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Citizens.complaint.ComplaintTrack"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        android:id="@+id/ComplaintTrack_Card">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_search"
+                android:padding="8dp"
+                android:id="@+id/ComplaintTrack_BtnSearch"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/ComplaintTrack_BtnSearch"
+                android:background="#FFF"
+                android:inputType="number"
+                android:hint="کد پیگیری خود را وارد کنید"
+                android:fontFamily="@font/shabnam"
+                android:padding="@dimen/spacing_medium"
+                android:textSize="@dimen/spacing_large"
+                android:id="@+id/ComplaintTrack_Search"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="1dp"
+        android:layout_below="@+id/ComplaintTrack_Card"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/ComplaintTrack_Root"
+        app:cardCornerRadius="2dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#5E000000"
+            android:backgroundTint="#5E000000">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:elevation="1dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#21C89A"
+                    android:fontFamily="@font/shabnam"
+                    android:gravity="center_vertical"
+                    android:paddingRight="@dimen/spacing_middle"
+                    android:textColor="@color/overlay_light_90"
+                    android:id="@+id/ComplaintTrack_Code"
+                    android:layout_gravity="right"/>
+
+                <!--<ImageView-->
+                    <!--android:layout_width="35dp"-->
+                    <!--android:layout_height="35dp"-->
+                    <!--android:padding="5dp"-->
+                    <!--app:srcCompat="@drawable/ic_list_white"-->
+                    <!--android:id="@+id/RequestVacation_Print"/>-->
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/iransansbold"
+                    android:gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/spacing_middle"
+                    android:id="@+id/ComplaintTrack_Date"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#21C89A"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:layout_marginLeft="@dimen/spacing_middle"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/shabnam"
+                android:textSize="@dimen/spacing_xmiddle"
+                android:layout_marginRight="@dimen/spacing_middle"
+                android:gravity="center_vertical|right"
+                android:id="@+id/ComplaintTrack_Response"/>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/ComplaintTrack_Status"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/ComplaintTrack_Card"
+        android:gravity="center"
+        android:text="شکایت شما در انتظار بررسی مدیر سیستم می باشد"
+        android:textColor="#000"
+        android:visibility="gone"
+        android:fontFamily="@font/shabnam"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCCCCCCC"
+        android:visibility="gone"
+        android:id="@+id/ComplaintTrack_Loading">
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:mk_type="TwinFishesSpinner"
+            android:layout_centerInParent="true"
+            app:mk_color="@color/colorPrimary" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

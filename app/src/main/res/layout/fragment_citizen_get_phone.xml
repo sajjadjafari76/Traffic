@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+
+    <irstit.transport.Views.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/DriversLogin_GetPhoneText"
+        android:textColor="#FFF"
+        android:gravity="center"
+        android:textSize="@dimen/DriversLogin_GetPhone"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/CitizenGetPhone_Text"/>
+
+    <irstit.transport.Views.CustomEdittext
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/DriversLogin_GetPhoneEditText"
+        android:inputType="number"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="@dimen/DriversLogin_GetPhone"
+        android:padding="6dp"
+        android:textDirection="ltr"
+        android:textColorHint="@color/grey_20"
+        android:textColor="@color/overlay_black"
+        android:id="@+id/CitizenGetPhone_Edittext"
+        android:background="@drawable/dr_getphone_edittext"
+        android:drawableLeft="@drawable/ic_getphone_smartphone"/>
+
+    <com.marozzi.roundbutton.RoundButton
+        android:id="@+id/CitizenGetPhone_Btn"
+        android:layout_width="200dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:text="ارسال"
+        android:fontFamily="@font/shabnam"
+        app:rb_animation_alpha="false"
+        app:rb_animation_progress_color="@color/colorAccent"
+        app:rb_animation_progress_padding="8dp"
+        app:rb_animation_progress_width="2dp"
+        app:rb_animation_progress_style="circle"
+        app:rb_animation_corner_radius="20dp"
+        app:rb_animation_duration="500"
+        app:rb_background_color="@android:color/transparent"
+        app:rb_background_color_pressed="@color/colorPrimary"
+        app:rb_corner_color="@color/grey_5"
+        app:rb_corner_color_pressed="@color/colorPrimary"
+        app:rb_corner_radius="2dp"
+        app:rb_corner_width="1dp"
+        app:rb_text_color="@color/grey_5"
+        app:rb_text_color_pressed="@android:color/white" />
+
+
+
+</LinearLayout>

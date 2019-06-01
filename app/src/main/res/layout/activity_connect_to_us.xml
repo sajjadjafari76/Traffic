@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConnectToUs">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/ConnectToUs_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ConnectToUs_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="ارتباط با ما"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="2"
+        android:layout_below="@+id/ConnectToUs_Toolbar">
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:elevation="2dp">
+
+            <WebView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map"
+                />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/loadingprogressbar"
+                android:visibility="gone"
+                />
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2"
+            android:layout_margin="@dimen/spacing_small"
+            android:elevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/spacing_large"
+                android:orientation="vertical">
+
+                <irstit.transport.Views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_telephone"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="(028) - 35237500"
+                    android:gravity="right|center_vertical"
+                    android:textSize="@dimen/spacing_large"
+                    android:textColor="#000"
+                    android:drawablePadding="@dimen/spacing_large"/>
+
+                <irstit.transport.Views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_placeholder"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="تاکستان - بلوار امام خمینی (ره) - روبروی باسکول قدیم - سازمان حمل و نقل همگانی تاکستان"
+                    android:gravity="right|center_vertical"
+                    android:textSize="@dimen/spacing_large"
+                    android:textColor="#000"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:drawablePadding="@dimen/spacing_large"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="#000"
+                    android:layout_margin="@dimen/spacing_mxlarge"/>
+
+
+                <irstit.transport.Views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_envelope"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="Info@TrafficTakestan.ir"
+                    android:gravity="right|center_vertical"
+                    android:textSize="@dimen/spacing_large"
+                    android:textColor="#000"
+                    android:drawablePadding="@dimen/spacing_large"/>
+
+                <irstit.transport.Views.CustomTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_instagram_logo"
+                    android:padding="@dimen/spacing_middle"
+                    android:text="TrafficTakestan.ir"
+                    android:gravity="right|center_vertical"
+                    android:textSize="@dimen/spacing_large"
+                    android:textColor="#000"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:drawablePadding="@dimen/spacing_large"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

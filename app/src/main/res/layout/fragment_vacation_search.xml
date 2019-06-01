@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Drivers.VacationSearch"
+    android:backgroundTint="#FFF"
+    android:id="@+id/fragment_vacation"
+    android:background="#FFF">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
+        android:elevation="2dp"
+        android:id="@+id/RequestVacation_CardSearch">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/img_search"
+                android:padding="8dp"
+                android:id="@+id/RequestVacation_Search"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/RequestVacation_Search"
+                android:background="#FFF"
+                android:hint="جستجوی مرخصی"
+                android:fontFamily="@font/shabnam"
+                android:padding="@dimen/spacing_medium"
+                android:textSize="@dimen/spacing_large"
+                android:id="@+id/RequestVacation_TextSearch"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@+id/RequestVacation_CardSearch"
+        android:id="@+id/RequestVacation_Status"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/app1"
+                android:visibility="visible"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/first_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="تایید نشده"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk_22"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/app2"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/second_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="در انتظار بررسی"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk_11"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/app3"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/third_app"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:text="تایید شده"
+                    android:textSize="10sp"
+                    android:fontFamily="@font/shabnam"/>
+
+                <View
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:background="@drawable/ic_circle_bk"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/RequestVacation_Status"
+        android:id="@+id/RequestVacation_Recycler"
+        android:visibility="gone">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#52CCCCCC"
+        android:visibility="gone"
+        android:id="@+id/VacationSearch_Loading"
+        android:layout_below="@+id/RequestVacation_Status">
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:mk_type="TwinFishesSpinner"
+            android:layout_centerInParent="true"
+            app:mk_color="@color/colorPrimary" />
+
+
+    </RelativeLayout>
+
+    <irstit.transport.Views.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/RequestVacation_Status"
+        android:fontFamily="@font/shabnam"
+        android:text="گزارشی یافت نشد"
+        android:gravity="center"
+        android:textSize="@dimen/spacing_smlarge"
+        android:textColor="#000"
+        android:id="@+id/VacationSearch_Empty"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/Delivery_Connectivity"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            app:srcCompat="@drawable/wifi_off"
+            android:layout_marginBottom="12dp"/>
+
+        <irstit.transport.Views.CustomTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="شما به اینترنت متصل نمی باشید!"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:textColor="#000"/>
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="18dp"
+            android:text="تلاش مجدد"
+            android:textSize="12sp"
+                android:id="@+id/Delivery_Btn"
+            android:textColor="#000"
+            android:background="@drawable/bg_network"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

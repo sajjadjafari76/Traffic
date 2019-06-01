@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:id="@+id/Delivery_Connectivity"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        app:srcCompat="@drawable/wifi_off"
+        android:layout_marginBottom="12dp"/>
+
+    <irstit.transport.Views.CustomTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="شما به اینترنت متصل نمی باشید!"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:textColor="#000"/>
+
+    <Button
+        android:layout_width="130dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="18dp"
+        android:text=" باشه !"
+        android:textSize="12sp"
+        android:id="@+id/Delivery_Btn_NotInternet"
+        android:textColor="#000"
+        android:background="@drawable/bg_network"/>
+
+</LinearLayout>

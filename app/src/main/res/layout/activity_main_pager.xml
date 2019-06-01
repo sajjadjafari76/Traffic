@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainPager_Drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_bg"
+        android:orientation="vertical"
+        tools:context=".ViewPager.MainPager">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/MainPager_Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/MainPager_NavigatorIcon"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    app:srcCompat="@drawable/ic_menu" />
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="18dp"
+                    android:layout_toLeftOf="@id/MainPager_NavigatorIcon"
+                    android:src="@drawable/logo" />
+
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/MainAPager_ViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/MainPage_Indicator"
+            android:layout_below="@+id/MainPager_Toolbar" />
+
+        <!--<com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--app:dotColor="#ff0000"-->
+        <!--android:layout_above="@+id/MainPage_Bottom"-->
+        <!--android:id="@+id/MainPage_Indicator"/>-->
+
+        <!--<com.rd.PageIndicatorView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--app:piv_animationType="scale"-->
+        <!--app:piv_dynamicCount="true"-->
+        <!--app:piv_interactiveAnimation="true"-->
+        <!--app:piv_selectedColor="@color/grey_50"-->
+        <!--app:piv_unselectedColor="@color/grey_300"-->
+        <!--app:piv_viewPager="@id/MainAPager_ViewPager"-->
+        <!--app:piv_padding="12dp"-->
+        <!--android:layout_above="@+id/MainPage_Bottom"-->
+        <!--android:id="@+id/MainPage_Indicator"-->
+        <!--app:piv_radius="8dp" />-->
+
+        <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+            android:id="@+id/MainPage_Indicator"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_above="@+id/MainPage_Bottom"
+            android:gravity="center"
+            app:dotsColor="@color/mdtp_white"
+            app:dotsCornerRadius="8dp"
+            app:dotsSize="16dp"
+            app:dotsSpacing="4dp"
+            app:dotsWidthFactor="2.5"
+            app:progressMode="true"
+            app:selectedDotColor="@color/blue_700" />
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_above="@+id/MainPage_Bottom"-->
+            <!--android:orientation="horizontal">-->
+
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginEnd="2dp"-->
+                <!--android:textColor="#000"-->
+                <!--android:id="@+id/minute"-->
+                <!--android:text="0"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/timer2"-->
+                <!--android:textColor="#000"-->
+                <!--android:text="0"-->
+                <!--/>-->
+
+            <!--<com.marozzi.roundbutton.RoundButton-->
+
+                <!--android:id="@+id/workbutton"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:rb_animation_alpha="false"-->
+                <!--app:rb_animation_progress_color="@color/colorAccent"-->
+                <!--app:rb_animation_progress_padding="8dp"-->
+                <!--app:rb_animation_progress_width="2dp"-->
+                <!--app:rb_animation_progress_style="circle"-->
+                <!--app:rb_animation_corner_radius="20dp"-->
+                <!--app:rb_animation_duration="500"-->
+                <!--app:rb_background_color="@android:color/transparent"-->
+                <!--app:rb_background_color_pressed="@color/colorPrimary"-->
+                <!--app:rb_corner_color="@color/grey_5"-->
+                <!--app:rb_corner_color_pressed="@color/colorPrimary"-->
+                <!--app:rb_corner_radius="2dp"-->
+                <!--app:rb_corner_width="1dp"-->
+                <!--app:rb_text_color="@color/grey_5"-->
+                <!--app:rb_text_color_pressed="@android:color/white" />-->
+
+
+            <!--/>-->
+
+
+
+
+        <LinearLayout
+            android:id="@+id/MainPage_Bottom"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#3293B8"
+                android:gravity="center"
+                android:id="@+id/MainPager_Dial">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/shabnam"
+                    android:text="تماس با ما"
+                    android:textColor="#FFF" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_call" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="?attr/colorPrimary"
+                android:gravity="center"
+                android:id="@+id/MainPager_Site">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="@font/shabnam"
+                    android:text="ورود به سایت"
+                    android:textColor="#FFF" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_domain" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/MAinActivity_NavigationView_3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:fitsSystemWindows="false"
+        app:headerLayout="@layout/layout_navigation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="165dp">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/MainPager_Navigation_RecyClerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:src="@drawable/img_footer_navigation" />
+
+        </RelativeLayout>
+
+    </android.support.design.widget.NavigationView>
+
+</android.support.v4.widget.DrawerLayout>

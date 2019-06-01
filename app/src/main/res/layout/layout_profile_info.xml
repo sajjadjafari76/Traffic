@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#F1F1F1"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="نام : سجاد"
+        android:fontFamily="@font/shabnam"
+        android:textColor="#000"
+        android:id="@+id/ProfileInfo_Text"/>
+
+</RelativeLayout>

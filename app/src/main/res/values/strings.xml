@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">TrafficTakestan</string>
+
+    <!--   Login    -->
+    <string name="Login_Toolbar"> ورود </string>
+
+    <!--  Drivers.Login.getPhone    -->
+    <string name="DriversLogin_GetPhoneText"> شماره همراه خود را برای دریافت کد وارد کنید. </string>
+    <string name="forgotten_GetPhoneText"> شماره همراه خود را برای بازیابی رمز عبور  وارد کنید ! </string>
+    <string name="EnterCitizenInfo"> رمز جدید خود را وارد کنید. </string>
+    <string name="EnterCitizenInfNewPassword">* رمز جدید  </string>
+    <string name="ReEnterCitizenInfNewPassword"> * تکرا رمز جدید </string>
+    <string name="DriversLogin_GetPhoneEditText"> شماره همراه </string>
+    <string name="DriversLogin_GetPhoneBtn"> ارسال </string>
+    <string name="forgetyourpassword"> رمز ورود خود را فراموش کردیده اید ! </string>
+
+    <!--  Drivers.Login.getSms    -->
+    <string name="DriversLogin_GetSmsText"> کد پیامک شده را وارد کنید. </string>
+
+    <!-- MainActivity -->
+    <string name="MainActivity_img1">نمایش نرخ نامه</string>
+    <string name="MainActivity_Search">جستجوی اشیاء</string>
+    <string name="MainActivity_img3">شکایات</string>
+    <string name="MainActivity_Login_Text_1">ورود راننده</string>
+    <string name="MainActivity_Login_Text_2">پروفایل</string>
+
+    <!-- Critical -->
+    <string name="Critical_Title">ثبت انتقادات و پیشنهادات</string>
+    <string name="Critical_Text">نظرات و پیشنهادات خود را برای ما ارسال کنید</string>
+
+
+    <!-- RegisterObject -->
+    <string name="RegisterObject_Title">ثبت شی گمشده</string>
+    <string name="RegisterObject_Btn">ثبت اطلاعات</string>
+    <string name="RegisterObject_Text">تصویر شی گمشده را انتخاب کنید</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!-- Phone_pay pay_by_reciepeind_code-->
+
+    <string name="pay_by">پرداخت با کد پذیرنده</string>
+    <string name="pay_profile">پروفایل</string>
+    <string name="pay">پرداخت</string>
+    <string name="increasing_balance">افزایش اعتبار</string>
+    <string name="increasing_bal">افزایش اعتبار</string>
+    <string name="all_our_prices">تمامی قیمت های ما به تومان می باشد</string>
+
+    <string name="pay_by_barcode">پرداخت از طریق اسکن  بارکد</string>
+    <string name="pay_by_barco">پرداخت از طیق اسکن بار کد</string>
+    <string name="security">امنیت</string>
+    <string name="generate_password">ایجاد رمز</string>
+    <string name="so_on">موارد بیشتر</string>
+    <string name="suggestion">ارسال نظرات</string>
+    <string name="wallet">کیف پول</string>
+    <string name="toman_balance">اعتبار : تومان</string>
+    <string name="amount_price">50,000</string>
+    <string name="list_of_price">لیست تراکنش ها</string>
+
+    <!--<string name="search_item"><![CDATA[جستجوی اشیا <br/> یافت شده]]></string>-->
+
+    <string name="sample_string">"   اشیاء  یافت شده "</string>
+    <string name="announcement_main_text"> متن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستی متن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتمحتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تستیمتن محتوا تست
+</string>یمتن محتوا تستیمتن محتوا تستی
+
+    <string name="newTakestan">تاکستان جدید</string>
+    <string name="announcement_date">2019-05-07</string>
+    <string name="announcement_link">www.takestan.ir/download/me</string>
+    <string name="cng_circumatancecng">در قانون جدید شرایط معاینه فنی خودرو‌ها در سال ۹۷ آمده است که خودرو‌های تا ۴ سال ساخت نیازی به دریافت معاینه فنی ندارند و خودرو‌های فاقد آن روزانه ۵۰ هزارتومان جریمه می‌شوند.
+براساس مصوبه هیات وزیران مقرر شد برای خودروهای دوگانه سوز   با عمر مخزن بیش از ۶ سال علاوه بر معاینه فنی بنزینی، تست هیدروستاتیک که مخصوص مخزن گازاین خودروهاست، نیز انجام گیرد
+</string>
+    <string name="examining_docs">مدارک مورد نیاز معاینه فنی</string>
+    <string name="examining_docs_des">مدارک لازم برای معاینه فنی خودرو شامل اصل کارت یا سند خودرو و فرم تشخیص عیوب ظاهری می باشد</string>
+    <string name="getting_examining_card">مراحل اخذ کارت معاینه فنی</string>
+    <string name="gettting_examining_card_det">با ورود به مرکز مشخص شده، لازم است که اطلاعات کامل خودرو خود را با در دست داشتن مدارک لازم معاینه فنی در سیستم ثبت کرده و پس از ثبت یک بارکد دریافت نمایید. این بارکد در تمام مراحل انجام معاینه فنی توسط دستگاه خوانده می‌شود و به این معنی است که هیچ ماشینی بدون ورود به مراکز معاینه فنی خودرو نمی‌تواند کارت معاینه فنی دریافت نماید.
+ گفتنی است، پرداخت هزینه لازم در این قسمت، جزو مدارک لازم برای معاینه فنی است.
+</string>
+
+
+    <string name="investigating_car_appereance">
+
+
+     jhjklhjkl
+
+
+
+
+   </string>
+
+</resources>

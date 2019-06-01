@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Citizens.RegisterObject">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/Complaint_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow"
+                android:id="@+id/RegisterObject_Back"/>
+
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/RegisterObject_Title"
+                android:id="@+id/titleOfFounded"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/Complaint_Toolbar"
+        android:background="@drawable/img_bk_complicate"
+        android:orientation="vertical"
+        android:weightSum="3">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/RegisterObject_Picture"
+                android:layout_width="@dimen/spacing_xxxxxlarge"
+                android:layout_height="@dimen/spacing_xxxxxlarge"
+                android:padding="@dimen/spacing_middle"
+                android:layout_centerHorizontal="true"
+                app:srcCompat="@drawable/ic_camera" />
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RegisterObject_Picture"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:gravity="center"
+                android:text="@string/RegisterObject_Text"
+                android:id="@+id/pictureOfFounded"
+                android:textColor="@color/grey_1000" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.8"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/appbar_padding_top"
+            android:paddingEnd="@dimen/appbar_padding_top"
+            android:gravity="center">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxxlarge"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+                <Spinner
+                    android:id="@+id/RegisterObject_Category"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:background="@drawable/back_spinner"
+                    android:focusableInTouchMode="true"
+                    android:layoutDirection="rtl"
+                    android:popupBackground="#62ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:spinnerMode="dialog"
+                    />
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    app:srcCompat="@drawable/img_user" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxxlarge"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="عنوان"
+                    android:lines="1"
+                    android:padding="@dimen/spacing_small"
+                    android:background="@drawable/res_focused_edittext"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80"
+                    android:id="@+id/RegisterObject_Title"/>
+
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    app:srcCompat="@drawable/img_title" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxxlarge"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+
+                <EditText
+                    android:id="@+id/RegisterObject_Date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="تاریخ مفقودی"
+                    android:inputType="date"
+                    android:lines="1"
+                    android:padding="@dimen/spacing_small"
+                    android:background="@drawable/res_focused_edittext"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80" />
+
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    app:srcCompat="@drawable/ic_calendar"
+                    android:id="@+id/RegisterObject_DateIcon"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxxxlarge"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/shabnam"
+                    android:hint="توضیحات"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:padding="@dimen/spacing_small"
+                    android:background="@drawable/res_focused_edittext"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:textColor="@color/grey_80"
+                    android:id="@+id/RegisterObject_Description"/>
+
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    app:srcCompat="@drawable/img_compliant_text" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:drawableRight="@drawable/ic_check"
+                android:fontFamily="@font/shabnam"
+                android:text="@string/RegisterObject_Btn"
+                android:theme="@style/Button.Accent"
+                android:id="@+id/RegisterObject_Btn"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CCCCCCCC"
+        android:visibility="gone"
+        android:id="@+id/RegisterObject_Loading">
+
+
+        <com.tuyenmonkey.mkloader.MKLoader
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            app:mk_type="TwinFishesSpinner"
+            android:layout_centerInParent="true"
+            app:mk_color="@color/colorPrimary" />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
