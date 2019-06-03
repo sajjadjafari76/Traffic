@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.R;
+import irstit.transport.ViewPager.ViewInfo.ProjectOngoing;
 import irstit.transport.ViewPager.ViewInfo.ViewInfo;
 import irstit.transport.annoucment.announcement;
 
@@ -43,8 +44,7 @@ public class Page_3 extends Fragment {
 
         project.setOnClickListener(v-> {
 
-             Intent project_ = new Intent(getContext(),announcement.class);
-             project_.putExtra("project","projectRequest");
+             Intent project_ = new Intent(getContext(), ProjectOngoing.class);
              startActivity(project_);
 
         });

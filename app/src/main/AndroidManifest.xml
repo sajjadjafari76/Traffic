@@ -2,13 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="irstit.transport">
-
     <!-- &lt;!&ndash;The following section is for Qr code&ndash;&gt; -->
     <!-- <uses-permission android:name="android.permission.CAMERA"/> -->
     <!-- <uses-feature android:name="android.hardware.camera"/> -->
     <!-- <uses-feature android:name="android.hardware.camera.autofocus"/> -->
     <!-- <code class="xml plain"/><uses-feature/> -->
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -23,7 +21,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- android:supportsRtl="" -->
     <application
         android:name=".AppController.AppController"
         android:allowBackup="true"
@@ -33,6 +30,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl">
+        <activity android:name=".ViewPager.ViewInfo.CarsLine"></activity>
+        <activity android:name=".ViewPager.ViewInfo.DieselCars" />
+        <activity android:name=".ViewPager.ViewInfo.ProjectOngoing" />
+        <activity android:name=".ViewPager.ViewInfo.DailyMarket" />
+        <activity android:name=".ViewPager.ViewInfo.Terminal" />
+        <activity android:name=".Drivers.TechnicalDiagnosis" />
+
         <meta-data
             android:name="co.ronash.pushe.token"
             android:value="PUSHE_474039343941" />
@@ -94,17 +98,14 @@
         <activity android:name=".Citizens.RegisterObject" />
         <activity android:name=".Citizens.Criticals_Suggestion" />
         <activity android:name=".Drivers.Login.ActivityLogin" />
-        <activity android:name=".MainActivity" />
-
-        <!-- <meta-data -->
+        <activity android:name=".MainActivity" /> <!-- <meta-data -->
         <!-- android:name="com.google.android.geo.API_KEY" -->
         <!-- android:value="AIzaSyCzAw8ST-YguIH4G2RrTJ_mGN4SlYgWk6g" /> -->
-
         <activity android:name=".VoiceRecoeder" />
         <activity android:name=".Citizens.complaint.Complaint" />
         <activity android:name=".PhonePay.pay_by_recipient_code" />
         <activity android:name=".annoucment.announcement" />
-        <activity android:name=".CNG.CNG"></activity>
+        <activity android:name=".CNG.CNG" />
     </application>
 
 </manifest>

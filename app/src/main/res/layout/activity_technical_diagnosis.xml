@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Drivers.TechnicalDiagnosis">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="معاینه فنی"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/LetterRate_Toolbar">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/linear_image"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/technical1" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/technical2" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/technical3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_image"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="@string/technical_diagnosis"
+                    android:textColor="#222"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="شرایط معاینه فنی خودروه"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="در قانون جدید شرایط معاینه فنی خودرو‌ها در سال ۹۷ آمده است که خودرو‌های تا ۴ سال ساخت نیازی به دریافت معاینه فنی ندارند و خودرو‌های فاقد آن روزانه ۵۰ هزارتومان جریمه می‌شوند.
+براساس مصوبه هیات وزیران مقرر شد برای خودروهای دوگانه سوز   با عمر مخزن بیش از ۶ سال علاوه بر معاینه فنی بنزینی، تست هیدروستاتیک که مخصوص مخزن گازاین خودروهاست، نیز انجام گیرد"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدارک مورد نیاز معاینه فنی"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدارک لازم برای معاینه فنی خودرو شامل اصل کارت یا سند خودرو و فرم تشخیص عیوب ظاهری می باشد"
+                    android:textColor="#333"
+
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مراحل اخذ کارت معاینه فنی"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="با ورود به مرکز مشخص شده، لازم است که اطلاعات کامل خودرو خود را با در دست داشتن مدارک لازم معاینه فنی در سیستم ثبت کرده و پس از ثبت یک بارکد دریافت نمایید. این بارکد در تمام مراحل انجام معاینه فنی توسط دستگاه خوانده می‌شود و به این معنی است که هیچ ماشینی بدون ورود به مراکز معاینه فنی خودرو نمی‌تواند کارت معاینه فنی دریافت نماید. 
+گفتنی است، پرداخت هزینه لازم در این قسمت، جزو مدارک لازم برای معاینه فنی است."
+
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="بررسی ظاهری خودرو
+
+آزمون آلاینده‌های خروجی از خودرو
+آزمون چراغ‌ های جلو
+آزمون لغزش جانبی
+آزمون کمک فنر
+آزمون ترمزها
+آزمون اتصالات جلوبندی و اهرم بندی
+صدور برگه معاینه فنی"
+
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+
+                    android:background="#111"
+                    android:padding="2dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="هزینه معاینه فنی ۹۷"
+
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مراکز معاینه فنی کشور با توجه به خدماتی که ارائه می دهد، هزینه چندانی از شما نمی‌گیرند طبق آخرین مصوبه هیئت وزراء ، نرخ ورود به و دریافت برگه معاینه فنی در سال ۹۷ مبلغ ۲۲ هزار تومان تعیین شده است در صورتی که ماشین از صدور برگه معاینه فنی مردود شود و مشکل فنی داشته باشد، بابت هزینه ورود مجدد ۵٫۰۰۰ تومان اخذ می گردد(ضمنا خودروها در صورت مردودی بایستی قبل از ۱۵ روز٬ ایراد را برطرف و مجددا به همان مرکز مراجعه کنند
+همچنین علاوه بر مبلغ ۲۲٫۰۰۰ تومان، برای خودروهایی که دو مخزن دارند نیز ۶۲ هزار تومان برای تست هیدرواستاتیک هر مخزن و ۳۵ هزار تومان هزینه باز و بسته کردن مخزن می باشد
+"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="استعلام گواهی معاینه فنی خودروهای سبک و سنگین"
+
+                    android:textColor="#50AEE8"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:id="@+id/link_technical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
+                    android:linksClickable="true"
+                    android:padding="2dp"
+                    android:text="https://s1.symfa.ir/TestCenters/Inquiry/VinPetrolInquiry"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="آدرس:تاکستان انتهای خیابان صنعت هفتم (مرکز معاینه فنی رحمانی تاکستان)"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="تلفن:02835244495"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

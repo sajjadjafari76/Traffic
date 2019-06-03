@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPager.ViewInfo.ProjectOngoing">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="پروژه های در دست اقدام"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_image"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="پروژه های در دست اقدام:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مطالعه ی طرح جامع حمل و نقل و ترافیک شهری"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="طرح مطالعه و اصلاح هندسی برخی از تقاطع های حادثه خیز"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مطالعه و بازبینی و اصلاح سرعتگیرهای سطح شهر"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="خط کشی کلیه معابر سطح شهر(نوبت دوم)"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مطالعه و بازبینی طرح دوطرفه کردن خیابانهای امام، موسی صدر طالقانی و آیت اله سعیدی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="ساماندهی و نوسازی دکه های سطح شهر"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدیریت و کنترل بازارهای روز ( پنج شنبه بازار)"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدیریت و کنترل جایگاه CNG کوثر شهرداری تاکستان"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="کنترل و نگهداشت چراغ های راهنمایی و رانندگی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدیریت و کنترل پارکبان و پارکنیگهای سطح شهر"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="چشم اندازها و اهداف آتی سازمان:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مطالعه و اجرای پیست دوچرخه سواری"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="اجرای طرح پرداخت الکترونیک در زمینه ی حمل و نقل"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="اجرای طرح پایش تصاویر ترافیکی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="برگزاری کلاسهای آموزشی جهت بالابردن فرهنگ ترافیک بین شهروندان و رانندگان"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

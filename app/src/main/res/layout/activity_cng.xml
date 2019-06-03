@@ -7,155 +7,111 @@
     android:background="@color/mdtp_white"
     tools:context=".CNG.CNG">
 
-
-    <ScrollView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
 
 
-            <TextView
+            <irstit.transport.Views.CustomTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:text="مرکز معاینه فنی خودروهای سبک رحمانی" />
+                android:layout_centerInParent="true"
+                android:text="معاینه فنی"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:orientation="horizontal"
-                >
+        </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="150dp"
-                    android:src="@drawable/k1"
-                    android:scaleType="fitCenter"
-                    />
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_below="@+id/LetterRate_Toolbar">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="150dp"
-                    android:src="@drawable/k2"
-                    android:scaleType="fitCenter"
-                    />
+    <LinearLayout
+        android:id="@+id/linear_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:padding="10dp">
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/cng1" />
 
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="150dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/k3"
-                    />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/cng2" />
 
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="2dp"
+            android:src="@drawable/cng3" />
+    </LinearLayout>
 
-            </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_image"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:textSize="20sp"
-                android:background="@color/mdtp_white"
-                android:lineSpacingExtra="15dp"
-                android:textColor="@color/black"
-                android:text=" مرکز معاینه فنی خودروهای سبک رحمانی شهر تاکستان با کد(2705) به مدیریت آقای بهرام رحمانی با 6 پرسنل و دارای آزمایشگاه هیدرواستاتیک به آدرس تاکستان انتهای خیابان صنعت هفتم برای خودروهای بنزینی و دوگانه سوز مشغول به فعالیت می باشد."
-                android:layout_marginTop="5dp"
-                />
+    <arsatech.co.justifiedtextview.JustifiedTextView
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/iransans"
+        android:gravity="right"
+        android:padding="2dp"
+        android:text="جایگاه سی ان جی شهرداری تاکستان واقع در کمربندی شهر تاکستان مابین میدان دادگستری و میدان انگور، تنها مرکز سوخت گاز درشهر تاکستان می باشد، لذاپرسنل این جایگاه  تمام تلاش خود را برای ارائه خدمات مطلوب به شهروندان بکار خواهیم بسته اند تا از اتلاف وقت و انرژی آنان جلوگیری گردد.
+هدف  پرسنل این جایگاه کار کردن برای مردم و تلاش در جهت رضایتمندی آنهاست و در همه حال انضباط کاری، خدمتگزاری، بردباری، خوش رویی و خوش رفتاری سرلوحه امور  این جایگاه قرار دارد.
+لازم به ذکر است این جایگاه زیر نظر سارمان مدیریت و حمل و نقل شهرداری تاکستان فعالیت مینماید و شهروندان در صورت دیدن مشکل،  پیشنهاد یا انتقاد از طریق اپلیکیشن به این سازمان اطلاع رسانی نمایند تا اسرع وقت مشکل ایشان رسیدگی گردد."
+        android:textColor="#222"
+        android:textSize="14dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="5dp"
-                android:text="شرایط معاینه فنی خودروها"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#111" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="@string/cng_circumatancecng"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:background="@color/mdtp_white"
-                android:lineSpacingExtra="15dp"
-                />
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="5dp"
-                android:text="@string/examining_docs"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/examining_docs_des"
-                android:textSize="20sp"
-                android:lineSpacingExtra="15dp"
-                android:background="@color/mdtp_white"
-                android:textColor="@color/black"
-
-                />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="5dp"
-                android:text="@string/getting_examining_card"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gettting_examining_card_det"
-                android:textSize="20sp"
-                android:lineSpacingExtra="15dp"
-                android:textColor="@color/black"
-                android:background="@color/mdtp_white"
-
-                />
-
-
-            <TextView
-                android:id="@+id/car_appereance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/investigating_car_appereance"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-               />
-
-        </LinearLayout>
-
-
-    </ScrollView>
-
-
+    </LinearLayout>
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

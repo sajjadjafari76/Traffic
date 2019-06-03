@@ -9,9 +9,9 @@
     tools:context=".MainActivity">
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
+        android:visibility="visible"
+        android:id="@+id/relative_main_page"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/main_bg"
@@ -103,56 +103,54 @@
 
 
         <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_above="@+id/MainPage_Bottom"-->
-            <!--android:orientation="horizontal">-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_above="@+id/MainPage_Bottom"-->
+        <!--android:orientation="horizontal">-->
 
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginEnd="2dp"-->
-                <!--android:textColor="#000"-->
-                <!--android:id="@+id/minute"-->
-                <!--android:text="0"-->
-                <!--/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="2dp"-->
+        <!--android:textColor="#000"-->
+        <!--android:id="@+id/minute"-->
+        <!--android:text="0"-->
+        <!--/>-->
 
-            <!--<TextView-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/timer2"-->
-                <!--android:textColor="#000"-->
-                <!--android:text="0"-->
-                <!--/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/timer2"-->
+        <!--android:textColor="#000"-->
+        <!--android:text="0"-->
+        <!--/>-->
 
-            <!--<com.marozzi.roundbutton.RoundButton-->
+        <!--<com.marozzi.roundbutton.RoundButton-->
 
-                <!--android:id="@+id/workbutton"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--app:rb_animation_alpha="false"-->
-                <!--app:rb_animation_progress_color="@color/colorAccent"-->
-                <!--app:rb_animation_progress_padding="8dp"-->
-                <!--app:rb_animation_progress_width="2dp"-->
-                <!--app:rb_animation_progress_style="circle"-->
-                <!--app:rb_animation_corner_radius="20dp"-->
-                <!--app:rb_animation_duration="500"-->
-                <!--app:rb_background_color="@android:color/transparent"-->
-                <!--app:rb_background_color_pressed="@color/colorPrimary"-->
-                <!--app:rb_corner_color="@color/grey_5"-->
-                <!--app:rb_corner_color_pressed="@color/colorPrimary"-->
-                <!--app:rb_corner_radius="2dp"-->
-                <!--app:rb_corner_width="1dp"-->
-                <!--app:rb_text_color="@color/grey_5"-->
-                <!--app:rb_text_color_pressed="@android:color/white" />-->
-
-
-            <!--/>-->
+        <!--android:id="@+id/workbutton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:rb_animation_alpha="false"-->
+        <!--app:rb_animation_progress_color="@color/colorAccent"-->
+        <!--app:rb_animation_progress_padding="8dp"-->
+        <!--app:rb_animation_progress_width="2dp"-->
+        <!--app:rb_animation_progress_style="circle"-->
+        <!--app:rb_animation_corner_radius="20dp"-->
+        <!--app:rb_animation_duration="500"-->
+        <!--app:rb_background_color="@android:color/transparent"-->
+        <!--app:rb_background_color_pressed="@color/colorPrimary"-->
+        <!--app:rb_corner_color="@color/grey_5"-->
+        <!--app:rb_corner_color_pressed="@color/colorPrimary"-->
+        <!--app:rb_corner_radius="2dp"-->
+        <!--app:rb_corner_width="1dp"-->
+        <!--app:rb_text_color="@color/grey_5"-->
+        <!--app:rb_text_color_pressed="@android:color/white" />-->
 
 
+        <!--/>-->
 
 
         <LinearLayout
@@ -163,12 +161,12 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/MainPager_Dial"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#3293B8"
-                android:gravity="center"
-                android:id="@+id/MainPager_Dial">
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,12 +186,12 @@
 
 
             <LinearLayout
+                android:id="@+id/MainPager_Site"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="?attr/colorPrimary"
-                android:gravity="center"
-                android:id="@+id/MainPager_Site">
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,7 +200,6 @@
                     android:fontFamily="@font/shabnam"
                     android:text="ورود به سایت"
                     android:textColor="#FFF" />
-
 
 
                 <ImageView
@@ -249,4 +246,16 @@
 
     </android.support.design.widget.NavigationView>
 
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/relative_back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#9C9B9B">
+        <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

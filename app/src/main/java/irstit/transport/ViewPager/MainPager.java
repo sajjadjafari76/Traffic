@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -67,8 +68,10 @@ public class MainPager extends AppCompatActivity {
     private NavigationView na;
 
     public static String incomingName;
+    RelativeLayout relative_main_page,relative_back;
 
 
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +80,11 @@ public class MainPager extends AppCompatActivity {
 
         LinearLayout Site = findViewById(R.id.MainPager_Site);
         LinearLayout Dial = findViewById(R.id.MainPager_Dial);
+        relative_main_page = findViewById(R.id.relative_main_page);
+        relative_back = findViewById(R.id.relative_back);
 
+        relative_main_page.setVisibility(View.VISIBLE);
+        relative_back.setVisibility(View.GONE);
         Dial.setOnClickListener(v -> {
 
             Intent dial1 = new Intent();
@@ -103,7 +110,7 @@ public class MainPager extends AppCompatActivity {
 
         changeDefaultuser_Name();
         drawer = findViewById(R.id.MainPager_Drawer);
-       // na = findViewById(R.id.MAinActivity_NavigationView_3);
+        // na = findViewById(R.id.MAinActivity_NavigationView_3);
         ImageView iconDrawer = findViewById(R.id.MainPager_NavigatorIcon);
         iconDrawer.setOnClickListener(v -> drawer.openDrawer(Gravity.END)
         );
@@ -124,8 +131,6 @@ public class MainPager extends AppCompatActivity {
 
 //        IndefinitePagerIndicator Indicator = findViewById(R.id.MainPage_Indicator);
 //        Indicator.attachToViewPager(mPager);
-
-
 
 
         NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_3);
@@ -169,7 +174,6 @@ public class MainPager extends AppCompatActivity {
     }
 
 
-
     private void changeDefaultuser_Name() {
 
         try {
@@ -184,7 +188,7 @@ public class MainPager extends AppCompatActivity {
             View headerView = navigationView.getHeaderView(0);
 
 
-            if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() !=null) {
+            if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() != null) {
 
                 incomingName = DBManager.getInstance(getBaseContext()).getDriverInfo().getName();
 //                incomingName = name.getString("d_name");
@@ -193,8 +197,7 @@ public class MainPager extends AppCompatActivity {
                 navUsername.setText(incomingName);
 
 
-
-                }else if(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()!=null){
+            } else if (DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName() != null) {
 
                 incomingName = DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName();
 //                incomingName = name.getString("d_name");
@@ -207,8 +210,6 @@ public class MainPager extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 
 
     public class FragmentAdapter extends FragmentPagerAdapter {
@@ -480,7 +481,6 @@ public class MainPager extends AppCompatActivity {
     }
 
 
-
     private void ShowDialog() {
 
         try {
@@ -529,6 +529,36 @@ public class MainPager extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            relative_main_page.setVisibility(View.GONE);
+            relative_back.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    finish();
+
+                }
+            }, 2000);
+//            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "برای خروج دوباره کلید کنید", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+
+            }
+        }, 2000);
+    }
 
 
 }

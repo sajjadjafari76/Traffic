@@ -1,6 +1,7 @@
 package irstit.transport.Citizens.Account;
 
 import android.content.Intent;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,9 @@ public class CitizenLogin extends AppCompatActivity {
 
         CustomEdittext UserName = findViewById(R.id.CitizenLogin_UserName);
         CustomEdittext Pass = findViewById(R.id.CitizenLogin_Password);
+
+        UserName.append("09");
+        UserName.setSelection(2);
         forget = findViewById(R.id.forgetyourpassword);
 
         forget.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +74,22 @@ public class CitizenLogin extends AppCompatActivity {
         });
 
 
+        UserName.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
+                UserName.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
+
+            }else {
+                UserName.setBackgroundResource(R.drawable.dr_getphone_edittext);
+            }
+        });
+        Pass.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
+                Pass.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
+
+            }else {
+                Pass.setBackgroundResource(R.drawable.dr_getphone_edittext);
+            }
+        });
     }
 
 
@@ -101,7 +121,10 @@ public class CitizenLogin extends AppCompatActivity {
 
                                 // this variable is used for identifying person's role
                                 identifyingOfPerson =0;
-                                startActivity(new Intent(getBaseContext(), MainPager.class));
+
+                                Intent intent = new Intent(getBaseContext(), MainPager.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(intent);
                                 finish();
 
 

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPager.ViewInfo.Terminal">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="ترمینال"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/terminal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_image"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="این سازمان دارای سه ترمینال به نام های ترمینال مرکزی(قزوین)،ترمینال غرب(ابهر) و ترمینال جنوب میباشد."
+                    android:textColor="#222"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="ترمینال مرکزی   :"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+
+                    android:padding="2dp"
+                    app:justified="true"
+                    android:text="در بلوار امام روبروی شرکت تعاونی واقع گردیده ودارای 180خودرو جهت حمل مسافر به قزوین و بالعکس می باشد.
+کنترل و نگهداشت ترمینال از وظایف سازمان بوده ولی مدیریت و صدور مجوز فعالیت خودروهای این خط از وظایف سازمان نمی باشد"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    app:justified="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="ترمینال جنوب  :"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    app:justified="true"
+                    android:padding="2dp"
+                    android:text="واقع درخ امام تقاطع بانک ملی ،جنب پمپ بنزین بوده و تعداد 180 خودرو در ترمینال در مسیرهای شال، اسفروورین وروستاهای همجوارمشغول به فعالیت می باشند و مدیریت و صدور مجوز رانندگان و خودروهای این خط از وظایف این سازمان می باشد."
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="ترمینال غرب  :"
+                    android:textColor="#111"
+                    app:justified="true"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    app:justified="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="تعداد 150خودرو در حال جابجایی در خطوط ابهر،آبگرم و.. میباشد و مدیریت و صدور مجوز رانندگان و خودروهای این خط از وظایف این سازمان می باشد."
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

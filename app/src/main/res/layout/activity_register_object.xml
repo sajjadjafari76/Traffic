@@ -174,14 +174,13 @@
                 android:paddingRight="@dimen/spacing_large">
 
 
-                <EditText
+                <TextView
                     android:id="@+id/RegisterObject_Date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/shabnam"
                     android:hint="تاریخ مفقودی"
-                    android:inputType="date"
                     android:lines="1"
                     android:padding="@dimen/spacing_small"
                     android:background="@drawable/res_focused_edittext"

@@ -105,5 +105,6 @@ dependencies {
 
     implementation 'co.ronash.android:pushe-base:1.6.3'
 
-    implementation  'me.grantland:autofittextview:0.2.+'
+    implementation 'me.grantland:autofittextview:0.2.+'
+    implementation 'com.github.arefbhrn:JustifiedTextView:1.0.5'
 }

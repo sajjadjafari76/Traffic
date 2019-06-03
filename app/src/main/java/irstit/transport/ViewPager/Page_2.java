@@ -14,6 +14,7 @@ import irstit.transport.CNG.CNG;
 import irstit.transport.Citizens.CitizenMainActivity;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.Drivers.DriverMainActivityTwo;
+import irstit.transport.Drivers.TechnicalDiagnosis;
 import irstit.transport.MainActivity;
 import irstit.transport.PhonePay.PhonePayMainActicity;
 import irstit.transport.R;
@@ -44,7 +45,7 @@ public class Page_2 extends Fragment {
             startActivity(new Intent(getContext(), CNG.class));
         });
         technical.setOnClickListener(v -> {
-            startActivity(new Intent(getContext(), ViewInfo.class));
+            startActivity(new Intent(getContext(), TechnicalDiagnosis.class));
         });
 
         wallet.setOnClickListener(v -> {

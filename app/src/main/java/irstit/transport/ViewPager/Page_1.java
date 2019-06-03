@@ -11,6 +11,10 @@ import android.widget.LinearLayout;
 
 import irstit.transport.ForDisel;
 import irstit.transport.R;
+import irstit.transport.ViewPager.ViewInfo.CarsLine;
+import irstit.transport.ViewPager.ViewInfo.DailyMarket;
+import irstit.transport.ViewPager.ViewInfo.DieselCars;
+import irstit.transport.ViewPager.ViewInfo.Terminal;
 import irstit.transport.ViewPager.ViewInfo.ViewInfo;
 import irstit.transport.ViewPager.ViewInfo.ViewInfoTerminal;
 
@@ -35,10 +39,10 @@ public class Page_1 extends Fragment {
         LinearLayout disel = view.findViewById(R.id.Page1_Diesel);
         LinearLayout terminal = view.findViewById(R.id.Page1_Terminal);
 
-        lineCar.setOnClickListener(v-> { startActivity(new Intent(getContext(), ViewInfo.class)); });
-        roozbazar.setOnClickListener(v-> { startActivity(new Intent(getContext(), ViewInfo.class)); });
-        disel.setOnClickListener(v-> { startActivity(new Intent(getContext(), ViewInfoTerminal.class)); });
-        terminal.setOnClickListener(v-> { startActivity(new Intent(getContext(), ViewInfo.class)); });
+        lineCar.setOnClickListener(v-> { startActivity(new Intent(getContext(), CarsLine.class)); });
+        roozbazar.setOnClickListener(v-> { startActivity(new Intent(getContext(), DailyMarket.class)); });
+        disel.setOnClickListener(v-> { startActivity(new Intent(getContext(), DieselCars.class)); });
+        terminal.setOnClickListener(v-> { startActivity(new Intent(getContext(), Terminal.class)); });
 
         return view;
     }

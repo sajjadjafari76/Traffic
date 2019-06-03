@@ -7,10 +7,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.Drivers.Login.GetPhone;
 import irstit.transport.R;
 
 public class CitizensAccountActivity extends AppCompatActivity {
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (DBManager.getInstance(this).getCitizenInfo().getUserPhone() != null){
+            if (!DBManager.getInstance(this).getCitizenInfo().getUserPhone().isEmpty()){
+                finish();
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

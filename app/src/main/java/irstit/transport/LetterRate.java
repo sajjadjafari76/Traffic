@@ -136,7 +136,7 @@ public class LetterRate extends AppCompatActivity {
                             }
                             adapter.add("دسته بندی نرخ نامه خود را انتخاب کنید");
                             Category.setAdapter(adapter);
-                            Category.setSelection(adapter.getCount());
+                            Category.setSelection(0);
                             Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

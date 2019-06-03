@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -37,6 +38,7 @@ import com.koushikdutta.async.http.body.MultipartFormDataBody;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -58,12 +60,13 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
     private int GALLERY = 1, CAMERA = 2;
     private String imgDecodableString = "";
     private ViewGroup RegisterObject_Loading;
-    private EditText Title, Description, Date;
+    private EditText TitleEdt, Description;
     private ImageView Picture;
     private PersianDatePickerDialog picker;
     private String mDate = "";
     private String type;
-    private TextView titleOfFoundedObject,pictureOfFoundedObject;
+    Spinner Category;
+    private TextView titleOfFoundedObject, pictureOfFoundedObject, DateEdt;
 
 
     @Override
@@ -72,49 +75,49 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_register_object);
 
         RegisterObject_Loading = findViewById(R.id.RegisterObject_Loading);
-        Title = findViewById(R.id.RegisterObject_Title);
+        TitleEdt = findViewById(R.id.RegisterObject_Title);
         Description = findViewById(R.id.RegisterObject_Description);
-        Date = findViewById(R.id.RegisterObject_Date);
+        DateEdt = findViewById(R.id.RegisterObject_Date);
 
         Button RegisterObject_Btn = findViewById(R.id.RegisterObject_Btn);
         Picture = findViewById(R.id.RegisterObject_Picture);
         ImageView Back = findViewById(R.id.RegisterObject_Back);
-        Spinner Category = findViewById(R.id.RegisterObject_Category);
+        Category = findViewById(R.id.RegisterObject_Category);
         configureDate();
         titleOfFoundedObject = findViewById(R.id.titleOfFounded);
         pictureOfFoundedObject = findViewById(R.id.pictureOfFounded);
 
-        disableSoftInputFromAppearing(Date);
+//        disableSoftInputFromAppearing(DateEdt);
 
 
-        if(DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() !=null){
+        if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() != null) {
 
             titleOfFoundedObject.setText("ثبت شی یافت شده");
             pictureOfFoundedObject.setText("تصویر شی یافت شده را انتخاب کنید");
         }
         Picture.setOnClickListener(this);
         Back.setOnClickListener(this);
-//        Date.setOnFocusChangeListener((view, hasFocus) -> {
-//            if (hasFocus) {
-//                picker.show();
+//        DateEdt.setOnFocusChangeListener((view, hasFocus) -> {
+//            if (!hasFocus) {
+//                DateEdt.setOnClickListener(v -> picker.show());
 //            }
 //        });
 
-        Date.setOnClickListener(view -> {
 
+        DateEdt.setOnClickListener(view -> {
             picker.show();
 
         });
 
         RegisterObject_Btn.setOnClickListener(view -> {
-            if (Title.getText().toString().isEmpty()) {
+            if (TitleEdt.getText().toString().isEmpty()) {
                 Toast.makeText(getBaseContext(), "عنوان نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
             } else if (Description.getText().toString().isEmpty()) {
                 Toast.makeText(getBaseContext(), "توضیحات نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
             } else if (mDate.isEmpty()) {
                 Toast.makeText(getBaseContext(), "تاریخ نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
             } else {
-                uploadContent(Title.getText().toString(),
+                uploadContent(TitleEdt.getText().toString(),
                         Description.getText().toString(),
                         mDate,
                         type,
@@ -128,7 +131,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
         spinnerAdapter adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
 
-        for (int i = 0 ; i < getCategory().size() ; i++) {
+        for (int i = 0; i < getCategory().size(); i++) {
             adapter.add(getCategory().get(i).getName());
         }
         adapter.add("یک موضوع را انتخاب کنید!");
@@ -139,7 +142,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position > (getCategory().size() - 1)) {
 
-                }else {
+                } else {
                     type = String.valueOf(getCategory().get(position).getId());
                 }
             }
@@ -152,20 +155,20 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public static void disableSoftInputFromAppearing(EditText editText) {
-        if (Build.VERSION.SDK_INT >= 11) {
-            editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
-            editText.setTextIsSelectable(true);
-        } else {
-            editText.setRawInputType(InputType.TYPE_NULL);
-            editText.setFocusable(true);
-        }
-    }
+//    public static void disableSoftInputFromAppearing(Text editText) {
+//        if (Build.VERSION.SDK_INT >= 11) {
+//            editText.setRawInputType(InputType.TYPE_CLASS_TEXT);
+//            editText.setTextIsSelectable(true);
+//        } else {
+//            editText.setRawInputType(InputType.TYPE_NULL);
+//            editText.setFocusable(true);
+//        }
+//    }
 
     private List<SpinnerModel> getCategory() {
         List<SpinnerModel> data = new ArrayList<>();
 
-        for (int i = 0 ; i < 6 ; i++) {
+        for (int i = 0; i < 6; i++) {
             switch (i) {
 
                 case 0:
@@ -361,6 +364,13 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
                         if (object.getString("status").equals("true")) {
                             enabledEditText();
                             clear();
+
+                            TitleEdt.setText("");
+                            DateEdt.setText("");
+                            Intent intent = new Intent(getIntent());
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+
                             Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
 
                         } else if (object.getString("status").equals("true")) {
@@ -405,17 +415,17 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
     private void disabledEditText() {
         Description.setEnabled(false);
-        Title.setEnabled(false);
+        TitleEdt.setEnabled(false);
     }
 
     private void enabledEditText() {
         Description.setEnabled(true);
-        Title.setEnabled(true);
+        TitleEdt.setEnabled(true);
     }
 
     private void clear() {
         Description.setText("");
-        Title.setSelection(0);
+        TitleEdt.setSelection(0);
     }
 
     public class spinnerAdapter extends ArrayAdapter<String> {
@@ -451,7 +461,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onDateSelected(PersianCalendar persianCalendar) {
                         mDate = persianCalendar.getPersianYear() + "/" + persianCalendar.getPersianMonth() + "/" + persianCalendar.getPersianDay();
-                        Date.setText(mDate);
+                        DateEdt.setText(mDate);
                     }
 
                     @Override

@@ -121,7 +121,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
             SharedPreferences sh = this.getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
 //            if(sh.toString().equals("-1"))
 //                Log.e("compliantArray",sh.toString());
-             String Jso = sh.getString("complaintArray", "-1");
+            String Jso = sh.getString("complaintArray", "-1");
 
             JSONObject object = new JSONObject(Jso);
             JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
@@ -136,6 +136,10 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                 Status.setVisibility(View.VISIBLE);
                 Btn.setVisibility(View.GONE);
                 Form.setVisibility(View.GONE);
+            }else {
+                Status.setVisibility(View.GONE);
+                Btn.setVisibility(View.VISIBLE);
+                Form.setVisibility(View.VISIBLE);
             }
 
 
@@ -446,10 +450,8 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
     }
 
 
-
     private void getNews() {
         String internetStatus = "true";
-
 
 
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/news",
@@ -470,8 +472,6 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                             editor.commit();
 
 
-
-
                         }
 
                     } catch (Exception e) {
@@ -481,7 +481,6 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                 },
                 error -> {
                     Log.e("ListLeavesError2", error.toString() + " |");
-
 
 
                 }) {
@@ -509,19 +508,18 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         AppController.getInstance().addToRequestQueue(getPhoneRequest);
 
 
-
     }
 
     public void getlog(String veryLongString) {
         int maxLogSize = 1500;
-        for(int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
+        for (int i = 0; i <= veryLongString.length() / maxLogSize; i++) {
             int start = i * maxLogSize;
-            int end = (i+1) * maxLogSize;
+            int end = (i + 1) * maxLogSize;
             end = end > veryLongString.length() ? veryLongString.length() : end;
             Log.e("ShowAssChild1", veryLongString.substring(start, end));
         }
 
-        Log.e("work","yessssssssss");
+        Log.e("work", "yessssssssss");
     }
 
 

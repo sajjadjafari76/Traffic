@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPager.ViewInfo.DailyMarket">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="روزبازارهای هفتگی"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:layout_marginBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:padding="5dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/daily_market" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear_image"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+
+        <arsatech.co.justifiedtextview.JustifiedTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans"
+            android:gravity="right"
+            android:padding="2dp"
+           android:text="روزبازار هفتگی تاکستان درروز های پنجشنبه واقع درخیابان امام خمینی (ره) در فضایی حدود 6000 متر مربع جنب شهربازی برپا میگردد.
+ساعت کاری این روز بازار از ساعت 8 صبح لغایت 21 همان روز آماده ارائه مایحتاج مورد نیاز شهروندان با قیمت مناسب می باشد.
+ساماندهی و مدیریت این روز بازار بر عهده سازمان مدیریت و حمل و نقل شهرداری تاکستان می باشد. شهروندان میتوانند انتقادات و یا پیشنهادات خود را از طریق اپلیکیشن سازمان مدیریت حمل و نقل شهرداری تاکستان به سمع و نظر مدیریت سازمان برسانند."
+            android:textColor="#111"
+            android:textSize="14dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="#111" />
+
+    </LinearLayout>
+    </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</RelativeLayout>

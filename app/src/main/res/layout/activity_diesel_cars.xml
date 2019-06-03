@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPager.ViewInfo.DieselCars">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/LetterRate_Toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/LetterRate_Back"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+            <irstit.transport.Views.CustomTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="ناوگان دیزلی"
+                android:textColor="@color/green_50"
+                android:textSize="@dimen/ToolbarSize" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_image"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدارک لازم جهت صدور پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
+                    android:textColor="#222"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۱ .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+تشکیل پرونده:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۱-کارت ملی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۲ - شناسنامه"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۳ – سند مالکیت"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۴ - کارت خودرو"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۵ - کارت معاینه فنی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۶ - بیمه شخص ثالث"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۷ - سه قطعه عکس ۴*۳"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۸ - برگ سبز "
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۹ -کارت پایان خدمت"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="
+۲ . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۱-کارت ملی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۲ - شناسنامه"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۳ – سند مالکیت"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۴ - کارت خودرو"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۵ - کارت معاینه فنی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۶ - بیمه شخص ثالث"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۷ - سه قطعه عکس ۴*۳"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۸ - برگ سبز "
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۹ -کارت پایان خدمت"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="10-برگ ثبت نام"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" 11-فرم تعهد نامه"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="12-پوشه و گیره"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مدارک لازم جهت تمدید  پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
+                    android:textColor="#111"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="1 .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+تشکیل پرونده:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۱ - کارت خودرو"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" 2 - کارت معاینه فنی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="3 -بیمه شخص ثالث"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" ۴ - سه قطعه عکس ۴*۳"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="۱ - کارت معاینه فنی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" 2 -بیمه شخص ثالث"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="3 -برگ ثبت نام"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text=" 4-پرداخت عوارض شهرداری در دفتر خدمات پستی"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="مراحل لازم جهت دریافت باربرگ:"
+                    android:textColor="#111"
+                    android:textSize="14dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="1-داشتن پروانه فعالیت از شهرداری (تاریخ دار)"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="2-ثبت نام اشتغال راننده در دفتر خدمات پستی معصومی واقع در میدان بسیج"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="3-نصب نرم افزار باربرگ  از سایت "
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="4-دریافت باربرگ حقیقی از نرم افزار"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -134,13 +134,14 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         navigation_Recycler.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
         navigation_Recycler.setAdapter(new MyNavigationAdapter(navigationData()));
 
-        // this textView is getting it's value from inner Person's name
-        //        TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+//         this textView is getting it's value from inner Person's name
 
         NavigationView navigationView = findViewById(R.id.DriverMainTwo_NavigationView);
         View headerView = navigationView.getHeaderView(0);
         RelativeLayout relativeLayout = headerView.findViewById(R.id.Navigation_Login);
 
+        TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
+        navUsername.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName());
         if(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()!=null){
 
             relativeLayout.setOnClickListener(new View.OnClickListener() {

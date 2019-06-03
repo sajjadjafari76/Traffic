@@ -71,7 +71,14 @@ public class GetPhone extends Fragment implements View.OnClickListener {
         phone = view.findViewById(R.id.GetPhone_Edittext);
         phone.append("09");
         phone.setSelection(2);
+        phone.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
+                phone.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
 
+            }else {
+                phone.setBackgroundResource(R.drawable.dr_getphone_edittext);
+            }
+        });
         return view;
     }
 

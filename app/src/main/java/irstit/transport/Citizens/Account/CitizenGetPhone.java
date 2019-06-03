@@ -40,6 +40,7 @@ public class CitizenGetPhone extends Fragment {
     private TextView text;
     private String state = "null";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class CitizenGetPhone extends Fragment {
         });
 
 
+
 //        if (getArguments() != null && getArguments().getString("state").equals("ChangePass")) {
 //            text.setText("شماره موبایل جدید خود را وارد کنید");
 //        }else {
@@ -75,7 +77,14 @@ public class CitizenGetPhone extends Fragment {
         phone.append("09");
         phone.setSelection(2);
 
+        phone.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus){
+                phone.setBackgroundColor(getResources().getColor(R.color.mdtp_white));
 
+            }else {
+                phone.setBackgroundResource(R.drawable.dr_getphone_edittext);
+            }
+        });
         return view;
     }
 

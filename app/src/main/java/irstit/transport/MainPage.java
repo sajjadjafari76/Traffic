@@ -42,6 +42,13 @@ public class MainPage extends AppCompatActivity {
 
         Log.e("ddddddd", DBManager.getInstance(getBaseContext()).getDriverInfo().getName() + " | " +
                 DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserId());
+
+        if (DBManager.getInstance(this).getCitizenInfo().getUserPhone() != null) {
+            if (!DBManager.getInstance(this).getCitizenInfo().getUserPhone().isEmpty()) {
+                finish();
+            }
+        }
+
         if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() != null
                 ||
                 DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserId() != null) {
@@ -50,6 +57,7 @@ public class MainPage extends AppCompatActivity {
             finish();
 
         }
+
 
     }
 
@@ -60,8 +68,6 @@ public class MainPage extends AppCompatActivity {
 
         String push_id;
         Pushe.initialize(this, true);
-
-
 
 
         LinearLayout driver = findViewById(R.id.MainPage_Driver);
@@ -253,7 +259,7 @@ public class MainPage extends AppCompatActivity {
                 JSONObject response_object = new JSONObject(response);
 
 //                JSONObject object = new JSONObject(response);
-                Log.e("json_contnet",response_object.toString());
+                Log.e("json_contnet", response_object.toString());
 
                 if (response_object.getString("status").equals("true")) {
 
@@ -290,7 +296,6 @@ public class MainPage extends AppCompatActivity {
 
             Log.e("general_server_error", error.toString() + " |");
             Toast.makeText(getApplicationContext(), "خطا در اتصال به سرور", Toast.LENGTH_LONG).show();
-
 
 
         }) {
