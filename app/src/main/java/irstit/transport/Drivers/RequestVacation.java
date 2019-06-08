@@ -126,7 +126,6 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
             JSONObject object = new JSONObject(Jso);
             JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
 
-
             Log.e("fulltimefromhere", allOffTimes.toString());
 
             //getArguments().getString("dataVacation")

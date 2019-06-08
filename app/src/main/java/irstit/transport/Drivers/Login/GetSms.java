@@ -53,6 +53,8 @@ public class GetSms extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_get_sms, container, false);
 
+        Log.e("getsmsmss", "sddsd");
+
         timerText = view.findViewById(R.id.GetSmsTimer);
         otpView = view.findViewById(R.id.GetSms_Otp);
         btn = view.findViewById(R.id.GetSms_Btn);
@@ -243,7 +245,7 @@ public class GetSms extends Fragment implements View.OnClickListener {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.e("GetPhoneResponse", response + " |");
+                        Log.e("3GetPhoneResponse122", response + " |");
 
                         try {
                             JSONObject object = new JSONObject(response);

@@ -47,71 +47,70 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_below="@+id/LetterRate_Toolbar">
+        android:layout_below="@+id/LetterRate_Toolbar"
+        android:layout_marginBottom="8dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-    <LinearLayout
-        android:id="@+id/linear_image"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:src="@drawable/cng1" />
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:src="@drawable/cng2" />
 
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:src="@drawable/cng3" />
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:padding="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/linear_image"
-        android:orientation="vertical"
-        android:padding="10dp">
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/cng1" />
 
-    <arsatech.co.justifiedtextview.JustifiedTextView
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/cng2" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/iransans"
-        android:gravity="right"
-        android:padding="2dp"
-        android:text="جایگاه سی ان جی شهرداری تاکستان واقع در کمربندی شهر تاکستان مابین میدان دادگستری و میدان انگور، تنها مرکز سوخت گاز درشهر تاکستان می باشد، لذاپرسنل این جایگاه  تمام تلاش خود را برای ارائه خدمات مطلوب به شهروندان بکار خواهیم بسته اند تا از اتلاف وقت و انرژی آنان جلوگیری گردد.
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/cng3" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_image"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <arsatech.co.justifiedtextview.JustifiedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="جایگاه سی ان جی شهرداری تاکستان واقع در کمربندی شهر تاکستان مابین میدان دادگستری و میدان انگور، تنها مرکز سوخت گاز درشهر تاکستان می باشد، لذاپرسنل این جایگاه  تمام تلاش خود را برای ارائه خدمات مطلوب به شهروندان بکار خواهیم بسته اند تا از اتلاف وقت و انرژی آنان جلوگیری گردد.
 هدف  پرسنل این جایگاه کار کردن برای مردم و تلاش در جهت رضایتمندی آنهاست و در همه حال انضباط کاری، خدمتگزاری، بردباری، خوش رویی و خوش رفتاری سرلوحه امور  این جایگاه قرار دارد.
 لازم به ذکر است این جایگاه زیر نظر سارمان مدیریت و حمل و نقل شهرداری تاکستان فعالیت مینماید و شهروندان در صورت دیدن مشکل،  پیشنهاد یا انتقاد از طریق اپلیکیشن به این سازمان اطلاع رسانی نمایند تا اسرع وقت مشکل ایشان رسیدگی گردد."
-        android:textColor="#222"
-        android:textSize="14dp"/>
+                    android:textColor="#222"
+                    android:textSize="14dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#111" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="#111" />
 
-    </LinearLayout>
-    </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

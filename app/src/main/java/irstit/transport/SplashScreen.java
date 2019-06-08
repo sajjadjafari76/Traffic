@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.complaint.Complaint;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.Views.Utils;
 
 //implements Parcelable
@@ -30,10 +31,6 @@ public class SplashScreen extends AppCompatActivity {
 
     private final int SPLASH_DISPLAY_LENGTH = 1500;
     private int Inite;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,31 +44,22 @@ public class SplashScreen extends AppCompatActivity {
 
     void startWelcomeActivity() {
 
+              new Handler().postDelayed(() -> {
+                  /* Create an Intent that will start the Menu-Activity. */
+                  if(Utils.getInstance(getBaseContext()).isOnline()){
 
 
-              new Handler().postDelayed(new Runnable() {
-                  @Override
-                  public void run() {
-                      /* Create an Intent that will start the Menu-Activity. */
-                      if(Utils.getInstance(getBaseContext()).isOnline()){
+                      getNews();
+                  }
+                  else {
 
+                      Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
+                  //    mainIntent.putExtra("data", response);
+                      mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                      startActivity(mainIntent);
 
-                          getNews();
-                      }
-                      else {
-
-                          Intent mainIntent = new Intent(getApplicationContext(), MainPage.class);
-                      //    mainIntent.putExtra("data", response);
-                          mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                          startActivity(mainIntent);
-
-                      }
                   }
               }, SPLASH_DISPLAY_LENGTH);
-
-
-
-
 
         }
 
@@ -138,7 +126,8 @@ public class SplashScreen extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<>();
-                    map.put("phone", " 09033433776");
+                    map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
                     map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
                     Log.v("FromSplash", map.get("phone"));
 
@@ -147,9 +136,9 @@ public class SplashScreen extends AppCompatActivity {
 
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("token", "df837016d0fc7670f221197cd92439b5");
-                    return super.getHeaders();
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                    return map;
                 }
             };
 
