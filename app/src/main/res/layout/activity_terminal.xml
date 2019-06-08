@@ -37,6 +37,14 @@
                 android:text="ترمینال"
                 android:textColor="@color/green_50"
                 android:textSize="@dimen/ToolbarSize" />
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/ic_terminal" />
 
         </RelativeLayout>
 

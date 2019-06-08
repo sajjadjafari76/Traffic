@@ -34,9 +34,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="ناوگان دیزلی"
+                android:text="خودروهای دیزلی"
                 android:textColor="@color/green_50"
                 android:textSize="@dimen/ToolbarSize" />
+
+            <ImageView
+                android:layout_marginRight="10dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                app:srcCompat="@drawable/disel" />
 
         </RelativeLayout>
 
@@ -81,7 +90,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text=" ۱ .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+                    android:text=" الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
 تشکیل پرونده:"
                     android:textColor="#111"
                     android:textSize="14dp" />
@@ -186,12 +195,12 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#111" />
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:background="#111" />-->
 
 
                 <arsatech.co.justifiedtextview.JustifiedTextView
@@ -202,7 +211,7 @@
                     android:gravity="right"
                     android:padding="2dp"
                     android:text="
-۲ . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
                     android:textColor="#111"
                     android:textSize="14dp" />
 
@@ -365,7 +374,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="1 .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+                    android:text="الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
 تشکیل پرونده:"
                     android:textColor="#111"
                     android:textSize="14dp" />
@@ -416,12 +425,12 @@
                     android:textSize="12dp" />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#111" />
+                <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:layout_marginTop="5dp"-->
+                <!--android:layout_marginBottom="5dp"-->
+                <!--android:background="#111" />-->
 
 
                 <arsatech.co.justifiedtextview.JustifiedTextView
@@ -431,7 +440,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+                    android:text="ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
                     android:textColor="#111"
                     android:textSize="14dp" />
 
@@ -456,8 +465,6 @@
                     android:text=" 2 -بیمه شخص ثالث"
                     android:textColor="#333"
                     android:textSize="12dp" />
-
-
 
 
                 <arsatech.co.justifiedtextview.JustifiedTextView
@@ -499,7 +506,8 @@
                     android:padding="2dp"
                     android:text="مراحل لازم جهت دریافت باربرگ:"
                     android:textColor="#111"
-                    android:textSize="14dp" />
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
 
                 <arsatech.co.justifiedtextview.JustifiedTextView
 
@@ -535,16 +543,36 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
-
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="4-دریافت باربرگ حقیقی از نرم افزار"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
+                    android:layout_height="wrap_content">
+
+                    <arsatech.co.justifiedtextview.JustifiedTextView
+
+                        android:id="@+id/link_diesel"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="2dp"
+                        android:text="www.baarbarg.ir"
+                        android:textColor="#2196F3"
+                        android:textSize="12dp" />
+
+                    <arsatech.co.justifiedtextview.JustifiedTextView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="2dp"
+                        android:text="4-دریافت باربرگ حقیقی از نرم افزار"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
 
 
                 <LinearLayout
@@ -553,6 +581,38 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginBottom="5dp"
                     android:background="#111" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/image1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/nerkh1" />
+
+                <ImageView
+                    android:id="@+id/image2"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/nerkh2" />
+
+                <ImageView
+                    android:id="@+id/image3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:src="@drawable/nerkh3" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

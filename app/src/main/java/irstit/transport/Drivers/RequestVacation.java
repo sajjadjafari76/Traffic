@@ -84,12 +84,15 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
     private CircleSeekBar SeekBar;
     private LinearLayout Form, Btn;
     Context context;
+    SharedPreferences shared;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_vacation, container, false);
-
+        shared = getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
+        editor = shared.edit();
 //        AnyChartView anyChartView = view.findViewById(R.id.RequestVacation_Chart);
         Button btn = view.findViewById(R.id.RequestVacation_Btn);
         Spinner Category = view.findViewById(R.id.RequestVacation_Category);
@@ -115,51 +118,62 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         //         !getArguments().getString("dataVacation").isEmpty()) {
 
         getNews();
-        try {
+//        try {
+//
+////            getNews();
+//            SharedPreferences sh = this.getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
+////            if(sh.toString().equals("-1"))
+////                Log.e("compliantArray",sh.toString());
+//            String Jso = sh.getString("complaintArray", "-1");
+//
+//            JSONObject object = new JSONObject(Jso);
+//            JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
+//
+//            Log.e("fulltimefromhere", allOffTimes.toString());
+//
+//            //getArguments().getString("dataVacation")
+//
+////                Log.e("canleave" , object.getString("canleave") + " | ");
+//            if (allOffTimes.getString("canleave").equals("false")) {
+//                Status.setVisibility(View.VISIBLE);
+//                Btn.setVisibility(View.GONE);
+//                Form.setVisibility(View.GONE);
+//            }else {
+//                Status.setVisibility(View.GONE);
+//                Btn.setVisibility(View.VISIBLE);
+//                Form.setVisibility(View.VISIBLE);
+//            }
+//
+//
+//            Used.setText(allOffTimes.getString("timeuse"));
+//            Remaining.setText(allOffTimes.getString("havetime"));
+//            Entire.setText(allOffTimes.getString("alltime"));
+//
+//            SeekBar.setCurProcess(Integer.parseInt(allOffTimes.getString("timeuse")));
+//            SeekBar.setMaxProcess(Integer.parseInt(allOffTimes.getString("alltime")));
+//
+//            int persent = (Integer.parseInt(allOffTimes.getString("timeuse")) * 100) /
+//                    Integer.parseInt(allOffTimes.getString("alltime"));
+//
+//            TextPersent.setText(persent + "%");
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Log.e("fulltimefromhere", "error from RequestVaction.java");
+//
+//        }
 
-//            getNews();
-            SharedPreferences sh = this.getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
-//            if(sh.toString().equals("-1"))
-//                Log.e("compliantArray",sh.toString());
-            String Jso = sh.getString("complaintArray", "-1");
-
-            JSONObject object = new JSONObject(Jso);
-            JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
-
-            Log.e("fulltimefromhere", allOffTimes.toString());
-
-            //getArguments().getString("dataVacation")
-
-//                Log.e("canleave" , object.getString("canleave") + " | ");
-            if (allOffTimes.getString("canleave").equals("false")) {
-                Status.setVisibility(View.VISIBLE);
-                Btn.setVisibility(View.GONE);
-                Form.setVisibility(View.GONE);
-            }else {
-                Status.setVisibility(View.GONE);
-                Btn.setVisibility(View.VISIBLE);
-                Form.setVisibility(View.VISIBLE);
-            }
-
-
-            Used.setText(allOffTimes.getString("timeuse"));
-            Remaining.setText(allOffTimes.getString("havetime"));
-            Entire.setText(allOffTimes.getString("alltime"));
-
-            SeekBar.setCurProcess(Integer.parseInt(allOffTimes.getString("timeuse")));
-            SeekBar.setMaxProcess(Integer.parseInt(allOffTimes.getString("alltime")));
-
-            int persent = (Integer.parseInt(allOffTimes.getString("timeuse")) * 100) /
-                    Integer.parseInt(allOffTimes.getString("alltime"));
-
-            TextPersent.setText(persent + "%");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e("fulltimefromhere", "error from RequestVaction.java");
-
+        if (shared.getString("canleave","false").equals("false")) {
+            Status.setVisibility(View.VISIBLE);
+            Btn.setVisibility(View.GONE);
+            Form.setVisibility(View.GONE);
+        } else {
+            Status.setVisibility(View.GONE);
+            Btn.setVisibility(View.VISIBLE);
+            Form.setVisibility(View.VISIBLE);
         }
+
         //     }
 
         startDate.setOnClickListener(v -> {
@@ -453,7 +467,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         String internetStatus = "true";
 
 
-        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/news",
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/timing",
                 response -> {
                     Log.e("NewsResponse", response + " |");
                     getlog(response);
@@ -461,15 +475,60 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                         JSONObject object = new JSONObject(response);
 
                         if (object.getString("status").equals("true")) {
-                            Log.v("news", object.getString("news").toString());
-                            Log.e("userData", object.getString("userdata"));
-                            JSONArray jsonArray = object.getJSONArray("complainttype");
 
-                            SharedPreferences shared = getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = shared.edit();
-                            editor.putString("complaintArray", object.toString());
-                            editor.commit();
+//
 
+//                            editor.commit();
+
+                            try {
+                                JSONObject object1 = object.getJSONObject("fulltime");
+
+                                Log.e("NewsResponse", object1 + " ||||");
+////            getNews();
+//                                SharedPreferences sh = this.getActivity().getSharedPreferences("complaint", MODE_PRIVATE);
+////            if(sh.toString().equals("-1"))
+////                Log.e("compliantArray",sh.toString());
+//                                String Jso = sh.getString("complaintArray", "-1");
+//
+//                                JSONObject object = new JSONObject(Jso);
+//                                JSONObject allOffTimes = new JSONObject(object.getString("fulltime"));
+//
+//                                Log.e("fulltimefromhere", allOffTimes.toString());
+
+                                //getArguments().getString("dataVacation")
+
+//                Log.e("canleave" , object.getString("canleave") + " | ");
+
+
+                                editor.putString("canleave", object1.getString("canleave")).apply();
+
+                                if (shared.getString("canleave","false").equals("false")) {
+                                    Status.setVisibility(View.VISIBLE);
+                                    Btn.setVisibility(View.GONE);
+                                    Form.setVisibility(View.GONE);
+                                } else {
+                                    Status.setVisibility(View.GONE);
+                                    Btn.setVisibility(View.VISIBLE);
+                                    Form.setVisibility(View.VISIBLE);
+                                }
+                                Used.setText(object1.getString("timeuse"));
+                                Remaining.setText(object1.getString("havetime"));
+                                Entire.setText(object1.getString("alltime"));
+
+                                SeekBar.setCurProcess(Integer.parseInt(object1.getString("timeuse")));
+                                SeekBar.setMaxProcess(Integer.parseInt(object1.getString("alltime")));
+
+                                int persent = (Integer.parseInt(object1.getString("timeuse")) * 100) /
+                                        Integer.parseInt(object1.getString("alltime"));
+
+                                TextPersent.setText(persent + "%");
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Log.e("fulltimefromhere", "error from RequestVaction.java");
+
+                            }
 
                         }
 
@@ -487,7 +546,8 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("phone", " 09033433776");
+                map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
                 map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
                 Log.v("FromSplash", map.get("phone"));
 
@@ -496,9 +556,9 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> map = new HashMap<>();
-//                map.put("token", "df837016d0fc7670f221197cd92439b5");
-                return super.getHeaders();
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                return map;
             }
         };
 

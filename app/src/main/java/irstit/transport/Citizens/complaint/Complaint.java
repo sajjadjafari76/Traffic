@@ -386,6 +386,7 @@ public class Complaint extends AppCompatActivity {
 
             JSONObject jsonObject = new JSONObject();
             jsonObject = getComplaintArray();
+            Log.i("jdshfuahf", "getCategory: "+jsonObject);
             JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
 
             if (array.length() != 0) {
@@ -1003,6 +1004,7 @@ public class Complaint extends AppCompatActivity {
 
         SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
         String Jso = sh.getString("complaintArray", "-1");
+        Log.i("jdshfuahf", "getNews: "+Jso);
 
 
         JSONObject jsonObject = null;

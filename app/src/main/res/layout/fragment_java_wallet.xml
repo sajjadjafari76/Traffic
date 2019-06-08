@@ -57,6 +57,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.44"
             android:background="@drawable/phone_pay_back"
+
             android:gravity="left"
             >
             <!--#9994cc-->

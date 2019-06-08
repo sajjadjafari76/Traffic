@@ -252,10 +252,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#9C9B9B">
-        <ImageView
-            android:src="@drawable/logo"
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:context=".SplashScreen"
+            android:weightSum="3"
+            android:orientation="vertical"
+            android:background="@drawable/bk_splash">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.2"/>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.6"/>
+
+
+        </LinearLayout>
 
     </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>
