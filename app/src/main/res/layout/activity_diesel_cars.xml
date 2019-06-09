@@ -39,12 +39,12 @@
                 android:textSize="@dimen/ToolbarSize" />
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="10dp"
                 app:srcCompat="@drawable/disel" />
 
         </RelativeLayout>
@@ -551,8 +551,8 @@
 
                         android:id="@+id/link_diesel"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:fontFamily="@font/iransans"
                         android:gravity="right"
                         android:padding="2dp"
@@ -563,8 +563,8 @@
                     <arsatech.co.justifiedtextview.JustifiedTextView
 
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:fontFamily="@font/iransans"
                         android:gravity="right"
                         android:padding="2dp"
@@ -574,7 +574,6 @@
                 </LinearLayout>
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
@@ -582,6 +581,19 @@
                     android:layout_marginBottom="5dp"
                     android:background="#111" />
             </LinearLayout>
+
+            <arsatech.co.justifiedtextview.JustifiedTextView
+
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/iransans"
+                android:gravity="right"
+                android:padding="2dp"
+                android:text="جدول سهمیه سوخت گازوئیل"
+                android:textColor="#333"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/linear_image"
@@ -597,14 +609,14 @@
                     android:padding="2dp"
                     android:src="@drawable/nerkh1" />
 
-                <ImageView
-                    android:id="@+id/image2"
+                <!--<ImageView-->
+                <!--android:id="@+id/image2"-->
 
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:src="@drawable/nerkh2" />
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:padding="2dp"-->
+                <!--android:src="@drawable/nerkh2" />-->
 
                 <ImageView
                     android:id="@+id/image3"

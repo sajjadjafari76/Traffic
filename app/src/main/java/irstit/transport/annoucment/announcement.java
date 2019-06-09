@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -13,7 +12,6 @@ import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,15 +22,13 @@ import java.util.List;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
-import irstit.transport.Citizens.SearchObject;
-import irstit.transport.DataModel.SearchObjModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
 
 public class announcement extends AppCompatActivity {
 
     private RecyclerView re;
-    private AnnouncementRecyclerAdoptor ad ;
+    private AnnouncementRecyclerAdoptor ad;
 
     private List<AnnoucmentContorol> list = new ArrayList<>();
 
@@ -47,19 +43,21 @@ public class announcement extends AppCompatActivity {
 
 
         getDate();
-//        ad = new AnnouncementRecyclerAdoptor(list,getApplicationContext());
-        re.setLayoutManager(new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false));
+//        ad = new AnnouncementRecyclerAdoptor(list, getApplicationContext());
+        ad = new AnnouncementRecyclerAdoptor(list, announcement.this);
+
+        re.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         re.setAdapter(ad);
-      //  announcement_progressbar.setVisibility(View.GONE);
+        //  announcement_progressbar.setVisibility(View.GONE);
 
 
     }
 
 
-    private  void getDate(){
+    private void getDate() {
 
         announcement_progressbar.setVisibility(View.VISIBLE);
-        Log.e("insdie:0","comes");
+        Log.e("insdie:0", "comes");
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/notification",
                 response -> {
                     Log.e("GetPhoneResponse", response + " |");
@@ -74,9 +72,7 @@ public class announcement extends AppCompatActivity {
                             JSONArray array = object.getJSONArray("result");
 
 
-
                             if (array.length() == 0) {
-
 
 
                             } else {
@@ -84,10 +80,10 @@ public class announcement extends AppCompatActivity {
 //                                Null.setVisibility(View.GONE);
                                 re.setVisibility(View.VISIBLE);
 
-                             //   List<AnnoucmentContorol> obj = new ArrayList<>();
+                                //   List<AnnoucmentContorol> obj = new ArrayList<>();
 
 
-                                for (int i = 0 ; i < array.length() ; i++) {
+                                for (int i = 0; i < array.length(); i++) {
                                     AnnoucmentContorol annou = new AnnoucmentContorol();
 
                                     annou.setTitle(array.getJSONObject(i).getString("title"));
@@ -96,18 +92,19 @@ public class announcement extends AppCompatActivity {
                                     annou.setContent(array.getJSONObject(i).getString("desc"));
                                     annou.setState(array.getJSONObject(i).getString("state"));
                                     annou.setImage(array.getJSONObject(i).getString("image"));
+                                    annou.setWeek(array.getJSONObject(i).getString("week"));
 //                                    Picasso picasso = new Picasso(this,;
                                     list.add(annou);
-                                    Log.e("announcement0",list.toString());
+                                    Log.e("announcement0", list.toString());
                                 }
 
 
-                                Log.e("announcement1",list.toString());
+                                Log.e("announcement1", list.toString());
 
-                                re.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
-                                ad = new AnnouncementRecyclerAdoptor(list,announcement.this);
-                                re.setAdapter(ad);
-                                Log.e("announcement2",list.toString());
+//                                re.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));
+//                                ad = new AnnouncementRecyclerAdoptor(list,announcement.this);
+//                                re.setAdapter(ad);
+                                Log.e("announcement2", list.toString());
                                 // re.setAdapter(new AnnouncementRecyclerAdoptor(list,getBaseContext()));
                                 announcement_progressbar.setVisibility(View.GONE);
                             }

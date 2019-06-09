@@ -1,7 +1,6 @@
 package irstit.transport.annoucment;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -39,49 +38,43 @@ public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<Announceme
 
         custom.title.setText(li.get(i).getTitle());
         custom.des.setText(li.get(i).getContent());
+        custom.week.setText(li.get(i).getWeek());
 
-        custom.link.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        custom.link.setOnClickListener(v -> {
 
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(li.get(i).getLink()));
-                context.startActivity(browserIntent);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(li.get(i).getLink()));
+            context.startActivity(browserIntent);
 
-            }
         });
 
 
-        if(li.get(i).getLink().equals("nolink"))
-        {
-
+        if (li.get(i).getLink().equals("nolink")) {
 //            not thing happens here
             custom.link.setText("");
-
-        }
-        else{
+        } else {
             custom.link.setText(li.get(i).getLink());
-
         }
 
 
         custom.date.setText(li.get(i).getDate());
 
-        if(li.get(i).getState() == "0"){
+        if (li.get(i).getState() == "0") {
 
 //          not thing happens here
 
-        }
-        else if(li.get(i).getState() == "1"){
+        } else if (li.get(i).getState() == "1") {
 
-            custom.role.setText("راننده");
+            custom.role.setText("(ویژه راننده)");
 
-        }
-        else{
+        } else {
 
-            custom.role.setText("شهروند");
+            custom.role.setText("(ویژه شهروند)");
 
         }
-        Picasso.with(context).load(li.get(i).getImage()).into(custom.mainImage);
+        Picasso.with(context)
+                .load(li.get(i).getImage())
+                .error(R.drawable.etelaye)
+                .into(custom.mainImage);
 
     }
 
@@ -91,9 +84,11 @@ public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<Announceme
     }
 
 
-    class custom extends RecyclerView.ViewHolder{
-        private TextView title,date,des,link,role;
+    class custom extends RecyclerView.ViewHolder {
+        private TextView date, role, week;
+        private TextView title, des, link;
         private ImageView mainImage;
+
         public custom(@NonNull View itemView) {
             super(itemView);
 
@@ -103,6 +98,7 @@ public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<Announceme
             link = itemView.findViewById(R.id.annoucment_link);
             mainImage = itemView.findViewById(R.id.annoucment_image);
             role = itemView.findViewById(R.id.announcement_refers);
+            week = itemView.findViewById(R.id.annoucment_week);
         }
     }
 }

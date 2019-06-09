@@ -29,16 +29,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.marozzi.roundbutton.RoundButton;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import irstit.transport.AboutUs;
+import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.Account.CitizenLogin;
 import irstit.transport.Citizens.CitizenMainActivity;
 import irstit.transport.Citizens.complaint.Complaint;
@@ -51,6 +60,7 @@ import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
 import irstit.transport.Drivers.DriverMainActivityTwo;
 import irstit.transport.Drivers.DriversMainActivity;
+import irstit.transport.Globals;
 import irstit.transport.MainPage;
 import irstit.transport.R;
 import irstit.transport.Views.CFProvider;
@@ -167,8 +177,48 @@ public class MainPager extends AppCompatActivity {
             editor.clear();
             editor.commit();
 
+            StringRequest request = new StringRequest(Request.Method.GET, Globals.APIURL + "/closeApp", new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
 
-        } catch (Exception e) {
+                }
+            }){
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() == null) {
+                    map.put("phone", DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone()+"");
+                } else {
+                    map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone()+"");
+                }
+//                map.put("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
+                map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+                Log.v("FromSplash", map.get("phone"));
+
+                return map;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", "df837016d0fc7670f221197cd92439b5");
+                return map;
+            }
+        };
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(request);
+
+
+
+    } catch (Exception e) {
             e.printStackTrace();
         }
     }

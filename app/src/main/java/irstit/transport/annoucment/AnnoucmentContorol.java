@@ -2,7 +2,15 @@ package irstit.transport.annoucment;
 
 public class AnnoucmentContorol {
 
-    private String image,link,date,content,title,state;
+    private String image, link, date, content, title, state, week;
+
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
 
     public String getState() {
         return state;

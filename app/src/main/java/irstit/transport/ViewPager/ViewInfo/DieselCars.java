@@ -19,7 +19,7 @@ import irstit.transport.R;
 
 public class DieselCars extends AppCompatActivity {
 
-    ImageView imageView, imageView1, imageView2, imageView3;
+    ImageView imageView, imageView1, imageView3;
     TextView textLink;
 
     @Override
@@ -29,7 +29,7 @@ public class DieselCars extends AppCompatActivity {
         imageView = findViewById(R.id.LetterRate_Back);
         textLink = findViewById(R.id.link_diesel);
         imageView1 = findViewById(R.id.image1);
-        imageView2 = findViewById(R.id.image2);
+//        imageView2 = findViewById(R.id.image2);
         imageView3 = findViewById(R.id.image3);
 
         imageView.setOnClickListener(new View.OnClickListener() {
@@ -41,22 +41,34 @@ public class DieselCars extends AppCompatActivity {
 
         imageView1.setOnClickListener(v -> {
 
-            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh1);
 //            String imgPath = path.toString();
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(path);
-            startActivity(intent);
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setData(path);
+//            startActivity(intent);
+
+            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh1);
+            Intent fullScreenIntent = new Intent(this, FullScreenImageActivity.class);
+            fullScreenIntent.setData(path);
+            startActivity(fullScreenIntent);
 
 
         });
-        imageView2.setOnClickListener(v -> {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh2))); /** replace with your own uri */
-
-
-        });
+//        imageView2.setOnClickListener(v -> {
+////            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh2))); /** replace with your own uri */
+//
+//            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh2);
+//            Intent fullScreenIntent = new Intent(this, FullScreenImageActivity.class);
+//            fullScreenIntent.setData(path);
+//            startActivity(fullScreenIntent);
+//
+//        });
         imageView3.setOnClickListener(v -> {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3))); /** replace with your own uri */
+//            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3))); /** replace with your own uri */
 
+            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3);
+            Intent fullScreenIntent = new Intent(this, FullScreenImageActivity.class);
+            fullScreenIntent.setData(path);
+            startActivity(fullScreenIntent);
 
         });
 
