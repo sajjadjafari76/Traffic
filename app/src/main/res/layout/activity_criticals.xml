@@ -141,6 +141,44 @@
 
 
                 <Spinner
+                    android:id="@+id/Critical"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:background="@drawable/back_spinner"
+                    android:focusableInTouchMode="true"
+                    android:layoutDirection="rtl"
+                    android:popupBackground="#62ffffff"
+                    android:soundEffectsEnabled="true"
+                    android:spinnerMode="dialog"
+                    />
+
+
+                <View
+                    android:layout_width="@dimen/spacing_middle"
+                    android:layout_height="wrap_content" />
+
+
+                <ImageButton
+                    android:layout_width="@dimen/spacing_xlarge"
+                    android:layout_height="@dimen/spacing_xlarge"
+                    android:background="@android:color/transparent"
+                    android:tint="@color/grey_40"
+                    app:srcCompat="@drawable/img_title" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_xxxxlarge"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/spacing_xxlarge"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/spacing_large"
+                android:paddingRight="@dimen/spacing_large">
+
+
+                <Spinner
                     android:id="@+id/Critical_Title"
                     android:layout_width="0dp"
                     android:layout_height="46dp"

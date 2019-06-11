@@ -22,18 +22,29 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import irstit.transport.AboutUs;
+import irstit.transport.AppController.AppController;
+import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.Citizens.complaint.Complaint;
 import irstit.transport.Citizens.RegisterObject;
 import irstit.transport.Citizens.SearchObject;
 import irstit.transport.ConnectToUs;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
+import irstit.transport.Globals;
 import irstit.transport.MainPage;
 import irstit.transport.R;
 import irstit.transport.ViewPager.MainPager;
@@ -181,20 +192,78 @@ public class DriverMainActivityTwo extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private void deleteSavedDefaultUsername(){
+
+    private void deleteSavedDefaultUsername() {
         try {
 
-            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sh.edit();
-            editor.clear();
-            editor.commit();
 
+            StringRequest request = new StringRequest(Request.Method.POST, Globals.APIURL + "/closeApp", response -> {
+
+                if (response.equals("ture")) {
+                    SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sh.edit();
+                    editor.clear();
+                    editor.commit();
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: " + "ok");
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: "+"no");
+
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<>();
+                    if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() == null) {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone() + "");
+                        map.put("state", "0");
+                    } else {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() + "");
+                        map.put("state", "1");
+
+                    }
+//                map.put("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
+                    map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+                    Log.v("FromSplash", map.get("phone"));
+
+                    return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", "df837016d0fc7670f221197cd92439b5");
+                    return map;
+                }
+            };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            AppController.getInstance().addToRequestQueue(request);
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+//    private void deleteSavedDefaultUsername(){
+//        try {
+//
+//            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+//            SharedPreferences.Editor editor = sh.edit();
+//            editor.clear();
+//            editor.commit();
+//
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     private class MyNavigationAdapter extends RecyclerView.Adapter<MyNavigationAdapter.MyCustomView> {
 
         List<NavModel> data;
@@ -231,10 +300,10 @@ public class DriverMainActivityTwo extends AppCompatActivity {
                         closeDrawer();
                         break;
                     case 2:
-                        Intent intent12 = new Intent(getBaseContext(), Complaint.class);
-                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
-                            intent12.putExtra("data", getIntent().getExtras().getString("data"));
-                        }
+                        Intent intent12 = new Intent(getBaseContext(), Criticals_Suggestion.class);
+//                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("data") != null) {
+//                            intent12.putExtra("data", getIntent().getExtras().getString("data"));
+//                        }
                         startActivity(intent12);
                         closeDrawer();
                         break;
@@ -247,7 +316,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
                         startActivity(new Intent(getBaseContext(),AboutUs.class));
                         break;
                     case 5:
-                        deleteSavedDefaultUsername();
+
                         ShowDialog();
                         break;
                 }
@@ -350,6 +419,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        deleteSavedDefaultUsername();
                         DBManager.getInstance(getApplicationContext()).deleteDrivers();
                         DBManager.getInstance(getApplicationContext()).deleteCitizen();
 

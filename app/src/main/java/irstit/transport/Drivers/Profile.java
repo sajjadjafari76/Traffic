@@ -4,6 +4,7 @@ package irstit.transport.Drivers;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,22 +20,34 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.github.florent37.expansionpanel.ExpansionHeader;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import ir.hamsaa.persiandatepicker.util.PersianCalendar;
+import irstit.transport.AppController.AppController;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.DriverInfoModel;
 import irstit.transport.Drivers.Login.ActivityLogin;
 import irstit.transport.Drivers.Login.GetPhone;
+import irstit.transport.Globals;
+import irstit.transport.MainPage;
 import irstit.transport.R;
 import irstit.transport.Views.EditnameDialogFragment;
 import irstit.transport.Views.MyDialogManager;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class Profile extends Fragment {
 
@@ -117,6 +130,16 @@ public class Profile extends Fragment {
             alertDialog.setNegativeButton("خیر", (dialog, which) -> dialog.dismiss());
             alertDialog.setPositiveButton("بله", (dialog, which) -> {
                 logOut();
+//                deleteSavedDefaultUsername();
+                DBManager.getInstance(getContext()).deleteDrivers();
+                DBManager.getInstance(getContext()).deleteCitizen();
+
+//                alertDialog.dismiss();
+                dialog.dismiss();
+                Intent intent = new Intent(getContext(), MainPage.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+//                finish();
                 getActivity().finish();
             });
             alertDialog.show();
@@ -284,6 +307,64 @@ public class Profile extends Fragment {
 
     private void logOut() {
         DBManager.getInstance(getContext()).deleteDrivers();
+
+
+        try {
+
+
+            StringRequest request = new StringRequest(Request.Method.POST, Globals.APIURL + "/closeApp", response -> {
+
+                if (response.equals("ture")) {
+                    SharedPreferences sh = getContext().getSharedPreferences("complaint", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sh.edit();
+                    editor.clear();
+                    editor.commit();
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: " + "ok");
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: "+"no");
+
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<>();
+                    if (DBManager.getInstance(getContext()).getDriverInfo().getTelephone() == null) {
+                        map.put("phone", DBManager.getInstance(getContext()).getCitizenInfo().getUserPhone() + "");
+                        map.put("state", "0");
+                    } else {
+                        map.put("phone", DBManager.getInstance(getContext()).getDriverInfo().getTelephone() + "");
+                        map.put("state", "1");
+
+                    }
+//                map.put("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
+                    map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+                    Log.v("FromSplash", map.get("phone"));
+
+                    return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", "df837016d0fc7670f221197cd92439b5");
+                    return map;
+                }
+            };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            AppController.getInstance().addToRequestQueue(request);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 

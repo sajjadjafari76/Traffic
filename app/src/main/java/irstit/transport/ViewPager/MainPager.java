@@ -349,7 +349,7 @@ public class MainPager extends AppCompatActivity {
                             break;
 
                         case 7:
-                            deleteSavedDefaultUsername();
+
                             ShowDialog();
                             break;
 
@@ -394,7 +394,7 @@ public class MainPager extends AppCompatActivity {
                             break;
 
                         case 5:
-                            deleteSavedDefaultUsername();
+
                             ShowDialog();
                             break;
 
@@ -565,6 +565,7 @@ public class MainPager extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 //                        deleteSavedDefaultUsername();
+                        deleteSavedDefaultUsername();
                         DBManager.getInstance(getApplicationContext()).deleteDrivers();
                         DBManager.getInstance(getApplicationContext()).deleteCitizen();
 

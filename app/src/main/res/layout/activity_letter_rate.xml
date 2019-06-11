@@ -91,7 +91,6 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/progressBarStyleLarge"
         android:id="@+id/pragressbar"
         android:layout_centerInParent="true"
         android:visibility="gone"

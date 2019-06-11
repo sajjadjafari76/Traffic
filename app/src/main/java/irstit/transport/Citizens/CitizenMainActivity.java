@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,17 +22,27 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import irstit.transport.AboutUs;
+import irstit.transport.AppController.AppController;
 import irstit.transport.Citizens.complaint.Complaint;
 import irstit.transport.Citizens.complaint.ComplaintTrack;
 import irstit.transport.ConnectToUs;
 import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.NavModel;
+import irstit.transport.Globals;
 import irstit.transport.LetterRate;
 import irstit.transport.MainPage;
 import irstit.transport.R;
@@ -110,6 +121,63 @@ public class CitizenMainActivity extends AppCompatActivity {
 
 
         changeDefaultUsername();
+    }
+    private void deleteSavedDefaultUsername() {
+        try {
+
+
+            StringRequest request = new StringRequest(Request.Method.POST, Globals.APIURL + "/closeApp", response -> {
+
+                if (response.equals("ture")) {
+                    SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sh.edit();
+                    editor.clear();
+                    editor.commit();
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: " + "ok");
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: "+"no");
+
+                }
+            }) {
+
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<>();
+                    if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() == null) {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone() + "");
+                        map.put("state", "0");
+                    } else {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() + "");
+                        map.put("state", "1");
+
+                    }
+//                map.put("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
+//                    map.put("phone", " 09033433776");
+                    map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+                    Log.v("FromSplash", map.get("phone"));
+
+                    return map;
+                }
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", "df837016d0fc7670f221197cd92439b5");
+                    return map;
+                }
+            };
+
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            AppController.getInstance().addToRequestQueue(request);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -309,6 +377,7 @@ public class CitizenMainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
+                        deleteSavedDefaultUsername();
                         DBManager.getInstance(getApplicationContext()).deleteDrivers();
                         DBManager.getInstance(getApplicationContext()).deleteCitizen();
 

@@ -91,6 +91,7 @@ public class Complaint extends AppCompatActivity {
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
     private ScrollView Page137_Scrool;
     private ProgressBar progressbar;
+    private ImageView Complaint_Back;
 
 
     //private List<ThreeCompliant> three = new ArrayList<ThreeCompliant>();
@@ -198,6 +199,7 @@ public class Complaint extends AppCompatActivity {
         Text = findViewById(R.id.Complaint_Text);
         Page137_Scrool = findViewById(R.id.Page137_Scrool);
         progressbar = findViewById(R.id.progressbar);
+        Complaint_Back = findViewById(R.id.Complaint_Back);
         getComplaintArray();
 
 //        modelofThreeCompliantList.add(new ThreeCompliant());
@@ -241,6 +243,12 @@ public class Complaint extends AppCompatActivity {
 
 
 
+        Complaint_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //  VoiceRecoeder gettingVoiceInstance ;
         Btn.setOnClickListener(v -> {
@@ -878,10 +886,10 @@ public class Complaint extends AppCompatActivity {
     }
 
     void Clear() {
-        Name.setText("");
-        Family.setText("");
-        Phone.setText("");
-        Email.setText("");
+//        Name.setText("");
+//        Family.setText("");
+//        Phone.setText("");
+//        Email.setText("");
         CarPelake.setText("");
         CarCode.setText("");
         Text.setText("");

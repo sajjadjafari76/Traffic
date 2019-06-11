@@ -464,7 +464,7 @@
                 android:backgroundTint="@color/green_400"
                 android:drawableRight="@drawable/ic_check"
                 android:fontFamily="@font/shabnam"
-                android:text="ثبت"
+                android:text="ثبت و ارسال"
                 android:textColor="#d9f1fd"
                 android:textSize="20dp" />
 

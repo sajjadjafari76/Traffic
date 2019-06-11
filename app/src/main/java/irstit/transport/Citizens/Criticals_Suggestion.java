@@ -38,11 +38,14 @@ import irstit.transport.Views.Utils;
 public class Criticals_Suggestion extends AppCompatActivity {
 
     private spinnerAdapter adapter;
+    private spinnerAdapter adapterTitle;
     private List<SpinnerModel> category = new ArrayList<>();
+    private List<SpinnerModel> categoryTitle = new ArrayList<>();
     private String type = "";
+    private String typeT = "";
     private RelativeLayout Critical_Loading;
     private EditText Name, Phone, Description;
-    private Spinner Title;
+    private Spinner Title,STitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
         Critical_Loading = findViewById(R.id.Critical_Loading);
         Name = findViewById(R.id.Critical_Name);
         Title = findViewById(R.id.Critical_Title);
+        STitle = findViewById(R.id.Critical);
         Phone = findViewById(R.id.Critical_Phone);
         Description = findViewById(R.id.Critical_Description);
         Critical_Btn.setOnClickListener(view -> {
@@ -67,6 +71,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
             } else {
                 criticalRequest(Name.getText().toString(),
                         type,
+                        typeT,
                         Phone.getText().toString(),
                         Description.getText().toString());
 
@@ -85,12 +90,13 @@ public class Criticals_Suggestion extends AppCompatActivity {
         }
 
         adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
+        adapterTitle = new spinnerAdapter(this, R.layout.layout_custom_spinner);
 
         for (int i = 0; i < getCategory().size(); i++) {
             adapter.add(getCategory().get(i).getName());
 
         }
-        adapter.add("یک موضوع را انتخاب کنید!");
+        adapter.add("یک واحد را انتخاب کنید!");
         Title.setAdapter(adapter);
         Title.setSelection(adapter.getCount());
         Title.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -101,6 +107,29 @@ public class Criticals_Suggestion extends AppCompatActivity {
                 } else {
                     type = String.valueOf(getCategory().get(position).getId());
                     Log.e("GetPhoneResponse123", String.valueOf(getCategory().get(position).getId()) + " |");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        for (int i = 0; i < getCategoryTitle().size(); i++) {
+            adapterTitle.add(getCategoryTitle().get(i).getName());
+
+        }
+        adapterTitle.add("نوع درخواست را انتخاب کنید!");
+        STitle.setAdapter(adapterTitle);
+        STitle.setSelection(adapterTitle.getCount());
+        STitle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if (position > (getCategoryTitle().size() - 1)) {
+
+                } else {
+                    typeT = String.valueOf(getCategoryTitle().get(position).getId());
+                    Log.e("GetPhoneResponse123", String.valueOf(getCategoryTitle().get(position).getId()) + " |");
                 }
             }
 
@@ -183,7 +212,43 @@ public class Criticals_Suggestion extends AppCompatActivity {
         return data;
     }
 
-    private void criticalRequest(String Name, String Type, String Phone, String Description) {
+    private List<SpinnerModel> getCategoryTitle() {
+        List<SpinnerModel> data = new ArrayList<>();
+
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+
+                case 0:
+                    SpinnerModel model = new SpinnerModel();
+                    model.setId(1111);
+                    model.setName("انتقاد");
+                    data.add(model);
+                    break;
+                case 1:
+                    SpinnerModel model2 = new SpinnerModel();
+                    model2.setId(2222);
+                    model2.setName("پیشنهادات");
+                    data.add(model2);
+                    break;
+                case 2:
+                    SpinnerModel model3 = new SpinnerModel();
+                    model3.setId(3333);
+                    model3.setName("گزارش خطا");
+                    data.add(model3);
+                    break;
+                case 3:
+                    SpinnerModel model4 = new SpinnerModel();
+                    model4.setId(4444);
+                    model4.setName("سایر");
+                    data.add(model4);
+                    break;
+
+            }
+        }
+        return data;
+    }
+
+    private void criticalRequest(String Name, String Type,String TypeT, String Phone, String Description) {
 
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/offers",
                 response -> {
@@ -215,10 +280,11 @@ public class Criticals_Suggestion extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
 
-                Log.e("parameter", Name + " | " + Type + " | " + Phone + " | " + Description);
+                Log.e("parameter", Name + " | " + Type + " | " + TypeT + " | " + Phone + " | " + Description);
                 Map<String, String> map = new HashMap<>();
                 map.put("fname", Name);
                 map.put("type", Type);
+                map.put("title", TypeT);
                 map.put("mobile", Phone);
                 map.put("comment", Description);
                 return map;
