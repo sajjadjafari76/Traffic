@@ -71,28 +71,14 @@ public class DieselCars extends AppCompatActivity {
             startActivity(fullScreenIntent);
 
         });
-
-        SpannableString ss = new SpannableString(textLink.getText());
-
-        ClickableSpan clickableTerms = new ClickableSpan() {
+        textLink.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View textView) {
-                // show toast here
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("www.baarbarg.ir"));
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://baarbarg.ir/Content/APK/Baarbarg(1.1.0).apk"));
                 startActivity(browserIntent);
             }
+        });
 
-            @Override
-            public void updateDrawState(TextPaint ds) {
-                super.updateDrawState(ds);
-                ds.setUnderlineText(true);
 
-            }
-        };
-        ss.setSpan(clickableTerms, 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        ss.setSpan(new ForegroundColorSpan(Color.BLUE), 0, 5, 0);
-        textLink.setText(ss);
-        textLink.setMovementMethod(LinkMovementMethod.getInstance());
-        textLink.setHighlightColor(Color.TRANSPARENT);
     }
 }

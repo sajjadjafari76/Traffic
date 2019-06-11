@@ -41,48 +41,63 @@
                 android:textColor="@color/green_50"
                 android:textSize="@dimen/ToolbarSize" />
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/img_about_us" />
         </RelativeLayout>
 
     </android.support.v7.widget.Toolbar>
 
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_below="@id/AboutUs_Toolbar"
+        android:orientation="vertical"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="10dp"
         tools:context=".ViewPager.ViewInfo.InfoTab">
 
 
-        <Spinner
-            android:id="@+id/About_Category"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_below="@+id/ViewInfo_Tab"
-            android:background="@drawable/back_spinner"
-            android:focusableInTouchMode="true"
-            android:layoutDirection="rtl"
-            android:popupBackground="#62ffffff"
-            android:soundEffectsEnabled="true"
-            android:spinnerMode="dialog"
-            android:layout_margin="12dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/ViewInfo_Category"
-            android:layout_marginTop="82dp"
-            android:fontFamily="@font/shabnam"
-            android:lineSpacingExtra="15dp"
+            android:layout_height="200dp"
             android:padding="5dp"
-            android:lineHeight="30dp"
-            android:text="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد."
-            android:textSize="15sp" />
+            android:scaleType="fitXY"
+            android:src="@drawable/about" />
+
+        <arsatech.co.justifiedtextview.JustifiedTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans"
+            android:gravity="right"
+            android:padding="2dp"
+          android:text="درباره سازمان حمل و نقل شهرداری تاکستان" android:textColor="#222"
+            android:textSize="14dp"
+            android:textStyle="bold" />
 
 
-    </RelativeLayout>
+        <arsatech.co.justifiedtextview.JustifiedTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iransans"
+            android:gravity="right"
+            android:padding="2dp"
+           android:text=" سازمان حمل و نقل همگانی شهر تاکستان در سال 1383 با تعداد 3 پرسنل فعالیت خود را آغاز نمود و پس از 13 سال فعالیت ، در سال 1396 برابر اساسنامه شماره 3739 سازمان شهرداریها و دهیاریهای کشور به سازمان مدیریت حمل ونقل شهرداری تاکستان تغییر نام یافت
+
+سازمان مدیریت حمل ونقل از جمله سازمانهای وابسته به شهرداری میباشد که مرکز اصلی سازمان در شهر تاکستان و حوزه فعالیت آن محدوده و حریم شهر میباشد و مدت فعالیت آن چهار سال میباشد. "
+            android:textColor="#111"
+            android:textSize="14dp" />
+
+    </LinearLayout>
 
 
 </RelativeLayout>

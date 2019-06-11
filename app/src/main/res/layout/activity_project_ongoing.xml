@@ -88,7 +88,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مطالعه ی طرح جامع حمل و نقل و ترافیک شهری"
+                    android:text="• مطالعه ی طرح جامع حمل و نقل و ترافیک شهری"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -99,7 +99,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="طرح مطالعه و اصلاح هندسی برخی از تقاطع های حادثه خیز"
+                    android:text="• طرح مطالعه و اصلاح هندسی برخی از تقاطع های حادثه خیز"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -110,7 +110,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مطالعه و بازبینی و اصلاح سرعتگیرهای سطح شهر"
+                    android:text="• مطالعه و بازبینی و اصلاح سرعتگیرهای سطح شهر"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -121,7 +121,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="خط کشی کلیه معابر سطح شهر(نوبت دوم)"
+                    android:text="• خط کشی کلیه معابر سطح شهر(نوبت دوم)"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -132,7 +132,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مطالعه و بازبینی طرح دوطرفه کردن خیابانهای امام، موسی صدر طالقانی و آیت اله سعیدی"
+                    android:text="• مطالعه و بازبینی طرح دوطرفه کردن خیابانهای امام، موسی صدر طالقانی و آیت اله سعیدی"
                     android:textColor="#333"
                     android:textSize="12sp" />
 
@@ -143,7 +143,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="ساماندهی و نوسازی دکه های سطح شهر"
+                    android:text="• ساماندهی و نوسازی دکه های سطح شهر"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -154,7 +154,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مدیریت و کنترل بازارهای روز ( پنج شنبه بازار)"
+                    android:text="• مدیریت و کنترل بازارهای روز ( پنج شنبه بازار)"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -165,7 +165,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مدیریت و کنترل جایگاه CNG کوثر شهرداری تاکستان"
+                    android:text="• مدیریت و کنترل جایگاه CNG کوثر شهرداری تاکستان"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -176,7 +176,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="کنترل و نگهداشت چراغ های راهنمایی و رانندگی"
+                    android:text="• کنترل و نگهداشت چراغ های راهنمایی و رانندگی"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -187,7 +187,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مدیریت و کنترل پارکبان و پارکنیگهای سطح شهر"
+                    android:text="• مدیریت و کنترل پارکبان و پارکنیگهای سطح شهر"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -218,7 +218,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="مطالعه و اجرای پیست دوچرخه سواری"
+                    android:text="• مطالعه و اجرای پیست دوچرخه سواری"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -229,7 +229,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="اجرای طرح پرداخت الکترونیک در زمینه ی حمل و نقل"
+                    android:text="• اجرای طرح پرداخت الکترونیک در زمینه ی حمل و نقل"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -240,7 +240,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="اجرای طرح پایش تصاویر ترافیکی"
+                    android:text="• اجرای طرح پایش تصاویر ترافیکی"
                     android:textColor="#333"
                     android:textSize="12dp" />
 
@@ -251,7 +251,7 @@
                     android:fontFamily="@font/iransans"
                     android:gravity="right"
                     android:padding="2dp"
-                    android:text="برگزاری کلاسهای آموزشی جهت بالابردن فرهنگ ترافیک بین شهروندان و رانندگان"
+                    android:text="• برگزاری کلاسهای آموزشی جهت بالابردن فرهنگ ترافیک بین شهروندان و رانندگان"
                     android:textColor="#333"
                     android:textSize="12dp" />
             </LinearLayout>

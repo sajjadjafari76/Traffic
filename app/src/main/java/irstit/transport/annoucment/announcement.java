@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import java.util.Map;
 import irstit.transport.AppController.AppController;
 import irstit.transport.Globals;
 import irstit.transport.R;
+import irstit.transport.Views.Utils;
 
 public class announcement extends AppCompatActivity {
 
@@ -33,16 +35,28 @@ public class announcement extends AppCompatActivity {
     private List<AnnoucmentContorol> list = new ArrayList<>();
 
     private ProgressBar announcement_progressbar;
+    ImageView LetterRate_Back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_announcement);
         re = findViewById(R.id.announcement_recycler);
+        LetterRate_Back = findViewById(R.id.LetterRate_Back);
         announcement_progressbar = findViewById(R.id.announcement_progressbar);
 
+        LetterRate_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        getDate();
+        if (!Utils.getInstance(getBaseContext()).hasInternetAccess() && !Utils.getInstance(getBaseContext()).isOnline()) {
+            Toast.makeText(getBaseContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_LONG).show();
+        } else {
+            getDate();
+        }
 //        ad = new AnnouncementRecyclerAdoptor(list, getApplicationContext());
         ad = new AnnouncementRecyclerAdoptor(list, announcement.this);
 
@@ -122,6 +136,7 @@ public class announcement extends AppCompatActivity {
                 },
                 error -> {
                     Log.e("GetPhoneError", error.toString() + " |");
+                    Toast.makeText(getBaseContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
 //                    Critical_Loading.setVisibility(View.GONE);
 //                    enabledEditText();
                 }) {

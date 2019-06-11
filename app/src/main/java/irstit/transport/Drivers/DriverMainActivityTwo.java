@@ -77,7 +77,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         }
 
 
-        Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName());
+        Name.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()+DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily());
 
         regVacation.setOnClickListener(v -> {
 
@@ -141,7 +141,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         RelativeLayout relativeLayout = headerView.findViewById(R.id.Navigation_Login);
 
         TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);
-        navUsername.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName());
+        navUsername.setText(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()+DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily());
         if(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()!=null){
 
             relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -310,7 +310,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
             } else if (i == 5) {
                 NavModel model = new NavModel();
                 model.setName("خروج");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_exit));
                 data.add(model);
             }
 

@@ -584,11 +584,10 @@
 
             <arsatech.co.justifiedtextview.JustifiedTextView
 
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:fontFamily="@font/iransans"
-                android:gravity="right"
+                android:gravity="center"
                 android:padding="2dp"
                 android:text="جدول سهمیه سوخت گازوئیل"
                 android:textColor="#333"

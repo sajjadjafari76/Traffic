@@ -33,10 +33,11 @@ import irstit.transport.AppController.AppController;
 import irstit.transport.DataModel.SpinnerModel;
 import irstit.transport.Globals;
 import irstit.transport.R;
+import irstit.transport.Views.Utils;
 
 public class Criticals_Suggestion extends AppCompatActivity {
 
-    private spinnerAdapter adapter ;
+    private spinnerAdapter adapter;
     private List<SpinnerModel> category = new ArrayList<>();
     private String type = "";
     private RelativeLayout Critical_Loading;
@@ -57,8 +58,9 @@ public class Criticals_Suggestion extends AppCompatActivity {
         Phone = findViewById(R.id.Critical_Phone);
         Description = findViewById(R.id.Critical_Description);
         Critical_Btn.setOnClickListener(view -> {
-
-            if (Name.getText().toString().isEmpty()) {
+            if (!Utils.getInstance(getBaseContext()).hasInternetAccess() && !Utils.getInstance(getBaseContext()).isOnline()) {
+                Toast.makeText(getBaseContext(), "لطفا دسترسی به اینترنت خود را بررسی کنید!", Toast.LENGTH_SHORT).show();
+            } else if (Name.getText().toString().isEmpty()) {
                 Toast.makeText(this, "نام نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
             } else if (Description.getText().toString().isEmpty()) {
                 Toast.makeText(this, "متن شکایت نمی تواند خالی باشد", Toast.LENGTH_SHORT).show();
@@ -84,7 +86,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
 
         adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
 
-        for (int i = 0 ; i < getCategory().size() ; i++) {
+        for (int i = 0; i < getCategory().size(); i++) {
             adapter.add(getCategory().get(i).getName());
 
         }
@@ -96,7 +98,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position > (getCategory().size() - 1)) {
 
-                }else {
+                } else {
                     type = String.valueOf(getCategory().get(position).getId());
                     Log.e("GetPhoneResponse123", String.valueOf(getCategory().get(position).getId()) + " |");
                 }
@@ -137,7 +139,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
     private List<SpinnerModel> getCategory() {
         List<SpinnerModel> data = new ArrayList<>();
 
-        for (int i = 0 ; i < 6 ; i++) {
+        for (int i = 0; i < 6; i++) {
             switch (i) {
 
                 case 0:

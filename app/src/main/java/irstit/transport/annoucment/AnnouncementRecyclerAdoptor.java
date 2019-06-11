@@ -62,7 +62,7 @@ public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<Announceme
 
 //          not thing happens here
 
-        } else if (li.get(i).getState() == "1") {
+        } else if (li.get(i).getState() == "2") {
 
             custom.role.setText("(ویژه راننده)");
 

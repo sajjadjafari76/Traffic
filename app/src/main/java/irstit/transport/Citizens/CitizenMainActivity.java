@@ -103,6 +103,12 @@ public class CitizenMainActivity extends AppCompatActivity {
 
         });
 
+        NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_citizen);
+        View headerView = navigationView.getHeaderView(0);
+        TextView textView = headerView.findViewById(R.id.Navigation_Enter);
+        textView.setText(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()+" ");
+
+
         changeDefaultUsername();
     }
 
@@ -205,14 +211,10 @@ public class CitizenMainActivity extends AppCompatActivity {
              JSONObject jsonObject = new JSONObject(getStringObject);
              JSONObject name = new JSONObject(jsonObject.getString("userdata"));
 
-             if(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName()!= null){
-                 NavigationView navigationView = findViewById(R.id.MAinActivity_NavigationView_citizen);
-                 View view = navigationView.getHeaderView(0);
-                 TextView textView = view.findViewById(R.id.Navigation_Enter);
-                 textView.setText(MainPager.incomingName);
+
 
              }
-         }
+
          catch (Exception e){
               e.printStackTrace();
          }
@@ -261,7 +263,7 @@ public class CitizenMainActivity extends AppCompatActivity {
             } else if (i == 7) {
                 NavModel model = new NavModel();
                 model.setName("خروج");
-                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_exit));
                 data.add(model);
             }
 

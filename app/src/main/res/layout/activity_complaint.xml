@@ -38,6 +38,14 @@
                 app:srcCompat="@drawable/ic_left_arrow"
                 android:id="@+id/Complaint_Back"/>
 
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/regcomplaint" />
             <!--android:foreground="?android:attr/selectableItemBackgroundBorderless"-->
 
 
@@ -46,7 +54,13 @@
 
     </android.support.v7.widget.Toolbar>
 
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
     <ScrollView
+
         android:id="@+id/Page137_Scrool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -377,7 +391,7 @@
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:src="@drawable/main_bg" />
+                                app:srcCompat="@drawable/ic_music_note" />
 
                             <irstit.transport.Views.CustomTextView
                                 android:layout_width="match_parent"

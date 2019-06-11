@@ -78,7 +78,7 @@ public class MainPager extends AppCompatActivity {
     private NavigationView na;
 
     public static String incomingName;
-    RelativeLayout relative_main_page,relative_back;
+    RelativeLayout relative_main_page, relative_back;
 
 
     boolean doubleBackToExitPressedOnce = false;
@@ -172,53 +172,57 @@ public class MainPager extends AppCompatActivity {
     private void deleteSavedDefaultUsername() {
         try {
 
-            SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sh.edit();
-            editor.clear();
-            editor.commit();
 
-            StringRequest request = new StringRequest(Request.Method.GET, Globals.APIURL + "/closeApp", new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
+            StringRequest request = new StringRequest(Request.Method.POST, Globals.APIURL + "/closeApp", response -> {
+
+                if (response.equals("ture")) {
+                    SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sh.edit();
+                    editor.clear();
+                    editor.commit();
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: " + "ok");
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: "+"no");
 
                 }
-            }){
+            }) {
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() == null) {
-                    map.put("phone", DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone()+"");
-                } else {
-                    map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone()+"");
-                }
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> map = new HashMap<>();
+                    if (DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() == null) {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone() + "");
+                        map.put("state", "0");
+                    } else {
+                        map.put("phone", DBManager.getInstance(getBaseContext()).getDriverInfo().getTelephone() + "");
+                        map.put("state", "1");
+
+                    }
 //                map.put("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
 //                    map.put("phone", " 09033433776");
-                map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
-                Log.v("FromSplash", map.get("phone"));
+                    map.put("TOKEN", "df837016d0fc7670f221197cd92439b5");
+                    Log.v("FromSplash", map.get("phone"));
 
-                return map;
-            }
+                    return map;
+                }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("token", "df837016d0fc7670f221197cd92439b5");
-                return map;
-            }
-        };
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> map = new HashMap<>();
+                    map.put("token", "df837016d0fc7670f221197cd92439b5");
+                    return map;
+                }
+            };
 
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        AppController.getInstance().addToRequestQueue(request);
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+            AppController.getInstance().addToRequestQueue(request);
 
 
-
-    } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -473,7 +477,7 @@ public class MainPager extends AppCompatActivity {
 
                     NavModel model = new NavModel();
                     model.setName("خروج");
-                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_exit));
                     data.add(model);
                 }
 
@@ -514,7 +518,7 @@ public class MainPager extends AppCompatActivity {
                 } else if (i == 8) {
                     NavModel model = new NavModel();
                     model.setName("خروج");
-                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.img_about_us));
+                    model.setImage(ContextCompat.getDrawable(getBaseContext(), R.drawable.ic_exit));
                     data.add(model);
                 }
 
@@ -560,7 +564,7 @@ public class MainPager extends AppCompatActivity {
                 Yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+//                        deleteSavedDefaultUsername();
                         DBManager.getInstance(getApplicationContext()).deleteDrivers();
                         DBManager.getInstance(getApplicationContext()).deleteCitizen();
 
@@ -598,7 +602,7 @@ public class MainPager extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, "برای خروج دوباره کلید کنید", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "برای خروج دوباره کلیک کنید", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
 

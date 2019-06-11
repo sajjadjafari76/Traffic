@@ -2,6 +2,7 @@ package irstit.transport.Citizens.complaint;
 
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,11 +34,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpPost;
 import com.koushikdutta.async.http.AsyncHttpResponse;
@@ -50,12 +57,17 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
+import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.DataModel.LetterRateModel;
 import irstit.transport.DataModel.ThreeCompliant;
 import irstit.transport.Globals;
+import irstit.transport.MainPage;
 import irstit.transport.R;
 import irstit.transport.VoiceRecoeder;
 
@@ -77,6 +89,9 @@ public class Complaint extends AppCompatActivity {
     private TextView Result;
     public RecyclerView threeRecyclerView;
     private final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
+    private ScrollView Page137_Scrool;
+    private ProgressBar progressbar;
+
 
     //private List<ThreeCompliant> three = new ArrayList<ThreeCompliant>();
     private List<ThreeCompliant> modelofThreeCompliantList = new ArrayList<ThreeCompliant>();
@@ -181,7 +196,9 @@ public class Complaint extends AppCompatActivity {
         Video = findViewById(R.id.Complaint_Video);
         Voice = findViewById(R.id.Complaint_Voice);
         Text = findViewById(R.id.Complaint_Text);
-
+        Page137_Scrool = findViewById(R.id.Page137_Scrool);
+        progressbar = findViewById(R.id.progressbar);
+        getComplaintArray();
 
 //        modelofThreeCompliantList.add(new ThreeCompliant());
 //        modelofThreeCompliantList.add(new ThreeCompliant());
@@ -222,44 +239,7 @@ public class Complaint extends AppCompatActivity {
 //            }
 //        }
 
-        if (!getCategory().isEmpty()) {
 
-            for (int i = 0; i < getCategory().size(); i++) {
-                adapter.add(getCategory().get(i).getText());
-            }
-        } else {
-
-            LetterRateModel model = new LetterRateModel();
-            model.setImage("عدم دریافت اطلاعات از سرور ");
-            model.setText(" عدم دریافت اطلاعات از سرور لطفا به اینترنت متصل شوید");
-            adapter.add(model.getText());
-        }
-
-
-        adapter.add("موضوع خود را انتخاب کنید");
-        Category.setAdapter(adapter);
-        Category.setSelection(adapter.getCount());
-        Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position > (getCategory().size() - 1)) {
-
-
-                } else if (getCategory().isEmpty()) {
-
-                    Toast.makeText(getApplicationContext(), "عدم دریافت اطلاعات از سرور", Toast.LENGTH_LONG).show();
-
-                } else {
-                    type = String.valueOf(getCategory().get(position).getImage());
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
 
         //  VoiceRecoeder gettingVoiceInstance ;
@@ -376,7 +356,7 @@ public class Complaint extends AppCompatActivity {
     }
 
 
-    List<LetterRateModel> getCategory() {
+    List<LetterRateModel> getCategory(JSONArray jsonArray) {
         List<LetterRateModel> data = new ArrayList<>();
         try {
 //            if (getIntent().getExtras().getString("data") != null && !getIntent().getExtras().getString("data").isEmpty()) {
@@ -384,10 +364,12 @@ public class Complaint extends AppCompatActivity {
 
 //                if (object.getString("status").equals("true")) {
 
-            JSONObject jsonObject = new JSONObject();
-            jsonObject = getComplaintArray();
-            Log.i("jdshfuahf", "getCategory: "+jsonObject);
-            JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
+//            JSONObject jsonObject = new JSONObject();
+//            jsonObject = getComplaintArray();
+//            Log.i("jdshfuahf", "getCategory: "+jsonObject);
+//            JSONArray array = new JSONArray(jsonObject.getString("complainttype"));
+
+            JSONArray array = jsonArray;
 
             if (array.length() != 0) {
                 for (int i = 0; i < array.length(); i++) {
@@ -842,7 +824,24 @@ public class Complaint extends AppCompatActivity {
 
                         JSONObject object = new JSONObject(result);
                         if (object.getString("status").equals("true")) {
+                            AlertDialog alertDialog = new AlertDialog.Builder(Complaint.this)
+                                    //set icon
+                                    //set title
+                                    .setTitle("کد پیگیری : ")
+                                    //set message
+                                    .setMessage(object.getString("code"))
+                                    //set positive button
+                                    .setPositiveButton("باشه", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            //set what would happen when positive button is clicked
 
+                                        }
+                                    })
+                                    //set negative button
+                                    .show();
+
+                            alertDialog.show();
                             // The below Toast shows some characters when uploading finishes successfully
                             //     Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                             Loading.setVisibility(View.GONE);
@@ -851,6 +850,13 @@ public class Complaint extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "آپلود با موفقعیت انجام شد.", Toast.LENGTH_LONG).show();
                             modelofThreeCompliantList.clear();
                             complaintAdapter.notifyDataSetChanged();
+
+//                            Dialog dialog = new Dialog(getApplicationContext());
+//                            dialog.setTitle("کد پیگیری : ");
+//                            dialog.setTitle(object.getString("code"));
+//                            dialog.setCancelable(false);
+//                            dialog.setCancelMessage("تایید");
+
 
                         } else if (object.getString("status").equals("false")) {
                             Loading.setVisibility(View.VISIBLE);
@@ -1000,24 +1006,120 @@ public class Complaint extends AppCompatActivity {
     }
 
 
-    private JSONObject getComplaintArray() {
+    private void getComplaintArray() {
 
-        SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
-        String Jso = sh.getString("complaintArray", "-1");
-        Log.i("jdshfuahf", "getNews: "+Jso);
+//        SharedPreferences sh = getSharedPreferences("complaint", MODE_PRIVATE);
+//        String Jso = sh.getString("complaintArray", "-1");
+//        Log.i("jdshfuahf", "getNews: "+Jso);
+
+        Page137_Scrool.setVisibility(View.GONE);
+        progressbar.setVisibility(View.VISIBLE);
 
 
-        JSONObject jsonObject = null;
-        try {
-            jsonObject = new JSONObject(Jso);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        StringRequest getPhoneRequest = new StringRequest(Request.Method.GET, Globals.APIURL + "/complaintType",
+                response -> {
 
+                    try {
+                        JSONObject object = new JSONObject(response);
+
+                        if (object.getString("status").equals("true")) {
+//                            Log.v("news", object.getString("news").toString());
+//                            Log.e("userData", object.getString("userdata"));
+
+                            Page137_Scrool.setVisibility(View.VISIBLE);
+                            progressbar.setVisibility(View.GONE);
+
+                            JSONArray jsonArray;
+                             jsonArray = object.getJSONArray("complainttype");
+
+
+
+                            if (!getCategory(jsonArray).isEmpty()) {
+
+                                for (int i = 0; i < getCategory(jsonArray).size(); i++) {
+                                    adapter.add(getCategory(jsonArray).get(i).getText());
+                                }
+                            } else {
+
+                                LetterRateModel model = new LetterRateModel();
+                                model.setImage("عدم دریافت اطلاعات از سرور ");
+                                model.setText(" عدم دریافت اطلاعات از سرور لطفا به اینترنت متصل شوید");
+                                adapter.add(model.getText());
+                            }
+
+
+                            adapter.add("موضوع خود را انتخاب کنید");
+                            Category.setAdapter(adapter);
+                            Category.setSelection(adapter.getCount());
+                            Category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                                    if (position > (getCategory(jsonArray).size() - 1)) {
+
+
+                                    } else if (getCategory(jsonArray).isEmpty()) {
+
+                                        Toast.makeText(getApplicationContext(), "عدم دریافت اطلاعات از سرور", Toast.LENGTH_LONG).show();
+
+                                    } else {
+                                        type = String.valueOf(getCategory(jsonArray).get(position).getImage());
+                                    }
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+
+//                            for (int i = 0; i < jsonArray.length(); i++) {
+//
+//                                jsonObject = new JSONObject(jsonArray.getString(i));
+//                            }
+
+
+
+
+//                            SharedPreferences shared = getSharedPreferences("complaint", MODE_PRIVATE);
+//                            SharedPreferences.Editor editor = shared.edit();
+//                            editor.putString("complaintArray", object.toString());
+//                            editor.apply();
+                            Log.i("jdshfuahf", "getNews: " + object.toString());
+
+
+
+
+                        } else if (object.getString("status").equals("false")) {
+                            Page137_Scrool.setVisibility(View.VISIBLE);
+                            progressbar.setVisibility(View.GONE);
+
+
+                        }
+                    } catch (Exception e) {
+                        Page137_Scrool.setVisibility(View.VISIBLE);
+                        progressbar.setVisibility(View.GONE);
+
+
+                        Log.e("ListLeavesError1", e.toString() + " |");
+
+                    }
+                },
+                error -> {
+                    Page137_Scrool.setVisibility(View.VISIBLE);
+                    progressbar.setVisibility(View.GONE);
+
+
+                    Log.e("ListLeavesError2", error + " |");
+
+                });
+
+        getPhoneRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        AppController.getInstance().addToRequestQueue(getPhoneRequest);
 
         //  Log.e("from_Complaint",jsonObject);
 
-        return jsonObject;
 
     }
 
@@ -1054,7 +1156,19 @@ public class Complaint extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull CustomizedView customizedView, int i) {
 
-            customizedView.filename.setText(lisOfUploadFiles.get(i).getFileName());
+            switch (lisOfUploadFiles.get(i).getStatus()) {
+                case "Video":
+                    customizedView.filename.setText("ویدیو");
+
+                    break;
+                case "Audio":
+                    customizedView.filename.setText("صدا");
+
+                    break;
+                case "camera":
+                    customizedView.filename.setText("تصویر");
+                    break;
+            }
             customizedView.deleteFromList.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
