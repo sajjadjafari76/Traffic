@@ -29,7 +29,7 @@ public class ReportDriverInfo extends Fragment {
         progressbar = view.findViewById(R.id.progressbar);
         Log.e("id123", getArguments().getString("id") + " |");
         Picasso.with(getContext())
-                .load("http://cpanel.traffictakestan.ir/upload/decree/" + getArguments().getString("id") + ".png")
+                .load("http://cpanel.traffictakestan.ir/upload/decree/" + getArguments().getString("id") + ".jpg")
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
