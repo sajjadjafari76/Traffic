@@ -31,7 +31,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:supportsRtl">
-        <activity android:name=".ViewPager.ViewInfo.FullScreenImageActivity"></activity>
+        <activity android:name=".ViewPager.ViewInfo.AboutTeam"></activity>
+        <activity android:name=".ViewPager.ViewInfo.FullScreenImageActivity" />
         <activity android:name=".ViewPager.ViewInfo.CarsLine" />
         <activity android:name=".ViewPager.ViewInfo.DieselCars" />
         <activity android:name=".ViewPager.ViewInfo.ProjectOngoing" />

@@ -168,7 +168,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
     private List<SpinnerModel> getCategory() {
         List<SpinnerModel> data = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             switch (i) {
 
                 case 0:
@@ -207,6 +207,18 @@ public class Criticals_Suggestion extends AppCompatActivity {
                     model6.setName("خودروهای دیزلی");
                     data.add(model6);
                     break;
+                    case 6:
+                    SpinnerModel model7 = new SpinnerModel();
+                    model7.setId(9524);
+                    model7.setName("خودروهای خطی");
+                    data.add(model7);
+                    break;
+                    case 7:
+                    SpinnerModel model8 = new SpinnerModel();
+                    model8.setId(9525);
+                    model8.setName("سایر");
+                    data.add(model8);
+                    break;
             }
         }
         return data;
@@ -231,14 +243,8 @@ public class Criticals_Suggestion extends AppCompatActivity {
                     data.add(model2);
                     break;
                 case 2:
-                    SpinnerModel model3 = new SpinnerModel();
-                    model3.setId(3333);
-                    model3.setName("گزارش خطا");
-                    data.add(model3);
-                    break;
-                case 3:
                     SpinnerModel model4 = new SpinnerModel();
-                    model4.setId(4444);
+                    model4.setId(3333);
                     model4.setName("سایر");
                     data.add(model4);
                     break;
@@ -273,6 +279,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
                 },
                 error -> {
                     Log.e("GetPhoneError", error.toString() + " |");
+                    Toast.makeText(getApplicationContext(),"خطا در اتصال، وروردی های خود را بررسی کنید",Toast.LENGTH_LONG).show();
                     Critical_Loading.setVisibility(View.GONE);
                     enabledEditText();
                 }) {
@@ -336,8 +343,8 @@ public class Criticals_Suggestion extends AppCompatActivity {
     }
 
     private void clear() {
-        Name.setText("");
-        Phone.setText("");
+//        Name.setText("");
+//        Phone.setText("");
         Description.setText("");
         Title.setSelection(0);
     }

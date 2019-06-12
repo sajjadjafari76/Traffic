@@ -24,10 +24,22 @@
             android:orientation="vertical"
             android:id="@+id/Page2_Taxi">
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="160dp"
-                android:src="@drawable/taxi" />
+                android:layout_height="160dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:src="@drawable/taxi" />
+                <ImageView
+                    android:id="@+id/taxi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="160dp"
+                    android:src="@drawable/taxi_light" />
+
+            </RelativeLayout>
+
 
             <android.support.v7.widget.CardView
                 android:layout_width="130dp"

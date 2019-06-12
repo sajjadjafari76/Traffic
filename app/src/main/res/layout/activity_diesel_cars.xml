@@ -70,8 +70,9 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
+                    android:id="@+id/text1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans"
@@ -83,7 +84,7 @@
                     android:textStyle="bold" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +96,7 @@
                     android:textColor="#111"
                     android:textSize="14dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +107,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -117,7 +118,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,7 +130,7 @@
                     android:textSize="12dp" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -140,7 +141,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -151,7 +152,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +163,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -173,7 +174,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -184,7 +185,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -203,7 +204,7 @@
                 <!--android:background="#111" />-->
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -215,7 +216,7 @@
                     android:textColor="#111"
                     android:textSize="14dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -226,7 +227,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -237,7 +238,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -249,7 +250,7 @@
                     android:textSize="12dp" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -260,7 +261,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -271,7 +272,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -282,7 +283,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -293,7 +294,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -304,7 +305,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -315,7 +316,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -326,7 +327,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -337,7 +338,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -355,8 +356,8 @@
                     android:layout_marginBottom="5dp"
                     android:background="#111" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
-
+                <TextView
+                    android:id="@+id/text2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/iransans"
@@ -367,7 +368,7 @@
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -379,7 +380,7 @@
                     android:textColor="#111"
                     android:textSize="14dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -390,7 +391,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,7 +403,7 @@
                     android:textSize="12dp" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -413,7 +414,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -433,7 +434,7 @@
                 <!--android:background="#111" />-->
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -444,7 +445,7 @@
                     android:textColor="#111"
                     android:textSize="14dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -455,7 +456,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -467,7 +468,7 @@
                     android:textSize="12dp" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -478,7 +479,7 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -497,7 +498,7 @@
                     android:layout_marginBottom="5dp"
                     android:background="#111" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -509,7 +510,7 @@
                     android:textSize="14dp"
                     android:textStyle="bold" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -521,7 +522,7 @@
                     android:textSize="12dp" />
 
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
+                <TextView
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -532,22 +533,11 @@
                     android:textColor="#333"
                     android:textSize="12dp" />
 
-                <arsatech.co.justifiedtextview.JustifiedTextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="3-نصب نرم افزار باربرگ  از سایت "
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <arsatech.co.justifiedtextview.JustifiedTextView
+                    <TextView
 
                         android:id="@+id/link_diesel"
                         android:layout_width="0dp"
@@ -560,18 +550,30 @@
                         android:textColor="#2196F3"
                         android:textSize="12dp" />
 
-                    <arsatech.co.justifiedtextview.JustifiedTextView
+                    <TextView
 
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/iransans"
                         android:gravity="right"
                         android:padding="2dp"
-                        android:text="4-دریافت باربرگ حقیقی از نرم افزار"
+                        android:text="3-نصب نرم افزار باربرگ  از سایت "
                         android:textColor="#333"
                         android:textSize="12dp" />
                 </LinearLayout>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/iransans"
+                    android:gravity="right"
+                    android:padding="2dp"
+                    android:text="4-دریافت باربرگ حقیقی از نرم افزار"
+                    android:textColor="#333"
+                    android:textSize="12dp" />
 
 
                 <LinearLayout
@@ -582,7 +584,7 @@
                     android:background="#111" />
             </LinearLayout>
 
-            <arsatech.co.justifiedtextview.JustifiedTextView
+            <TextView
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -108,4 +108,8 @@ dependencies {
     implementation 'me.grantland:autofittextview:0.2.+'
     implementation 'com.github.arefbhrn:JustifiedTextView:1.0.5'
     implementation 'com.github.chrisbanes:PhotoView:2.0.0'
+
+
+    implementation 'com.daimajia.easing:library:2.0@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
 }

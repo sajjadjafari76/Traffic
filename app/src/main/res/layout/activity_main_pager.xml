@@ -36,6 +36,13 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/image_info"
+                    android:layout_width="40dp"
+                    android:padding="2dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_info_outline_black_24dp"/>
+                <ImageView
                     android:id="@+id/MainPager_NavigatorIcon"
                     android:layout_width="28dp"
                     android:layout_height="28dp"

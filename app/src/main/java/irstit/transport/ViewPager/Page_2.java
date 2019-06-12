@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import irstit.transport.CNG.CNG;
 import irstit.transport.Citizens.CitizenMainActivity;
@@ -40,6 +44,12 @@ public class Page_2 extends Fragment {
         LinearLayout technical = view.findViewById(R.id.Page2_Technical);
         LinearLayout wallet = view.findViewById(R.id.Page2_Wallet);
         LinearLayout Taxi = view.findViewById(R.id.Page2_Taxi);
+        ImageView taxi = view.findViewById(R.id.taxi);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(taxi);
 
         cng.setOnClickListener(v -> {
             startActivity(new Intent(getContext(), CNG.class));
@@ -49,9 +59,8 @@ public class Page_2 extends Fragment {
         });
 
         wallet.setOnClickListener(v -> {
-//            Toast.makeText(getContext(), "این قسمت در دست ساخت می باشد", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getContext(),PhonePayMainActicity.class));
-
+            Toast.makeText(getContext(), " به زودی فعال ميگردد", Toast.LENGTH_SHORT).show();
+//            startActivity(new Intent(getContext(),PhonePayMainActicity.class));
         });
 
         Taxi.setOnClickListener(v -> {

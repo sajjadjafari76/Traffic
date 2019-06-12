@@ -80,6 +80,7 @@ public class MainPager extends AppCompatActivity {
     public static String incomingName;
     RelativeLayout relative_main_page, relative_back;
 
+    ImageView image_info;
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -92,6 +93,7 @@ public class MainPager extends AppCompatActivity {
         LinearLayout Dial = findViewById(R.id.MainPager_Dial);
         relative_main_page = findViewById(R.id.relative_main_page);
         relative_back = findViewById(R.id.relative_back);
+        image_info = findViewById(R.id.image_info);
 
         relative_main_page.setVisibility(View.VISIBLE);
         relative_back.setVisibility(View.GONE);
@@ -108,6 +110,10 @@ public class MainPager extends AppCompatActivity {
             Uri uri = Uri.parse("http://www.traffictakestan.ir"); // missing 'http://' will cause crashed
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
+
+        });
+
+        image_info.setOnClickListener(v -> {
 
         });
 
@@ -185,7 +191,7 @@ public class MainPager extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: "+"no");
+                    Log.i("hfdserserserst", "deleteSavedDefaultUsername: " + "no");
 
                 }
             }) {

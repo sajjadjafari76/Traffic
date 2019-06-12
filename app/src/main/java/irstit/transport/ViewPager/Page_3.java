@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 
 import irstit.transport.Citizens.Criticals_Suggestion;
 import irstit.transport.R;
+import irstit.transport.ViewPager.ViewInfo.AboutTeam;
 import irstit.transport.ViewPager.ViewInfo.ProjectOngoing;
-import irstit.transport.ViewPager.ViewInfo.ViewInfo;
 import irstit.transport.annoucment.announcement;
 
 
@@ -32,6 +32,7 @@ public class Page_3 extends Fragment {
         LinearLayout critical = view.findViewById(R.id.Page3_Critical);
         LinearLayout project = view.findViewById(R.id.Page3_Project);
         LinearLayout anouncement = view.findViewById(R.id.announcement_spe);
+        LinearLayout about_team = view.findViewById(R.id.about_team);
 
         critical.setOnClickListener(v-> {
 
@@ -40,6 +41,16 @@ public class Page_3 extends Fragment {
             critical_.putExtra("critical","criticalRequest");
             startActivity(critical_);
 
+        });
+
+        about_team.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(getContext(), AboutTeam.class);
+                startActivity(intent);
+            }
         });
 
         project.setOnClickListener(v-> {
