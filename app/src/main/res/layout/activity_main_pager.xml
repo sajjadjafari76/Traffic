@@ -51,6 +51,14 @@
                     android:layout_marginRight="8dp"
                     app:srcCompat="@drawable/ic_menu" />
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:padding="10dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/sahat" />
+
 
                 <ImageView
                     android:layout_width="50dp"

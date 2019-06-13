@@ -3,6 +3,7 @@ package irstit.transport;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,6 +79,11 @@ public class MainPage extends AppCompatActivity {
         LinearLayout site = findViewById(R.id.MainPage_Site);
         LinearLayout dial = findViewById(R.id.MainPage_Dial1);
 
+        ImageView driverI = findViewById(R.id.driverMain);
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(driverI);
 
         driver.setOnClickListener(
 

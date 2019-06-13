@@ -7,7 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import irstit.transport.ForDisel;
 import irstit.transport.R;
@@ -38,6 +42,31 @@ public class Page_1 extends Fragment {
         LinearLayout roozbazar = view.findViewById(R.id.Page1_RoozBazar);
         LinearLayout disel = view.findViewById(R.id.Page1_Diesel);
         LinearLayout terminal = view.findViewById(R.id.Page1_Terminal);
+
+        ImageView shop = view.findViewById(R.id.shop);
+        ImageView terminall = view.findViewById(R.id.terminal);
+        ImageView line = view.findViewById(R.id.line);
+        ImageView disellll = view.findViewById(R.id.disel);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(shop);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(terminall);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(line);
+
+        YoYo.with(Techniques.Flash)
+                .duration(700)
+                .repeat(100000)
+                .playOn(disellll);
 
         lineCar.setOnClickListener(v-> { startActivity(new Intent(getContext(), CarsLine.class)); });
         roozbazar.setOnClickListener(v-> { startActivity(new Intent(getContext(), DailyMarket.class)); });

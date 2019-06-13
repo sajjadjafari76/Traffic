@@ -78,6 +78,58 @@ public class DieselCars extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
+        TextView text,text2;
+
+        text = findViewById(R.id.text1);
+        text2 = findViewById(R.id.text2);
+
+        SpannableString ss = new SpannableString(text.getText());
+
+        ClickableSpan clickableTerms = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // show toast here
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://s1.symfa.ir/TestCenters/Inquiry/VinPetrolInquiry"));
+//                startActivity(browserIntent);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);
+
+            }
+        };
+        ss.setSpan(clickableTerms, 11,26, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss.setSpan(new ForegroundColorSpan(Color.BLACK), 11, 26, 0);
+        text.setText(ss);
+        text.setMovementMethod(LinkMovementMethod.getInstance());
+        text.setHighlightColor(Color.TRANSPARENT);
+
+
+        SpannableString ss2 = new SpannableString(text2.getText());
+
+        ClickableSpan clickableTerms2 = new ClickableSpan() {
+            @Override
+            public void onClick(View textView) {
+                // show toast here
+//                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://s1.symfa.ir/TestCenters/Inquiry/VinPetrolInquiry"));
+//                startActivity(browserIntent);
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);
+
+            }
+        };
+
+        ss2.setSpan(clickableTerms2, 11,28, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ss2.setSpan(new ForegroundColorSpan(Color.BLACK), 11, 28, 0);
+        text2.setText(ss2);
+        text2.setMovementMethod(LinkMovementMethod.getInstance());
+        text2.setHighlightColor(Color.TRANSPARENT);
 
 
     }

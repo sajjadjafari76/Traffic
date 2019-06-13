@@ -168,7 +168,7 @@ public class Criticals_Suggestion extends AppCompatActivity {
     private List<SpinnerModel> getCategory() {
         List<SpinnerModel> data = new ArrayList<>();
 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             switch (i) {
 
                 case 0:

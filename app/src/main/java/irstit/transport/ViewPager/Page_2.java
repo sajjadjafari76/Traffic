@@ -59,7 +59,7 @@ public class Page_2 extends Fragment {
         });
 
         wallet.setOnClickListener(v -> {
-            Toast.makeText(getContext(), " به زودی فعال ميگردد", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "این قسمت به زودی راه اندازی می گردد", Toast.LENGTH_SHORT).show();
 //            startActivity(new Intent(getContext(),PhonePayMainActicity.class));
         });
 

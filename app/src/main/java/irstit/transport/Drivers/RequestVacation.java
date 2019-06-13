@@ -117,6 +117,15 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         //  if (getArguments().getString("dataVacation") != null &&
         //         !getArguments().getString("dataVacation").isEmpty()) {
 
+        if (shared.getString("canleave", "false").equals("false")) {
+            Status.setVisibility(View.VISIBLE);
+            Btn.setVisibility(View.GONE);
+            Form.setVisibility(View.GONE);
+        } else {
+            Status.setVisibility(View.GONE);
+            Btn.setVisibility(View.VISIBLE);
+            Form.setVisibility(View.VISIBLE);
+        }
         getNews();
 //        try {
 //
@@ -164,15 +173,6 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 //
 //        }
 
-        if (shared.getString("canleave","false").equals("false")) {
-            Status.setVisibility(View.VISIBLE);
-            Btn.setVisibility(View.GONE);
-            Form.setVisibility(View.GONE);
-        } else {
-            Status.setVisibility(View.GONE);
-            Btn.setVisibility(View.VISIBLE);
-            Form.setVisibility(View.VISIBLE);
-        }
 
         //     }
 
@@ -209,6 +209,8 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                         endTime.getText().toString(),
                         destination.getText().toString(), type, "");
                 Loading.setVisibility(View.VISIBLE);
+
+
             }
         });
 //        anyChartView.setProgressBar(findViewById(R.id.progress_bar));
@@ -387,7 +389,17 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
                             if (object.getString("status").equals("true")) {
                                 Clear();
                                 Toast.makeText(RequestVacation.this.getContext(), "درخواست مرخصی شما با موفقیت ثبت شد", Toast.LENGTH_SHORT).show();
-//
+                                editor.putString("canleave", "false").apply();
+
+                                if (shared.getString("canleave", "false").equals("false")) {
+                                    Status.setVisibility(View.VISIBLE);
+                                    Btn.setVisibility(View.GONE);
+                                    Form.setVisibility(View.GONE);
+                                } else {
+                                    Status.setVisibility(View.GONE);
+                                    Btn.setVisibility(View.VISIBLE);
+                                    Form.setVisibility(View.VISIBLE);
+                                }
                             } else if (object.getString("status").equals("false") && object.has("statusLeave")) {
                             } else if (object.getString("status").equals("false")) {
                                 Toast.makeText(RequestVacation.this.getContext(), "وضعیت اخرین مرخصی ارسالی هنوز مشخص نشده است لطفا تا بررسی مدیر صبر کنید", Toast.LENGTH_SHORT).show();
@@ -502,7 +514,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 
                                 editor.putString("canleave", object1.getString("canleave")).apply();
 
-                                if (shared.getString("canleave","false").equals("false")) {
+                                if (shared.getString("canleave", "false").equals("false")) {
                                     Status.setVisibility(View.VISIBLE);
                                     Btn.setVisibility(View.GONE);
                                     Form.setVisibility(View.GONE);

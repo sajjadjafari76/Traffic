@@ -45,6 +45,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.ads.MobileAds;
 import com.koushikdutta.async.http.AsyncHttpClient;
 import com.koushikdutta.async.http.AsyncHttpPost;
 import com.koushikdutta.async.http.AsyncHttpResponse;
@@ -80,7 +81,7 @@ public class Complaint extends AppCompatActivity {
     private Spinner Category;
     private spinnerAdapter adapter;
     private Button Btn;
-    private String type = "", selectedVideoPath ="";
+    private String type = "", selectedVideoPath = "";
     private RelativeLayout Loading;
     private int GALLERY = 1, CAMERA = 2, GALLERYVIDEO = 3, VOICE = 4;
     public static int NOTPICTURESANDVIDEO = -1;
@@ -93,6 +94,8 @@ public class Complaint extends AppCompatActivity {
     private ProgressBar progressbar;
     private ImageView Complaint_Back;
 
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     //private List<ThreeCompliant> three = new ArrayList<ThreeCompliant>();
     private List<ThreeCompliant> modelofThreeCompliantList = new ArrayList<ThreeCompliant>();
@@ -181,7 +184,8 @@ public class Complaint extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint);
-
+        prefs = getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        editor = prefs.edit();
         adapter = new spinnerAdapter(this, R.layout.layout_custom_spinner);
         Category = findViewById(R.id.Complaint_Category);
         Text = findViewById(R.id.Complaint_Text);
@@ -241,6 +245,10 @@ public class Complaint extends AppCompatActivity {
 //            }
 //        }
 
+        Name.setText(prefs.getString("fname",""));
+        Family.setText(prefs.getString("lname",""));
+        Email.setText(prefs.getString("email",""));
+        Phone.setText(prefs.getString("mobile",""));
 
 
         Complaint_Back.setOnClickListener(new View.OnClickListener() {
@@ -259,12 +267,12 @@ public class Complaint extends AppCompatActivity {
                 Toast.makeText(this, "فیلد های اطلاعات نمیتواند خالی باشد", Toast.LENGTH_SHORT).show();
 
             } else if ((imgDecodableString != null && !imgDecodableString.equals("") || selectedVideoPath != null && !selectedVideoPath.equals("")) || VoiceRecoeder.AudioSavePathInDevice != null && !VoiceRecoeder.AudioSavePathInDevice.equals("")) {
-
+                Loading.setVisibility(View.VISIBLE);
                 complaintRequest(Name.getText().toString(), Family.getText().toString(),
                         Email.getText().toString(), Text.getText().toString(), type,
                         CarCode.getText().toString(), CarPelake.getText().toString(), Phone.getText().toString(), modelofThreeCompliantList);
 
-                Loading.setVisibility(View.VISIBLE);
+
                 Disabled();
 
             } else {
@@ -853,6 +861,13 @@ public class Complaint extends AppCompatActivity {
                             // The below Toast shows some characters when uploading finishes successfully
                             //     Toast.makeText(getBaseContext(), object.getString("message"), Toast.LENGTH_SHORT).show();
                             Loading.setVisibility(View.GONE);
+
+                            editor.putString("fname", Fname).apply();
+                            editor.putString("lname", LName).apply();
+                            editor.putString("email", Email).apply();
+                            editor.putString("mobile", Mobile).apply();
+
+
                             Enabled();
                             Clear();
                             Toast.makeText(getApplicationContext(), "آپلود با موفقعیت انجام شد.", Toast.LENGTH_LONG).show();
@@ -867,7 +882,7 @@ public class Complaint extends AppCompatActivity {
 
 
                         } else if (object.getString("status").equals("false")) {
-                            Loading.setVisibility(View.VISIBLE);
+                            Loading.setVisibility(View.GONE);
                             Enabled();
                         }
 
@@ -1038,8 +1053,7 @@ public class Complaint extends AppCompatActivity {
                             progressbar.setVisibility(View.GONE);
 
                             JSONArray jsonArray;
-                             jsonArray = object.getJSONArray("complainttype");
-
+                            jsonArray = object.getJSONArray("complainttype");
 
 
                             if (!getCategory(jsonArray).isEmpty()) {
@@ -1087,15 +1101,11 @@ public class Complaint extends AppCompatActivity {
 //                            }
 
 
-
-
 //                            SharedPreferences shared = getSharedPreferences("complaint", MODE_PRIVATE);
 //                            SharedPreferences.Editor editor = shared.edit();
 //                            editor.putString("complaintArray", object.toString());
 //                            editor.apply();
                             Log.i("jdshfuahf", "getNews: " + object.toString());
-
-
 
 
                         } else if (object.getString("status").equals("false")) {
