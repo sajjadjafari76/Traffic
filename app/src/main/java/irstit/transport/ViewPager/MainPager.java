@@ -115,6 +115,16 @@ public class MainPager extends AppCompatActivity {
 
         image_info.setOnClickListener(v -> {
 
+            AlertDialog alertDialog;
+            AlertDialog.Builder dialog = new AlertDialog.Builder(MainPager.this);
+            dialog.setView(R.layout.dialog_info_main);
+
+            alertDialog = dialog.create();
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            LayoutInflater inflater = getLayoutInflater();
+            alertDialog.setContentView(inflater.inflate(R.layout.exit_permission, null));
+            alertDialog.setCancelable(true);
+            alertDialog.show();
         });
 
 
@@ -165,6 +175,14 @@ public class MainPager extends AppCompatActivity {
                 }
             });
         }
+
+
+
+
+
+
+
+
     }
 
 

@@ -44,6 +44,7 @@
                     app:srcCompat="@drawable/ic_menu" />
 
                 <ImageView
+                    android:id="@+id/sahat"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
@@ -167,7 +168,7 @@
                             android:layout_height="match_parent"
                             android:fontFamily="@font/shabnam"
                             android:gravity="center"
-                            android:text="@string/sample_string"
+                            android:text="جستجوی اشیا گمشده"
                             android:textAlignment="center"
                             android:textColor="#ffff"
                             android:textSize="16sp" />

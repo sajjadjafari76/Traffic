@@ -1,13 +1,16 @@
 package irstit.transport.Drivers;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,10 +30,12 @@ import java.io.IOException;
 import java.util.Random;
 
 import irstit.transport.R;
+import irstit.transport.Views.Utils;
 
 public class ReportDriverInfo extends Fragment {
 
     ProgressBar progressbar;
+    private final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 100;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,10 +51,31 @@ public class ReportDriverInfo extends Fragment {
                     @Override
                     public void onSuccess() {
                         progressbar.setVisibility(View.GONE);
+
+                        try {
+
+                            if (!Utils.getInstance(getContext()).checkWriteExternalPermission()) {
+                                ActivityCompat.requestPermissions(getActivity(),
+                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+                                Toast.makeText(getContext(), "اجازه دسترسی داده نشد !!!", Toast.LENGTH_LONG).show();
+
+                            } else {
+                                Picasso.with(getContext()).load("http://cpanel.traffictakestan.ir/upload/decree/" + getArguments().getString("id") + ".jpg")
+                                        .into(picassoImageTarget(getContext(), "imageDir", "my_image.jpeg"));
+                                Toast.makeText(getContext(), "عکس در پوشه دانلود ذخیره شد", Toast.LENGTH_LONG).show();
+//                        SaveImage();
+//            drawerCase();
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
 //                        getTarget();
-                        Picasso.with(getContext()).load("http://cpanel.traffictakestan.ir/upload/decree/" + getArguments().getString("id") + ".jpg")
-                                .into(picassoImageTarget(getContext(), "imageDir", "my_image.jpeg"));
-                        Toast.makeText(getContext(), "عکس در پوشه دانلود ذخیره شد", Toast.LENGTH_LONG).show();
+//                        Picasso.with(getContext()).load("http://cpanel.traffictakestan.ir/upload/decree/" + getArguments().getString("id") + ".jpg")
+//                                .into(picassoImageTarget(getContext(), "imageDir", "my_image.jpeg"));
+//                        Toast.makeText(getContext(), "عکس در پوشه دانلود ذخیره شد", Toast.LENGTH_LONG).show();
 //                        SaveImage();
 //                        sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED,
 //
@@ -179,6 +205,41 @@ public class ReportDriverInfo extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean checkWriteExternalPermission() {
+        String permission = android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+        int res = getContext().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    /* Checks if external storage is available for read and write */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    /* Checks if external storage is available to at least read */
+    public boolean isExternalStorageReadable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state) ||
+                Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+    public File getPublicAlbumStorageDir(String albumName) {
+        // Get the directory for the user's public pictures directory.
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), albumName);
+        if (!file.mkdirs()) {
+            Log.e("Image_Log", "Directory not created");
+        }
+        return file;
     }
 
 }

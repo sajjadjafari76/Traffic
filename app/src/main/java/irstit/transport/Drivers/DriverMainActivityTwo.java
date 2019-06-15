@@ -60,6 +60,7 @@ public class DriverMainActivityTwo extends AppCompatActivity {
     NavigationView navigationView;
     TextView navUsername;
     public  static  String sharingName;
+    ImageView sahat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,13 @@ public class DriverMainActivityTwo extends AppCompatActivity {
         LinearLayout followUp = findViewById(R.id.DriverMainTwo_VacationFollowUp);
         TextView Name = findViewById(R.id.DriverMainTwo_Name);
         rel = findViewById(R.id.MainActivity_Login_Driver_profile_name);
+        sahat = findViewById(R.id.sahat);
+        sahat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         if(DBManager.getInstance(getBaseContext()).getDriverInfo().getName()!=null){
 

@@ -55,6 +55,7 @@ public class CitizenMainActivity extends AppCompatActivity {
     private DrawerLayout drawer;
     private AlertDialog alertDialog;
 
+    ImageView sahat;
     public  static  String sharinCitizenName;
 
     @Override
@@ -67,6 +68,13 @@ public class CitizenMainActivity extends AppCompatActivity {
         LinearLayout Price = findViewById(R.id.CitizenMain_Price);
         LinearLayout regObj = findViewById(R.id.CitizenMain_regObj);
         TextView Name = findViewById(R.id.CitizenMain_Name);
+        sahat = findViewById(R.id.sahat);
+        sahat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Name.setText(DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserName());
 
