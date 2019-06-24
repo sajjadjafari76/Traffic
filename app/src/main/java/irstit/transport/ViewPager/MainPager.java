@@ -1,5 +1,6 @@
 package irstit.transport.ViewPager;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
@@ -23,6 +24,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -114,17 +117,13 @@ public class MainPager extends AppCompatActivity {
         });
 
         image_info.setOnClickListener(v -> {
-
-            AlertDialog alertDialog;
-            AlertDialog.Builder dialog = new AlertDialog.Builder(MainPager.this);
-            dialog.setView(R.layout.dialog_info_main);
-
-            alertDialog = dialog.create();
-            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-            LayoutInflater inflater = getLayoutInflater();
-            alertDialog.setContentView(inflater.inflate(R.layout.exit_permission, null));
-            alertDialog.setCancelable(true);
-            alertDialog.show();
+            final Dialog dialog = new Dialog(this);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+            dialog.setContentView(R.layout.dialog_info_main);
+            dialog.setCancelable(true);
+            ImageView ismid = dialog.findViewById(R.id.ismid);
+            ismid.setOnClickListener(v1 -> dialog.dismiss());
+            dialog.show();
         });
 
 
@@ -175,12 +174,6 @@ public class MainPager extends AppCompatActivity {
                 }
             });
         }
-
-
-
-
-
-
 
 
     }
@@ -268,7 +261,7 @@ public class MainPager extends AppCompatActivity {
 
             if (DBManager.getInstance(getBaseContext()).getDriverInfo().getName() != null) {
 
-                incomingName = DBManager.getInstance(getBaseContext()).getDriverInfo().getName();
+                incomingName = DBManager.getInstance(getBaseContext()).getDriverInfo().getName()+" "+DBManager.getInstance(getBaseContext()).getDriverInfo().getFamily();
 //                incomingName = name.getString("d_name");
 
                 TextView navUsername = headerView.findViewById(R.id.Navigation_Enter);

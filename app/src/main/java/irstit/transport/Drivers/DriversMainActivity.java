@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
     private TabLayout tab_layout;
     private BottomNavigationView bottomNavigationMenuView;
     public static List<ReqVacationModel> mData = new ArrayList<>();
+    private TextView text_not_driver;
 
     @Override
     protected void onStart() {
@@ -30,7 +33,8 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
         if (DBManager.getInstance(getBaseContext()).getDriverInfo().getOwnerId() == null) {
 //            bottomNavigationMenuView.getMenu().removeItem(R.id.DriversMainMenu_ReqVacation);
             bottomNavigationMenuView.setVisibility(View.GONE);
-
+            text_not_driver.setVisibility(View.VISIBLE);
+            Toast.makeText(this, "کاربر گرامی: اطلاعات شما در سیستم ناقص ثبت شده است لطفا با مدیر سیستم تماس بگيريد", Toast.LENGTH_SHORT).show();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
             fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());
             fragmentTransaction.commit();
@@ -38,19 +42,20 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
             if (DBManager.getInstance(getBaseContext()).getDriverInfo().getOwnerId().equals("3")) {
 //            bottomNavigationMenuView.getMenu().removeItem(R.id.DriversMainMenu_ReqVacation);
                 bottomNavigationMenuView.setVisibility(View.GONE);
-
+                text_not_driver.setVisibility(View.VISIBLE);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
                 fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());
                 fragmentTransaction.commit();
             }else if (DBManager.getInstance(getBaseContext()).getDriverInfo().getIsTaxi().equals("0")) {
                 //            bottomNavigationMenuView.getMenu().removeItem(R.id.DriversMainMenu_ReqVacation);
                 bottomNavigationMenuView.setVisibility(View.GONE);
-
+                text_not_driver.setVisibility(View.VISIBLE);
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
                 fragmentTransaction.replace(R.id.DriversMainActivity_Container, new Profile());
                 fragmentTransaction.commit();
             }else {
 
+                text_not_driver.setVisibility(View.GONE);
                 if (getIntent().getExtras() != null) {
                     if (getIntent().getExtras().getString("RequestVacation") != null && getIntent().getExtras().getString("RequestVacation").equals("true")) {
                         bottomNavigationMenuView.setSelectedItemId(R.id.DriversMainMenu_ReqVacation);
@@ -77,6 +82,8 @@ public class DriversMainActivity extends AppCompatActivity implements BottomNavi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drivers_main);
         bottomNavigationMenuView = findViewById(R.id.DriversMainActivity_BottomNavigation);
+        text_not_driver = findViewById(R.id.text_not_driver);
+        text_not_driver.setVisibility(View.GONE);
         bottomNavigationMenuView.setOnNavigationItemSelectedListener(this);
 
     }

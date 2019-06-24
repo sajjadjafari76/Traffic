@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import irstit.transport.AppController.AppController;
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.Globals;
 import irstit.transport.R;
 import irstit.transport.Views.Utils;
@@ -108,11 +109,17 @@ public class announcement extends AppCompatActivity {
                                     annou.setImage(array.getJSONObject(i).getString("image"));
                                     annou.setWeek(array.getJSONObject(i).getString("week"));
 //                                    Picasso picasso = new Picasso(this,;
-                                    list.add(annou);
+                                    if (annou.getState().equals("2")) {
+                                        if (DBManager.getInstance(getBaseContext()).getCitizenInfo().getUserPhone() != null) {
+                                            Log.i("sadasd", "getDate: " + annou.getState());
+                                        } else {
+                                            list.add(annou);
+                                        }
+                                    } else {
+                                        list.add(annou);
+                                    }
                                     Log.e("announcement0", list.toString());
                                 }
-
-
                                 Log.e("announcement1", list.toString());
 
 //                                re.setLayoutManager(new LinearLayoutManager(getBaseContext(), LinearLayoutManager.VERTICAL, false));

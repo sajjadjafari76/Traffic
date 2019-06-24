@@ -67,521 +67,544 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/linear_image"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-
-                    android:id="@+id/text1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="مدارک لازم جهت صدور پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
-                    android:textColor="#222"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
-تشکیل پرونده:"
-                    android:textColor="#111"
-                    android:textSize="14dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۱-کارت ملی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۲ - شناسنامه"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۳ – سند مالکیت"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۴ - کارت خودرو"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۵ - کارت معاینه فنی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۶ - بیمه شخص ثالث"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۷ - سه قطعه عکس ۴*۳"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۸ - برگ سبز "
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۹ -کارت پایان خدمت"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:background="#111" />-->
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="
-ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
-                    android:textColor="#111"
-                    android:textSize="14dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۱-کارت ملی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۲ - شناسنامه"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۳ – سند مالکیت"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۴ - کارت خودرو"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۵ - کارت معاینه فنی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۶ - بیمه شخص ثالث"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۷ - سه قطعه عکس ۴*۳"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۸ - برگ سبز "
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۹ -کارت پایان خدمت"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="10-برگ ثبت نام"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" 11-فرم تعهد نامه"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="12-پوشه و گیره"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#111" />
-
-                <TextView
-                    android:id="@+id/text2"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="مدارک لازم جهت تمدید  پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
-                    android:textColor="#111"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
-تشکیل پرونده:"
-                    android:textColor="#111"
-                    android:textSize="14dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۱ - کارت خودرو"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" 2 - کارت معاینه فنی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="3 -بیمه شخص ثالث"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" ۴ - سه قطعه عکس ۴*۳"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="0.5dp"-->
-                <!--android:layout_marginTop="5dp"-->
-                <!--android:layout_marginBottom="5dp"-->
-                <!--android:background="#111" />-->
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
-                    android:textColor="#111"
-                    android:textSize="14dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="۱ - کارت معاینه فنی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" 2 -بیمه شخص ثالث"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="3 -برگ ثبت نام"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text=" 4-پرداخت عوارض شهرداری در دفتر خدمات پستی"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#111" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="مراحل لازم جهت دریافت باربرگ:"
-                    android:textColor="#111"
-                    android:textSize="14dp"
-                    android:textStyle="bold" />
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="1-داشتن پروانه فعالیت از شهرداری (تاریخ دار)"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="2-ثبت نام اشتغال راننده در دفتر خدمات پستی معصومی واقع در میدان بسیج"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:background="@drawable/background_disel_car_item"
+                    android:orientation="vertical"
+                    android:padding="10dp">
 
                     <TextView
 
-                        android:id="@+id/link_diesel"
-                        android:layout_width="0dp"
+                        android:id="@+id/text1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:background="#cfcfcf"
                         android:fontFamily="@font/iransans"
                         android:gravity="right"
-                        android:padding="2dp"
-                        android:text="www.baarbarg.ir"
-                        android:textColor="#2196F3"
-                        android:textSize="12dp" />
+                        android:padding="10dp"
+                        android:text="مدارک لازم جهت صدور پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
+                        android:textColor="#222"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
 
                     <TextView
 
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/iransans"
                         android:gravity="right"
-                        android:padding="2dp"
-                        android:text="3-نصب نرم افزار باربرگ  از سایت "
+                        android:padding="5dp"
+                        android:text=" الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+تشکیل پرونده:"
+                        android:textColor="#111"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۱-کارت ملی"
                         android:textColor="#333"
                         android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۲ - شناسنامه"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۳ – سند مالکیت"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۴ - کارت خودرو"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۵ - کارت معاینه فنی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۶ - بیمه شخص ثالث"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۷ - سه قطعه عکس ۴*۳"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۸ - برگ سبز "
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۹ -کارت پایان خدمت"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:background="#111" />-->
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="
+ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+                        android:textColor="#111"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۱-کارت ملی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۲ - شناسنامه"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۳ – سند مالکیت"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۴ - کارت خودرو"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۵ - کارت معاینه فنی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۶ - بیمه شخص ثالث"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۷ - سه قطعه عکس ۴*۳"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۸ - برگ سبز "
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۹ -کارت پایان خدمت"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="10-برگ ثبت نام"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" 11-فرم تعهد نامه"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="12-پوشه و گیره"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
                 </LinearLayout>
-
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/iransans"
-                    android:gravity="right"
-                    android:padding="2dp"
-                    android:text="4-دریافت باربرگ حقیقی از نرم افزار"
-                    android:textColor="#333"
-                    android:textSize="12dp" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="#111" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_disel_car_item"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#cfcfcf"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:text="مدارک لازم جهت تمدید  پروانه فعالیت برای ناوگان حمل و نقل دیزلی در شهرداری تاکستان"
+                        android:textColor="#111"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="الف .  متقاضی(مالک خودرو) با در دست داشتن  اصل مدارک ذیل به دفتر خدمات پستی معصومی واقع در میدان بسیج  مراجعه و ثبت نام اولیه را انجام دهد:
+تشکیل پرونده:"
+                        android:textColor="#111"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۱ - کارت خودرو"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" 2 - کارت معاینه فنی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="3 -بیمه شخص ثالث"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" ۴ - سه قطعه عکس ۴*۳"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:background="#111" />-->
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="ب . مراجعه به سازمان مدیریت حمل و نقل شهرداری تاکستان به همراه اصل و کپی مدارک ذیل:"
+                        android:textColor="#111"
+                        android:textSize="14dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="۱ - کارت معاینه فنی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" 2 -بیمه شخص ثالث"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="3 -برگ ثبت نام"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text=" 4-پرداخت عوارض شهرداری در دفتر خدمات پستی"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/background_disel_car_item"
+                    android:padding="10dp">
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#cfcfcf"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:text="مراحل لازم جهت دریافت باربرگ:"
+                        android:textColor="#111"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="1-داشتن پروانه فعالیت از شهرداری (تاریخ دار)"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="2-ثبت نام اشتغال راننده در دفتر خدمات پستی معصومی واقع در میدان بسیج"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:id="@+id/link_diesel"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/iransans"
+                            android:gravity="right"
+                            android:padding="5dp"
+                            android:text="www.baarbarg.ir"
+                            android:textColor="#2196F3"
+                            android:textSize="12dp" />
+
+                        <TextView
+
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/iransans"
+                            android:gravity="right"
+                            android:padding="5dp"
+                            android:text="3-نصب نرم افزار باربرگ  از سایت "
+                            android:textColor="#333"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/iransans"
+                        android:gravity="right"
+                        android:padding="5dp"
+                        android:text="4-دریافت باربرگ حقیقی از نرم افزار"
+                        android:textColor="#333"
+                        android:textSize="12dp" />
+
+
+                </LinearLayout>
+
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0.5dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:layout_marginBottom="5dp"-->
+                    <!--android:background="#111" />-->
             </LinearLayout>
 
             <TextView
@@ -619,13 +642,7 @@
                 <!--android:padding="2dp"-->
                 <!--android:src="@drawable/nerkh2" />-->
 
-                <ImageView
-                    android:id="@+id/image3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:src="@drawable/nerkh3" />
+
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

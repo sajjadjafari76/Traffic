@@ -86,6 +86,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
     Context context;
     SharedPreferences shared;
     SharedPreferences.Editor editor;
+    private RelativeLayout warning;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -107,6 +108,7 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
         Status = view.findViewById(R.id.RequestVacation_Status);
         Btn = view.findViewById(R.id.RequestVacation_Btn1);
         Form = view.findViewById(R.id.RequestVacation_Form);
+        warning = view.findViewById(R.id.warning);
 
         Remaining = view.findViewById(R.id.RequestVacation_Remaining);
         Used = view.findViewById(R.id.RequestVacation_Used);
@@ -478,13 +480,13 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
     private void getNews() {
         String internetStatus = "true";
 
-
         StringRequest getPhoneRequest = new StringRequest(Request.Method.POST, Globals.APIURL + "/timing",
                 response -> {
                     Log.e("NewsResponse", response + " |");
                     getlog(response);
                     try {
                         JSONObject object = new JSONObject(response);
+                        warning.setVisibility(View.GONE);
 
                         if (object.getString("status").equals("true")) {
 
@@ -532,6 +534,11 @@ public class RequestVacation extends Fragment implements TimePickerDialog.OnTime
 
                                 int persent = (Integer.parseInt(object1.getString("timeuse")) * 100) /
                                         Integer.parseInt(object1.getString("alltime"));
+
+                                if (persent >= 100){
+
+                                    warning.setVisibility(View.VISIBLE);
+                                }
 
                                 TextPersent.setText(persent + "%");
 

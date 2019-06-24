@@ -19,7 +19,7 @@ import irstit.transport.R;
 
 public class DieselCars extends AppCompatActivity {
 
-    ImageView imageView, imageView1, imageView3;
+    ImageView imageView, imageView1;
     TextView textLink;
 
     @Override
@@ -30,7 +30,7 @@ public class DieselCars extends AppCompatActivity {
         textLink = findViewById(R.id.link_diesel);
         imageView1 = findViewById(R.id.image1);
 //        imageView2 = findViewById(R.id.image2);
-        imageView3 = findViewById(R.id.image3);
+//        imageView3 = findViewById(R.id.image3);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +62,15 @@ public class DieselCars extends AppCompatActivity {
 //            startActivity(fullScreenIntent);
 //
 //        });
-        imageView3.setOnClickListener(v -> {
-//            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3))); /** replace with your own uri */
-
-            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3);
-            Intent fullScreenIntent = new Intent(this, FullScreenImageActivity.class);
-            fullScreenIntent.setData(path);
-            startActivity(fullScreenIntent);
-
-        });
+//        imageView3.setOnClickListener(v -> {
+////            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3))); /** replace with your own uri */
+//
+//            Uri path = Uri.parse("android.resource://irstit.transport/" + R.drawable.nerkh3);
+//            Intent fullScreenIntent = new Intent(this, FullScreenImageActivity.class);
+//            fullScreenIntent.setData(path);
+//            startActivity(fullScreenIntent);
+//
+//        });
         textLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

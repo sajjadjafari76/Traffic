@@ -1,84 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
     android:background="#cfcfcf"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    app:cardBackgroundColor="#ffff"
+    app:cardCornerRadius="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#cfcfcf"
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/title"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_toLeftOf="@id/tex"
-                android:text="منوی اصلی"
-                android:textColor="#111"
-                android:textSize="16sp"
-                app:srcCompat="@drawable/ic_menu_black" />
+                android:layout_gravity="center"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_info_outline_black_24dp" />
 
-            <TextView
-                android:id="@+id/tex"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#111"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/title"
-                android:layout_alignParentStart="true"
-                android:fontFamily="@font/iransans"
-                android:text="درمنوی اصلی امکانات موجود در اپلیکیشن ساحت(سارمان حمل و نقل شهرداری تاکستان)قبال مشاهده است.
-با لمس هر کدم از آیتم ها، وارد صفحه مربوط به آن خواهید شد.
+                android:padding="16dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/relative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        app:srcCompat="@drawable/ic_home_black_24dp" />
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toLeftOf="@id/image3"
+                        android:text="منوی اصلی"
+                        android:textColor="#3F51B5"
+                        android:textSize="16sp"/>
+
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/relative"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/iransans"
+                    android:text="در منوی اصلی امکانات موجود در اپلیکیشن ساحت(سازمان مدیریت حمل و نقل شهرداری تاکستان)قابل مشاهده است.
+با لمس هر کدام از آیتم ها، وارد صفحه مربوط به آن خواهید شد.
 با لمس صفحه و کشیدن آن به چپ یا راست میتوانید خدمات دیگر اپلیکیشن را مشاهده فرمائید."
-                android:textColor="#111" />
-        </RelativeLayout>
+                    android:textColor="#111" />
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <RelativeLayout
+                    android:id="@+id/rel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        app:srcCompat="@drawable/ic_menu_black" />
+
+
+                    <TextView
+                        android:textColor="#4CAF50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toLeftOf="@id/image"
+                        android:fontFamily="@font/iransans"
+
+                        android:text="(منو برنامه)" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rel"
+                    android:text="در بالای این صفحه دکمه منو تعبیه گردیده است که با لمس این منوی کشویی تنظیمات مربوطه باز میشود.
+ ساحت آیکن برنامه"
+                    android:textColor="#111" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/re"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:id="@+id/image2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="90dp"
+                        android:layout_height="50dp">
+                        <ImageView
+                            android:layout_width="90dp"
+                            android:layout_height="50dp"
+                            app:srcCompat="@drawable/sahat2" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:textColor="#4CAF50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="10dp"
+                        android:layout_toLeftOf="@id/image2"
+                        android:fontFamily="@font/iransans"
+                        android:text="(آیکون برنامه)" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/re"
+                    android:text="در کلیه صفحات با لمس لوگوی ساحت به صفحه اول برنامه بازخواهید گشت."
+                    android:textColor="#111" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:background="#111"></LinearLayout>
 
             <ImageView
-                android:id="@+id/image"
+                android:id="@+id/ismid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/ic_menu_black" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image"
-                android:text="در بالای این صفحه دکمه منو تعبیه گردیده است که با لمس این منوی کشویی تنظیمان مربوطه باز میشود."
-                android:textColor="#111" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                app:srcCompat="@drawable/sahat" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/image2"
-                android:text="در کلیه صفحات با لمس لوگوی ساحت به صفحه اول برنامه بازخواهید گشت."
-                android:textColor="#111" />
-        </RelativeLayout>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+                android:layout_gravity="center"
+                android:padding="10dp"
+                app:srcCompat="@drawable/ic_close_black_24dp" />
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v7.widget.CardView>

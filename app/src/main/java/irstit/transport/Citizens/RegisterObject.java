@@ -91,9 +91,9 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
 
         if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getName() != null) {
-
             titleOfFoundedObject.setText("ثبت شی یافت شده");
             pictureOfFoundedObject.setText("تصویر شی یافت شده را انتخاب کنید");
+            DateEdt.setHint("تاریخ یافت شده");
         }
         Picture.setOnClickListener(this);
         Back.setOnClickListener(this);
@@ -179,25 +179,31 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
                     break;
                 case 1:
                     SpinnerModel model2 = new SpinnerModel();
-                    model2.setId(5164);
+                    model2.setId(6164);
                     model2.setName("وسایل شخصی");
                     data.add(model2);
                     break;
                 case 2:
                     SpinnerModel model3 = new SpinnerModel();
-                    model3.setId(6164);
+                    model3.setId(6214);
                     model3.setName("وسایل الکترونیکی");
                     data.add(model3);
                     break;
                 case 3:
                     SpinnerModel model4 = new SpinnerModel();
-                    model4.setId(6214);
+                    model4.setId(7214);
                     model4.setName("توشه");
                     data.add(model4);
                     break;
                 case 4:
+                    SpinnerModel model6 = new SpinnerModel();
+                    model6.setId(5164);
+                    model6.setName("زیورآلات");
+                    data.add(model6);
+                    break;
+                case 5:
                     SpinnerModel model5 = new SpinnerModel();
-                    model5.setId(7214);
+                    model5.setId(8214);
                     model5.setName("سایر");
                     data.add(model5);
                     break;
@@ -333,17 +339,28 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
 
 
     public void uploadContent(String Title, String Description, String Date, String Type, String File) {
+        AsyncHttpPost post;
 
-        AsyncHttpPost post = new AsyncHttpPost(Globals.APIURL + "/regobjcustomer");
+        if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone() != null) {
+            post = new AsyncHttpPost(Globals.APIURL + "/regobjdriver");
+        } else {
+            post = new AsyncHttpPost(Globals.APIURL + "/regobjcustomer");
+        }
         post.setHeader("token", "df837016d0fc7670f221197cd92439b5");
         post.setTimeout(20000);
 
         MultipartFormDataBody body = new MultipartFormDataBody();
+        if (DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone() != null) {
+            body.addStringPart("phone", DBManager.getInstance(getApplicationContext()).getDriverInfo().getTelephone());
+        } else {
+            body.addStringPart("phone", DBManager.getInstance(getApplicationContext()).getCitizenInfo().getUserPhone());
+        }
 
         body.addStringPart("name", Title);
         body.addStringPart("desc", Description);
         body.addStringPart("time", Date);
         body.addStringPart("type", Type);
+
         if (!File.isEmpty()) {
             body.addFilePart("img", new File(File));
         }
@@ -379,6 +396,7 @@ public class RegisterObject extends AppCompatActivity implements View.OnClickLis
                         }
                     } catch (Exception error) {
                         Log.e("GetPhoneError", error.toString() + " |");
+                        error.printStackTrace();
                         enabledEditText();
                         RegisterObject_Loading.setVisibility(View.GONE);
                     }

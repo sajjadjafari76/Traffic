@@ -86,7 +86,9 @@ public class ReportDriverInfo extends Fragment {
                     @Override
                     public void onError() {
                         progressbar.setVisibility(View.GONE);
-                        Toast.makeText(getContext(), "حطا در برقراری ارتباط با سرور", Toast.LENGTH_LONG).show();
+                        if (getContext() != null) {
+                            Toast.makeText(getContext(), "حطا در برقراری ارتباط با سرور", Toast.LENGTH_LONG).show();
+                        }
 
                     }
                 });

@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import irstit.transport.DataBase.DBManager;
 import irstit.transport.R;
 
 public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<AnnouncementRecyclerAdoptor.custom> {
@@ -58,15 +59,16 @@ public class AnnouncementRecyclerAdoptor extends RecyclerView.Adapter<Announceme
 
         custom.date.setText(li.get(i).getDate());
 
-        if (li.get(i).getState() == "0") {
+        if (li.get(i).getState().equals("0")) {
 
 //          not thing happens here
 
-        } else if (li.get(i).getState() == "2") {
+        } else if (li.get(i).getState().equals("2")) {
 
+//            if (DBManager.getInstance(context).)
             custom.role.setText("(ویژه راننده)");
 
-        } else {
+        } else if (li.get(i).getState().equals("1")){
 
             custom.role.setText("(ویژه شهروند)");
 
